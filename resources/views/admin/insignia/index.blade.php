@@ -2,9 +2,7 @@
 
 @section('content')
 <div class="container">
-	<add-insignias></add-insignias>
-	<insignias-component></insignias-component>
-	<create-insignias></create-insignias>
+<insignia></insignia>
 </div>
 @endsection
 
