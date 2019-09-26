@@ -2,7 +2,6 @@
   <div>
     <!-- editar registro -->
     <form v-on:submit.prevent="updateInsignia(fillInsignia)" enctype="multipart/form-data">
-      <input type="hidden" name="update" method="PUT">
       <div class="modal fade" id="edit">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -163,7 +162,7 @@
         reader.readAsDataURL(file);
       },
       agregar(){
-        var formData = new FormData();
+        let formData = new FormData();
         formData.append('name', this.insignia.name);
         formData.append('description', this.insignia.description);
         formData.append('icon', this.insignia.icon);
@@ -182,13 +181,14 @@
         $('#edit').modal('show');
       },
       updateInsignia:function(fillInsignia){
-        var formData = new FormData();
-        formData.append('name', this.fillInsignia.name);
-        formData.append('description', this.fillInsignia.description);
-        formData.append('icon', this.fillInsignia.icon);
+        let data = new FormData();
+        data.append('name', this.fillInsignia.name);
+        data.append('description', this.fillInsignia.description);
+        data.append('icon', this.fillInsignia.icon);
+        data.append('_method','PUT');
         var url = `/insignia/${fillInsignia.id}`;
-        console.log("url : "+this.fillInsignia.name);
-        axios.put(url, formData).then(res=>{
+        console.log('icono : '+this.fillInsignia.icon);
+        axios.post(url, data).then(res=>{
           $('#edit').modal('hide');
         })
       }, //fin del metodo actualizar
