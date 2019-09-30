@@ -16,6 +16,8 @@ class CreateExamUserTable extends Migration
         Schema::create('exam_user', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('exam_id');
+            $table->integer('ppm');
+            $table->integer('comprension');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('exam_id')->references('id')->on('exams');
             $table->timestamps();

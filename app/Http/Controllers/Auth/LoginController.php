@@ -30,7 +30,7 @@ class LoginController extends Controller
         if (auth()->user()->hasRole('admin')) {
             return 'perfil';
         }else if (auth()->user()->hasRole('user')){
-            return '/home';
+            return 'home';
         }
     }
     /**
