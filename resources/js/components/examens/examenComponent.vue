@@ -1,5 +1,53 @@
 <template>
 	<div>
+		<!-- crear registro REspuestas-->
+		<form v-on:submit.prevent="agregarRespuesta" id="dynamic_form">
+			<div class="modal fade" id="createRespuesta">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4>Crear</h4>
+							<button type="button" class="close" data-dismiss="modal">
+								<span>&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<div class="btn btn-primary" @click="addNewRespuesta">Agregar </div>
+							</div>
+							<div class="form-group row">
+								<table class="table table-bordered">
+									<thead>
+										<th class="col-9">Respuesta</th>
+										<th >Accion</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<input type="text" class="form-control" name="respuesta[]" placeholder="Respuesta de la respuesta">
+												<input type="hidden" class="form-control" name="examen_id[]" v-model="id_examen">
+											</td>
+											<td></td>
+										</tr>
+										<tr v-for="(resp,index) in respuestas">
+											<td>
+												<input type="text" class="form-control" name="respuesta[]" placeholder="Respuesta de la respuesta">
+												<input type="hidden" class="form-control" name="examen_id[]" v-model="id_examen">
+											</td>
+											<td>
+												<div class="btn btn-danger" @click="removeRespuesta(index)">Borrar</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<input type="hidden" name="_token" :value="csrf">
+							<input type="submit" name="save" id="save" class="btn btn-primary" value="Save" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 		<!-- Editar registro -->
 		<form v-on:submit.prevent="updateExamen(fillExamen)" enctype="multipart/form-data">
 			<div class="modal fade" id="edit">
@@ -49,10 +97,10 @@
 		</form>
 		<!-- listar los examenes -->
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-12">
 				<h1 class="page-header">Examenes</h1>
 			</div>
-			<div class="col-sm-7">
+			<div class="col-12">
 				<a href="#" class="btn btn-primary float-right" data-toggle="modal" data-target="#create">Crear Nuevo</a>
 				<spinner v-show="loading"></spinner>
 				<table class="table table-hover table-striped py-5">
@@ -62,7 +110,7 @@
 							<th>Nombre</th>
 							<th>Contenido</th>
 							<th>Imagen</th>
-							<th colspan="2">
+							<th colspan="4">
 								&nbsp;
 							</th>
 						</tr>
@@ -73,6 +121,12 @@
 							<td>{{examen.name}}</td>
 							<td>{{examen.content}}</td>
 							<td><img :src="`/imagenes/examen/${examen.icon}`" class="img-responsive" height="40" width="40"></td>
+							<td width="10px">
+								<a :href="`examenes/${examen.id}`" class="btn btn-success float-right">Ver</a>
+							</td>
+							<td width="10px">
+								<a href="#" class="btn btn-success float-right" data-toggle="modal" data-target="#createRespuesta" @click="crearRespuesta(examen)">Crear Respuestas</a>
+							</td>
 							<td width="10px">
 								<a href="#" class="btn btn-warning float-right" @click="editarExamen(examen)">Editar</a>
 							</td>
@@ -98,12 +152,16 @@
 		},
 		data() {
 			return { 
+				csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 				examens: [],
 				examen: {name: '',content:'', icon:''},
 				fillExamen: {name: '',content:'', icon:''},
 				imagenMiniatura:'',
+				respuestas: [],
+				respuesta: {respuesta:'', examen_id:''},
 				loading:true,
 				estado:false,
+				id_examen:'',
 			}
 		},
 		methods:{
@@ -161,6 +219,27 @@
 					this.mostrarExamen();
 					$('#edit').modal('hide');
 				})
+			},
+			crearRespuesta(respuesta){
+				this.id_examen = respuesta.id;
+				$('#createRespuesta').modal('show');
+			},
+			agregarRespuesta(){
+				let formData = new FormData($('#dynamic_form')[0]);
+				axios.post('/respuesta',formData)
+				.then(res=>{
+					EventBus.$emit('agregadoResp', res.data);
+					this.respuestas = [],
+					$('#createRespuesta').modal('hide')
+				})
+			},
+			addNewRespuesta() {
+				this.respuestas.push({
+					respuesta:'', examen_id:''
+				});
+			},
+			removeRespuesta(index){
+				this.respuestas.splice(index,1);
 			},
 		},
 		computed:{

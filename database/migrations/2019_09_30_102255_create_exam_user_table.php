@@ -18,6 +18,8 @@ class CreateExamUserTable extends Migration
             $table->unsignedBigInteger('exam_id');
             $table->integer('ppm');
             $table->integer('comprension');
+            $table->integer('tiempo');
+            $table->boolean('estado');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('exam_id')->references('id')->on('exams');
             $table->timestamps();
