@@ -1,5 +1,18 @@
 <template>
-	<div class="loader">Loading...</div>
+	<div class="grid">
+		<div class="loader">
+			<div id="ld3">
+				<div>
+				</div>
+				<div>
+				</div>
+				<div>
+				</div>
+				<div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 <script>
 	export default{
@@ -8,62 +21,105 @@
 </script>
 
 <style>
-.loader,
-.loader:before,
-.loader:after {
-	border-radius: 50%;
-	width: 2.5em;
-	height: 2.5em;
-	-webkit-animation-fill-mode: both;
-	animation-fill-mode: both;
-	-webkit-animation: load7 1.8s infinite ease-in-out;
-	animation: load7 1.8s infinite ease-in-out;
-}
+* {
+  padding: 0;
+  margin: 0;}
+
+body {
+  min-height: 100vh;
+  min-width: 100vw;}
+
+.grid {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap; 
+text-align: center;}
+
 .loader {
-	color: #535353;
-	font-size: 10px;
-	margin: 80px auto;
-	position: relative;
-	text-indent: -9999em;
-	-webkit-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	transform: translateZ(0);
-	-webkit-animation-delay: -0.16s;
-	animation-delay: -0.16s;
-}
-.loader:before,
-.loader:after {
-	content: '';
-	position: absolute;
-	top: 0;
-}
-.loader:before {
-	left: -3.5em;
-	-webkit-animation-delay: -0.32s;
-	animation-delay: -0.32s;
-}
-.loader:after {
-	left: 3.5em;
-}
-@-webkit-keyframes load7 {
-	0%,
-	80%,
-	100% {
-		box-shadow: 0 2.5em 0 -1.3em;
-	}
-	40% {
-		box-shadow: 0 2.5em 0 0;
-	}
-}
-@keyframes load7 {
-	0%,
-	80%,
-	100% {
-		box-shadow: 0 2.5em 0 -1.3em;
-	}
-	40% {
-		box-shadow: 0 2.5em 0 0;
-	}
-}
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+#ld3 {
+  position: relative;
+  animation: outercontainer 4s linear infinite; }
+  #ld3 div {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; }
+  #ld3 div:nth-child(1) {
+    top: 20px;
+    background: #59CD90;
+    animation: ld3_div1 2s linear infinite; }
+  #ld3 div:nth-child(2) {
+    top: -20px;
+    background: #D91E36;
+    animation: ld3_div2 2s linear infinite; }
+  #ld3 div:nth-child(3) {
+    left: 20px;
+    background: #F39237;
+    animation: ld3_div4 2s linear infinite; }
+  #ld3 div:nth-child(4) {
+    left: -20px;
+    background: #0072BB;
+    animation: ld3_div3 2s linear infinite; }
+
+@keyframes outercontainer {
+  100% {
+    transform: rotate(360deg); } }
+@keyframes ld3_div1 {
+  0% {
+    top: 20px; }
+  25% {
+    top: 0; }
+  50% {
+    top: 20px; }
+  75% {
+    top: 0; }
+  100% {
+    top: 20px; } }
+@keyframes ld3_div2 {
+  0% {
+    top: -20px; }
+  25% {
+    top: 0; }
+  50% {
+    top: -20px; }
+  75% {
+    top: 0; }
+  100% {
+    top: -20px; } }
+@keyframes ld3_div3 {
+  0% {
+    left: -20px; }
+  25% {
+    left: 0; }
+  50% {
+    left: -20px; }
+  75% {
+    left: 0; }
+  100% {
+    left: -20px; } }
+@keyframes ld3_div4 {
+  0% {
+    left: 20px; }
+  25% {
+    left: 0; }
+  50% {
+    left: 20px; }
+  75% {
+    left: 0; }
+  100% {
+    left: 20px; } }
+/*# sourceMappingURL=app.css.map */
 
 </style>

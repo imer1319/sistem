@@ -1,0 +1,97 @@
+<template>
+	<div>
+		<!-- crear registro -->
+		<form v-on:submit.prevent="agregarRespuesta">
+			<div class="modal fade" id="createRespuesta">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4>Crear</h4>
+							<button type="button" class="close" data-dismiss="modal">
+								<span>&times;</span>
+							</button>
+						</div>
+						<div class="modal-body pb-0">
+							<div class="form-group row">
+								<div class="btn btn-primary" @click="addNewRespuesta">+</div>
+							</div>
+							<div class="form-group row">
+								<label>Examen</label>
+								<div class="col-md-10">
+									<select v-model="respuesta.examen_id">
+										<option v-for="exam in examens" v-bind:value="exam.id">
+											{{ exam.name }}
+										</option>
+									</select>
+									<span>seleccionado : {{ respuesta.examen_id }}</span>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div v-for="(resp,index) in respuestas" class="col-md-12">
+									<button type="button" class="close float-right" @click="removeRespuesta(index)">
+										<span>&times;</span>
+									</button>
+									<label class="col-form-label col-md-2">Respuesta</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control" v-model="resp.respuesta" placeholder="Respuesta de la respuesta">
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer pb-0">
+							<div class="form-group row">
+								<div class="col-lg-6">
+									<input type="submit" name="enviar" value="Crear Registro" class="btn btn-primary pull-right">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</template>
+<script>
+	import EventBus from '../../event-bus';
+	export default {
+		created:function(){
+			this.mostrarExamenes();
+		},
+		props:['examens'],
+		data() {
+			return {
+				exams:[],
+				respuestas: [],
+				respuesta: {respuesta:'', examen_id:''},
+			}
+		},
+		methods:{
+			mostrarExamenes:function(){
+				axios.get('respuesta').then(res =>{
+					this.exams = res.data
+				})
+			},
+			agregarRespuesta:function(){ 
+				let formData = new FormData();
+				formData.append('examen_id', this.respuesta.examen_id);
+				formData.append('respuesta', this.respuesta.respuesta);
+				axios.post('/respuesta',formData)
+				.then(res=>{
+					EventBus.$emit('agregadoResp', res.data);
+					this.respuesta.respuesta = "";
+					this.respuesta.examen_id = "";
+					$('#createRespuesta').modal('hide')
+				})
+			},
+			addNewRespuesta() {
+				this.respuestas.push({
+					respuesta:'', examen_id:''
+				});
+			},
+			removeRespuesta(index){
+				this.respuestas.splice(index,1);
+			},
+		}
+	}	
+</script>

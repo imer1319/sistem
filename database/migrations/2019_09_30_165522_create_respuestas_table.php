@@ -17,7 +17,7 @@ class CreateRespuestasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('examen_id');
             $table->string('respuesta');
-            $table->foreign('examen_id')->references('id')->on('exams');
+            $table->foreign('examen_id')->references('id')->on('exams')->onDelete('cascade');
             $table->timestamps();
         });
     }

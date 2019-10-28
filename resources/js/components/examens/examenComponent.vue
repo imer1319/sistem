@@ -1,53 +1,6 @@
 <template>
-	<div>
-		<!-- crear registro REspuestas-->
-		<form v-on:submit.prevent="agregarRespuesta" id="dynamic_form">
-			<div class="modal fade" id="createRespuesta">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4>Crear</h4>
-							<button type="button" class="close" data-dismiss="modal">
-								<span>&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="form-group">
-								<div class="btn btn-primary" @click="addNewRespuesta">Agregar </div>
-							</div>
-							<div class="form-group row">
-								<table class="table table-bordered">
-									<thead>
-										<th class="col-9">Respuesta</th>
-										<th >Accion</th>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<input type="text" class="form-control" name="respuesta[]" placeholder="Respuesta de la respuesta">
-												<input type="hidden" class="form-control" name="examen_id[]" v-model="id_examen">
-											</td>
-											<td></td>
-										</tr>
-										<tr v-for="(resp,index) in respuestas">
-											<td>
-												<input type="text" class="form-control" name="respuesta[]" placeholder="Respuesta de la respuesta">
-												<input type="hidden" class="form-control" name="examen_id[]" v-model="id_examen">
-											</td>
-											<td>
-												<div class="btn btn-danger" @click="removeRespuesta(index)">Borrar</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<input type="hidden" name="_token" :value="csrf">
-							<input type="submit" name="save" id="save" class="btn btn-primary" value="Save" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
+	<div class="col-md-12">
+		<crear-examen></crear-examen>
 		<!-- Editar registro -->
 		<form v-on:submit.prevent="updateExamen(fillExamen)" enctype="multipart/form-data">
 			<div class="modal fade" id="edit">
@@ -97,12 +50,12 @@
 		</form>
 		<!-- listar los examenes -->
 		<div class="row">
-			<div class="col-12">
+			<div class="col-md-12">
 				<h1 class="page-header">Examenes</h1>
 			</div>
-			<div class="col-12">
+			<spinner v-if="loading"></spinner>
+			<div class="col-md-12" v-else>
 				<a href="#" class="btn btn-primary float-right" data-toggle="modal" data-target="#create">Crear Nuevo</a>
-				<spinner v-show="loading"></spinner>
 				<table class="table table-hover table-striped py-5">
 					<thead>
 						<tr>
@@ -117,21 +70,21 @@
 					</thead>
 					<tbody>
 						<tr v-for="(examen, index) in examens" :key="index" >
-							<td width="10px">{{ examen.id}}</td>
+							<td width="10px">{{ index+1}}</td>
 							<td>{{examen.name}}</td>
 							<td>{{examen.content}}</td>
 							<td><img :src="`/imagenes/examen/${examen.icon}`" class="img-responsive" height="40" width="40"></td>
+							<td>
+								<router-link :to="{name : 'show',params:{id:examen.id}}" class="btn btn-info">
+									Ver
+								</router-link>
+							</td>
+							
 							<td width="10px">
-								<a :href="`examenes/${examen.id}`" class="btn btn-success float-right">Ver</a>
+								<a to="/examen" class="btn btn-warning" @click="editarExamen(examen)">Editar</a>
 							</td>
 							<td width="10px">
-								<a href="#" class="btn btn-success float-right" data-toggle="modal" data-target="#createRespuesta" @click="crearRespuesta(examen)">Crear Respuestas</a>
-							</td>
-							<td width="10px">
-								<a href="#" class="btn btn-warning float-right" @click="editarExamen(examen)">Editar</a>
-							</td>
-							<td width="10px">
-								<a href="#" class="btn btn-danger" v-on:click="eliminarExamen(examen,index)">Eliminar</a>
+								<a to="/examen" class="btn btn-danger" v-on:click="eliminarExamen(examen,index)">Eliminar</a>
 							</td>
 						</tr>
 					</tbody>
@@ -166,7 +119,7 @@
 		},
 		methods:{
 			mostrarExamen:function(){
-				axios.get('examenes').then(res =>{
+				axios.get('examen').then(res =>{
 					this.examens = res.data
 					this.loading = false;
 				})
@@ -195,7 +148,7 @@
 				reader.readAsDataURL(file);
 			},
 			eliminarExamen:function(examen,index){
-				axios.delete(`/examenes/${examen.id}`)
+				axios.delete(`/examen/${examen.id}`)
 				.then(()=>{
 					this.examens.splice(index,1); 
 				})
@@ -214,32 +167,11 @@
 				data.append('content', this.fillExamen.content);
 				data.append('icon', this.examen.icon);
 				data.append('_method','PUT');
-				var url = `/examenes/${fillExamen.id}`;
+				var url = `/examen/${fillExamen.id}`;
 				axios.post(url, data).then(res=>{
 					this.mostrarExamen();
 					$('#edit').modal('hide');
 				})
-			},
-			crearRespuesta(respuesta){
-				this.id_examen = respuesta.id;
-				$('#createRespuesta').modal('show');
-			},
-			agregarRespuesta(){
-				let formData = new FormData($('#dynamic_form')[0]);
-				axios.post('/respuesta',formData)
-				.then(res=>{
-					EventBus.$emit('agregadoResp', res.data);
-					this.respuestas = [],
-					$('#createRespuesta').modal('hide')
-				})
-			},
-			addNewRespuesta() {
-				this.respuestas.push({
-					respuesta:'', examen_id:''
-				});
-			},
-			removeRespuesta(index){
-				this.respuestas.splice(index,1);
 			},
 		},
 		computed:{

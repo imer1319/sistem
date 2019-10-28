@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Respuesta;
-use App\Exam;
 use Response;
 use Illuminate\Http\Request;
 use Validator;
@@ -13,7 +12,6 @@ class RespuestaController extends Controller
     {
         if($request->ajax()){
             $respuestas = Respuesta::all();
-            $exams = Exam::all();
             return $respuestas;
         }
         return view('admin.examen.index');
@@ -40,11 +38,11 @@ class RespuestaController extends Controller
 
        Respuesta::insert($insert_data);
        return response()->json([
-           'success'  => 'Data Added successfully.'
+         'success'  => 'Data Added successfully.'
        ]);
+     }
    }
-}
-}
+ }
 public function update(Request $request, $id)
 {
     $respuesta = Respuesta::find($id);
@@ -57,5 +55,9 @@ public function destroy($id)
 {
    $respuesta = Respuesta::find($id);
    $respuesta->delete();
+   return response()->json([
+        "message" => "Eliminado correctamente",
+        "respuesta" => $respuesta
+    ],200);
 }
 }

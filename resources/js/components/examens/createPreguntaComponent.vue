@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<!-- crear registro -->
+		<!-- crear registro de pregunta-->
 		<form v-on:submit.prevent="agregarPregunta" enctype="multipart/form-data">
-			<div class="modal fade" id="create">
+			<div class="modal fade" id="create-pregunta">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -15,23 +15,19 @@
 							<div class="form-group row">
 								<label class="col-form-label col-md-2">Nombre</label>
 								<div class="col-md-10">
-									<input type="text"  name="name" class="form-control" v-model="examen.name" placeholder="Nombre de la examen">
+									<input type="text"  class="form-control" v-model="pregunta.enunciado" placeholder="Nombre de la pregunta">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="form-group">
-									<label for="imagen">Contenido</label>
-									<input type="file" @change="obtenerArchivo" class="form-control-file" ref="texto">
+									<label for="respuesta"></label>
+									<select v-model="pregunta.respuesta_id" class="custom-select">
+										<option disabled value="">--Seleccione la respuesta correcta--</option>
+										<option v-for="(respuesta,index) in respuestas" v-if="respuesta.examen_id == $route.params.id" :value="respuesta.id">
+											{{ respuesta.respuesta }}
+										</option>
+									</select>
 								</div>
-							</div>
-							<div class="form-group">
-								<div class="form-group">
-									<label for="imagen"></label>
-									<input type="file" @change="obtenerImagen" class="form-control-file" ref="img">
-								</div>
-								<figure>
-									<img width="200" height="200" :src="imagen">
-								</figure>
 							</div>
 						</div>
 						<div class="modal-footer pb-0">
@@ -49,52 +45,39 @@
 </template>
 
 <script>
-	import EventBus from '../../event-bus';
+	import EventBus from '../../event-bus'
 	export default{
+		created:function(){
+			this.mostrarRespuestas();
+		},
 		data(){
 			return{
-				examen: {name: '',content:'',icon:''},
-				imagenMiniatura:'',
+				respuestas: [],
+				preguntas:[],
+				pregunta:{enunciado:'',examen_id:'',respuesta_id:''},
+				respuesta: {respuesta:'', examen_id:''},
 			}
 		},
 		methods:{
-			obtenerArchivo(e){
-				let arch = e.target.files[0];
-				this.examen.content = arch;
-			},
-			obtenerImagen(e){
-				let file = e.target.files[0];
-				this.examen.icon = file;
-				this.cargarImagen(file);
-			},
-			cargarImagen(file){
-				let reader = new FileReader();
-				reader.onload = (e) => {
-					this.imagenMiniatura = e.target.result;
-				}
-				reader.readAsDataURL(file);
-			},
 			agregarPregunta(){
 				let formData = new FormData();
-				formData.append('name', this.examen.name);
-				formData.append('content', this.examen.content);
-				formData.append('icon', this.examen.icon);
-
-				axios.post('/examenes',formData)
+				formData.append('enunciado', this.pregunta.enunciado);
+				formData.append('examen_id', this.$route.params.id);
+				formData.append('respuesta_id', this.pregunta.respuesta_id);
+				axios.post('/pregunta',formData)
 				.then(res=>{
-					EventBus.$emit('agregado', res.data.examen);
-					this.examen.name = "";
-					this.$refs.texto.value="";
-					this.$refs.img.value = "";
-					this.imagenMiniatura = "";
-					$('#create').modal('hide')
+					EventBus.$emit('add-pregunta', res.data.pregunta);
+					this.pregunta.enunciado = "";
+					this.pregunta.respuesta_id = "";
+					$('#create-pregunta').modal('hide');
 				})
 			},
-		},
-		computed:{
-			imagen(){
-				return this.imagenMiniatura;
-			} 
+			mostrarRespuestas(){
+				var url = '/respuesta';
+				axios.get(url).then(res =>{
+					this.respuestas = res.data
+				})
+			},
 		}
 	}
 </script>

@@ -19,8 +19,10 @@ class CreatePreguntasTable extends Migration
             $table->unsignedBigInteger('examen_id');
             $table->unsignedBigInteger('respuesta_id');
             $table->timestamps();
-            $table->foreign('examen_id')->references('id')->on('exams');
-            $table->foreign('respuesta_id')->references('id')->on('respuestas');
+            $table->foreign('examen_id')->references('id')
+                    ->on('exams')->onDelete('cascade');
+            $table->foreign('respuesta_id')->references('id')
+                    ->on('respuestas')->onDelete('cascade');
         });
     }
 

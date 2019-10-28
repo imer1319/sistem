@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-	<examen></examen>
-	<create-examen></create-examen>
+	<App/>
 </div>
 @endsection

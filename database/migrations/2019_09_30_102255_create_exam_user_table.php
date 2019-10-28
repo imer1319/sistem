@@ -20,8 +20,8 @@ class CreateExamUserTable extends Migration
             $table->integer('comprension');
             $table->integer('tiempo');
             $table->boolean('estado');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('exam_id')->references('id')->on('exams');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
             $table->timestamps();
         });
     }

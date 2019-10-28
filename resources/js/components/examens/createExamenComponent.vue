@@ -80,7 +80,7 @@
 				formData.append('content', this.examen.content);
 				formData.append('icon', this.examen.icon);
 
-				axios.post('/examenes',formData)
+				axios.post('/examen',formData)
 				.then(res=>{
 					EventBus.$emit('agregado', res.data.examen);
 					this.examen.name = "";
