@@ -43,7 +43,6 @@
 						<tr>
 							<th>ID</th>
 							<th>Respuesta</th>
-							<th>Examen</th>
 							<th colspan="2">
 								&nbsp;
 							</th>
@@ -53,7 +52,6 @@
 						<tr v-for="(respuesta, index) in respuestas" :key="index" v-if="respuesta.examen_id == $route.params.id">
 							<td width="10px">{{ index+1 }}</td>
 							<td>{{respuesta.respuesta}}</td>
-							<td>{{$route.params.id}}</td>
 							<td>
 								<a href="#" class="btn btn-warning" @click.prevent="editarRespuesta(respuesta)">Editar</a>
 							</td>

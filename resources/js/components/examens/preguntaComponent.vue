@@ -53,7 +53,6 @@
 					<tr>
 						<th>ID</th>
 						<th>Enunciado</th>
-						<th>Examen</th>
 						<th>Respuesta</th>
 						<th colspan="2">
 							&nbsp;
@@ -64,8 +63,7 @@
 					<tr v-for="(pregunta, index) in preguntas" :key="index" v-if="pregunta.examen_id == $route.params.id">
 						<td width="10px">{{ index+1 }}</td>
 						<td>{{pregunta.enunciado}}</td>
-						<td>{{$route.params.id}}</td>
-						<td>{{pregunta.respuesta_id}}</td>
+						<td><span v-for="(respuesta,index) in respuestas" v-if="respuesta.id == pregunta.respuesta_id">{{ respuesta.respuesta }}</span></td>
 						<td>
 							<a href="#" class="btn btn-warning float-right" @click.prevent="editarPregunta(pregunta)">Editar</a>
 						</td>
