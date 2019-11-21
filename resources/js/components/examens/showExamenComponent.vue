@@ -1,20 +1,22 @@
 <template>
 	<div class="row">
-		<div class="col-md-6">
-			<div class="btn btn-primary" @click.prevent="loadDoc()">Mostrar</div>
-			<h2>titulo : {{ examen.name }}</h2>
-			<p id="test"></p>
-			<h2>
-				Imagen :  <figure><img :src="`/imagenes/examen/${examen.icon}`" class="img-responsive" height="40" width="40"></figure>
-			</h2>
+		<div class="col-lg-6">
+			<div class="card card-primary card-outline">
+				<div class="card-body box-profile">
+					<div class="text-center">
+						<img class="profile-user-img img-fluid img-circle img-responsive"
+						:src="`/imagenes/examen/${examen.icon}`"
+						alt="User profile picture">
+					</div>
+					<h3 class="profile-username text-center">{{ examen.name }}</h3>
+					<div class="btn btn-primary" @click.prevent="loadDoc()">Mostrar</div>
+					<hr>
+					<p id="test" class="text-justify"></p>
+				</div>
+			</div>
 		</div>
 
-		<div class="col-md-6">
-			<respuesta/>
-			<createRespuesta/>
-		</div>
-
-		<div class="col-md-12">
+		<div class="col-lg-12">
 			<pregunta/>
 			<createPregunta/>
 		</div>
@@ -22,16 +24,12 @@
 </template>
 <script>
 	import EventBus from '../../event-bus';
-	import respuesta from '../examens/respuestaComponent.vue';
-	import createRespuesta from '../examens/createRespuesta.vue';
 	import pregunta from '../examens/preguntaComponent.vue';
 	import createPregunta from '../examens/createPreguntaComponent.vue';
 	export default{
 		components:{
 			createPregunta:createPregunta,
 			pregunta:pregunta,
-			createRespuesta:createRespuesta,
-			respuesta:respuesta,
 		},
 		created:function() {
 			this.showExamen();
@@ -49,7 +47,7 @@
 				})
 			},
 			loadDoc() {
-				var url ="/examenes/"+this.examen.content;
+				var url ="/examenes/"+this.examen.content;;
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {

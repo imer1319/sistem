@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="col-12">
 		<form v-on:submit.prevent="updateRespuesta(fillRespuesta)" enctype="multipart/form-data">
 			<div class="modal fade" id="editarRespuesta">
 				<div class="modal-dialog">
@@ -31,36 +31,35 @@
 			</div>
 		</form>
 		<!-- listar las respuestas -->
-		<div class="row">
-			<div class="col-12">
-				<h1 class="page-header">Respuestas</h1>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Respuestas</h3>
+				<a href="#" class="btn btn-success float-right" data-toggle="modal" data-target="#create-respuesta"><i class="fas fa-plus"></i> Crear Nuevo</a>
 			</div>
 			<spinner v-if="loading"></spinner>
-			<div class="col-12" v-else>
-				<a href="#" class="btn btn-primary float-right" data-toggle="modal" data-target="#create-respuesta">Crear Nuevo</a>
-				<table class="table table-hover table-striped py-5">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Respuesta</th>
-							<th colspan="2">
-								&nbsp;
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="(respuesta, index) in respuestas" :key="index" v-if="respuesta.examen_id == $route.params.id">
-							<td width="10px">{{ index+1 }}</td>
-							<td>{{respuesta.respuesta}}</td>
-							<td>
-								<a href="#" class="btn btn-warning" @click.prevent="editarRespuesta(respuesta)">Editar</a>
-							</td>
-							<td width="10px">
-								<a href="#" class="btn btn-danger" @click.prevent="eliminarRespuesta(respuesta,index)">Eliminar</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="card-body" v-else>
+				<paginate name="respuestas" :list="respuestas" :per="4">
+					<table class="table table-bordered table-striped py-5">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Respuesta</th>
+								<th class="text-center" colspan="2">Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(respuesta, index) in paginated('respuestas')" :key="index" v-if="respuesta.examen_id == $route.params.id">
+								<td width="10px">{{ index+1 }}</td>
+								<td>{{respuesta.respuesta}}</td>
+								<td class="text-center" colspan="2">
+									<a href="#" class="btn btn-warning color-letra" @click.prevent="editarRespuesta(respuesta)"><i class="fas fa-pencil-alt"></i> Editar</a>
+									<a href="#" class="btn btn-danger color-letra" @click.prevent="eliminarRespuesta(respuesta,index)"><i class="far fa-trash-alt"></i> Eliminar</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</paginate>
+				<paginate-links for="respuestas" :classes="{'ul': 'pagination', 'li': 'page-item', 'a': 'page-link'}"></paginate-links>
 			</div>
 		</div>
 	</div>
@@ -82,6 +81,7 @@
 				respuesta: {respuesta: '',examen_id:''},
 				fillRespuesta: {respuesta: '',examen_id:''},
 				loading:true,
+				paginate:['respuestas'],
 			}
 		},
 		props:['examens'],
@@ -118,3 +118,9 @@
 		}
 	}
 </script>
+
+<style>
+.color-letra, .color-letra:hover{
+	color: white;
+}
+</style>

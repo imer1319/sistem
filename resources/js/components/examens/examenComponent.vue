@@ -1,6 +1,6 @@
 <template>
-	<div class="col-md-12">
-		<crear-examen></crear-examen>
+	<div class="col-12">
+		<createExamen></createExamen>
 		<!-- Editar registro -->
 		<form v-on:submit.prevent="updateExamen(fillExamen)" enctype="multipart/form-data">
 			<div class="modal fade" id="edit">
@@ -49,46 +49,41 @@
 			</div>
 		</form>
 		<!-- listar los examenes -->
-		<div class="row">
-			<div class="col-md-12">
-				<h1 class="page-header">Examenes</h1>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Examenes</h3>
+				<a href="#" class="btn btn-success float-right" data-toggle="modal" data-target="#create"><i class="fas fa-plus"></i> Crear Nuevo</a>
 			</div>
 			<spinner v-if="loading"></spinner>
-			<div class="col-md-12" v-else>
-				<a href="#" class="btn btn-primary float-right" data-toggle="modal" data-target="#create">Crear Nuevo</a>
-				<table class="table table-hover table-striped py-5">
+			<div class="card-body" v-else>
+				<paginate name="examens" :list="examens" :per="4">
+				<table class="table table-bordered table-striped py-5">
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>Nombre</th>
 							<th>Contenido</th>
 							<th>Imagen</th>
-							<th colspan="4">
-								&nbsp;
-							</th>
+							<th class="text-center">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(examen, index) in examens" :key="index" >
+						<tr v-for="(examen, index) in paginated('examens')" :key="index" >
 							<td width="10px">{{ index+1}}</td>
 							<td>{{examen.name}}</td>
-							<td>{{examen.content}}</td>
+							<td><span v-text="examen.content.substr(10,examen.name.length+4)"></span></td>
 							<td><img :src="`/imagenes/examen/${examen.icon}`" class="img-responsive" height="40" width="40"></td>
-							<td>
-								<router-link :to="{name : 'show',params:{id:examen.id}}" class="btn btn-info">
-									Ver
+							<td class="text-center" colspan="3">
+								<router-link :to="{name : 'show',params:{id:examen.id}}" class="btn btn-info"><i class="fas fa-eye"></i> Ver
 								</router-link>
-							</td>
-							
-							<td width="10px">
-								<a to="/examen" class="btn btn-warning" @click="editarExamen(examen)">Editar</a>
-							</td>
-							<td width="10px">
-								<a to="/examen" class="btn btn-danger" v-on:click="eliminarExamen(examen,index)">Eliminar</a>
+								<a href="#" class="btn btn-warning color-letra" @click="editarExamen(examen)"><i class="fas fa-pencil-alt"></i> Editar</a>
+								<a href="#" class="btn btn-danger color-letra" v-on:click="eliminarExamen(examen,index)"><i class="far fa-trash-alt"></i> Eliminar</a>
 							</td>
 						</tr>
 					</tbody>
 				</table>
+				</paginate>
+				<paginate-links for="examens" :classes="{'ul': 'pagination', 'li': 'page-item', 'a': 'page-link'}"></paginate-links>
 			</div>
 		</div>
 	</div>
@@ -96,7 +91,11 @@
 
 <script>
 	import EventBus from '../../event-bus';
+	import createExamen from '../examens/createExamenComponent.vue';
 	export default {
+		components:{
+			createExamen:createExamen,
+		},
 		created:function() {
 			this.mostrarExamen();
 			EventBus.$on('agregado',data =>{
@@ -115,6 +114,8 @@
 				loading:true,
 				estado:false,
 				id_examen:'',
+				paginate:['examens'],
+
 			}
 		},
 		methods:{
@@ -182,3 +183,9 @@
 		}
 	}
 </script>
+
+<style>
+.color-letra, .color-letra:hover{
+	color: white;
+}
+</style>

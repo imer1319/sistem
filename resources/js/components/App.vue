@@ -1,9 +1,5 @@
 <template>
-	<div>
-		<router-link to="/examen">Examen</router-link>
-		<router-link to="/respuesta">Respuesta</router-link>
-		<router-view></router-view>
-	</div>
+	<router-view></router-view>
 </template>
 
 <script>

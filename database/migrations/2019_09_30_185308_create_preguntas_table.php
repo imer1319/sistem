@@ -16,13 +16,15 @@ class CreatePreguntasTable extends Migration
         Schema::create('preguntas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('enunciado');
+            $table->string('respuestaA');
+            $table->string('respuestaB');
+            $table->string('respuestaC');
+            $table->string('respuestaD');
+            $table->unsignedInteger('esCorrecto');
             $table->unsignedBigInteger('examen_id');
-            $table->unsignedBigInteger('respuesta_id');
             $table->timestamps();
             $table->foreign('examen_id')->references('id')
                     ->on('exams')->onDelete('cascade');
-            $table->foreign('respuesta_id')->references('id')
-                    ->on('respuestas')->onDelete('cascade');
         });
     }
 

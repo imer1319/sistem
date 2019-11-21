@@ -2,7 +2,7 @@
 	<div>
 		<!-- crear registro de pregunta-->
 		<form v-on:submit.prevent="agregarPregunta" enctype="multipart/form-data">
-			<div class="modal fade" id="create-pregunta">
+			<div class="modal fade" id="createPregunta">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -13,20 +13,46 @@
 						</div>
 						<div class="modal-body pb-0">
 							<div class="form-group row">
-								<label class="col-form-label col-md-2">Nombre</label>
+								<label class="col-form-label col-md-2">Enunciado</label>
 								<div class="col-md-10">
 									<input type="text"  class="form-control" v-model="pregunta.enunciado" placeholder="Nombre de la pregunta">
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="form-group">
-									<label for="respuesta"></label>
-									<select v-model="pregunta.respuesta_id" class="custom-select">
-										<option disabled value="">--Seleccione la respuesta correcta--</option>
-										<option v-for="(respuesta,index) in respuestas" v-if="respuesta.examen_id == $route.params.id" :value="respuesta.id">
-											{{ respuesta.respuesta }}
-										</option>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">RespuestaA</label>
+								<div class="col-md-10">
+									<input type="text"  class="form-control" v-model="pregunta.respuestaA" placeholder="Nombre de la pregunta">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">RespuestaB</label>
+								<div class="col-md-10">
+									<input type="text"  class="form-control" v-model="pregunta.respuestaB" placeholder="Nombre de la pregunta">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">RespuestaC</label>
+								<div class="col-md-10">
+									<input type="text"  class="form-control" v-model="pregunta.respuestaC" placeholder="Nombre de la pregunta">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">RespuestaD</label>
+								<div class="col-md-10">
+									<input type="text"  class="form-control" v-model="pregunta.respuestaD" placeholder="Nombre de la pregunta">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">Correcta</label>
+								<div class="col-md-10">
+									<select v-model="selected">
+										<option disabled value="">Seleccione un elemento</option>
+										<option>A</option>
+										<option>B</option>
+										<option>C</option>
+										<option>D</option>
 									</select>
+									<span>Seleccionado: {{ selected }}</span>
 								</div>
 							</div>
 						</div>
@@ -47,15 +73,11 @@
 <script>
 	import EventBus from '../../event-bus'
 	export default{
-		created:function(){
-			this.mostrarRespuestas();
-		},
 		data(){
 			return{
-				respuestas: [],
+				selected: '',
 				preguntas:[],
-				pregunta:{enunciado:'',examen_id:'',respuesta_id:''},
-				respuesta: {respuesta:'', examen_id:''},
+				pregunta:{enunciado:'',respuestaA:'',respuestaB:'',respuestaC:'',respuestaCorrecta:'',examen_id:''},
 			}
 		},
 		methods:{
@@ -63,19 +85,21 @@
 				let formData = new FormData();
 				formData.append('enunciado', this.pregunta.enunciado);
 				formData.append('examen_id', this.$route.params.id);
-				formData.append('respuesta_id', this.pregunta.respuesta_id);
+				formData.append('respuestaA', this.pregunta.respuestaA);
+				formData.append('respuestaB', this.pregunta.respuestaB);
+				formData.append('respuestaC', this.pregunta.respuestaC);
+				formData.append('respuestaD', this.pregunta.respuestaD);
+				formData.append('esCorrecto', this.pregunta.esCorrecto);
 				axios.post('/pregunta',formData)
 				.then(res=>{
 					EventBus.$emit('add-pregunta', res.data.pregunta);
 					this.pregunta.enunciado = "";
-					this.pregunta.respuesta_id = "";
-					$('#create-pregunta').modal('hide');
-				})
-			},
-			mostrarRespuestas(){
-				var url = '/respuesta';
-				axios.get(url).then(res =>{
-					this.respuestas = res.data
+					this.pregunta.respuestaA = "";
+					this.pregunta.respuestaB = "";
+					this.pregunta.respuestaC = "";
+					this.pregunta.respuestaD = "";
+					this.pregunta.esCorrecto = "";
+					$('#createPregunta').modal('hide');
 				})
 			},
 		}

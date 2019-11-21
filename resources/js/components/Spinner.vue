@@ -1,5 +1,5 @@
 <template>
-	<div class="grid">
+	<div class="grid text-center">
 		<div class="loader">
 			<div id="ld3">
 				<div>
@@ -24,102 +24,89 @@
 * {
   padding: 0;
   margin: 0;}
+  
+  .grid {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+    flex-wrap: wrap; 
+  }
 
-body {
-  min-height: 100vh;
-  min-width: 100vw;}
+  .loader {
+    width: 50vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-.grid {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  flex-wrap: wrap; 
-text-align: center;}
+  #ld3 {
+    position: relative;
+    animation: outercontainer 4s linear infinite; }
+    #ld3 div {
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0; 
+    }
+    #ld3 div:nth-child(1) {
+      top: 20px;
+      background: #59CD90;
+      animation: ld3_div1 2s linear infinite; 
+    }
+    #ld3 div:nth-child(2) {
+      top: -20px;
+      background: #D91E36;
+      animation: ld3_div2 2s linear infinite; 
+    }
+    #ld3 div:nth-child(3) {
+      left: 20px;
+      background: #F39237;
+      animation: ld3_div4 2s linear infinite;
+    }
+    #ld3 div:nth-child(4) {
+      left: -20px;
+      background: #0072BB;
+      animation: ld3_div3 2s linear infinite; 
+    }
 
-.loader {
-  width: 50vw;
-  height: 50vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
+    @keyframes outercontainer {
+      100% {
+        transform: rotate(360deg); 
+      } 
+    }
+    @keyframes ld3_div1 {
+      0% {top: 20px; }
+      25% {top: 0; }
+      50% {top: 20px; }
+      75% {top: 0; }
+      100% {top: 20px; } 
+    }
+    @keyframes ld3_div2 {
+      0% {top: -20px; }
+      25% {top: 0; }
+      50% {top: -20px; }
+      75% {top: 0; }
+      100% {top: -20px; } 
+    }
+    @keyframes ld3_div3 {
+      0% {left: -20px; }
+      25% {left: 0; }
+      50% {left: -20px; }
+      75% {left: 0; }
+      100% {left: -20px; }
+    }
+    @keyframes ld3_div4 {
+      0% {left: 20px; }
+      25% {left: 0; }
+      50% {left: 20px; }
+      75% {left: 0; }
+      100% {left: 20px; }
+    }
 
-#ld3 {
-  position: relative;
-  animation: outercontainer 4s linear infinite; }
-  #ld3 div {
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0; }
-  #ld3 div:nth-child(1) {
-    top: 20px;
-    background: #59CD90;
-    animation: ld3_div1 2s linear infinite; }
-  #ld3 div:nth-child(2) {
-    top: -20px;
-    background: #D91E36;
-    animation: ld3_div2 2s linear infinite; }
-  #ld3 div:nth-child(3) {
-    left: 20px;
-    background: #F39237;
-    animation: ld3_div4 2s linear infinite; }
-  #ld3 div:nth-child(4) {
-    left: -20px;
-    background: #0072BB;
-    animation: ld3_div3 2s linear infinite; }
-
-@keyframes outercontainer {
-  100% {
-    transform: rotate(360deg); } }
-@keyframes ld3_div1 {
-  0% {
-    top: 20px; }
-  25% {
-    top: 0; }
-  50% {
-    top: 20px; }
-  75% {
-    top: 0; }
-  100% {
-    top: 20px; } }
-@keyframes ld3_div2 {
-  0% {
-    top: -20px; }
-  25% {
-    top: 0; }
-  50% {
-    top: -20px; }
-  75% {
-    top: 0; }
-  100% {
-    top: -20px; } }
-@keyframes ld3_div3 {
-  0% {
-    left: -20px; }
-  25% {
-    left: 0; }
-  50% {
-    left: -20px; }
-  75% {
-    left: 0; }
-  100% {
-    left: -20px; } }
-@keyframes ld3_div4 {
-  0% {
-    left: 20px; }
-  25% {
-    left: 0; }
-  50% {
-    left: 20px; }
-  75% {
-    left: 0; }
-  100% {
-    left: 20px; } }
-/*# sourceMappingURL=app.css.map */
-
-</style>
+  </style>

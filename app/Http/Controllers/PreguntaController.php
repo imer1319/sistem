@@ -22,7 +22,11 @@ class PreguntaController extends Controller
     $pregunta = new Pregunta();
     $pregunta->enunciado = $request->enunciado;
     $pregunta->examen_id = $request->examen_id;
-    $pregunta->respuesta_id = $request->respuesta_id;
+    $pregunta->respuestaA = $request->respuestaA;
+    $pregunta->respuestaB = $request->respuestaB;
+    $pregunta->respuestaC = $request->respuestaC;
+    $pregunta->respuestaD = $request->respuestaD;
+    $pregunta->esCorrecto = $request->esCorrecto;
     $pregunta->save();
     return response()->json([
       "message" => "Creado correctamente",
@@ -35,7 +39,11 @@ class PreguntaController extends Controller
     $pregunta = Pregunta::find($id);
     $pregunta->enunciado = $request->enunciado;
     $pregunta->examen_id = $request->examen_id;
-    $pregunta->respuesta_id = $request->respuesta_id;
+    $pregunta->respuestaA = $request->respuestaA;
+    $pregunta->respuestaB = $request->respuestaB;
+    $pregunta->respuestaC = $request->respuestaC;
+    $pregunta->respuestaD = $request->respuestaD;
+    $pregunta->esCorrecto = $request->esCorrecto;
     $pregunta->save();
     return $pregunta;
   }

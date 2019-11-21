@@ -1,6 +1,6 @@
 <template>
 	<!-- listar las respuestas -->
-	<div>
+	<div class="col-12">
 		<form v-on:submit.prevent="updatePregunta(fillpregunta)" enctype="multipart/form-data">
 			<div class="modal fade" id="editarPregunta">
 				<div class="modal-dialog">
@@ -18,15 +18,34 @@
 									<input type="text"  class="form-control" v-model="fillpregunta.enunciado">
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="form-group">
-									<label for="respuesta"></label>
-									<select v-model="fillpregunta.respuesta_id" class="custom-select">
-										<option disabled value="">--Seleccione la respuesta correcta--</option>
-										<option v-for="(respuesta,index) in respuestas" v-if="respuesta.examen_id == $route.params.id" :value="respuesta.id">
-											{{ respuesta.respuesta }}
-										</option>
-									</select>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">RespuestaA</label>
+								<div class="col-md-10">
+									<input type="text"  class="form-control" v-model="fillpregunta.respuestaA">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">RespuestaB</label>
+								<div class="col-md-10">
+									<input type="text"  class="form-control" v-model="fillpregunta.respuestaB">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">RespuestaC</label>
+								<div class="col-md-10">
+									<input type="text"  class="form-control" v-model="fillpregunta.respuestaC">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">RespuestaD</label>
+								<div class="col-md-10">
+									<input type="text"  class="form-control" v-model="fillpregunta.respuestaD">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">Correcta</label>
+								<div class="col-md-10">
+									<input type="text"  class="form-control" v-model="fillpregunta.esCorrecto">
 								</div>
 							</div>
 						</div>
@@ -42,37 +61,46 @@
 			</div>
 		</form>
 		<!-- listar preguntas -->
-		<div class="col-md-12">
-			<h3 class="page-header">Preguntas</h3>
-		</div>
-		<spinner v-if="loading"></spinner>
-		<div class="col-md-12" v-else>
-			<a href="#" class="btn btn-primary float-right" data-toggle="modal" data-target="#create-pregunta">Crear Nuevo</a>
-			<table class="table table-hover table-striped py-5">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Enunciado</th>
-						<th>Respuesta</th>
-						<th colspan="2">
-							&nbsp;
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="(pregunta, index) in preguntas" :key="index" v-if="pregunta.examen_id == $route.params.id">
-						<td width="10px">{{ index+1 }}</td>
-						<td>{{pregunta.enunciado}}</td>
-						<td><span v-for="(respuesta,index) in respuestas" v-if="respuesta.id == pregunta.respuesta_id">{{ respuesta.respuesta }}</span></td>
-						<td>
-							<a href="#" class="btn btn-warning float-right" @click.prevent="editarPregunta(pregunta)">Editar</a>
-						</td>
-						<td width="10px">
-							<a href="#" class="btn btn-danger" v-on:click.prevent="eliminarPregunta(pregunta,index)">Eliminar</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Preguntas</h3>
+				<a href="#" class="btn btn-success float-right" data-toggle="modal" data-target="#createPregunta"><i class="fas fa-plus"></i> Crear Nuevo</a>
+			</div>
+			<spinner v-if="loading"></spinner>
+			<div class="card-body" v-else>
+				<paginate name="preguntas" :list="preguntas" :per="4">
+					<table class="table table-bordered table-striped py-5">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Enunciado</th>
+								<th>RespuestaA</th>
+								<th>RespuestaB</th>
+								<th>RespuestaC</th>
+								<th>RespuestaD</th>
+								<th>Correcto</th>
+								<th class="text-center">Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(pregunta, index) in paginated('preguntas')" :key="index" v-if="pregunta.examen_id == $route.params.id">
+								<td width="10px">{{ index+1 }}</td>
+								<td>{{pregunta.enunciado}}</td>
+								<td>{{ pregunta.respuestaA }}</td>
+								<td>{{ pregunta.respuestaB }}</td>
+								<td>{{ pregunta.respuestaC }}</td>
+								<td>{{ pregunta.respuestaD }}</td>
+								<td>{{ pregunta.esCorrecto }}</td>
+								<td class="text-center">
+									<a href="#" class="btn btn-warning color-letra" @click.prevent="editarPregunta(pregunta)"><i class="fas fa-pencil-alt"></i> Editar</a>
+									<a href="#" class="btn btn-danger color-letra" v-on:click.prevent="eliminarPregunta(pregunta,index)"><i class="far fa-trash-alt"></i> Eliminar</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</paginate>
+				<paginate-links for="preguntas" :classes="{'ul': 'pagination', 'li': 'page-item', 'a': 'page-link'}"></paginate-links>
+			</div>
 		</div>
 	</div>
 </template>
@@ -81,7 +109,6 @@
 	export default{
 		created(){
 			this.mostrarPregunta();
-			this.mostrarRespuestas();
 			EventBus.$on('add-pregunta',data =>{
 				this.preguntas.push(data)
 			});
@@ -89,10 +116,14 @@
 		data(){
 			return{
 				preguntas:[],
-				pregunta:{enunciado:'',examen_id:'',respuesta_id:''},
-				fillpregunta: {enunciado: '',examen_id:'',respuesta_id:''},
+				pregunta:{
+					enunciado:'',examen_id:'',respuestaA:'',respuestaB:'',respuestaC:'',respuestaD:'',esCorrecto:''
+				},
+				fillpregunta: {
+					enunciado: '',examen_id:'',respuestaA:'',respuestaB:'',respuestaC:'',respuestaD:'',esCorrecto:''
+				},
 				loading:true,
-				respuestas:[]
+				paginate:['preguntas'],
 			}
 		},
 		methods:{
@@ -102,12 +133,6 @@
 					this.loading = false;
 				})
 			},
-			mostrarRespuestas(){
-				var url = '/respuesta';
-				axios.get(url).then(res =>{
-					this.respuestas = res.data
-				})
-			},
 			eliminarPregunta:function(pregunta,index){
 				axios.delete(`/pregunta/${pregunta.id}`)
 				.then(()=>{
@@ -115,10 +140,13 @@
 				})
 			},
 			editarPregunta:function (pregunta){
-				this.mostrarRespuestas();
 				this.fillpregunta.enunciado = pregunta.enunciado;
 				this.fillpregunta.examen_id = this.$route.params.id;
-				this.fillpregunta.respuesta_id = pregunta.respuesta_id;
+				this.fillpregunta.respuestaA = pregunta.respuestaA;
+				this.fillpregunta.respuestaB = pregunta.respuestaB;
+				this.fillpregunta.respuestaC = pregunta.respuestaC;
+				this.fillpregunta.respuestaD = pregunta.respuestaD;
+				this.fillpregunta.esCorrecto = pregunta.esCorrecto;
 				this.fillpregunta.id = pregunta.id;
 				$('#editarPregunta').modal('show');
 			},
@@ -126,7 +154,11 @@
 				let data = new FormData();
 				data.append('enunciado', this.fillpregunta.enunciado);
 				data.append('examen_id', this.fillpregunta.examen_id);
-				data.append('respuesta_id', this.fillpregunta.respuesta_id);
+				data.append('respuestaA', this.fillpregunta.respuestaA);
+				data.append('respuestaB', this.fillpregunta.respuestaB);
+				data.append('respuestaC', this.fillpregunta.respuestaC);
+				data.append('respuestaD', this.fillpregunta.respuestaD);
+				data.append('esCorrecto', this.fillpregunta.esCorrecto);
 				data.append('_method','PUT');
 				var url = `/pregunta/${fillpregunta.id}`;
 				axios.post(url, data).then(res=>{
@@ -137,3 +169,9 @@
 		}
 	}
 </script>
+
+<style>
+.color-letra, .color-letra:hover{
+	color: white;
+}
+</style>

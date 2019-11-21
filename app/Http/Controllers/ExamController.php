@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 
 class ExamController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin');
+    }
     public function index(Request $request)
     {
         if($request->ajax()){
@@ -78,15 +82,15 @@ class ExamController extends Controller
 
     public function destroy($id)
     {
-       $examen = Exam::find($id);
-       $file_path = public_path().'/imagenes/examen/'.$examen->icon;
-       if(is_file($file_path)){unlink($file_path);}
-       $file_content = public_path().'/examenes/'.$examen->content;
-       if(is_file($file_content)){unlink($file_content);}
-       $examen->delete();
-       return response()->json([
+     $examen = Exam::find($id);
+     $file_path = public_path().'/imagenes/examen/'.$examen->icon;
+     if(is_file($file_path)){unlink($file_path);}
+     $file_content = public_path().'/examenes/'.$examen->content;
+     if(is_file($file_content)){unlink($file_content);}
+     $examen->delete();
+     return response()->json([
         "message" => "Eliminado correctamente",
         "examen" => $examen
     ],200);
-   }
+ }
 }
