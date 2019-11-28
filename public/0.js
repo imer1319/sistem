@@ -78,24 +78,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      selected: '',
       preguntas: [],
       pregunta: {
         enunciado: '',
         respuestaA: '',
         respuestaB: '',
         respuestaC: '',
-        respuestaCorrecta: '',
+        respuestaD: '',
+        esCorrecto: '',
         examen_id: ''
-      }
+      },
+      options: [{
+        value: 'A'
+      }, {
+        value: 'B'
+      }, {
+        value: 'C'
+      }, {
+        value: 'D'
+      }]
     };
   },
   methods: {
@@ -109,7 +114,23 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('respuestaB', this.pregunta.respuestaB);
       formData.append('respuestaC', this.pregunta.respuestaC);
       formData.append('respuestaD', this.pregunta.respuestaD);
-      formData.append('esCorrecto', this.pregunta.esCorrecto);
+
+      if (this.pregunta.esCorrecto == "A") {
+        formData.append('esCorrecto', this.pregunta.respuestaA);
+      }
+
+      if (this.pregunta.esCorrecto == "B") {
+        formData.append('esCorrecto', this.pregunta.respuestaB);
+      }
+
+      if (this.pregunta.esCorrecto == "C") {
+        formData.append('esCorrecto', this.pregunta.respuestaC);
+      }
+
+      if (this.pregunta.esCorrecto == "D") {
+        formData.append('esCorrecto', this.pregunta.respuestaD);
+      }
+
       axios.post('/pregunta', formData).then(function (res) {
         _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('add-pregunta', res.data.pregunta);
         _this.pregunta.enunciado = "";
@@ -136,6 +157,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _event_bus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../event-bus */ "./resources/js/event-bus.js");
+//
+//
+//
 //
 //
 //
@@ -274,7 +298,16 @@ __webpack_require__.r(__webpack_exports__);
         esCorrecto: ''
       },
       loading: true,
-      paginate: ['preguntas']
+      paginate: ['preguntas'],
+      options: [{
+        value: 'A'
+      }, {
+        value: 'B'
+      }, {
+        value: 'C'
+      }, {
+        value: 'D'
+      }]
     };
   },
   methods: {
@@ -294,6 +327,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     editarPregunta: function editarPregunta(pregunta) {
+      this.fillpregunta.id = pregunta.id;
       this.fillpregunta.enunciado = pregunta.enunciado;
       this.fillpregunta.examen_id = this.$route.params.id;
       this.fillpregunta.respuestaA = pregunta.respuestaA;
@@ -301,7 +335,6 @@ __webpack_require__.r(__webpack_exports__);
       this.fillpregunta.respuestaC = pregunta.respuestaC;
       this.fillpregunta.respuestaD = pregunta.respuestaD;
       this.fillpregunta.esCorrecto = pregunta.esCorrecto;
-      this.fillpregunta.id = pregunta.id;
       $('#editarPregunta').modal('show');
     },
     updatePregunta: function updatePregunta(fillpregunta) {
@@ -315,6 +348,23 @@ __webpack_require__.r(__webpack_exports__);
       data.append('respuestaC', this.fillpregunta.respuestaC);
       data.append('respuestaD', this.fillpregunta.respuestaD);
       data.append('esCorrecto', this.fillpregunta.esCorrecto);
+
+      if (this.fillpregunta.esCorrecto == "A") {
+        data.append('esCorrecto', this.fillpregunta.respuestaA);
+      }
+
+      if (this.fillpregunta.esCorrecto == "B") {
+        data.append('esCorrecto', this.fillpregunta.respuestaB);
+      }
+
+      if (this.fillpregunta.esCorrecto == "C") {
+        data.append('esCorrecto', this.fillpregunta.respuestaC);
+      }
+
+      if (this.fillpregunta.esCorrecto == "D") {
+        data.append('esCorrecto', this.fillpregunta.respuestaD);
+      }
+
       data.append('_method', 'PUT');
       var url = "/pregunta/".concat(fillpregunta.id);
       axios.post(url, data).then(function (res) {
@@ -377,7 +427,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      examen: {}
+      examen: {},
+      loading: true,
+      palabras: ''
     };
   },
   methods: {
@@ -387,6 +439,9 @@ __webpack_require__.r(__webpack_exports__);
       var url = this.$route.params.id;
       axios.get(url).then(function (res) {
         _this.examen = res.data;
+        _this.loading = false;
+
+        _this.loadDoc();
       });
     },
     loadDoc: function loadDoc() {
@@ -402,6 +457,10 @@ __webpack_require__.r(__webpack_exports__);
 
       xhttp.open("GET", url, true);
       xhttp.send();
+    },
+    contarPalabras: function contarPalabras() {
+      var textArea = document.getElementById("test").value;
+      this.palabras = textArea.match(/[^\s]+/g).length;
     }
   }
 });
@@ -692,8 +751,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.selected,
-                              expression: "selected"
+                              value: _vm.pregunta.esCorrecto,
+                              expression: "pregunta.esCorrecto"
                             }
                           ],
                           on: {
@@ -706,9 +765,13 @@ var render = function() {
                                   var val = "_value" in o ? o._value : o.value
                                   return val
                                 })
-                              _vm.selected = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
+                              _vm.$set(
+                                _vm.pregunta,
+                                "esCorrecto",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
                             }
                           }
                         },
@@ -717,19 +780,16 @@ var render = function() {
                             _vm._v("Seleccione un elemento")
                           ]),
                           _vm._v(" "),
-                          _c("option", [_vm._v("A")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("B")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("C")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("D")])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm._v("Seleccionado: " + _vm._s(_vm.selected))
-                      ])
+                          _vm._l(_vm.options, function(option) {
+                            return _c(
+                              "option",
+                              { domProps: { value: option.value } },
+                              [_vm._v(_vm._s(option.value))]
+                            )
+                          })
+                        ],
+                        2
+                      )
                     ])
                   ])
                 ]),
@@ -996,31 +1056,52 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-10" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.fillpregunta.esCorrecto,
-                            expression: "fillpregunta.esCorrecto"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.fillpregunta.esCorrecto },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.fillpregunta.esCorrecto,
+                              expression: "fillpregunta.esCorrecto"
                             }
-                            _vm.$set(
-                              _vm.fillpregunta,
-                              "esCorrecto",
-                              $event.target.value
-                            )
+                          ],
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.fillpregunta,
+                                "esCorrecto",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
                           }
-                        }
-                      })
+                        },
+                        [
+                          _c("option", { attrs: { disabled: "", value: "" } }, [
+                            _vm._v("Seleccione un elemento")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.options, function(option) {
+                            return _c(
+                              "option",
+                              { domProps: { value: option.value } },
+                              [_vm._v(_vm._s(option.value))]
+                            )
+                          })
+                        ],
+                        2
+                      )
                     ])
                   ])
                 ]),
@@ -1269,42 +1350,35 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-lg-6" }, [
-      _c("div", { staticClass: "card card-primary card-outline" }, [
-        _c("div", { staticClass: "card-body box-profile" }, [
-          _c("div", { staticClass: "text-center" }, [
-            _c("img", {
-              staticClass:
-                "profile-user-img img-fluid img-circle img-responsive",
-              attrs: {
-                src: "/imagenes/examen/" + _vm.examen.icon,
-                alt: "User profile picture"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("h3", { staticClass: "profile-username text-center" }, [
-            _vm._v(_vm._s(_vm.examen.name))
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "btn btn-primary",
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.loadDoc()
-                }
-              }
-            },
-            [_vm._v("Mostrar")]
-          ),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("p", { staticClass: "text-justify", attrs: { id: "test" } })
-        ])
-      ])
+      _c(
+        "div",
+        { staticClass: "card card-primary card-outline" },
+        [
+          _vm.loading
+            ? _c("spinner")
+            : _c("div", { staticClass: "card-body box-profile" }, [
+                _c("div", { staticClass: "text-center" }, [
+                  _c("img", {
+                    staticClass:
+                      "profile-user-img img-fluid img-circle img-responsive",
+                    attrs: {
+                      src: "/imagenes/examen/" + _vm.examen.icon,
+                      alt: "User profile picture"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("h3", { staticClass: "profile-username text-center" }, [
+                  _vm._v(_vm._s(_vm.examen.name))
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-justify", attrs: { id: "test" } })
+              ])
+        ],
+        1
+      )
     ]),
     _vm._v(" "),
     _c(

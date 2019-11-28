@@ -1,8 +1,4 @@
-@extends('layouts.admin')
-
-@section('admin')
-<!-- start: content -->
-<div id="content">
+<template>
 	<div class="panel">
 		<div class="panel-body">
 			<div class="col-md-6 col-sm-12">
@@ -10,5 +6,9 @@
 			</div>                 
 		</div>
 	</div>
-</div>
-@endsection
+</template>
+<script>
+	export default{
+		
+	}
+</script>

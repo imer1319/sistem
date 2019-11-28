@@ -117,9 +117,6 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Starter Page</h1>
-          </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -129,7 +126,7 @@
     <div class="content" id="app">
       <div class="container-fluid">
         <div class="row">
-          @yield('administrador')
+          <App/>
           <!-- /.col-md-6 -->
         </div>
         <!-- /.row -->

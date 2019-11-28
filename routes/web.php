@@ -19,3 +19,6 @@ Route::resource('ejercicio','EjercicioController');
 // rutas para el usuario
 Route::get('/exam','UserController@examen');
 Route::get('/exam/{id}','UserController@darExamen');
+Route::post('exam','UserController@saveExam');
+Route::post('game','UserController@saveGame');
+Route::get('user','UserController@user');

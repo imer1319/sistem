@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Exam;
+use App\Save;
+use App\User;
+use App\SaveGame;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +16,8 @@ class UserController extends Controller
     public function examen(Request $request)
     {
         if($request->ajax()){
-            return Exam::all();
+            $exam =  Exam::get();
+            return $exam;
         }
         return view('home');
     }
@@ -24,5 +27,42 @@ class UserController extends Controller
             return Exam::find($id);
         }
         return view('home');
+    }
+    public function saveExam(Request $request)
+    {
+        $saveExam = new Save();
+        $saveExam->exam_id = $request->exam_id;
+        $saveExam->user_id = $request->user_id;
+        $saveExam->ppm = $request->ppm;
+        $saveExam->comprension = $request->comprension;
+        $saveExam->tiempo = $request->tiempo;
+        $saveExam->estado = $request->estado;
+        $saveExam->save();
+        return response()->json([
+            "message" => "Creado correctamente",
+            "saveExam" => $saveExam
+        ],200);
+        return $saveExam;
+    }
+    public function user(Request $request)
+    {
+        if($request->ajax()){
+            $user = auth()->user(); 
+            return $user;
+        }
+        return view('home');
+    }
+    public function saveGame(Request $request)
+    {
+        $savGame = new SaveGame();
+        $savGame->ejercicio_id = $request->ejercicio_id;
+        $savGame->user_id = $request->user_id;
+        savGame->puntuacion = $request->puntuacion;
+        $savGame->save();
+        return response()->json([
+            "message" => "Creado correctamente",
+            "savGame" => $savGame
+        ],200);
+        return $savGame;
     }
 }

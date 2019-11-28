@@ -17,7 +17,7 @@ class ExamController extends Controller
         if($request->ajax()){
             return Exam::all();
         }
-        return view('admin.examen.index');
+        return view('layouts.administrador');
     }
 
     public function store(Request $request)
@@ -50,7 +50,7 @@ class ExamController extends Controller
             $examen =Exam::find($id); 
             return $examen;
         }
-        return view('admin.examen.index');
+        return view('layouts.administrador');
     }
     public function update(Request $request, $id)
     {

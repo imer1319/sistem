@@ -23,9 +23,13 @@
 		<div v-show="muestra_exam==1">
 			<div class="card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto pt-2" style="box-shadow: 2px 2px 10px #666;">
 				<div class="card-body">
+					<div class="row">
+						<span class="pull-right">{{ cronometro }}</span>
+					</div>
 					<h3 class="text-center">{{ examen.name }}</h3>
 					<hr>
 					<p id="test" class="text-justify"></p>
+					<textarea id="area" COLS=40 ROWS=10 style="display: none;"></textarea>
 				</div>
 			</div>
 			<div class="row mt-4">
@@ -41,25 +45,57 @@
 						<div v-show="index == contador">
 							<div>{{pregunta.enunciado}}</div>
 							<div>
-								<input type="radio" name="radio1">
-								<label>{{ pregunta.respuestaA }}</label>
+								<label>
+									<input type="radio" name="radio" :value="pregunta.respuestaA" v-model="picked">{{ pregunta.respuestaA }}
+								</label>
 							</div>
 							<div>
-								<input type="radio" name="radio1">
-								<label>{{ pregunta.respuestaB }}</label>
+								<label>
+									<input type="radio" name="radio" :value="pregunta.respuestaB" v-model="picked">{{ pregunta.respuestaB }}
+								</label>
 							</div>
 							<div>
-								<input type="radio" name="radio1">
-								<label>{{ pregunta.respuestaC }}</label>
+								<label>
+									<input type="radio" name="radio" :value="pregunta.respuestaC" v-model="picked">{{ pregunta.respuestaC }}
+								</label>
 							</div>
 							<div>
-								<input type="radio" name="radio1">
-								<label>{{ pregunta.respuestaCorrecta }}</label>
+								<label>
+									<input type="radio" name="radio" :value="pregunta.respuestaD" v-model="picked">{{ pregunta.respuestaD }}
+								</label>
+							</div>
+							<div>
+								<span v-model="pregunta.esCorrecto" style="display: none;"></span>
 							</div>
 							<div class="row">
-								<div class="btn btn-success" @click.prevent="contador++">Siguiente</div>
+								<div class="btn btn-success" @click.prevent="siguiente(pregunta)">Siguiente</div>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div v-show="muestra_exam == 3">
+			<div class="card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto" style="box-shadow: 2px 2px 10px #666;">
+				<div class="card-body">
+					<form v-on:submit.prevent="guardarExam">
+						<input type="submit"value="Mostrar Resultados" class="btn btn-primary">
+					</form>
+				</div>
+			</div>
+		</div>
+		<div v-show="muestra_exam == 4">
+			<div class="card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto" style="box-shadow: 2px 2px 10px #666;">
+				<div class="card-body">
+					<h3 class="text-center">Resultados</h3>
+					<hr>
+					<h4>Respondidas Correctamente : {{ cp }}</h4>
+					<h4>Respondidas Erroneamente : {{ 10-cp }}</h4>
+					<h4>Numero de palabras : {{ palabras }}</h4>
+					<h4>Palabras por minuto : {{ ppmR }}</h4>
+					<h4>Tiempo en dar el examen : {{ result }}</h4>
+					<div class="row">
+						<router-link :to="{name:'home'}" class="btn btn-info m-auto"> Ir al Inicio</router-link>
 					</div>
 				</div>
 			</div>
@@ -71,6 +107,7 @@
 		created:function() {
 			this.showExamen();
 			this.mostrarPregunta();
+			this.obtenerID();
 		},
 		mounted:function(){
 			if (this.step==1){
@@ -84,13 +121,75 @@
 				muestra_exam:0,
 				examen :{},
 				preguntas:[],
-				pregunta:{enunciado:'',examen_id:'',},
+				pregunta:{enunciado:'',examen_id:'',respuestaA:'',respuestaB:'',respuestaC:'',respuestaD:'',esCorrecto:''},
 				contador : 0,
-				posicion : [0,1,2,3],
-				posicionAleatoria : [],
+				cp:0,
+				picked:'',
+				palabras:'',
+				ppmR:0,
+				saveExam:{exam_id: '',user_id:'',ppm:'',comprension:'',tiempo:'',estado:''},
+				users:{},
+				myTime: 0,
+				cronometro:0,
+				result:'',
 			}
 		},
 		methods:{
+			myTimer(){
+				this.cronometro++;
+			},
+			stopTimer(){
+				clearInterval(this.myTime);
+				this.ppmR = Math.round(this.palabras/(this.cronometro/60));
+				this.muestraCronometro();
+			},
+			muestraCronometro(){
+				var time = this.cronometro;
+				var minutes = Math.floor( time / 60 );
+				var seconds = time % 60;
+
+				minutes = minutes < 10 ? '0' + minutes : minutes;
+
+				seconds = seconds < 10 ? '0' + seconds : seconds;
+
+				this.result = minutes + ":" + seconds; 
+			},
+			guardarExam(){
+				this.saveExam.exam_id = this.$route.params.id;
+				this.saveExam.user_id = this.users.id;
+				this.saveExam.ppm = this.palabras/(this.cronometro/60);
+				this.saveExam.comprension = (this.cp)*10;
+				this.saveExam.tiempo = this.cronometro;
+				this.saveExam.estado = 1;
+
+				let formData = new FormData();
+				formData.append('exam_id', this.saveExam.exam_id);
+				formData.append('user_id', this.saveExam.exam_id);
+				formData.append('ppm', this.saveExam.ppm);
+				formData.append('comprension', this.saveExam.comprension);
+				formData.append('tiempo', this.saveExam.tiempo);
+				formData.append('estado', this.saveExam.estado);
+
+				axios.post('/exam',formData)
+				.then(res=>{
+					this.saveExam.exam_id = "";
+					this.saveExam.user_id = "";
+					this.saveExam.ppm = "";
+					this.saveExam.comprension = "";
+					this.saveExam.tiempo = "";
+					this.saveExam.estado = "";
+					this.muestra_exam=4;
+				})
+			},
+			siguiente(pregunta){
+				if (pregunta.esCorrecto == this.picked) {
+					this.cp++;
+				}
+				this.contador++;
+				if (this.contador == 10) {
+					this.muestra_exam=3;
+				}
+			},
 			next:function() {
 				this.step++;
 				if (this.step==2) {
@@ -102,9 +201,14 @@
 					document.getElementById('paso3').classList.add("active");
 				}
 				if (this.step==4) {
-					this.loadDoc();
+					this.myTime = setInterval(this.myTimer,1000);
 					this.muestra_exam=1;
 				}
+			},
+			obtenerID(){
+				axios.get("/user").then(res =>{
+					this.users = res.data
+				})
 			},
 			mostrarPregunta (){
 				var url = '/pregunta';
@@ -117,14 +221,16 @@
 				var url = this.$route.params.id;
 				axios.get(url).then(res =>{
 					this.examen = res.data
+					this.leerDocumento();
 				})
 			},
-			loadDoc() {
+			leerDocumento() {
 				var url = "/examenes/"+this.examen.content;
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById("test").innerHTML = this.responseText;
+						document.getElementById("area").innerHTML = this.responseText;
 					}
 				};
 				xhttp.open("GET", url, true);
@@ -132,12 +238,13 @@
 			},
 			mostrarPreguntas(){
 				this.muestra_exam=2;
-				this.mostrarRandom();
+				this.contarPalabras();
+				this.stopTimer();
 			},
-			mostrarRandom(){
-				this.posicionAleatoria = this.posicion.sort(function(){return Math.random()-0.5});
-				console.log('numerosaleatorios '+this.posicionAleatoria);
-			},
+			contarPalabras(){
+				var textArea = document.getElementById("area").value;
+				this.palabras = textArea.match(/[^\s]+/g).length;
+			}
 		}
 	}
 </script>
@@ -192,56 +299,6 @@
 	background: #27AE60;
 	color: white;
 }
+/* para el radio button*/
 
-/*radio button para saber las respuestas de examenes.*/
-[type="radio"]:checked,
-[type="radio"]:not(:checked) {
-	position: absolute;
-	left: -9999px;
-}
-[type="radio"]:checked + label,
-[type="radio"]:not(:checked) + label
-{
-	position: relative;
-	padding-left: 28px;
-	cursor: pointer;
-	line-height: 20px;
-	display: inline-block;
-	color: #666;
-}
-[type="radio"]:checked + label:before,
-[type="radio"]:not(:checked) + label:before {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 18px;
-	height: 18px;
-	border: 1px solid #ddd;
-	border-radius: 100%;
-	background: #fff;
-}
-[type="radio"]:checked + label:after,
-[type="radio"]:not(:checked) + label:after {
-	content: '';
-	width: 12px;
-	height: 12px;
-	background: #F87DA9;
-	position: absolute;
-	top: 4px;
-	left: 4px;
-	border-radius: 100%;
-	-webkit-transition: all 0.2s ease;
-	transition: all 0.2s ease;
-}
-[type="radio"]:not(:checked) + label:after {
-	opacity: 0;
-	-webkit-transform: scale(0);
-	transform: scale(0);
-}
-[type="radio"]:checked + label:after {
-	opacity: 1;
-	-webkit-transform: scale(1);
-	transform: scale(1);
-}
 </style>

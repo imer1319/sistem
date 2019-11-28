@@ -77,10 +77,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showExamen();
     this.mostrarPregunta();
+    this.obtenerID();
   },
   mounted: function mounted() {
     if (this.step == 1) {
@@ -96,14 +133,86 @@ __webpack_require__.r(__webpack_exports__);
       preguntas: [],
       pregunta: {
         enunciado: '',
-        examen_id: ''
+        examen_id: '',
+        respuestaA: '',
+        respuestaB: '',
+        respuestaC: '',
+        respuestaD: '',
+        esCorrecto: ''
       },
       contador: 0,
-      posicion: [0, 1, 2, 3],
-      posicionAleatoria: []
+      cp: 0,
+      picked: '',
+      palabras: '',
+      ppmR: 0,
+      saveExam: {
+        exam_id: '',
+        user_id: '',
+        ppm: '',
+        comprension: '',
+        tiempo: '',
+        estado: ''
+      },
+      users: {},
+      myTime: 0,
+      cronometro: 0,
+      result: ''
     };
   },
   methods: {
+    myTimer: function myTimer() {
+      this.cronometro++;
+    },
+    stopTimer: function stopTimer() {
+      clearInterval(this.myTime);
+      this.ppmR = Math.round(this.palabras / (this.cronometro / 60));
+      this.muestraCronometro();
+    },
+    muestraCronometro: function muestraCronometro() {
+      var time = this.cronometro;
+      var minutes = Math.floor(time / 60);
+      var seconds = time % 60;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+      this.result = minutes + ":" + seconds;
+    },
+    guardarExam: function guardarExam() {
+      var _this = this;
+
+      this.saveExam.exam_id = this.$route.params.id;
+      this.saveExam.user_id = this.users.id;
+      this.saveExam.ppm = this.palabras / (this.cronometro / 60);
+      this.saveExam.comprension = this.cp * 10;
+      this.saveExam.tiempo = this.cronometro;
+      this.saveExam.estado = 1;
+      var formData = new FormData();
+      formData.append('exam_id', this.saveExam.exam_id);
+      formData.append('user_id', this.saveExam.exam_id);
+      formData.append('ppm', this.saveExam.ppm);
+      formData.append('comprension', this.saveExam.comprension);
+      formData.append('tiempo', this.saveExam.tiempo);
+      formData.append('estado', this.saveExam.estado);
+      axios.post('/exam', formData).then(function (res) {
+        _this.saveExam.exam_id = "";
+        _this.saveExam.user_id = "";
+        _this.saveExam.ppm = "";
+        _this.saveExam.comprension = "";
+        _this.saveExam.tiempo = "";
+        _this.saveExam.estado = "";
+        _this.muestra_exam = 4;
+      });
+    },
+    siguiente: function siguiente(pregunta) {
+      if (pregunta.esCorrecto == this.picked) {
+        this.cp++;
+      }
+
+      this.contador++;
+
+      if (this.contador == 10) {
+        this.muestra_exam = 3;
+      }
+    },
     next: function next() {
       this.step++;
 
@@ -118,34 +227,44 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.step == 4) {
-        this.loadDoc();
+        this.myTime = setInterval(this.myTimer, 1000);
         this.muestra_exam = 1;
       }
     },
+    obtenerID: function obtenerID() {
+      var _this2 = this;
+
+      axios.get("/user").then(function (res) {
+        _this2.users = res.data;
+      });
+    },
     mostrarPregunta: function mostrarPregunta() {
-      var _this = this;
+      var _this3 = this;
 
       var url = '/pregunta';
       axios.get(url).then(function (res) {
-        _this.preguntas = res.data;
-        _this.loading = false;
+        _this3.preguntas = res.data;
+        _this3.loading = false;
       });
     },
     showExamen: function showExamen() {
-      var _this2 = this;
+      var _this4 = this;
 
       var url = this.$route.params.id;
       axios.get(url).then(function (res) {
-        _this2.examen = res.data;
+        _this4.examen = res.data;
+
+        _this4.leerDocumento();
       });
     },
-    loadDoc: function loadDoc() {
+    leerDocumento: function leerDocumento() {
       var url = "/examenes/" + this.examen.content;
       var xhttp = new XMLHttpRequest();
 
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
           document.getElementById("test").innerHTML = this.responseText;
+          document.getElementById("area").innerHTML = this.responseText;
         }
       };
 
@@ -154,13 +273,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     mostrarPreguntas: function mostrarPreguntas() {
       this.muestra_exam = 2;
-      this.mostrarRandom();
+      this.contarPalabras();
+      this.stopTimer();
     },
-    mostrarRandom: function mostrarRandom() {
-      this.posicionAleatoria = this.posicion.sort(function () {
-        return Math.random() - 0.5;
-      });
-      console.log('numerosaleatorios ' + this.posicionAleatoria);
+    contarPalabras: function contarPalabras() {
+      var textArea = document.getElementById("area").value;
+      this.palabras = textArea.match(/[^\s]+/g).length;
     }
   }
 });
@@ -179,7 +297,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#progressbar {\r\n\tmargin-bottom: 30px;\r\n\toverflow: hidden;\r\n\t/*CSS counters to number the steps*/\r\n\tcounter-reset: step;\n}\n#progressbar li {\r\n\tlist-style-type: none;\r\n\tcolor: black;\r\n\ttext-transform: uppercase;\r\n\tfont-size: 18px;\r\n\twidth: 33.33%;\r\n\tfloat: left;\r\n\tposition: relative;\r\n\ttext-align: center;\n}\n#progressbar li:before {\r\n\tcontent: counter(step);\r\n\tcounter-increment: step;\r\n\twidth: 40px;\r\n\tline-height: 40px;\r\n\tdisplay: block;\r\n\tfont-size: 18px;\r\n\tcolor: #333;\r\n\tbackground: white;\r\n\tborder-radius: 3px;\r\n\tmargin: 0 auto 5px auto;\r\n\ttext-align: center;\n}\r\n/*progressbar connectors*/\n#progressbar li:after {\r\n\tcontent: '';\r\n\twidth: 100%;\r\n\theight: 2px;\r\n\tbackground: white;\r\n\tposition: absolute;\r\n\tleft: -50%;\r\n\ttop: 20px;\r\n\tz-index: -1; /*put it behind the numbers*/\n}\n#progressbar li:first-child:after {\r\n\t/*connector not needed before the first step*/\r\n\tcontent: none;\n}\r\n/*marking active/completed steps green*/\r\n/*The number of the step and the connector before it = green*/\n#progressbar li.active:before,  #progressbar li.active:after{\r\n\tbackground: #27AE60;\r\n\tcolor: white;\n}\r\n\r\n/*radio button para saber las respuestas de examenes.*/\n[type=\"radio\"]:checked,\r\n[type=\"radio\"]:not(:checked) {\r\n\tposition: absolute;\r\n\tleft: -9999px;\n}\n[type=\"radio\"]:checked + label,\r\n[type=\"radio\"]:not(:checked) + label\r\n{\r\n\tposition: relative;\r\n\tpadding-left: 28px;\r\n\tcursor: pointer;\r\n\tline-height: 20px;\r\n\tdisplay: inline-block;\r\n\tcolor: #666;\n}\n[type=\"radio\"]:checked + label:before,\r\n[type=\"radio\"]:not(:checked) + label:before {\r\n\tcontent: '';\r\n\tposition: absolute;\r\n\tleft: 0;\r\n\ttop: 0;\r\n\twidth: 18px;\r\n\theight: 18px;\r\n\tborder: 1px solid #ddd;\r\n\tborder-radius: 100%;\r\n\tbackground: #fff;\n}\n[type=\"radio\"]:checked + label:after,\r\n[type=\"radio\"]:not(:checked) + label:after {\r\n\tcontent: '';\r\n\twidth: 12px;\r\n\theight: 12px;\r\n\tbackground: #F87DA9;\r\n\tposition: absolute;\r\n\ttop: 4px;\r\n\tleft: 4px;\r\n\tborder-radius: 100%;\r\n\ttransition: all 0.2s ease;\n}\n[type=\"radio\"]:not(:checked) + label:after {\r\n\topacity: 0;\r\n\ttransform: scale(0);\n}\n[type=\"radio\"]:checked + label:after {\r\n\topacity: 1;\r\n\ttransform: scale(1);\n}\r\n", ""]);
+exports.push([module.i, "\n#progressbar {\r\n\tmargin-bottom: 30px;\r\n\toverflow: hidden;\r\n\t/*CSS counters to number the steps*/\r\n\tcounter-reset: step;\n}\n#progressbar li {\r\n\tlist-style-type: none;\r\n\tcolor: black;\r\n\ttext-transform: uppercase;\r\n\tfont-size: 18px;\r\n\twidth: 33.33%;\r\n\tfloat: left;\r\n\tposition: relative;\r\n\ttext-align: center;\n}\n#progressbar li:before {\r\n\tcontent: counter(step);\r\n\tcounter-increment: step;\r\n\twidth: 40px;\r\n\tline-height: 40px;\r\n\tdisplay: block;\r\n\tfont-size: 18px;\r\n\tcolor: #333;\r\n\tbackground: white;\r\n\tborder-radius: 3px;\r\n\tmargin: 0 auto 5px auto;\r\n\ttext-align: center;\n}\r\n/*progressbar connectors*/\n#progressbar li:after {\r\n\tcontent: '';\r\n\twidth: 100%;\r\n\theight: 2px;\r\n\tbackground: white;\r\n\tposition: absolute;\r\n\tleft: -50%;\r\n\ttop: 20px;\r\n\tz-index: -1; /*put it behind the numbers*/\n}\n#progressbar li:first-child:after {\r\n\t/*connector not needed before the first step*/\r\n\tcontent: none;\n}\r\n/*marking active/completed steps green*/\r\n/*The number of the step and the connector before it = green*/\n#progressbar li.active:before,  #progressbar li.active:after{\r\n\tbackground: #27AE60;\r\n\tcolor: white;\n}\r\n/* para el radio button*/\r\n\r\n", ""]);
 
 // exports
 
@@ -367,13 +485,24 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("span", { staticClass: "pull-right" }, [
+                  _vm._v(_vm._s(_vm.cronometro))
+                ])
+              ]),
+              _vm._v(" "),
               _c("h3", { staticClass: "text-center" }, [
                 _vm._v(_vm._s(_vm.examen.name))
               ]),
               _vm._v(" "),
               _c("hr"),
               _vm._v(" "),
-              _c("p", { staticClass: "text-justify", attrs: { id: "test" } })
+              _c("p", { staticClass: "text-justify", attrs: { id: "test" } }),
+              _vm._v(" "),
+              _c("textarea", {
+                staticStyle: { display: "none" },
+                attrs: { id: "area", COLS: "40", ROWS: "10" }
+              })
             ])
           ]
         ),
@@ -446,37 +575,144 @@ var render = function() {
                             _c("div", [_vm._v(_vm._s(pregunta.enunciado))]),
                             _vm._v(" "),
                             _c("div", [
-                              _c("input", {
-                                attrs: { type: "radio", name: "radio1" }
-                              }),
-                              _vm._v(" "),
-                              _c("label", [_vm._v(_vm._s(pregunta.respuestaA))])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", [
-                              _c("input", {
-                                attrs: { type: "radio", name: "radio1" }
-                              }),
-                              _vm._v(" "),
-                              _c("label", [_vm._v(_vm._s(pregunta.respuestaB))])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", [
-                              _c("input", {
-                                attrs: { type: "radio", name: "radio1" }
-                              }),
-                              _vm._v(" "),
-                              _c("label", [_vm._v(_vm._s(pregunta.respuestaC))])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", [
-                              _c("input", {
-                                attrs: { type: "radio", name: "radio1" }
-                              }),
-                              _vm._v(" "),
                               _c("label", [
-                                _vm._v(_vm._s(pregunta.respuestaCorrecta))
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.picked,
+                                      expression: "picked"
+                                    }
+                                  ],
+                                  attrs: { type: "radio", name: "radio" },
+                                  domProps: {
+                                    value: pregunta.respuestaA,
+                                    checked: _vm._q(
+                                      _vm.picked,
+                                      pregunta.respuestaA
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.picked = pregunta.respuestaA
+                                    }
+                                  }
+                                }),
+                                _vm._v(
+                                  _vm._s(pregunta.respuestaA) +
+                                    "\n\t\t\t\t\t\t\t"
+                                )
                               ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("label", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.picked,
+                                      expression: "picked"
+                                    }
+                                  ],
+                                  attrs: { type: "radio", name: "radio" },
+                                  domProps: {
+                                    value: pregunta.respuestaB,
+                                    checked: _vm._q(
+                                      _vm.picked,
+                                      pregunta.respuestaB
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.picked = pregunta.respuestaB
+                                    }
+                                  }
+                                }),
+                                _vm._v(
+                                  _vm._s(pregunta.respuestaB) +
+                                    "\n\t\t\t\t\t\t\t"
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("label", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.picked,
+                                      expression: "picked"
+                                    }
+                                  ],
+                                  attrs: { type: "radio", name: "radio" },
+                                  domProps: {
+                                    value: pregunta.respuestaC,
+                                    checked: _vm._q(
+                                      _vm.picked,
+                                      pregunta.respuestaC
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.picked = pregunta.respuestaC
+                                    }
+                                  }
+                                }),
+                                _vm._v(
+                                  _vm._s(pregunta.respuestaC) +
+                                    "\n\t\t\t\t\t\t\t"
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("label", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.picked,
+                                      expression: "picked"
+                                    }
+                                  ],
+                                  attrs: { type: "radio", name: "radio" },
+                                  domProps: {
+                                    value: pregunta.respuestaD,
+                                    checked: _vm._q(
+                                      _vm.picked,
+                                      pregunta.respuestaD
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.picked = pregunta.respuestaD
+                                    }
+                                  }
+                                }),
+                                _vm._v(
+                                  _vm._s(pregunta.respuestaD) +
+                                    "\n\t\t\t\t\t\t\t"
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("span", {
+                                staticStyle: { display: "none" },
+                                model: {
+                                  value: pregunta.esCorrecto,
+                                  callback: function($$v) {
+                                    _vm.$set(pregunta, "esCorrecto", $$v)
+                                  },
+                                  expression: "pregunta.esCorrecto"
+                                }
+                              })
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "row" }, [
@@ -487,7 +723,7 @@ var render = function() {
                                   on: {
                                     click: function($event) {
                                       $event.preventDefault()
-                                      _vm.contador++
+                                      return _vm.siguiente(pregunta)
                                     }
                                   }
                                 },
@@ -502,6 +738,116 @@ var render = function() {
               ],
               2
             )
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.muestra_exam == 3,
+            expression: "muestra_exam == 3"
+          }
+        ]
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto",
+            staticStyle: { "box-shadow": "2px 2px 10px #666" }
+          },
+          [
+            _c("div", { staticClass: "card-body" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.guardarExam($event)
+                    }
+                  }
+                },
+                [
+                  _c("input", {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "submit", value: "Mostrar Resultados" }
+                  })
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.muestra_exam == 4,
+            expression: "muestra_exam == 4"
+          }
+        ]
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto",
+            staticStyle: { "box-shadow": "2px 2px 10px #666" }
+          },
+          [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h3", { staticClass: "text-center" }, [_vm._v("Resultados")]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("h4", [
+                _vm._v("Respondidas Correctamente : " + _vm._s(_vm.cp))
+              ]),
+              _vm._v(" "),
+              _c("h4", [
+                _vm._v("Respondidas Erroneamente : " + _vm._s(10 - _vm.cp))
+              ]),
+              _vm._v(" "),
+              _c("h4", [
+                _vm._v("Numero de palabras : " + _vm._s(_vm.palabras))
+              ]),
+              _vm._v(" "),
+              _c("h4", [_vm._v("Palabras por minuto : " + _vm._s(_vm.ppmR))]),
+              _vm._v(" "),
+              _c("h4", [
+                _vm._v("Tiempo en dar el examen : " + _vm._s(_vm.result))
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "row" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-info m-auto",
+                      attrs: { to: { name: "home" } }
+                    },
+                    [_vm._v(" Ir al Inicio")]
+                  )
+                ],
+                1
+              )
+            ])
           ]
         )
       ]

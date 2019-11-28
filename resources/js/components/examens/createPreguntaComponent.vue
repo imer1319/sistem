@@ -45,14 +45,10 @@
 							<div class="form-group row">
 								<label class="col-form-label col-md-2">Correcta</label>
 								<div class="col-md-10">
-									<select v-model="selected">
+									<select v-model="pregunta.esCorrecto">
 										<option disabled value="">Seleccione un elemento</option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
+										<option v-for="option in options" v-bind:value="option.value">{{ option.value }}</option>
 									</select>
-									<span>Seleccionado: {{ selected }}</span>
 								</div>
 							</div>
 						</div>
@@ -75,9 +71,14 @@
 	export default{
 		data(){
 			return{
-				selected: '',
 				preguntas:[],
-				pregunta:{enunciado:'',respuestaA:'',respuestaB:'',respuestaC:'',respuestaCorrecta:'',examen_id:''},
+				pregunta:{enunciado:'',respuestaA:'',respuestaB:'',respuestaC:'',respuestaD:'',esCorrecto:'',examen_id:''},
+				options:[
+					{value: 'A'},
+					{value: 'B'},
+					{value: 'C'},
+					{value: 'D'},
+				],
 			}
 		},
 		methods:{
@@ -89,7 +90,10 @@
 				formData.append('respuestaB', this.pregunta.respuestaB);
 				formData.append('respuestaC', this.pregunta.respuestaC);
 				formData.append('respuestaD', this.pregunta.respuestaD);
-				formData.append('esCorrecto', this.pregunta.esCorrecto);
+				if (this.pregunta.esCorrecto == "A") {formData.append('esCorrecto', this.pregunta.respuestaA);}
+				if (this.pregunta.esCorrecto == "B") {formData.append('esCorrecto', this.pregunta.respuestaB);}
+				if (this.pregunta.esCorrecto == "C") {formData.append('esCorrecto', this.pregunta.respuestaC);}
+				if (this.pregunta.esCorrecto == "D") {formData.append('esCorrecto', this.pregunta.respuestaD);}
 				axios.post('/pregunta',formData)
 				.then(res=>{
 					EventBus.$emit('add-pregunta', res.data.pregunta);

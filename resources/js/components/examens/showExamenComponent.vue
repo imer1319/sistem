@@ -2,14 +2,14 @@
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card card-primary card-outline">
-				<div class="card-body box-profile">
+				<spinner v-if="loading"></spinner>
+				<div class="card-body box-profile" v-else>
 					<div class="text-center">
 						<img class="profile-user-img img-fluid img-circle img-responsive"
 						:src="`/imagenes/examen/${examen.icon}`"
 						alt="User profile picture">
 					</div>
 					<h3 class="profile-username text-center">{{ examen.name }}</h3>
-					<div class="btn btn-primary" @click.prevent="loadDoc()">Mostrar</div>
 					<hr>
 					<p id="test" class="text-justify"></p>
 				</div>
@@ -31,12 +31,14 @@
 			createPregunta:createPregunta,
 			pregunta:pregunta,
 		},
-		created:function() {
+		created() {
 			this.showExamen();
 		},
 		data(){
 			return{
 				examen :{},
+				loading:true,
+				palabras:'',
 			}
 		},
 		methods:{
@@ -44,6 +46,8 @@
 				var url = this.$route.params.id;
 				axios.get(url).then(res =>{
 					this.examen = res.data
+					this.loading = false;
+					this.loadDoc();
 				})
 			},
 			loadDoc() {
@@ -57,6 +61,10 @@
 				xhttp.open("GET", url, true);
 				xhttp.send();
 			},
+			contarPalabras(){
+				var textArea = document.getElementById("test").value;
+				this.palabras = textArea.match(/[^\s]+/g).length;
+			}
 		}
 	}
 </script>

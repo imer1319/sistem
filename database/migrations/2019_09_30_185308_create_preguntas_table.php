@@ -20,7 +20,7 @@ class CreatePreguntasTable extends Migration
             $table->string('respuestaB');
             $table->string('respuestaC');
             $table->string('respuestaD');
-            $table->unsignedInteger('esCorrecto');
+            $table->string('esCorrecto');
             $table->unsignedBigInteger('examen_id');
             $table->timestamps();
             $table->foreign('examen_id')->references('id')

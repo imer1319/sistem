@@ -1,5 +1,10 @@
 export const routes = [
 	{
+		name:'perfil',
+		path: '/perfil', 
+		component: () => import('./components/perfil.vue'),
+	},
+	{
 		name:'examen',
 		path: '/examen', 
 		component: () => import('./components/examens/examenComponent.vue'),

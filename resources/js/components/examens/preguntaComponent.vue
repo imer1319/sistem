@@ -45,7 +45,10 @@
 							<div class="form-group row">
 								<label class="col-form-label col-md-2">Correcta</label>
 								<div class="col-md-10">
-									<input type="text"  class="form-control" v-model="fillpregunta.esCorrecto">
+									<select v-model="fillpregunta.esCorrecto">
+										<option disabled value="">Seleccione un elemento</option>
+										<option v-for="option in options" v-bind:value="option.value">{{ option.value }}</option>
+									</select>
 								</div>
 							</div>
 						</div>
@@ -124,6 +127,12 @@
 				},
 				loading:true,
 				paginate:['preguntas'],
+				options:[
+				{value: 'A'},
+				{value: 'B'},
+				{value: 'C'},
+				{value: 'D'},
+				],
 			}
 		},
 		methods:{
@@ -140,6 +149,7 @@
 				})
 			},
 			editarPregunta:function (pregunta){
+				this.fillpregunta.id = pregunta.id;
 				this.fillpregunta.enunciado = pregunta.enunciado;
 				this.fillpregunta.examen_id = this.$route.params.id;
 				this.fillpregunta.respuestaA = pregunta.respuestaA;
@@ -147,7 +157,6 @@
 				this.fillpregunta.respuestaC = pregunta.respuestaC;
 				this.fillpregunta.respuestaD = pregunta.respuestaD;
 				this.fillpregunta.esCorrecto = pregunta.esCorrecto;
-				this.fillpregunta.id = pregunta.id;
 				$('#editarPregunta').modal('show');
 			},
 			updatePregunta:function(fillpregunta){
@@ -159,6 +168,10 @@
 				data.append('respuestaC', this.fillpregunta.respuestaC);
 				data.append('respuestaD', this.fillpregunta.respuestaD);
 				data.append('esCorrecto', this.fillpregunta.esCorrecto);
+				if (this.fillpregunta.esCorrecto == "A") {data.append('esCorrecto', this.fillpregunta.respuestaA);}
+				if (this.fillpregunta.esCorrecto == "B") {data.append('esCorrecto', this.fillpregunta.respuestaB);}
+				if (this.fillpregunta.esCorrecto == "C") {data.append('esCorrecto', this.fillpregunta.respuestaC);}
+				if (this.fillpregunta.esCorrecto == "D") {data.append('esCorrecto', this.fillpregunta.respuestaD);}
 				data.append('_method','PUT');
 				var url = `/pregunta/${fillpregunta.id}`;
 				axios.post(url, data).then(res=>{
