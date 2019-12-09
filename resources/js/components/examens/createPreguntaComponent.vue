@@ -85,7 +85,7 @@
 			agregarPregunta(){
 				let formData = new FormData();
 				formData.append('enunciado', this.pregunta.enunciado);
-				formData.append('examen_id', this.$route.params.id);
+				formData.append('exam_id', this.$route.params.id);
 				formData.append('respuestaA', this.pregunta.respuestaA);
 				formData.append('respuestaB', this.pregunta.respuestaB);
 				formData.append('respuestaC', this.pregunta.respuestaC);

@@ -1,8 +1,7 @@
 <template>
 	<div>
-		<!-- crear registro -->
-		<form v-on:submit.prevent="agregarCategoria" enctype="multipart/form-data">
-			<div class="modal fade" id="create">
+		<form v-on:submit.prevent="agregarEjercicio" enctype="multipart/form-data">
+			<div class="modal fade" id="createEjercicio">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -15,7 +14,13 @@
 							<div class="form-group row">
 								<label class="col-form-label col-md-2">Nombre</label>
 								<div class="col-md-10">
-									<input type="text"  name="name" class="form-control" v-model="categoria.name" placeholder="Nombre de la categoria">
+									<input type="text"  name="name" class="form-control" v-model="ejercicio.name" placeholder="Nombre de la ejercicio">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-md-2">Descripcion</label>
+								<div class="col-md-10">
+									<textarea rows="3" cols="5" name="description" class="form-control" v-model="ejercicio.description" placeholder="Describa la ejercicio"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -47,14 +52,14 @@
 	export default{
 		data(){
 			return{
-				categoria: {name: '',icon:''},
+				ejercicio: {name: '',description:'',icon:''},
 				imagenMiniatura:'',
 			}
 		},
 		methods:{
 			obtenerImagen(e){
 				let file = e.target.files[0];
-				this.categoria.icon = file;
+				this.ejercicio.icon = file;
 				this.cargarImagen(file);
 			},
 			cargarImagen(file){
@@ -64,18 +69,20 @@
 				}
 				reader.readAsDataURL(file);
 			},
-			agregarCategoria(){
+			agregarEjercicio(){
 				let formData = new FormData();
-				formData.append('name', this.categoria.name);
-				formData.append('icon', this.categoria.icon);
+				formData.append('name', this.ejercicio.name);
+				formData.append('description', this.ejercicio.description);
+				formData.append('icon', this.ejercicio.icon);
 
-				axios.post('/categoria',formData)
+				axios.post('/ejercicio',formData)
 				.then(res=>{
-					EventBus.$emit('agregado', res.data.categoria);
-					this.categoria.name = "";
+					EventBus.$emit('agregado', res.data.ejercicio);
+					this.ejercicio.name = "";
+					this.ejercicio.description = "";
 					this.$refs.img.value = "";
 					this.imagenMiniatura = "";
-					$('#create').modal('hide')
+					$('#createEjercicio').modal('hide')
 				})
 			},
 		},

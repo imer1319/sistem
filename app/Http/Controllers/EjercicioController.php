@@ -3,85 +3,68 @@
 namespace App\Http\Controllers;
 
 use App\Ejercicio;
-use App\Categoria;
 use Illuminate\Http\Request;
 
 class EjercicioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $ejercicios = Ejercicio::all();
-        return view('system.ejercicio.index',compact('ejercicios'));
+ public function __construct()
+ {
+    $this->middleware('auth');
+    $this->middleware('role:admin');
+}
+public function index(Request $request)
+{
+    if($request->ajax()){
+        return Ejercicio::all();
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    return view('layouts.administrador');
+}
+public function store(Request $request)
+{
+    if ($request->hasFile('icon')) {
+        $file = $request->file('icon');
+        $url = time().$file->getClientOriginalName();
+        $file->move(public_path().'/imagenes/ejercicios',$url);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    $ejercicio = new Ejercicio();
+    $ejercicio->name = $request->name;
+    $ejercicio->description = $request->description;
+    $ejercicio->icon = $url;
+    $ejercicio->save();
+    return response()->json([
+        "message" => "Creado correctamente",
+        "ejercicio" => $ejercicio
+    ],200);
+    return $ejercicio;
+}
+public function update(Request $request, $id)
+{
+    $ejercicio = Ejercicio::find($id);
+    $ejercicio->fill($request->except('icon'));
+    if ($file = $request->hasFile('icon')) {
+        $file = $request->file('icon');
+        $url = time().$file->getClientOriginalName();
+        $file->move(public_path().'/imagenes/ejercicios',$url);
+        $file_path = public_path().'/imagenes/ejercicios/'.$ejercicio->icon;
+        if(is_file($file_path)){unlink($file_path);}
+        $ejercicio->icon = $url;
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Ejercicio  $ejercicio
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Ejercicio $ejercicio)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Ejercicio  $ejercicio
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ejercicio $ejercicio)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Ejercicio  $ejercicio
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Ejercicio $ejercicio)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Ejercicio  $ejercicio
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Ejercicio $ejercicio)
-    {
-        //
-    }
+    $ejercicio->save();
+    return response()->json([
+        "message" => "Actualizado correctamente",
+        "ejercicio" => $ejercicio
+    ],200);
+    return $ejercicio;
+}
+public function destroy($id)
+{
+   $ejercicio = Ejercicio::find($id);
+   $file_path = public_path().'/imagenes/ejercicios/'.$ejercicio->icon;
+   if(is_file($file_path)){unlink($file_path);}
+   $ejercicio->delete();
+   return response()->json([
+    "message" => "Eliminado correctamente",
+    "ejercicio" => $ejercicio
+],200);
+}
 }

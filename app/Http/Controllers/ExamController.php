@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exam;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\CreateExamRequest;
 class ExamController extends Controller
 {
     public function __construct()
@@ -20,7 +20,7 @@ class ExamController extends Controller
         return view('layouts.administrador');
     }
 
-    public function store(Request $request)
+    public function store(CreateExamRequest $request)
     {
         if ($request->hasFile('icon')) {
             $file = $request->file('icon');

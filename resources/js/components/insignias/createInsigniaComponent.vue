@@ -1,8 +1,7 @@
 <template>
 	<div>
-		<!-- crear registro -->
 		<form v-on:submit.prevent="agregarInsignia" enctype="multipart/form-data">
-			<div class="modal fade" id="create">
+			<div class="modal fade" id="createInsignia">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -83,7 +82,7 @@
 					this.insignia.description = "";
 					this.$refs.img.value = "";
 					this.imagenMiniatura = "";
-					$('#create').modal('hide')
+					$('#createInsignia').modal('hide')
 				})
 			},
 		},

@@ -41,9 +41,9 @@
 				<div class="card-body">
 					<h3 class="text-center">Las preguntas</h3>
 					<hr>
-					<div v-for="(pregunta, index) in preguntas" :key="index" v-if="pregunta.examen_id == $route.params.id">
+					<div v-for="(pregunta, index) in preguntas" :key="index">
 						<div v-show="index == contador">
-							<div>{{pregunta.enunciado}}</div>
+							<h2>{{pregunta.enunciado}}</h2>
 							<div>
 								<label>
 									<input type="radio" name="radio" :value="pregunta.respuestaA" v-model="picked">{{ pregunta.respuestaA }}
@@ -67,8 +67,11 @@
 							<div>
 								<span v-model="pregunta.esCorrecto" style="display: none;"></span>
 							</div>
-							<div class="row">
+							<div class="row" v-if="picked!=''">
 								<div class="btn btn-success" @click.prevent="siguiente(pregunta)">Siguiente</div>
+							</div>
+							<div v-else>
+								<span class="bg-success text-white">{{ mensaje }}</span>
 							</div>
 						</div>
 					</div>
@@ -132,6 +135,7 @@
 				myTime: 0,
 				cronometro:0,
 				result:'',
+				mensaje:'Selecciona un inciso'
 			}
 		},
 		methods:{
@@ -185,6 +189,7 @@
 				if (pregunta.esCorrecto == this.picked) {
 					this.cp++;
 				}
+				this.picked ="";
 				this.contador++;
 				if (this.contador == 10) {
 					this.muestra_exam=3;
@@ -211,7 +216,7 @@
 				})
 			},
 			mostrarPregunta (){
-				var url = '/pregunta';
+				var url = '/pregunta/'+this.$route.params.id;
 				axios.get(url).then(res =>{
 					this.preguntas = res.data
 					this.loading = false;

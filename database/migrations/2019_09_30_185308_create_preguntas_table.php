@@ -21,9 +21,9 @@ class CreatePreguntasTable extends Migration
             $table->string('respuestaC');
             $table->string('respuestaD');
             $table->string('esCorrecto');
-            $table->unsignedBigInteger('examen_id');
+            $table->unsignedBigInteger('exam_id');
             $table->timestamps();
-            $table->foreign('examen_id')->references('id')
+            $table->foreign('exam_id')->references('id')
                     ->on('exams')->onDelete('cascade');
         });
     }

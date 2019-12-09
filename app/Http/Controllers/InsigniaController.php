@@ -7,12 +7,17 @@ use App\Insignia;
 use Illuminate\Support\Facades\File;
 class InsigniaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin');
+    }
 	public function index(Request $request)
     {
         if($request->ajax()){
             return Insignia::all();
         }
-        return view('admin.insignia.index');
+        return view('layouts.administrador');
     }
 	public function store(Request $request)
     {

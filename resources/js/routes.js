@@ -1,5 +1,20 @@
 export const routes = [
 	{
+		name:'usuario',
+		path: '/usuario', 
+		component: () => import('./components/usuario/usuario.vue'),
+	},
+	{
+		name:'shoex',
+		path: '/usuario/:id', 
+		component: () => import('./components/usuario/showUsuario.vue'),
+	},
+	{
+		name:'ejercicio',
+		path: '/ejercicio', 
+		component: () => import('./components/ejercicios/ejercicio.vue'),
+	},
+	{
 		name:'perfil',
 		path: '/perfil', 
 		component: () => import('./components/perfil.vue'),
@@ -13,6 +28,11 @@ export const routes = [
 		name: 'show',
 		path: '/examen/:id',
 		component: () => import('./components/examens/showExamenComponent.vue')
+	},
+	{
+		name: 'insignia',
+		path: '/insignia',
+		component: () => import('./components/insignias/insigniaComponent.vue')
 	},
 	// esta es la parte de los usuarios....
 	{
@@ -31,7 +51,22 @@ export const routes = [
 		component: () => import('./users/exam/show-exam')
 	},
 	{
+		name: 'game',
+		path: '/game',
+		component: () => import('./users/game/game.vue')
+	},
+	{
+		name: 'schult',
+		path: '/schult',
+		component: () => import('./users/game/1schultz.vue')
+	},
+	{
+		name: 'parpadeo',
+		path: '/parpadeo',
+		component: () => import('./users/game/parpadeo.vue')
+	},
+	{
 		path: '*',
 		component: () => import('./components/404')
-	},	
+	},
 ];

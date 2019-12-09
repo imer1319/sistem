@@ -16,10 +16,10 @@ class CreateEjerciciosTable extends Migration
         Schema::create('ejercicios', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->string('description')->unique();
-            $table->string('icon')->nullable();
+            $table->string('description');
+            $table->string('icon');
             $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->timestamps();
         });
     }

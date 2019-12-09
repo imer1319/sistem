@@ -5,6 +5,7 @@ use App\Exam;
 use App\Save;
 use App\User;
 use App\SaveGame;
+use App\Ejercicio;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -52,12 +53,17 @@ class UserController extends Controller
         }
         return view('home');
     }
+    // game ejercicios
+    public function game(Request $request)
+    {
+        return view('home');
+    }
     public function saveGame(Request $request)
     {
         $savGame = new SaveGame();
         $savGame->ejercicio_id = $request->ejercicio_id;
         $savGame->user_id = $request->user_id;
-        savGame->puntuacion = $request->puntuacion;
+        $savGame->puntuacion = $request->puntuacion;
         $savGame->save();
         return response()->json([
             "message" => "Creado correctamente",

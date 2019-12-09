@@ -53878,16 +53878,34 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
 var routes = [{
+  name: 'usuario',
+  path: '/usuario',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./components/usuario/usuario.vue */ "./resources/js/components/usuario/usuario.vue"));
+  }
+}, {
+  name: 'shoex',
+  path: '/usuario/:id',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./components/usuario/showUsuario.vue */ "./resources/js/components/usuario/showUsuario.vue"));
+  }
+}, {
+  name: 'ejercicio',
+  path: '/ejercicio',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/ejercicios/ejercicio.vue */ "./resources/js/components/ejercicios/ejercicio.vue"));
+  }
+}, {
   name: 'perfil',
   path: '/perfil',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
+    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
   }
 }, {
   name: 'examen',
   path: '/examen',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/examens/examenComponent.vue */ "./resources/js/components/examens/examenComponent.vue"));
+    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/examens/examenComponent.vue */ "./resources/js/components/examens/examenComponent.vue"));
   }
 }, {
   name: 'show',
@@ -53895,29 +53913,53 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./components/examens/showExamenComponent.vue */ "./resources/js/components/examens/showExamenComponent.vue"));
   }
+}, {
+  name: 'insignia',
+  path: '/insignia',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/insignias/insigniaComponent.vue */ "./resources/js/components/insignias/insigniaComponent.vue"));
+  }
 }, // esta es la parte de los usuarios....
 {
   name: 'home',
   path: '/home',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./users/home */ "./resources/js/users/home.vue"));
+    return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./users/home */ "./resources/js/users/home.vue"));
   }
 }, {
   name: 'exam',
   path: '/exam',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./users/exam/exam */ "./resources/js/users/exam/exam.vue"));
+    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./users/exam/exam */ "./resources/js/users/exam/exam.vue"));
   }
 }, {
   name: 'showing',
   path: '/exam/:id',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./users/exam/show-exam */ "./resources/js/users/exam/show-exam.vue"));
+    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./users/exam/show-exam */ "./resources/js/users/exam/show-exam.vue"));
+  }
+}, {
+  name: 'game',
+  path: '/game',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./users/game/game.vue */ "./resources/js/users/game/game.vue"));
+  }
+}, {
+  name: 'schult',
+  path: '/schult',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./users/game/1schultz.vue */ "./resources/js/users/game/1schultz.vue"));
+  }
+}, {
+  name: 'parpadeo',
+  path: '/parpadeo',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./users/game/parpadeo.vue */ "./resources/js/users/game/parpadeo.vue"));
   }
 }, {
   path: '*',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/404 */ "./resources/js/components/404.vue"));
+    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/404 */ "./resources/js/components/404.vue"));
   }
 }];
 

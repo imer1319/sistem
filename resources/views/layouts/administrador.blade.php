@@ -29,7 +29,7 @@
   <div class="wrapper">
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-dark" style="background-color: #004C99;">
+    <nav class="main-header navbar navbar-expand navbar-dark" style="background-color: #25546D;">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -70,7 +70,7 @@
           <img src="{{ asset('admin/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Sabio24</a>
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -87,22 +87,33 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-file-alt"></i>
+          <li class="nav-item">
+            <a href="{{ route('examen') }}" class="nav-link">
+              <i class="fas fa-file-contract nav-icon"></i>
+              <p>Examenes</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('insignia') }}" class="nav-link">
+              <i class="nav-icon fas fa-trophy"></i>
+              <p>Insignias</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('ejercicio') }}" class="nav-link">
+              <i class="nav-icon fas fa-gamepad"></i>
               <p>
-                Examenes
-                <i class="right fas fa-angle-left"></i>
+                Ejercicios
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('examen') }}" class="nav-link">
-                  <i class="fas fa-file-contract nav-icon"></i>
-                  <p>Ver examenes</p>
-                </a>
-              </li>
-            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('usuario') }}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
           </li>
         </ul>
       </nav>
@@ -143,7 +154,7 @@
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019 Sistema Lectura Veloz.</strong>
   </footer>
 </div>
 <!-- ./wrapper -->

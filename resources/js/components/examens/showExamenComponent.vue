@@ -6,8 +6,7 @@
 				<div class="card-body box-profile" v-else>
 					<div class="text-center">
 						<img class="profile-user-img img-fluid img-circle img-responsive"
-						:src="`/imagenes/examen/${examen.icon}`"
-						alt="User profile picture">
+						:src="`/imagenes/examen/${examen.icon}`">
 					</div>
 					<h3 class="profile-username text-center">{{ examen.name }}</h3>
 					<hr>
@@ -68,3 +67,8 @@
 		}
 	}
 </script>
+<style>
+	.profile-user-img {
+		height: 100px;
+	}
+</style>

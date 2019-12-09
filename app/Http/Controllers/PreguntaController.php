@@ -3,25 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Pregunta;
+use App\Exam;
 use Illuminate\Http\Request;
 
 class PreguntaController extends Controller
 {
 
-  public function index(Request $request)
+  public function index(Request $request, $id)
   {
     if($request->ajax()){
-      $preguntas = Pregunta::all();
-      return $preguntas;
+      $examen = Exam::find($id);
+
+      return $examen->pregunta;
     }
-    return view('admin.examen.index');
+    return view('layouts.administrador');
   }
 
   public function store(Request $request)
   {
     $pregunta = new Pregunta();
     $pregunta->enunciado = $request->enunciado;
-    $pregunta->examen_id = $request->examen_id;
+    $pregunta->exam_id = $request->exam_id;
     $pregunta->respuestaA = $request->respuestaA;
     $pregunta->respuestaB = $request->respuestaB;
     $pregunta->respuestaC = $request->respuestaC;
@@ -38,7 +40,7 @@ class PreguntaController extends Controller
   {
     $pregunta = Pregunta::find($id);
     $pregunta->enunciado = $request->enunciado;
-    $pregunta->examen_id = $request->examen_id;
+    $pregunta->exam_id = $request->exam_id;
     $pregunta->respuestaA = $request->respuestaA;
     $pregunta->respuestaB = $request->respuestaB;
     $pregunta->respuestaC = $request->respuestaC;

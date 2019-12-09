@@ -12,8 +12,4 @@ class Exam extends Model
 	{
 		return $this->hasMany('App\Pregunta');
 	}
-	public function respuesta()
-	{
-		return $this->hasMany('App\Respuesta');
-	}
 }
