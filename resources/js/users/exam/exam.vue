@@ -3,7 +3,7 @@
     <div class="container" v-else>
         <h3>este son los examen</h3>
         <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-3 mt-4"v-for="(examen, index) in examens" :key="index">
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4" v-for="(examen, index) in examens" :key="index">
                 <div class="card card-primary card-outline">
                     <img class="img-responsive p-2 m-auto" :src="`/imagenes/examen/${examen.icon}`" height="180" width="80%">
                     <div>

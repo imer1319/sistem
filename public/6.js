@@ -54,7 +54,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         nombre: 'puntuaciones',
         icono: 'puntuaciones.png',
-        url: '',
+        url: '/profile',
         numero: 2
       }, {
         nombre: 'posicion',

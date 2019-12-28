@@ -10,6 +10,11 @@ export const routes = [
 		component: () => import('./components/usuario/showUsuario.vue'),
 	},
 	{
+		name:'categoria',
+		path: '/categoria',
+		component: () => import('./components/ejercicios/categoria.vue'),
+	},
+	{
 		name:'ejercicio',
 		path: '/ejercicio', 
 		component: () => import('./components/ejercicios/ejercicio.vue'),
@@ -39,6 +44,11 @@ export const routes = [
 		name: 'home',
 		path: '/home',
 		component: () => import('./users/home')
+	},
+	{
+		name: 'profile',
+		path: '/profile',
+		component: () => import('./users/user/perfil.vue')
 	},
 	{
 		name: 'exam',

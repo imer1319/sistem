@@ -1,5 +1,5 @@
 <template>
-	<div class="container" v-else>
+	<div class="container">
 		<h3>este son los game</h3>
 		<div class="row">
 			<div class="col-sm-6 col-md-4 col-lg-3 mt-4"

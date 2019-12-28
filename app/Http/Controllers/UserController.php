@@ -45,13 +45,32 @@ class UserController extends Controller
         ],200);
         return $saveExam;
     }
-    public function user(Request $request)
+    public function perfil(Request $request)
     {
         if($request->ajax()){
-            $user = auth()->user(); 
+            $user = auth()->user();
             return $user;
         }
         return view('home');
+    }
+    public function update(Request $request, $id)
+    {
+        $usuario = User::find($id);
+        $usuario->fill($request->except('avatar'));
+        if ($file = $request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $url = time().$file->getClientOriginalName();
+            $file->move(public_path().'/imagenes/usuario',$url);
+            $file_path = public_path().'/imagenes/usuario/'.$usuario->avatar;
+            if($file_path !=public_path().'/imagenes/usuario/default.png'){unlink($file_path);}
+            $usuario->avatar = $url;
+        }
+        $usuario->save();
+        return response()->json([
+            "message" => "Actualizado correctamente",
+            "usuario" => $usuario
+        ],200);
+        return $usuario;
     }
     // game ejercicios
     public function game(Request $request)

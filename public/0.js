@@ -1268,6 +1268,7 @@ var render = function() {
                               expression: "pregunta.esCorrecto"
                             }
                           ],
+                          staticClass: "form-control",
                           on: {
                             change: function($event) {
                               var $$selectedVal = Array.prototype.filter
@@ -1338,7 +1339,7 @@ var render = function() {
                 _c("div", { staticClass: "modal-body pb-0" }, [
                   _c("div", { staticClass: "form-group row" }, [
                     _c("label", { staticClass: "col-form-label col-md-2" }, [
-                      _vm._v("Respuesta")
+                      _vm._v("Enunciado")
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-10" }, [
@@ -1523,6 +1524,7 @@ var render = function() {
                               expression: "fillpregunta.esCorrecto"
                             }
                           ],
+                          staticClass: "form-control",
                           on: {
                             change: function($event) {
                               var $$selectedVal = Array.prototype.filter
@@ -1588,6 +1590,7 @@ var render = function() {
               attrs: { href: "#" },
               on: {
                 click: function($event) {
+                  $event.preventDefault()
                   return _vm.crearPregunta()
                 }
               }
@@ -1778,7 +1781,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("h4", [_vm._v("Editar Respuesta")]),
+      _c("h4", [_vm._v("Editar Preguntas")]),
       _vm._v(" "),
       _c(
         "button",

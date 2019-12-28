@@ -45,7 +45,7 @@
 							<div class="form-group row">
 								<label class="col-form-label col-md-2">Correcta</label>
 								<div class="col-md-10">
-									<select v-model="pregunta.esCorrecto">
+									<select v-model="pregunta.esCorrecto" class="form-control">
 										<option disabled value="">Seleccione un elemento</option>
 										<option v-for="option in options" v-bind:value="option.value">{{ option.value }}</option>
 									</select>
@@ -69,14 +69,14 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4>Editar Respuesta</h4>
+							<h4>Editar Preguntas</h4>
 							<button type="button" class="close" data-dismiss="modal">
 								<span>&times;</span>
 							</button>
 						</div>
 						<div class="modal-body pb-0">
 							<div class="form-group row">
-								<label class="col-form-label col-md-2">Respuesta</label>
+								<label class="col-form-label col-md-2">Enunciado</label>
 								<div class="col-md-10">
 									<input type="text"  class="form-control" v-model="fillpregunta.enunciado" required>
 								</div>
@@ -108,7 +108,7 @@
 							<div class="form-group row">
 								<label class="col-form-label col-md-2">Correcta</label>
 								<div class="col-md-10">
-									<select v-model="fillpregunta.esCorrecto">
+									<select v-model="fillpregunta.esCorrecto" class="form-control">
 										<option disabled value="">Seleccione un elemento</option>
 										<option v-for="option in options" v-bind:value="option.value">{{ option.value }}</option>
 									</select>
@@ -130,7 +130,7 @@
 		<div class="card">
 			<div class="card-header">
 				<h3 class="card-title">Preguntas <span>{{ contador }}</span> de 10</h3>
-				<a href="#" class="btn btn-success float-right" v-on:click="crearPregunta()"><i class="fas fa-plus"></i> Crear Nuevo</a>
+				<a href="#" class="btn btn-success float-right" v-on:click.prevent="crearPregunta()"><i class="fas fa-plus"></i> Crear Nuevo</a>
 			</div>
 			<spinner v-if="loading"></spinner>
 			<div class="card-body" v-else>

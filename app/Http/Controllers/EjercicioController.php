@@ -29,6 +29,7 @@ public function store(Request $request)
     $ejercicio = new Ejercicio();
     $ejercicio->name = $request->name;
     $ejercicio->description = $request->description;
+    $ejercicio->categoria_id = $request->categoria_id;
     $ejercicio->icon = $url;
     $ejercicio->save();
     return response()->json([

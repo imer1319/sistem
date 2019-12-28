@@ -21,7 +21,7 @@
 							<div class="form-group row">
 								<label class="col-form-label col-md-2">Descripcion</label>
 								<div class="col-md-10">
-									<textarea rows="3" cols="5" name="description" class="form-control" v-model="insignia.description" placeholder="Describa la insignia"maxlength="150"  required></textarea>
+									<textarea rows="3" cols="5" name="description" class="form-control" v-model="insignia.description" placeholder="Describa la insignia" maxlength="150"  required></textarea>
 								</div>
 							</div>
 							<div class="form-group">

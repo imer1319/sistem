@@ -53881,25 +53881,31 @@ var routes = [{
   name: 'usuario',
   path: '/usuario',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./components/usuario/usuario.vue */ "./resources/js/components/usuario/usuario.vue"));
+    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./components/usuario/usuario.vue */ "./resources/js/components/usuario/usuario.vue"));
   }
 }, {
   name: 'shoex',
   path: '/usuario/:id',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./components/usuario/showUsuario.vue */ "./resources/js/components/usuario/showUsuario.vue"));
+    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./components/usuario/showUsuario.vue */ "./resources/js/components/usuario/showUsuario.vue"));
+  }
+}, {
+  name: 'categoria',
+  path: '/categoria',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/ejercicios/categoria.vue */ "./resources/js/components/ejercicios/categoria.vue"));
   }
 }, {
   name: 'ejercicio',
   path: '/ejercicio',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/ejercicios/ejercicio.vue */ "./resources/js/components/ejercicios/ejercicio.vue"));
+    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/ejercicios/ejercicio.vue */ "./resources/js/components/ejercicios/ejercicio.vue"));
   }
 }, {
   name: 'perfil',
   path: '/perfil',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
+    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
   }
 }, {
   name: 'examen',
@@ -53917,7 +53923,7 @@ var routes = [{
   name: 'insignia',
   path: '/insignia',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/insignias/insigniaComponent.vue */ "./resources/js/components/insignias/insigniaComponent.vue"));
+    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./components/insignias/insigniaComponent.vue */ "./resources/js/components/insignias/insigniaComponent.vue"));
   }
 }, // esta es la parte de los usuarios....
 {
@@ -53927,10 +53933,16 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./users/home */ "./resources/js/users/home.vue"));
   }
 }, {
+  name: 'profile',
+  path: '/profile',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./users/user/perfil.vue */ "./resources/js/users/user/perfil.vue"));
+  }
+}, {
   name: 'exam',
   path: '/exam',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./users/exam/exam */ "./resources/js/users/exam/exam.vue"));
+    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./users/exam/exam */ "./resources/js/users/exam/exam.vue"));
   }
 }, {
   name: 'showing',
@@ -53942,7 +53954,7 @@ var routes = [{
   name: 'game',
   path: '/game',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./users/game/game.vue */ "./resources/js/users/game/game.vue"));
+    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./users/game/game.vue */ "./resources/js/users/game/game.vue"));
   }
 }, {
   name: 'schult',
@@ -53954,7 +53966,7 @@ var routes = [{
   name: 'parpadeo',
   path: '/parpadeo',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./users/game/parpadeo.vue */ "./resources/js/users/game/parpadeo.vue"));
+    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./users/game/parpadeo.vue */ "./resources/js/users/game/parpadeo.vue"));
   }
 }, {
   path: '*',
