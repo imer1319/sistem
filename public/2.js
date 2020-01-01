@@ -557,33 +557,37 @@ var render = function() {
                           attrs: {
                             type: "file",
                             accept: "image/*",
-                            required: ""
+                            equired: ""
                           },
                           on: { change: _vm.obtenerImagen }
                         })
                       : _c("input", {
                           staticClass: "form-control-file",
-                          attrs: { type: "file", accept: "image/*" },
+                          attrs: {
+                            type: "file",
+                            accept: "image/*",
+                            equired: ""
+                          },
                           on: { change: _vm.obtenerImagenNueva }
-                        })
-                  ]),
-                  _vm._v(" "),
-                  _c("figure", [
-                    _vm.estado == false
-                      ? _c("img", {
-                          attrs: {
-                            width: "200",
-                            height: "200",
-                            src: _vm.imagen
-                          }
-                        })
-                      : _c("img", {
-                          attrs: {
-                            width: "200",
-                            height: "200",
-                            src: "imagenes/examen/" + _vm.fillExamen.icon
-                          }
-                        })
+                        }),
+                    _vm._v(" "),
+                    _c("figure", [
+                      _vm.estado == false
+                        ? _c("img", {
+                            attrs: {
+                              width: "200",
+                              height: "200",
+                              src: _vm.imagen
+                            }
+                          })
+                        : _c("img", {
+                            attrs: {
+                              width: "200",
+                              height: "200",
+                              src: "imagenes/examen/" + _vm.fillExamen.icon
+                            }
+                          })
+                    ])
                   ])
                 ]),
                 _vm._v(" "),

@@ -72,13 +72,13 @@
 							<div class="form-group">
 								<div class="form-group">
 									<label></label>
-									<input type="file" class="form-control-file" @change="obtenerImagen" v-if="estado == false" accept="image/*" required>
-									<input type="file" class="form-control-file" @change="obtenerImagenNueva" v-else accept="image/*">
+									<input type="file" class="form-control-file" @change="obtenerImagen" v-if="estado == false" accept="image/*" equired>
+									<input type="file" class="form-control-file" @change="obtenerImagenNueva" v-else accept="image/*" equired>
+									<figure>
+										<img width="200" height="200" :src="imagen" v-if="estado == false">
+										<img width="200" height="200" :src="`imagenes/examen/${fillExamen.icon}`" v-else>
+									</figure>
 								</div>
-								<figure>
-									<img width="200" height="200" :src="imagen" v-if="estado == false">
-									<img width="200" height="200" :src="`imagenes/examen/${fillExamen.icon}`" v-else>
-								</figure>
 							</div>
 							<div class="modal-footer pb-0">
 								<div class="form-group row">

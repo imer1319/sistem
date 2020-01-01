@@ -153,136 +153,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -735,7 +605,7 @@ var render = function() {
                             attrs: {
                               type: "file",
                               accept: "image/*",
-                              equired: ""
+                              required: ""
                             },
                             on: { change: _vm.obtenerImagen }
                           })
@@ -744,7 +614,7 @@ var render = function() {
                             attrs: {
                               type: "file",
                               accept: "image/*",
-                              equired: ""
+                              required: ""
                             },
                             on: { change: _vm.obtenerImagenNueva }
                           })
@@ -884,9 +754,7 @@ var render = function() {
                                       _c("i", {
                                         staticClass: "fas fa-pencil-alt"
                                       }),
-                                      _vm._v(
-                                        "\n                                    Ver"
-                                      )
+                                      _vm._v("Ver")
                                     ]
                                   ),
                                   _vm._v(" "),
@@ -906,9 +774,7 @@ var render = function() {
                                       _c("i", {
                                         staticClass: "fas fa-pencil-alt"
                                       }),
-                                      _vm._v(
-                                        "\n                                    Editar"
-                                      )
+                                      _vm._v("Editar")
                                     ]
                                   ),
                                   _vm._v(" "),
@@ -930,9 +796,7 @@ var render = function() {
                                       _c("i", {
                                         staticClass: "far fa-trash-alt"
                                       }),
-                                      _vm._v(
-                                        "\n                                    Eliminar"
-                                      )
+                                      _vm._v("Eliminar")
                                     ]
                                   )
                                 ]

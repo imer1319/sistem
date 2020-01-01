@@ -30,9 +30,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -85,7 +82,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\na:link \r\n{ \r\ntext-decoration:none;\n}\n.color1{\r\n    background-color: #277D96;\r\n    color: white;\n}\n.color2{\r\n    background-color: #FE4C7C;\r\n    color: white;\n}\r\n", ""]);
+exports.push([module.i, "\na:link \r\n{ \r\n    text-decoration:none;\n}\n.color1{\r\n    background-color: #277D96;\r\n    color: white;\n}\n.color2{\r\n    background-color: #FE4C7C;\r\n    color: white;\n}\r\n", ""]);
 
 // exports
 
@@ -154,11 +151,7 @@ var render = function() {
                     {
                       staticClass: "card card-primary card-outline m-auto",
                       class: [contenido.numero % 2 == 1 ? "color1" : "color2"],
-                      staticStyle: {
-                        "box-shadow": "2px 2px 10px #666",
-                        width: "80%",
-                        "border-radius": "4%"
-                      }
+                      staticStyle: { "box-shadow": "0px 3px 2px #aab2bd" }
                     },
                     [
                       _c(
