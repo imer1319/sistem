@@ -16,7 +16,6 @@ class CreateRangosTable extends Migration
         Schema::create('rangos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->string('descripcion');
             $table->string('avatar');
             $table->timestamps();
         });

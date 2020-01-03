@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Exam;
 use App\Save;
 use App\User;
+use App\Rango;
 use App\SaveGame;
 use App\Ejercicio;
 use Illuminate\Http\Request;
@@ -13,6 +14,14 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+    public function rango(Request $request)
+    {
+        if($request->ajax()){
+            $rango =  Rango::get();
+            return $rango;
+        }
+        return view('home');
     }
     public function examen(Request $request)
     {
@@ -90,4 +99,5 @@ class UserController extends Controller
         ],200);
         return $savGame;
     }
+
 }

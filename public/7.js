@@ -162,13 +162,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showUser();
+    this.showRango();
   },
   data: function data() {
     return {
       usuario: {},
+      rangos: [],
       loading: true,
       fillUsuario: {
         name: '',
@@ -196,11 +220,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.loading = false;
       });
     },
-    obtenerImagen: function obtenerImagen(e) {
-      this.estado = false;
-      var file = e.target.files[0];
-      this.usuario.avatar = file;
-      this.cargarImagen(file);
+    showRango: function showRango() {
+      var _this2 = this;
+
+      var url = "/rank";
+      axios.get(url).then(function (res) {
+        _this2.rangos = res.data;
+      });
     },
     obtenerImagenNueva: function obtenerImagenNueva(e) {
       this.estado = true;
@@ -209,12 +235,12 @@ __webpack_require__.r(__webpack_exports__);
       this.cargarImagen(file);
     },
     cargarImagen: function cargarImagen(file) {
-      var _this2 = this;
+      var _this3 = this;
 
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        _this2.imagenMiniatura = e.target.result;
+        _this3.imagenMiniatura = e.target.result;
       };
 
       reader.readAsDataURL(file);
@@ -224,10 +250,12 @@ __webpack_require__.r(__webpack_exports__);
       this.fillUsuario.apellido_paterno = this.usuario.apellido_paterno;
       this.fillUsuario.apellido_materno = this.usuario.apellido_materno;
       this.fillUsuario.curso = this.usuario.curso;
+      this.fillUsuario.puntos = this.usuario.puntos;
+      this.fillUsuario.rango_id = this.usuario.rango_id;
       this.fillUsuario.id = this.usuario.id;
     },
     alerta: function alerta() {
-      var _this3 = this;
+      var _this4 = this;
 
       var Toast = this.$swal.mixin({
         toast: true,
@@ -235,29 +263,38 @@ __webpack_require__.r(__webpack_exports__);
         showConfirmButton: false,
         timer: 2000,
         onOpen: function onOpen(toast) {
-          toast.addEventListener('mouseenter', _this3.$swal.stopTimer);
-          toast.addEventListener('mouseleave', _this3.$swal.resumeTimer);
+          toast.addEventListener('mouseenter', _this4.$swal.stopTimer);
+          toast.addEventListener('mouseleave', _this4.$swal.resumeTimer);
         }
       });
       Toast.fire({
-        icon: 'warning',
+        icon: 'success',
         title: 'Actualizado Correctamente'
       });
     },
     updateUsuario: function updateUsuario(fillUsuario) {
-      var _this4 = this;
+      var _this5 = this;
 
       var data = new FormData();
       data.append('name', this.fillUsuario.name);
       data.append('apellido_paterno', this.fillUsuario.apellido_paterno);
       data.append('apellido_materno', this.fillUsuario.apellido_materno);
       data.append('curso', this.fillUsuario.curso);
+
+      if (this.fillUsuario.puntos < 100) {
+        data.append('rango_id', 1);
+      } else if (this.fillUsuario.puntos >= 100 && this.fillUsuario.puntos < 500) {
+        data.append('rango_id', 2);
+      } else if (this.fillUsuario.puntos >= 500 && this.fillUsuario.puntos < 1000) {
+        data.append('rango_id', 3);
+      }
+
       data.append('_method', 'PUT');
       var url = "/profile/".concat(fillUsuario.id);
       axios.post(url, data).then(function (res) {
-        _this4.showUser();
+        _this5.showUser();
 
-        _this4.alerta();
+        _this5.alerta();
       });
     },
     editarAvatar: function editarAvatar() {
@@ -266,16 +303,16 @@ __webpack_require__.r(__webpack_exports__);
       $('#editAvatar').modal('show');
     },
     updateAvatar: function updateAvatar(fillUsuario) {
-      var _this5 = this;
+      var _this6 = this;
 
       var data = new FormData();
       data.append('avatar', this.fillUsuario.avatar);
       data.append('_method', 'PUT');
       var url = "/profile/".concat(fillUsuario.id);
       axios.post(url, data).then(function (res) {
-        _this5.showUser();
+        _this6.showUser();
 
-        _this5.alerta();
+        _this6.alerta();
 
         $('#editAvatar').modal('hide');
       });
@@ -302,7 +339,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.sombra{\n\tbox-shadow: 0px 3px 2px #aab2bd;\n}\n.cont{\n\tposition: relative; \n\theight:120px; \n\twidth:120px;\n}\n.cont img{\n\theight:100%; \n\twidth:100%;\n}\n.cont a{\n\tposition: absolute;\n\tbottom: 0;\n\tright: 5px;\n\ttext-shadow: 0 0 10px #000;\n}\na i{\n\tcursor: pointer; \n\tfont-size: 25px;\n\tcolor: #fff;\n}\n.border-right {\n\tborder-right: 1px solid #dee2e6!important;\n}\n", ""]);
+exports.push([module.i, "\n.sombra{\n\tbox-shadow: 0px 3px 2px #aab2bd;\n}\n.cont{\n\tposition: relative; \n\theight:120px; \n\twidth:120px;\n}\n.cont img{\n\theight:100%; \n\twidth:100%;\n}\n.cont a{\n\tposition: absolute;\n\tbottom: 15px;\n\tleft: 70px;\n\ttext-shadow: 0 0 10px #000;\n}\na i{\n\tcursor: pointer; \n\tfont-size: 25px;\n\tcolor: #fff;\n}\n.border-right {\n\tborder-right: 1px solid #dee2e6!important;\n}\n.description-block {\n\tdisplay: block;\n\tmargin: 10px 0;\n\ttext-align: center;\n}\n.widget-user .widget-user-image {\n\tleft: 50%;\n\tmargin-left: -45px;\n\tposition: absolute;\n\ttop: 80px;\n}\n.widget-user .widget-user-header {\n\tborder-top-left-radius: .25rem;\n\tborder-top-right-radius: .25rem;\n\theight: 135px;\n\tpadding: 1rem;\n\ttext-align: center;\n}\n.widget-user .widget-user-image>img {\n\tborder: 3px solid #fff;\n\theight: 100px;\n\twidth: 100px;\n}\n.elevation-2 {\n\tbox-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)!important;\n}\n.img-circle {\n\tborder-radius: 50%;\n}\nimg {\n\tvertical-align: middle;\n\tborder-style: none;\n}\n.card-footer {\n\tpadding-top: 50px;\n}\n.bg-info {\n\tbackground-color: #17a2b8!important;\n\tcolor: #fff;\n}\nh1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {\n\tmargin-bottom: 0.5rem;\n\tfont-weight: 500;\n\tline-height: 1.2;\n}\n", ""]);
 
 // exports
 
@@ -361,193 +398,191 @@ var render = function() {
       _vm.loading
         ? _c("spinner")
         : _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-12" }, [
-              _c(
-                "div",
-                { staticClass: "card card-primary card-outline sombra" },
-                [
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-4" }, [
-                        _c("div", { staticClass: "m-auto cont" }, [
-                          _c("img", {
-                            staticClass: "profile-user-img img-circle",
-                            attrs: {
-                              src: "/imagenes/usuario/" + _vm.usuario.avatar
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.editarAvatar()
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "fas fa-camera" })]
+            _c("div", { staticClass: "col-sm-12 col-md-6 mb-3" }, [
+              _c("div", { staticClass: "card sombra" }, [
+                _c("div", { staticClass: "card-widget widget-user" }, [
+                  _c("div", { staticClass: "widget-user-header bg-info" }, [
+                    _c("h3", { staticClass: "widget-user-username" }, [
+                      _vm._v(_vm._s(_vm.usuario.name))
+                    ]),
+                    _vm._v(" "),
+                    _c("h5", { staticClass: "widget-user-desc" }, [
+                      _vm._v("Estudiante")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "widget-user-image cont" }, [
+                    _c("img", {
+                      staticClass: "img-circle elevation-2",
+                      attrs: { src: "/imagenes/usuario/" + _vm.usuario.avatar }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.editarAvatar()
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-camera" })]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      attrs: { enctype: "multipart/form-data" },
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.updateAvatar(_vm.fillUsuario)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "modal fade",
+                          attrs: { id: "editAvatar" }
+                        },
+                        [
+                          _c("div", { staticClass: "modal-dialog" }, [
+                            _c("div", { staticClass: "modal-content" }, [
+                              _c("div", { staticClass: "modal-header" }, [
+                                _c(
+                                  "h5",
+                                  {
+                                    staticClass: "modal-title",
+                                    attrs: { id: "exampleModalLabel" }
+                                  },
+                                  [_vm._v("Editar Avatar")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "close",
+                                    attrs: {
+                                      type: "button",
+                                      "data-dismiss": "modal",
+                                      "aria-label": "Close"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      { attrs: { "aria-hidden": "true" } },
+                                      [_vm._v("×")]
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "modal-body" }, [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("input", {
+                                      staticClass: "form-control-file",
+                                      attrs: {
+                                        type: "file",
+                                        accept: "image/*",
+                                        required: ""
+                                      },
+                                      on: { change: _vm.obtenerImagenNueva }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("figure", [
+                                    _c("img", {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value: _vm.estado == true,
+                                          expression: "estado == true"
+                                        }
+                                      ],
+                                      attrs: {
+                                        width: "200",
+                                        height: "200",
+                                        src: _vm.imagen
+                                      }
+                                    })
+                                  ])
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "modal-footer" }, [
+                                _c("input", {
+                                  staticClass: "btn btn-primary",
+                                  attrs: {
+                                    type: "submit",
+                                    name: "enviar",
+                                    value: "Guardar Cambios"
+                                  }
+                                })
+                              ])
+                            ])
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4 border-right" }, [
+                      _c("div", { staticClass: "description-block" }, [
+                        _c("h5", { staticClass: "description-header" }, [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\t\t" +
+                              _vm._s(_vm.usuario.apellido_paterno) +
+                              " " +
+                              _vm._s(_vm.usuario.apellido_materno) +
+                              "\n\t\t\t\t\t\t\t\t"
                           )
                         ]),
                         _vm._v(" "),
-                        _c(
-                          "form",
-                          {
-                            attrs: { enctype: "multipart/form-data" },
-                            on: {
-                              submit: function($event) {
-                                $event.preventDefault()
-                                return _vm.updateAvatar(_vm.fillUsuario)
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "modal fade",
-                                attrs: { id: "editAvatar" }
-                              },
-                              [
-                                _c("div", { staticClass: "modal-dialog" }, [
-                                  _c("div", { staticClass: "modal-content" }, [
-                                    _c("div", { staticClass: "modal-header" }, [
-                                      _c(
-                                        "h5",
-                                        {
-                                          staticClass: "modal-title",
-                                          attrs: { id: "exampleModalLabel" }
-                                        },
-                                        [_vm._v("Editar Avatar")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass: "close",
-                                          attrs: {
-                                            type: "button",
-                                            "data-dismiss": "modal",
-                                            "aria-label": "Close"
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            {
-                                              attrs: { "aria-hidden": "true" }
-                                            },
-                                            [_vm._v("×")]
-                                          )
-                                        ]
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "modal-body" }, [
-                                      _c("div", { staticClass: "form-group" }, [
-                                        _c(
-                                          "div",
-                                          { staticClass: "form-group" },
-                                          [
-                                            _c("input", {
-                                              staticClass: "form-control-file",
-                                              attrs: {
-                                                type: "file",
-                                                accept: "image/*",
-                                                required: ""
-                                              },
-                                              on: {
-                                                change: _vm.obtenerImagenNueva
-                                              }
-                                            })
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("figure", [
-                                          _c("img", {
-                                            directives: [
-                                              {
-                                                name: "show",
-                                                rawName: "v-show",
-                                                value: _vm.estado == true,
-                                                expression: "estado == true"
-                                              }
-                                            ],
-                                            attrs: {
-                                              width: "200",
-                                              height: "200",
-                                              src: _vm.imagen
-                                            }
-                                          })
-                                        ])
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "modal-footer" }, [
-                                      _c("input", {
-                                        staticClass: "btn btn-primary",
-                                        attrs: {
-                                          type: "submit",
-                                          name: "enviar",
-                                          value: "Guardar Cambios"
-                                        }
-                                      })
-                                    ])
-                                  ])
-                                ])
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "h3",
-                          { staticClass: "profile-username text-center" },
-                          [_vm._v(_vm._s(_vm.usuario.name))]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-8" }, [
-                        _c("h6", { staticClass: "text-center" }, [
-                          _vm._v("DATOS DEL USUARIO")
+                        _c("span", { staticClass: "description-text" }, [
+                          _vm._v("APELLIDOS")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-4 border-right" }, [
+                      _c("div", { staticClass: "description-block" }, [
+                        _c("h5", { staticClass: "description-header" }, [
+                          _vm._v(_vm._s(_vm.usuario.email))
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-6 border-right" }, [
-                            _c("h4", [_vm._v("APELLIDOS")]),
-                            _vm._v(" "),
-                            _c("h6", [
-                              _vm._v(
-                                _vm._s(_vm.usuario.apellido_paterno) +
-                                  " " +
-                                  _vm._s(_vm.usuario.apellido_materno)
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("h4", [_vm._v("CORREO ELECTRONICO")]),
-                            _vm._v(" "),
-                            _c("h6", [_vm._v(_vm._s(_vm.usuario.email))])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-6" }, [
-                            _c("h4", [_vm._v("PUNTOS")]),
-                            _vm._v(" "),
-                            _c("h6", [_vm._v(_vm._s(_vm.usuario.puntos))]),
-                            _vm._v(" "),
-                            _c("h4", [_vm._v("CURSO")]),
-                            _vm._v(" "),
-                            _c("h6", [_vm._v(_vm._s(_vm.usuario.curso))])
-                          ])
+                        _c("span", { staticClass: "description-text" }, [
+                          _vm._v("CORREO")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-4" }, [
+                      _c("div", { staticClass: "description-block" }, [
+                        _c("h5", { staticClass: "description-header" }, [
+                          _vm._v(_vm._s(_vm.usuario.curso))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "description-text" }, [
+                          _vm._v("CURSO")
                         ])
                       ])
                     ])
                   ])
-                ]
-              )
+                ])
+              ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-12 mt-3" }, [
+            _c("div", { staticClass: "col-sm-12 col-md-6" }, [
               _c("div", { staticClass: "card sombra" }, [
                 _c("div", { staticClass: "card-header p-2" }, [
                   _c("ul", { staticClass: "nav nav-pills" }, [
@@ -556,7 +591,18 @@ var render = function() {
                         "a",
                         {
                           staticClass: "nav-link active",
-                          attrs: { href: "#activity", "data-toggle": "tab" }
+                          attrs: { href: "#rango", "data-toggle": "tab" }
+                        },
+                        [_vm._v("Rangos")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link ",
+                          attrs: { href: "#insignia", "data-toggle": "tab" }
                         },
                         [_vm._v("Insignias")]
                       )
@@ -567,18 +613,7 @@ var render = function() {
                         "a",
                         {
                           staticClass: "nav-link",
-                          attrs: { href: "#timeline", "data-toggle": "tab" }
-                        },
-                        [_vm._v("Rangos")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { href: "#settings", "data-toggle": "tab" },
+                          attrs: { href: "#datos", "data-toggle": "tab" },
                           on: {
                             click: function($event) {
                               return _vm.editarUsuario()
@@ -593,22 +628,112 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "tab-content" }, [
-                    _c("div", {
-                      staticClass: "active tab-pane",
-                      attrs: { id: "activity" }
-                    }),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane active",
+                        attrs: { id: "rango" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "text-center" },
+                          _vm._l(_vm.rangos, function(rango) {
+                            return _c("div", [
+                              _vm.usuario.puntos < 100
+                                ? _c("div", [
+                                    rango.nombre == "Bronce"
+                                      ? _c("div", [
+                                          _c(
+                                            "div",
+                                            { staticClass: "text-center" },
+                                            [
+                                              _c("img", {
+                                                staticClass: "img-responsive",
+                                                attrs: {
+                                                  src:
+                                                    "imagenes/rangos/" +
+                                                    rango.avatar,
+                                                  height: "400px",
+                                                  width: "70%"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.usuario.puntos >= 100 &&
+                              _vm.usuario.puntos < 500
+                                ? _c("div", [
+                                    rango.nombre == "Plata"
+                                      ? _c("div", [
+                                          _c(
+                                            "div",
+                                            { staticClass: "text-center" },
+                                            [
+                                              _c("img", {
+                                                staticClass: "img-responsive",
+                                                attrs: {
+                                                  src:
+                                                    "imagenes/rangos/" +
+                                                    rango.avatar,
+                                                  height: "400px",
+                                                  width: "70%"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.usuario.puntos >= 500 &&
+                              _vm.usuario.puntos < 1000
+                                ? _c("div", [
+                                    rango.nombre == "Oro"
+                                      ? _c("div", [
+                                          _c(
+                                            "div",
+                                            { staticClass: "text-center" },
+                                            [
+                                              _c("img", {
+                                                staticClass: "img-responsive",
+                                                attrs: {
+                                                  src:
+                                                    "imagenes/rangos/" +
+                                                    rango.avatar,
+                                                  height: "400px",
+                                                  width: "70%"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  ])
+                                : _vm._e()
+                            ])
+                          }),
+                          0
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
                     _c("div", {
                       staticClass: "tab-pane",
-                      attrs: { id: "timeline" }
+                      attrs: { id: "insignia" }
                     }),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "tab-pane", attrs: { id: "settings" } },
+                      { staticClass: "tab-pane", attrs: { id: "datos" } },
                       [
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-sm-12 col-lg-8" }, [
+                          _c("div", { staticClass: "col-sm-12" }, [
                             _c(
                               "form",
                               {
@@ -624,11 +749,11 @@ var render = function() {
                                 _c("div", { staticClass: "form-group row" }, [
                                   _c(
                                     "label",
-                                    { staticClass: "col-form-label col-md-2" },
+                                    { staticClass: "col-form-label col-md-3" },
                                     [_vm._v("Nombre")]
                                   ),
                                   _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-10" }, [
+                                  _c("div", { staticClass: "col-md-8" }, [
                                     _c("input", {
                                       directives: [
                                         {
@@ -639,7 +764,11 @@ var render = function() {
                                         }
                                       ],
                                       staticClass: "form-control",
-                                      attrs: { type: "text", required: "" },
+                                      attrs: {
+                                        type: "text",
+                                        placeholder: "Escriba su nombre",
+                                        required: ""
+                                      },
                                       domProps: { value: _vm.fillUsuario.name },
                                       on: {
                                         input: function($event) {
@@ -660,11 +789,11 @@ var render = function() {
                                 _c("div", { staticClass: "form-group row" }, [
                                   _c(
                                     "label",
-                                    { staticClass: "col-form-label col-md-2" },
+                                    { staticClass: "col-form-label col-md-3" },
                                     [_vm._v("Apellido Paterno")]
                                   ),
                                   _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-10" }, [
+                                  _c("div", { staticClass: "col-md-8" }, [
                                     _c("input", {
                                       directives: [
                                         {
@@ -677,7 +806,11 @@ var render = function() {
                                         }
                                       ],
                                       staticClass: "form-control",
-                                      attrs: { type: "text", required: "" },
+                                      attrs: {
+                                        type: "text",
+                                        placeholder: "Apellido paterno",
+                                        required: ""
+                                      },
                                       domProps: {
                                         value: _vm.fillUsuario.apellido_paterno
                                       },
@@ -700,11 +833,11 @@ var render = function() {
                                 _c("div", { staticClass: "form-group row" }, [
                                   _c(
                                     "label",
-                                    { staticClass: "col-form-label col-md-2" },
+                                    { staticClass: "col-form-label col-md-3" },
                                     [_vm._v("Apellido Materno")]
                                   ),
                                   _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-10" }, [
+                                  _c("div", { staticClass: "col-md-8" }, [
                                     _c("input", {
                                       directives: [
                                         {
@@ -717,7 +850,11 @@ var render = function() {
                                         }
                                       ],
                                       staticClass: "form-control",
-                                      attrs: { type: "text", required: "" },
+                                      attrs: {
+                                        type: "text",
+                                        placeholder: "Apellido materno",
+                                        required: ""
+                                      },
                                       domProps: {
                                         value: _vm.fillUsuario.apellido_materno
                                       },
@@ -740,7 +877,7 @@ var render = function() {
                                 _c("div", { staticClass: "form-group row" }, [
                                   _c(
                                     "label",
-                                    { staticClass: "col-form-label col-md-2" },
+                                    { staticClass: "col-form-label col-md-3" },
                                     [_vm._v("Curso")]
                                   ),
                                   _vm._v(" "),
@@ -840,11 +977,7 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("option", [_vm._v("6° D")])
                                       ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("span", [
-                                      _vm._v("Cursos: " + _vm._s(_vm.cursos))
-                                    ])
+                                    )
                                   ])
                                 ]),
                                 _vm._v(" "),

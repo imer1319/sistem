@@ -39,6 +39,11 @@ export const routes = [
 		path: '/insignia',
 		component: () => import('./components/insignias/insigniaComponent.vue')
 	},
+	{
+		name: 'rango',
+		path: '/rango',
+		component: () => import('./components/rango/rango.vue')
+	},
 	// esta es la parte de los usuarios....
 	{
 		name: 'home',

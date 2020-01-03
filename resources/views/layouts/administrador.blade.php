@@ -81,7 +81,7 @@
            with font-awesome or any other icon font library -->
            <li class="nav-item">
             <a href="{{ route('admin') }}" class="nav-link">
-              <i class="nav-icon fas fa-user fa-th"></i>
+              <i class="nav-icon fas fa-th"></i>
               <p>
                 Inicio
               </p>
@@ -97,6 +97,12 @@
             <a href="{{ route('insignia') }}" class="nav-link">
               <i class="nav-icon fas fa-trophy"></i>
               <p>Insignias</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('rango') }}" class="nav-link">
+              <i class="nav-icon fas fa-trophy"></i>
+              <p>Rangos</p>
             </a>
           </li>
           <li class="nav-item">

@@ -57051,6 +57051,12 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./components/insignias/insigniaComponent.vue */ "./resources/js/components/insignias/insigniaComponent.vue"));
   }
+}, {
+  name: 'rango',
+  path: '/rango',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./components/rango/rango.vue */ "./resources/js/components/rango/rango.vue"));
+  }
 }, // esta es la parte de los usuarios....
 {
   name: 'home',
