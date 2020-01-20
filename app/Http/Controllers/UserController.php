@@ -6,6 +6,7 @@ use App\Save;
 use App\User;
 use App\Rango;
 use App\SaveGame;
+use App\Insignia;
 use App\Ejercicio;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,14 @@ class UserController extends Controller
         if($request->ajax()){
             $rango =  Rango::get();
             return $rango;
+        }
+        return view('home');
+    }
+    public function insignia(Request $request)
+    {
+        if($request->ajax()){
+            $insignia =  Insignia::get();
+            return $insignia;
         }
         return view('home');
     }
@@ -62,7 +71,7 @@ class UserController extends Controller
         }
         return view('home');
     }
-    public function update(Request $request, $id)
+    public function updatePerfil(Request $request, $id)
     {
         $usuario = User::find($id);
         $usuario->fill($request->except('avatar'));

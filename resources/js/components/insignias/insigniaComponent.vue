@@ -15,7 +15,7 @@
 							<div class="form-group row">
 								<label class="col-form-label col-md-2">Nombre</label>
 								<div class="col-md-10">
-									<input type="text"  name="name" class="form-control" v-model="insignia.name" placeholder="Nombre de la insignia" required>
+									<input type="text" class="form-control" v-model="insignia.name" placeholder="Nombre de la insignia" required>
 								</div>
 							</div>
 							<div class="form-group row">
@@ -77,7 +77,7 @@
 								</div>
 								<figure>
 									<img width="200" height="200" :src="imagen" v-if="estado == false">
-									<img width="200" height="200" :src="`imagenes/insignias/${fillInsignia.icon}`" v-else>
+									<img width="200" height="200" :src="`imagenes/insignias/${fillInsignia.icon}`" v-if="estado == true">
 								</figure>
 							</div>
 						</div>

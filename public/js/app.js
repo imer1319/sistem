@@ -6468,7 +6468,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n* {\r\n  padding: 0;\r\n  margin: 0;}\n.grid {\r\n    display: flex;\r\n    min-height: 100vh;\r\n    min-width: 100vw;\r\n    flex-wrap: wrap;\n}\n.loader {\r\n    width: 50vw;\r\n    height: 50vh;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n#ld3 {\r\n    position: relative;\r\n    -webkit-animation: outercontainer 4s linear infinite;\r\n            animation: outercontainer 4s linear infinite;\n}\n#ld3 div {\r\n      height: 12px;\r\n      width: 12px;\r\n      border-radius: 50%;\r\n      position: absolute;\r\n      top: 0;\r\n      bottom: 0;\r\n      left: 0;\r\n      right: 0;\n}\n#ld3 div:nth-child(1) {\r\n      top: 20px;\r\n      background: #59CD90;\r\n      -webkit-animation: ld3_div1 2s linear infinite;\r\n              animation: ld3_div1 2s linear infinite;\n}\n#ld3 div:nth-child(2) {\r\n      top: -20px;\r\n      background: #D91E36;\r\n      -webkit-animation: ld3_div2 2s linear infinite;\r\n              animation: ld3_div2 2s linear infinite;\n}\n#ld3 div:nth-child(3) {\r\n      left: 20px;\r\n      background: #F39237;\r\n      -webkit-animation: ld3_div4 2s linear infinite;\r\n              animation: ld3_div4 2s linear infinite;\n}\n#ld3 div:nth-child(4) {\r\n      left: -20px;\r\n      background: #0072BB;\r\n      -webkit-animation: ld3_div3 2s linear infinite;\r\n              animation: ld3_div3 2s linear infinite;\n}\n@-webkit-keyframes outercontainer {\n100% {\r\n        transform: rotate(360deg);\n}\n}\n@keyframes outercontainer {\n100% {\r\n        transform: rotate(360deg);\n}\n}\n@-webkit-keyframes ld3_div1 {\n0% {top: 20px;\n}\n25% {top: 0;\n}\n50% {top: 20px;\n}\n75% {top: 0;\n}\n100% {top: 20px;\n}\n}\n@keyframes ld3_div1 {\n0% {top: 20px;\n}\n25% {top: 0;\n}\n50% {top: 20px;\n}\n75% {top: 0;\n}\n100% {top: 20px;\n}\n}\n@-webkit-keyframes ld3_div2 {\n0% {top: -20px;\n}\n25% {top: 0;\n}\n50% {top: -20px;\n}\n75% {top: 0;\n}\n100% {top: -20px;\n}\n}\n@keyframes ld3_div2 {\n0% {top: -20px;\n}\n25% {top: 0;\n}\n50% {top: -20px;\n}\n75% {top: 0;\n}\n100% {top: -20px;\n}\n}\n@-webkit-keyframes ld3_div3 {\n0% {left: -20px;\n}\n25% {left: 0;\n}\n50% {left: -20px;\n}\n75% {left: 0;\n}\n100% {left: -20px;\n}\n}\n@keyframes ld3_div3 {\n0% {left: -20px;\n}\n25% {left: 0;\n}\n50% {left: -20px;\n}\n75% {left: 0;\n}\n100% {left: -20px;\n}\n}\n@-webkit-keyframes ld3_div4 {\n0% {left: 20px;\n}\n25% {left: 0;\n}\n50% {left: 20px;\n}\n75% {left: 0;\n}\n100% {left: 20px;\n}\n}\n@keyframes ld3_div4 {\n0% {left: 20px;\n}\n25% {left: 0;\n}\n50% {left: 20px;\n}\n75% {left: 0;\n}\n100% {left: 20px;\n}\n}\r\n\r\n  ", ""]);
+exports.push([module.i, "\n* {\r\n  padding: 0;\r\n  margin: 0;}\n.grid {\r\n    min-height: 100vh; \r\n    position: relative;\n}\n.loader {\r\n    top: 30%;\r\n    left: 40%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    position: absolute;\n}\n#ld3 {\r\n    position: relative;\r\n    -webkit-animation: outercontainer 4s linear infinite;\r\n            animation: outercontainer 4s linear infinite;\n}\n#ld3 div {\r\n      height: 12px;\r\n      width: 12px;\r\n      border-radius: 50%;\r\n      position: absolute;\r\n      top: 0;\r\n      bottom: 0;\r\n      left: 0;\r\n      right: 0;\n}\n#ld3 div:nth-child(1) {\r\n      top: 20px;\r\n      background: #59CD90;\r\n      -webkit-animation: ld3_div1 2s linear infinite;\r\n              animation: ld3_div1 2s linear infinite;\n}\n#ld3 div:nth-child(2) {\r\n      top: -20px;\r\n      background: #D91E36;\r\n      -webkit-animation: ld3_div2 2s linear infinite;\r\n              animation: ld3_div2 2s linear infinite;\n}\n#ld3 div:nth-child(3) {\r\n      left: 20px;\r\n      background: #F39237;\r\n      -webkit-animation: ld3_div4 2s linear infinite;\r\n              animation: ld3_div4 2s linear infinite;\n}\n#ld3 div:nth-child(4) {\r\n      left: -20px;\r\n      background: #0072BB;\r\n      -webkit-animation: ld3_div3 2s linear infinite;\r\n              animation: ld3_div3 2s linear infinite;\n}\n@-webkit-keyframes outercontainer {\n100% {\r\n        transform: rotate(360deg);\n}\n}\n@keyframes outercontainer {\n100% {\r\n        transform: rotate(360deg);\n}\n}\n@-webkit-keyframes ld3_div1 {\n0% {top: 20px;\n}\n25% {top: 0;\n}\n50% {top: 20px;\n}\n75% {top: 0;\n}\n100% {top: 20px;\n}\n}\n@keyframes ld3_div1 {\n0% {top: 20px;\n}\n25% {top: 0;\n}\n50% {top: 20px;\n}\n75% {top: 0;\n}\n100% {top: 20px;\n}\n}\n@-webkit-keyframes ld3_div2 {\n0% {top: -20px;\n}\n25% {top: 0;\n}\n50% {top: -20px;\n}\n75% {top: 0;\n}\n100% {top: -20px;\n}\n}\n@keyframes ld3_div2 {\n0% {top: -20px;\n}\n25% {top: 0;\n}\n50% {top: -20px;\n}\n75% {top: 0;\n}\n100% {top: -20px;\n}\n}\n@-webkit-keyframes ld3_div3 {\n0% {left: -20px;\n}\n25% {left: 0;\n}\n50% {left: -20px;\n}\n75% {left: 0;\n}\n100% {left: -20px;\n}\n}\n@keyframes ld3_div3 {\n0% {left: -20px;\n}\n25% {left: 0;\n}\n50% {left: -20px;\n}\n75% {left: 0;\n}\n100% {left: -20px;\n}\n}\n@-webkit-keyframes ld3_div4 {\n0% {left: 20px;\n}\n25% {left: 0;\n}\n50% {left: 20px;\n}\n75% {left: 0;\n}\n100% {left: 20px;\n}\n}\n@keyframes ld3_div4 {\n0% {left: 20px;\n}\n25% {left: 0;\n}\n50% {left: 20px;\n}\n75% {left: 0;\n}\n100% {left: 20px;\n}\n}\r\n\r\n  ", ""]);
 
 // exports
 
@@ -57007,13 +57007,13 @@ var routes = [{
   name: 'usuario',
   path: '/usuario',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./components/usuario/usuario.vue */ "./resources/js/components/usuario/usuario.vue"));
+    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./components/usuario/usuario.vue */ "./resources/js/components/usuario/usuario.vue"));
   }
 }, {
   name: 'shoex',
   path: '/usuario/:id',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./components/usuario/showUsuario.vue */ "./resources/js/components/usuario/showUsuario.vue"));
+    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./components/usuario/showUsuario.vue */ "./resources/js/components/usuario/showUsuario.vue"));
   }
 }, {
   name: 'categoria',
@@ -57031,7 +57031,7 @@ var routes = [{
   name: 'perfil',
   path: '/perfil',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
+    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
   }
 }, {
   name: 'examen',
@@ -57055,7 +57055,7 @@ var routes = [{
   name: 'rango',
   path: '/rango',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./components/rango/rango.vue */ "./resources/js/components/rango/rango.vue"));
+    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./components/rango/rango.vue */ "./resources/js/components/rango/rango.vue"));
   }
 }, // esta es la parte de los usuarios....
 {
@@ -57074,7 +57074,7 @@ var routes = [{
   name: 'exam',
   path: '/exam',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./users/exam/exam */ "./resources/js/users/exam/exam.vue"));
+    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./users/exam/exam */ "./resources/js/users/exam/exam.vue"));
   }
 }, {
   name: 'showing',
@@ -57086,19 +57086,25 @@ var routes = [{
   name: 'game',
   path: '/game',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./users/game/game.vue */ "./resources/js/users/game/game.vue"));
+    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./users/game/game.vue */ "./resources/js/users/game/game.vue"));
   }
 }, {
   name: 'schult',
   path: '/schult',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./users/game/1schultz.vue */ "./resources/js/users/game/1schultz.vue"));
+    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./users/game/schultz.vue */ "./resources/js/users/game/schultz.vue"));
   }
 }, {
   name: 'parpadeo',
   path: '/parpadeo',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./users/game/parpadeo.vue */ "./resources/js/users/game/parpadeo.vue"));
+    return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./users/game/parpadeo.vue */ "./resources/js/users/game/parpadeo.vue"));
+  }
+}, {
+  name: 'alrededor',
+  path: '/alrededor',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./users/game/alrededor.vue */ "./resources/js/users/game/alrededor.vue"));
   }
 }, {
   path: '*',

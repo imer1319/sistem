@@ -27,8 +27,6 @@
 					{name:'schultz',icon:'schulte.png',url:'/schult'},
 					{name:'parpadeo veloz',icon:'parpadeo.png',url:'/parpadeo'}
 					],
-				game: {name: '',content:'', icon:''},
-				loading:true,
 			}
 		},
 		methods:{

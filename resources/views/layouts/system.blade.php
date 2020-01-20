@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
 </head>
-<body style="background: #F0F0F0">
+<body style="background: #F0F0F0;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #25546D; box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);">
             <div class="container">

@@ -73,12 +73,17 @@ export const routes = [
 	{
 		name: 'schult',
 		path: '/schult',
-		component: () => import('./users/game/1schultz.vue')
+		component: () => import('./users/game/schultz.vue')
 	},
 	{
 		name: 'parpadeo',
 		path: '/parpadeo',
 		component: () => import('./users/game/parpadeo.vue')
+	},
+	{
+		name: 'alrededor',
+		path: '/alrededor',
+		component: () => import('./users/game/alrededor.vue')
 	},
 	{
 		path: '*',

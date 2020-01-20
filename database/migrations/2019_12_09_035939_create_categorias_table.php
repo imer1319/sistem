@@ -17,7 +17,6 @@ class CreateCategoriasTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('icono');
-            $table->unsignedBigInteger('puntos');
             $table->timestamps();
         });
     }

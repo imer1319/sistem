@@ -29,8 +29,9 @@ Route::get('/exam','UserController@examen');
 Route::get('/exam/{id}','UserController@darExamen');
 Route::post('exam','UserController@saveExam');
 Route::get('rank','UserController@rango');
+Route::get('insig','UserController@insignia');
 Route::get('profile','UserController@perfil');
-Route::put('profile/{id}','UserController@update');
+Route::put('profile/{id}','UserController@updatePerfil');
 // games rutas
 Route::get('game','UserController@game');
 Route::post('game','UserController@saveGame');

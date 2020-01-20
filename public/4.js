@@ -239,7 +239,7 @@ __webpack_require__.r(__webpack_exports__);
     obtenerID: function obtenerID() {
       var _this2 = this;
 
-      axios.get("/user").then(function (res) {
+      axios.get("/profile").then(function (res) {
         _this2.users = res.data;
       });
     },

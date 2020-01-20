@@ -18,12 +18,6 @@
                                     <input type="text" class="form-control" v-model="categoria.nombre" placeholder="Nombre de la categoria" required/>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Puntos</label>
-                                <div class="col-md-10">
-                                    <input type="text" class="form-control" v-model="categoria.puntos" placeholder="puntos de la categoria" required />
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="imagen"></label>
@@ -66,12 +60,6 @@
                                 <input type="text" class="form-control" v-model="fillCategoria.nombre" placeholder="Nombre de la categoria" required/>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2">Puntos</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" v-model="fillCategoria.puntos" placeholder="puntos de la categoria" required/>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <div class="form-group">
                                 <label></label>
@@ -111,7 +99,6 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Puntos</th>
                             <th>Imagen</th>
                             <th class="text-center">Acciones</th>
                         </tr>
@@ -120,7 +107,6 @@
                         <tr v-for="(categoria, index) in paginated('categorias')" :key="index">
                             <td width="10px">{{ index + 1 }}</td>
                             <td>{{ categoria.nombre }}</td>
-                            <td>{{ categoria.puntos }}</td>
                             <td>
                                 <img :src="`/imagenes/categorias/${categoria.icono}`" 
                                 class="img-responsive" height="40" width="40"/>
@@ -156,8 +142,8 @@
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
                 categorias: [],
-                categoria: { nombre: "", puntos: "", icono: "" },
-                fillCategoria: { nombre: "", puntos: "", icono: "" },
+                categoria: { nombre: "", icono: "" },
+                fillCategoria: { nombre: "", icono: "" },
                 imagenMiniatura: "",
                 loading: true,
                 estado: false,
@@ -209,19 +195,16 @@
             agregarCategoria() {
                 if (
                     this.validarEspacios(this.categoria.nombre) == false ||
-                    this.validarEspacios(this.categoria.puntos) == false ||
                     this.validarEspacios(this.categoria.icono) == false
                     ) {
                     alert("los campos no pueden estar vacios");
             } else {
                 let formData = new FormData();
                 formData.append("nombre", this.categoria.nombre);
-                formData.append("puntos", this.categoria.puntos);
                 formData.append("icono", this.categoria.icono);
                 axios.post("/categoria", formData).then(res => {
                     EventBus.$emit("agregado", res.data.categoria);
                     this.categoria.nombre = "";
-                    this.categoria.puntos = "";
                     this.$refs.img.value = "";
                     this.imagenMiniatura = "";
                     $("#crearCategory").modal("hide");
@@ -246,7 +229,6 @@
         editarCategoria: function(categoria) {
             this.estado = true;
             this.fillCategoria.nombre = categoria.nombre;
-            this.fillCategoria.puntos = categoria.puntos;
             this.fillCategoria.icono = categoria.icono;
             this.fillCategoria.id = categoria.id;
             $("#editCategoria").modal("show");
@@ -254,14 +236,12 @@
         updateCategoria: function(fillCategoria) {
             if (
                 this.validarEspacios(this.fillCategoria.nombre) == false ||
-                this.validarEspacios(this.fillCategoria.puntos) == false ||
                 this.validarEspacios(this.fillCategoria.icono) == false
                 ) {
                 alert("los campos no pueden estar vacios");
         } else {
             let data = new FormData();
             data.append("nombre", this.fillCategoria.nombre);
-            data.append("puntos", this.fillCategoria.puntos);
             data.append("icono", this.fillCategoria.icono);
             data.append("_method", "PUT");
             var url = `/categoria/${fillCategoria.id}`;

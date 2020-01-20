@@ -211,7 +211,7 @@
 				}
 			},
 			obtenerID(){
-				axios.get("/user").then(res =>{
+				axios.get("/profile").then(res =>{
 					this.users = res.data
 				})
 			},

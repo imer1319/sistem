@@ -353,7 +353,6 @@ var render = function() {
                         staticClass: "form-control",
                         attrs: {
                           type: "text",
-                          name: "name",
                           placeholder: "Nombre de la insignia",
                           required: ""
                         },
@@ -573,13 +572,17 @@ var render = function() {
                               src: _vm.imagen
                             }
                           })
-                        : _c("img", {
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.estado == true
+                        ? _c("img", {
                             attrs: {
                               width: "200",
                               height: "200",
                               src: "imagenes/insignias/" + _vm.fillInsignia.icon
                             }
                           })
+                        : _vm._e()
                     ])
                   ])
                 ]),

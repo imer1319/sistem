@@ -26,19 +26,18 @@
   margin: 0;}
   
   .grid {
-    display: flex;
-    min-height: 100vh;
-    min-width: 100vw;
-    flex-wrap: wrap; 
+    min-height: 100vh; 
+    position: relative;
   }
 
   .loader {
-    width: 50vw;
-    height: 50vh;
+    top: 30%;
+    left: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: absolute;
   }
 
   #ld3 {

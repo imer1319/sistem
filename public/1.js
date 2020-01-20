@@ -139,20 +139,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -169,12 +155,10 @@ __webpack_require__.r(__webpack_exports__);
       categorias: [],
       categoria: {
         nombre: "",
-        puntos: "",
         icono: ""
       },
       fillCategoria: {
         nombre: "",
-        puntos: "",
         icono: ""
       },
       imagenMiniatura: "",
@@ -235,17 +219,15 @@ __webpack_require__.r(__webpack_exports__);
     agregarCategoria: function agregarCategoria() {
       var _this4 = this;
 
-      if (this.validarEspacios(this.categoria.nombre) == false || this.validarEspacios(this.categoria.puntos) == false || this.validarEspacios(this.categoria.icono) == false) {
+      if (this.validarEspacios(this.categoria.nombre) == false || this.validarEspacios(this.categoria.icono) == false) {
         alert("los campos no pueden estar vacios");
       } else {
         var formData = new FormData();
         formData.append("nombre", this.categoria.nombre);
-        formData.append("puntos", this.categoria.puntos);
         formData.append("icono", this.categoria.icono);
         axios.post("/categoria", formData).then(function (res) {
           _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit("agregado", res.data.categoria);
           _this4.categoria.nombre = "";
-          _this4.categoria.puntos = "";
           _this4.$refs.img.value = "";
           _this4.imagenMiniatura = "";
           $("#crearCategory").modal("hide");
@@ -273,7 +255,6 @@ __webpack_require__.r(__webpack_exports__);
     editarCategoria: function editarCategoria(categoria) {
       this.estado = true;
       this.fillCategoria.nombre = categoria.nombre;
-      this.fillCategoria.puntos = categoria.puntos;
       this.fillCategoria.icono = categoria.icono;
       this.fillCategoria.id = categoria.id;
       $("#editCategoria").modal("show");
@@ -281,12 +262,11 @@ __webpack_require__.r(__webpack_exports__);
     updateCategoria: function updateCategoria(fillCategoria) {
       var _this6 = this;
 
-      if (this.validarEspacios(this.fillCategoria.nombre) == false || this.validarEspacios(this.fillCategoria.puntos) == false || this.validarEspacios(this.fillCategoria.icono) == false) {
+      if (this.validarEspacios(this.fillCategoria.nombre) == false || this.validarEspacios(this.fillCategoria.icono) == false) {
         alert("los campos no pueden estar vacios");
       } else {
         var data = new FormData();
         data.append("nombre", this.fillCategoria.nombre);
-        data.append("puntos", this.fillCategoria.puntos);
         data.append("icono", this.fillCategoria.icono);
         data.append("_method", "PUT");
         var url = "/categoria/".concat(fillCategoria.id);
@@ -432,44 +412,6 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c("label", { staticClass: "col-form-label col-md-2" }, [
-                      _vm._v("Puntos")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-10" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.categoria.puntos,
-                            expression: "categoria.puntos"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          placeholder: "puntos de la categoria",
-                          required: ""
-                        },
-                        domProps: { value: _vm.categoria.puntos },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.categoria,
-                              "puntos",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("div", { staticClass: "form-group" }, [
                       _c("label", { attrs: { for: "imagen" } }),
@@ -549,44 +491,6 @@ var render = function() {
                             _vm.$set(
                               _vm.fillCategoria,
                               "nombre",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c("label", { staticClass: "col-form-label col-md-2" }, [
-                      _vm._v("Puntos")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-10" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.fillCategoria.puntos,
-                            expression: "fillCategoria.puntos"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          placeholder: "puntos de la categoria",
-                          required: ""
-                        },
-                        domProps: { value: _vm.fillCategoria.puntos },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.fillCategoria,
-                              "puntos",
                               $event.target.value
                             )
                           }
@@ -695,8 +599,6 @@ var render = function() {
                             _vm._v(" "),
                             _c("th", [_vm._v("Nombre")]),
                             _vm._v(" "),
-                            _c("th", [_vm._v("Puntos")]),
-                            _vm._v(" "),
                             _c("th", [_vm._v("Imagen")]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-center" }, [
@@ -717,8 +619,6 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(categoria.nombre))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(categoria.puntos))]),
                               _vm._v(" "),
                               _c("td", [
                                 _c("img", {

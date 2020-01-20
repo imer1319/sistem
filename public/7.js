@@ -184,15 +184,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showUser();
     this.showRango();
+    this.showInsignia();
   },
   data: function data() {
     return {
       usuario: {},
       rangos: [],
+      insignias: [],
       loading: true,
       fillUsuario: {
         name: '',
@@ -228,6 +244,14 @@ __webpack_require__.r(__webpack_exports__);
         _this2.rangos = res.data;
       });
     },
+    showInsignia: function showInsignia() {
+      var _this3 = this;
+
+      var url = "/insig";
+      axios.get(url).then(function (res) {
+        _this3.insignias = res.data;
+      });
+    },
     obtenerImagenNueva: function obtenerImagenNueva(e) {
       this.estado = true;
       var file = e.target.files[0];
@@ -235,12 +259,12 @@ __webpack_require__.r(__webpack_exports__);
       this.cargarImagen(file);
     },
     cargarImagen: function cargarImagen(file) {
-      var _this3 = this;
+      var _this4 = this;
 
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        _this3.imagenMiniatura = e.target.result;
+        _this4.imagenMiniatura = e.target.result;
       };
 
       reader.readAsDataURL(file);
@@ -255,7 +279,7 @@ __webpack_require__.r(__webpack_exports__);
       this.fillUsuario.id = this.usuario.id;
     },
     alerta: function alerta() {
-      var _this4 = this;
+      var _this5 = this;
 
       var Toast = this.$swal.mixin({
         toast: true,
@@ -263,8 +287,8 @@ __webpack_require__.r(__webpack_exports__);
         showConfirmButton: false,
         timer: 2000,
         onOpen: function onOpen(toast) {
-          toast.addEventListener('mouseenter', _this4.$swal.stopTimer);
-          toast.addEventListener('mouseleave', _this4.$swal.resumeTimer);
+          toast.addEventListener('mouseenter', _this5.$swal.stopTimer);
+          toast.addEventListener('mouseleave', _this5.$swal.resumeTimer);
         }
       });
       Toast.fire({
@@ -273,7 +297,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateUsuario: function updateUsuario(fillUsuario) {
-      var _this5 = this;
+      var _this6 = this;
 
       var data = new FormData();
       data.append('name', this.fillUsuario.name);
@@ -292,9 +316,9 @@ __webpack_require__.r(__webpack_exports__);
       data.append('_method', 'PUT');
       var url = "/profile/".concat(fillUsuario.id);
       axios.post(url, data).then(function (res) {
-        _this5.showUser();
+        _this6.showUser();
 
-        _this5.alerta();
+        _this6.alerta();
       });
     },
     editarAvatar: function editarAvatar() {
@@ -303,16 +327,16 @@ __webpack_require__.r(__webpack_exports__);
       $('#editAvatar').modal('show');
     },
     updateAvatar: function updateAvatar(fillUsuario) {
-      var _this6 = this;
+      var _this7 = this;
 
       var data = new FormData();
       data.append('avatar', this.fillUsuario.avatar);
       data.append('_method', 'PUT');
       var url = "/profile/".concat(fillUsuario.id);
       axios.post(url, data).then(function (res) {
-        _this6.showUser();
+        _this7.showUser();
 
-        _this6.alerta();
+        _this7.alerta();
 
         $('#editAvatar').modal('hide');
       });
@@ -339,7 +363,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.sombra{\n\tbox-shadow: 0px 3px 2px #aab2bd;\n}\n.cont{\n\tposition: relative; \n\theight:120px; \n\twidth:120px;\n}\n.cont img{\n\theight:100%; \n\twidth:100%;\n}\n.cont a{\n\tposition: absolute;\n\tbottom: 15px;\n\tleft: 70px;\n\ttext-shadow: 0 0 10px #000;\n}\na i{\n\tcursor: pointer; \n\tfont-size: 25px;\n\tcolor: #fff;\n}\n.border-right {\n\tborder-right: 1px solid #dee2e6!important;\n}\n.description-block {\n\tdisplay: block;\n\tmargin: 10px 0;\n\ttext-align: center;\n}\n.widget-user .widget-user-image {\n\tleft: 50%;\n\tmargin-left: -45px;\n\tposition: absolute;\n\ttop: 80px;\n}\n.widget-user .widget-user-header {\n\tborder-top-left-radius: .25rem;\n\tborder-top-right-radius: .25rem;\n\theight: 135px;\n\tpadding: 1rem;\n\ttext-align: center;\n}\n.widget-user .widget-user-image>img {\n\tborder: 3px solid #fff;\n\theight: 100px;\n\twidth: 100px;\n}\n.elevation-2 {\n\tbox-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)!important;\n}\n.img-circle {\n\tborder-radius: 50%;\n}\nimg {\n\tvertical-align: middle;\n\tborder-style: none;\n}\n.card-footer {\n\tpadding-top: 50px;\n}\n.bg-info {\n\tbackground-color: #17a2b8!important;\n\tcolor: #fff;\n}\nh1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {\n\tmargin-bottom: 0.5rem;\n\tfont-weight: 500;\n\tline-height: 1.2;\n}\n", ""]);
+exports.push([module.i, "\n.sombra{\n\tbox-shadow: 0px 3px 2px #aab2bd;\n}\n.cont{\n\tposition: relative; \n\theight:120px; \n\twidth:120px;\n}\n.cont img{\n\theight:100%; \n\twidth:100%;\n}\n.cont a{\n\tposition: absolute;\n\tbottom: 15px;\n\tleft: 70px;\n\ttext-shadow: 0 0 10px #000;\n}\na i{\n\tcursor: pointer; \n\tfont-size: 25px;\n\tcolor: #fff;\n}\n.border-right {\n\tborder-right: 1px solid #dee2e6!important;\n}\n.description-block {\n\tdisplay: block;\n\tmargin: 10px 0;\n\ttext-align: center;\n}\n.widget-user .widget-user-image {\n\tleft: 50%;\n\tmargin-left: -45px;\n\tposition: absolute;\n\ttop: 80px;\n}\n.widget-user .widget-user-header {\n\tborder-top-left-radius: .25rem;\n\tborder-top-right-radius: .25rem;\n\theight: 135px;\n\tpadding: 1rem;\n\ttext-align: center;\n}\n.widget-user .widget-user-image>img {\n\tborder: 3px solid #fff;\n\theight: 100px;\n\twidth: 100px;\n}\n.elevation-2 {\n\tbox-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)!important;\n}\n.img-circle {\n\tborder-radius: 50%;\n}\nimg {\n\tvertical-align: middle;\n\tborder-style: none;\n}\n.card-footer {\n\tpadding-top: 50px;\n}\n.bg-info {\n\tbackground-color: #17a2b8!important;\n\tcolor: #fff;\n}\nh1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {\n\tmargin-bottom: 0.5rem;\n\tfont-weight: 500;\n\tline-height: 1.2;\n}\n\n/***********TOOLTIPS***********/\n.tooltipP{\n\tcursor: pointer;\n\tposition: relative;\n\ttext-align: center;\n}\n.tooltipP:hover .ttip{\n\tdisplay: block;\n}\n.ttip:before{\n\tborder-left: 6px solid transparent;\n\tborder-right: 6px solid transparent;\n\tborder-top: 6px solid #777777;\n\tbottom: -6px;\n\tcontent: \"\";\n\theight: 0;\n\tleft: 50%;\n\tmargin-left: -6px;\n\tposition: absolute;\n\twidth: 0;\n}\n.ttip{\n\tbackground: #777777;\n\tcolor: #fff;\n\tdisplay: none;\n\tleft: 30%;\n\tpadding: 10px 10px;\n\tposition: absolute;\n\twidth: 200px;\n\ttop: -70px;\n\tz-index: 1000;\n}\n", ""]);
 
 // exports
 
@@ -654,7 +678,7 @@ var render = function() {
                                                   src:
                                                     "imagenes/rangos/" +
                                                     rango.avatar,
-                                                  height: "400px",
+                                                  height: "350px",
                                                   width: "70%"
                                                 }
                                               })
@@ -723,10 +747,35 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _c("div", {
-                      staticClass: "tab-pane",
-                      attrs: { id: "insignia" }
-                    }),
+                    _c(
+                      "div",
+                      { staticClass: "tab-pane", attrs: { id: "insignia" } },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "row" },
+                          _vm._l(_vm.insignias, function(insig) {
+                            return _c("div", { staticClass: "col-4" }, [
+                              _c("div", { staticClass: "text-center m-3" }, [
+                                _c("img", {
+                                  staticStyle: {
+                                    "border-radius": "50%",
+                                    height: "90%",
+                                    width: "90%"
+                                  },
+                                  attrs: {
+                                    src: "/imagenes/insignias/" + insig.icon
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("h5", [_vm._v(_vm._s(insig.name))])
+                              ])
+                            ])
+                          }),
+                          0
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "div",

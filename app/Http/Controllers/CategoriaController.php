@@ -28,7 +28,6 @@ class CategoriaController extends Controller
         }
         $categoria = new Categoria();
         $categoria->nombre = $request->nombre;
-        $categoria->puntos = $request->puntos;
         $categoria->icono = $url;
         $categoria->save();
         return response()->json([

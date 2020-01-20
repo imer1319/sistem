@@ -84,24 +84,38 @@
 										<div v-for="rango in rangos">
 											<div v-if="usuario.puntos < 100">
 												<div v-if="rango.nombre == 'Bronce'">
-													<div class="text-center"><img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="400px" width="70%"></div>
+													<div class="text-center">
+														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="350px" width="70%">
+													</div>
 												</div>
 											</div>
 											<div v-if="usuario.puntos >= 100 && usuario.puntos <500">
 												<div v-if="rango.nombre == 'Plata'">
-													<div class="text-center"><img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="400px" width="70%"></div>
+													<div class="text-center">
+														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="400px" width="70%">
+													</div>
 												</div>
 											</div>
 											<div v-if="usuario.puntos >= 500 && usuario.puntos <1000">
 												<div v-if="rango.nombre == 'Oro'">
-													<div class="text-center"><img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="400px" width="70%"></div>
+													<div class="text-center">
+														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="400px" width="70%">
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="tab-pane" id="insignia">
-									
+									<div class="row">
+										<div class="col-4" v-for="insig in insignias">
+											<div class="text-center m-3">
+												<img style="border-radius: 50%; height: 90%;width:90%;" 
+												:src="`/imagenes/insignias/${insig.icon}`">
+												<h5>{{ insig.name }}</h5>
+											</div>
+										</div>
+									</div>
 								</div>
 								<div class="tab-pane" id="datos">
 									<div class="row">
@@ -178,11 +192,13 @@
 			created() {
 				this.showUser();
 				this.showRango();
+				this.showInsignia();
 			},
 			data(){
 				return{
 					usuario :{},
 					rangos:[],
+					insignias:[],
 					loading:true,
 					fillUsuario: {name: '',apellido_paterno:'', avatar:'',email:'',
 					apellido_materno:'',rango_id:'',curso:''},
@@ -205,6 +221,12 @@
 					var url ="/rank"
 					axios.get(url).then(res =>{
 						this.rangos = res.data
+					})
+				},
+				showInsignia(){
+					var url ="/insig"
+					axios.get(url).then(res =>{
+						this.insignias = res.data
 					})
 				},
 				obtenerImagenNueva(e){
@@ -360,5 +382,38 @@
 		margin-bottom: 0.5rem;
 		font-weight: 500;
 		line-height: 1.2;
+	}
+
+	/***********TOOLTIPS***********/
+	.tooltipP{
+		cursor: pointer;
+		position: relative;
+		text-align: center;
+	}
+	.tooltipP:hover .ttip{
+		display: block;
+	}
+	.ttip:before{
+		border-left: 6px solid transparent;
+		border-right: 6px solid transparent;
+		border-top: 6px solid #777777;
+		bottom: -6px;
+		content: "";
+		height: 0;
+		left: 50%;
+		margin-left: -6px;
+		position: absolute;
+		width: 0;
+	}
+	.ttip{
+		background: #777777;
+		color: #fff;
+		display: none;
+		left: 30%;
+		padding: 10px 10px;
+		position: absolute;
+		width: 200px;
+		top: -70px;
+		z-index: 1000;
 	}
 </style>
