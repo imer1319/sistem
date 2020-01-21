@@ -7,13 +7,28 @@
 						<div class="card-body">
 							<h3>Schulte</h3>
 							<h3>Record</h3>
-							<h3>Record Global</h3>
 							<div class="btn btn-primary btn-block" @click="temporizame()">Iniciar</div>
 						</div>
 					</div>
 					<div class="card mb-3">
 						<div class="card-body">
 							<p>Puntuacion</p>
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">usuario</th>
+										<th scope="col">Puntuacion</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="(punt, index) in recordMundial">
+										<th scope="row">{{ index+1 }}</th>
+										<td>{{ punt.user_id }}</td>
+										<td>{{ punt.puntuacion }}</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -49,7 +64,7 @@
 			<div id="numero">{{ contador }}</div>
 		</div>
 		<div class="row">
-			<div v-show="pasos == 1" class="col-md-8 col-sm-12 m-auto" id="tabla1">
+			<div v-show="pasos == 1" class="col-md-8 col-sm-12 m-auto tabla-juego" id="tabla1">
 				<table class="table table-bordered">
 					<tr>
 						<td @click="press_1($event)" id="a1"></td>
@@ -68,7 +83,7 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 2 "class="col-md-8 col-sm-12 m-auto">
+			<div v-show="pasos == 2 "class="col-md-8 col-sm-12 m-auto tabla-juego">
 				<table class="table table-bordered">
 					<tr>
 						<td @click="press_2($event)" id="a2"></td>
@@ -96,7 +111,7 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 3" class="col-md-8 col-sm-12 m-auto">
+			<div v-show="pasos == 3" class="col-md-8 col-sm-12 m-auto tabla-juego">
 				<table class="table table-bordered">
 					<tr>
 						<td @click="press_3($event)" id="a3"></td>
@@ -135,7 +150,7 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 4" class="col-md-8 col-sm-12 m-auto">
+			<div v-show="pasos == 4" class="col-md-8 col-sm-12 m-auto tabla-juego">
 				<table class="table table-bordered">
 					<tr>
 						<td @click="press_4($event)" id="a4"></td>
@@ -187,7 +202,7 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 5" class="col-md-8 col-sm-12 m-auto">
+			<div v-show="pasos == 5" class="col-md-8 col-sm-12 m-auto tabla-juego">
 				<div class="col-8 m-auto">
 					<form v-on:submit.prevent="guardarResultado">
 						<h3 class="text-uppercase">se acabo el tiempo</h3>
@@ -208,6 +223,7 @@
 	export default{
 		created:function() {
 			this.obtenerDatosUsuario()
+			this.mostrarPuntuacion()
 		},
 		data(){
 			return{
@@ -232,9 +248,15 @@
 				contador:3,
 				user:{},
 				guardarEjercicio:{user_id:'',ejercicio_id:'',puntos:''},
+				recordMundial:[]
 			}
 		},
 		methods:{
+			mostrarPuntuacion(){
+				axios.get("/puntuacion/"+1).then(res =>{
+					this.recordMundial = res.data
+				})
+			},
 			obtenerDatosUsuario(){
 				axios.get("/profile").then(res =>{
 					this.user = res.data
@@ -247,7 +269,7 @@
 
 				let formData = new FormData()
 				formData.append('ejercicio_id', this.guardarEjercicio.ejercicio_id)
-				formData.append('user_id', this.guardarEjercicio.ejercicio_id)
+				formData.append('user_id', this.guardarEjercicio.user_id)
 				formData.append('puntuacion', this.guardarEjercicio.puntos)
 
 				axios.post('/game',formData)
@@ -730,6 +752,9 @@
 					}
 				}
 			},
+		},
+		beforeDestroy: function () {
+			clearInterval(this.miTiempo)
 		}
 	}
 </script>
@@ -743,10 +768,10 @@
 #tabla1{
 	display: none;
 }
-table{
+.tabla-juego >table{
 	table-layout: fixed;
 }
-th, td {
+.tabla-juego >th,.tabla-juego >td {
 	word-wrap: break-word;
 	text-align: center;
 	height: 65px;

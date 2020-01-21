@@ -9,6 +9,7 @@ use App\SaveGame;
 use App\Insignia;
 use App\Ejercicio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -107,6 +108,28 @@ class UserController extends Controller
             "savGame" => $savGame
         ],200);
         return $savGame;
+    }
+    public function rankingGame(Request $request, $id)
+    {
+        if($request->ajax()){
+            $suma = DB::table('ejercicio_user')
+            ->orderBy('puntuacion', 'desc')
+            ->limit(3)
+            ->get();
+            return $suma;
+        }
+        return view('home');
+    }
+    public function rankingMundial(Request $request)
+    {
+        if($request->ajax()){
+            $pool = User::select('name','puntos','avatar','curso')
+            ->orderBy('puntos','desc')
+            ->limit(5)
+            ->get();
+            return $pool;
+        }
+        return view('home');
     }
 
 }

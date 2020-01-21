@@ -66,6 +66,11 @@ export const routes = [
 		component: () => import('./users/exam/show-exam')
 	},
 	{
+		name: 'ranking',
+		path: '/ranking',
+		component: () => import('./users/ranking.vue')
+	},
+	{
 		name: 'game',
 		path: '/game',
 		component: () => import('./users/game/game.vue')
@@ -84,9 +89,5 @@ export const routes = [
 		name: 'alrededor',
 		path: '/alrededor',
 		component: () => import('./users/game/alrededor.vue')
-	},
-	{
-		path: '*',
-		component: () => import('./components/404')
 	},
 ];

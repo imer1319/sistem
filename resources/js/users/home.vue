@@ -28,7 +28,7 @@
                 {nombre:'examen',icono:'examen.png',url:'/exam',numero:2},
                 {nombre:'ejercicio',icono:'ejercicios.png',url:'game',numero:1},
                 {nombre:'puntuaciones',icono:'puntuaciones.png',url:'/profile',numero:2},
-                {nombre:'posicion',icono:'posicion.png',url:'',numero:1},
+                {nombre:'posicion',icono:'posicion.png',url:'/ranking',numero:1},
                 {nombre:'insignia',icono:'premios.png',url:'',numero:2},
                 ]
             }

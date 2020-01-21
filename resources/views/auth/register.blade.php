@@ -54,7 +54,6 @@
                                 <input id="password-confirm" type="password" class="form-control text-center" name="password_confirmation" required autocomplete="new-password" placeholder="Confirmar Contraseña">
                             </div>
                         </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-12 offset-md-12">
                                 <button type="submit" class="btn btn-primary btn-block">

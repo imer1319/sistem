@@ -31,8 +31,10 @@ Route::post('exam','UserController@saveExam');
 Route::get('rank','UserController@rango');
 Route::get('insig','UserController@insignia');
 Route::get('profile','UserController@perfil');
+Route::get('ranking','UserController@rankingMundial');
 Route::put('profile/{id}','UserController@updatePerfil');
 // games rutas
 Route::get('game','UserController@game');
+Route::get('puntuacion/{id}','UserController@rankingGame');
 Route::post('game','UserController@saveGame');
 Route::get('schult','UserController@game');

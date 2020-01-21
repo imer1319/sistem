@@ -17,17 +17,14 @@
 
 		<div class="col-lg-12">
 			<pregunta/>
-			<createPregunta/>
 		</div>
 	</div>
 </template>
 <script>
 	import EventBus from '../../event-bus';
 	import pregunta from '../examens/preguntaComponent.vue';
-	import createPregunta from '../examens/createPreguntaComponent.vue';
 	export default{
 		components:{
-			createPregunta:createPregunta,
 			pregunta:pregunta,
 		},
 		created() {

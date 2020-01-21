@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/rango/rango.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -130,47 +130,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     var _this = this;
 
-    this.mostrarInsignia();
+    this.mostrarRango();
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('agregado', function (data) {
-      _this.insignias.push(data);
+      _this.rangos.push(data);
     });
   },
   data: function data() {
     return {
-      insignias: [],
-      insignia: {
-        name: '',
-        description: '',
-        icon: ''
+      rangos: [],
+      rango: {
+        nombre: '',
+        avatar: ''
       },
-      fillInsignia: {
-        name: '',
-        description: '',
-        icon: ''
+      fillRango: {
+        nombre: '',
+        avatar: ''
       },
       imagenMiniatura: '',
       loading: true,
       estado: false,
-      paginate: ['insignias']
+      paginate: ['rangos']
     };
   },
   methods: {
@@ -183,32 +167,32 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
     },
-    mostrarInsignia: function mostrarInsignia() {
+    mostrarRango: function mostrarRango() {
       var _this2 = this;
 
-      axios.get('insignia').then(function (res) {
-        _this2.insignias = res.data;
+      axios.get('rango').then(function (res) {
+        _this2.rangos = res.data;
         _this2.loading = false;
       });
     },
-    crearInsignia: function crearInsignia() {
-      $('#createInsignia').modal('show');
+    crearRango: function crearRango() {
+      $('#createRango').modal('show');
     },
     obtenerImagencrear: function obtenerImagencrear(e) {
       var file = e.target.files[0];
-      this.insignia.icon = file;
+      this.rango.avatar = file;
       this.cargarImagen(file);
     },
     obtenerImagen: function obtenerImagen(e) {
       this.estado = true;
       var file = e.target.files[0];
-      this.fillInsignia.icon = file;
+      this.fillRango.avatar = file;
       this.cargarImagen(file);
     },
     obtenerImagenNueva: function obtenerImagenNueva(e) {
       this.estado = false;
       var file = e.target.files[0];
-      this.insignia.icon = file;
+      this.rango.avatar = file;
       this.cargarImagen(file);
     },
     cargarImagen: function cargarImagen(file) {
@@ -231,59 +215,55 @@ __webpack_require__.r(__webpack_exports__);
         return true;
       }
     },
-    agregarInsignia: function agregarInsignia() {
+    agregarRango: function agregarRango() {
       var _this4 = this;
 
-      if (this.validarEspacios(this.insignia.name) == false || this.validarEspacios(this.insignia.description) == false || this.validarEspacios(this.insignia.icon) == false) {
+      if (this.validarEspacios(this.rango.nombre) == false || this.validarEspacios(this.rango.avatar) == false) {
         alert("los campos no pueden estar vacios");
       } else {
         var formData = new FormData();
-        formData.append('name', this.insignia.name);
-        formData.append('description', this.insignia.description);
-        formData.append('icon', this.insignia.icon);
-        axios.post('/insignia', formData).then(function (res) {
-          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.insignia);
-          _this4.insignia.name = "";
-          _this4.insignia.description = "";
+        formData.append('nombre', this.rango.nombre);
+        formData.append('avatar', this.rango.avatar);
+        axios.post('/rango', formData).then(function (res) {
+          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.rango);
+          _this4.rango.nombre = "";
           _this4.$refs.img.value = "";
           _this4.imagenMiniatura = "";
-          $('#createInsignia').modal('hide');
+          $('#createRango').modal('hide');
         });
       }
     },
-    eliminarInsignia: function eliminarInsignia(insignia, index) {
+    eliminarRango: function eliminarRango(rango, index) {
       var _this5 = this;
 
       if (this.confirmarDelete() == true) {
-        axios["delete"]("/insignia/".concat(insignia.id)).then(function () {
-          _this5.insignias.splice(index, 1);
+        axios["delete"]("/rango/".concat(rango.id)).then(function () {
+          _this5.rangos.splice(index, 1);
         });
       }
     },
-    editarInsignia: function editarInsignia(insignia) {
+    editarRango: function editarRango(rango) {
       this.estado = true;
-      this.fillInsignia.name = insignia.name;
-      this.fillInsignia.description = insignia.description;
-      this.fillInsignia.icon = insignia.icon;
-      this.fillInsignia.id = insignia.id;
-      $('#editInsignia').modal('show');
+      this.fillRango.nombre = rango.nombre;
+      this.fillRango.avatar = rango.avatar;
+      this.fillRango.id = rango.id;
+      $('#editRango').modal('show');
     },
-    updateInsignia: function updateInsignia(fillInsignia) {
+    updateRango: function updateRango(fillRango) {
       var _this6 = this;
 
-      if (this.validarEspacios(this.fillInsignia.name) == false || this.validarEspacios(this.fillInsignia.description) == false || this.validarEspacios(this.fillInsignia.icon) == false) {
+      if (this.validarEspacios(this.fillRango.nombre) == false || this.validarEspacios(this.fillRango.avatar) == false) {
         alert("los campos no pueden estar vacios");
       } else {
         var data = new FormData();
-        data.append('name', this.fillInsignia.name);
-        data.append('description', this.fillInsignia.description);
-        data.append('icon', this.insignia.icon);
+        data.append('nombre', this.fillRango.nombre);
+        data.append('avatar', this.rango.avatar);
         data.append('_method', 'PUT');
-        var url = "/insignia/".concat(fillInsignia.id);
+        var url = "/rango/".concat(fillRango.id);
         axios.post(url, data).then(function (res) {
-          _this6.mostrarInsignia();
+          _this6.mostrarRango();
 
-          $('#editInsignia').modal('hide');
+          $('#editRango').modal('hide');
         });
       }
     }
@@ -298,10 +278,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8& ***!
+  \**************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -321,124 +301,76 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.agregarInsignia($event)
+            return _vm.agregarRango($event)
           }
         }
       },
       [
-        _c(
-          "div",
-          { staticClass: "modal fade", attrs: { id: "createInsignia" } },
-          [
-            _c("div", { staticClass: "modal-dialog" }, [
-              _c("div", { staticClass: "modal-content" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body pb-0" }, [
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c("label", { staticClass: "col-form-label col-md-2" }, [
-                      _vm._v("Nombre")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-10" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.insignia.name,
-                            expression: "insignia.name"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          placeholder: "Nombre de la insignia",
-                          required: ""
-                        },
-                        domProps: { value: _vm.insignia.name },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.insignia, "name", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
+        _c("div", { staticClass: "modal fade", attrs: { id: "createRango" } }, [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body pb-0" }, [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("label", { staticClass: "col-form-label col-md-2" }, [
+                    _vm._v("Nombre")
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c("label", { staticClass: "col-form-label col-md-2" }, [
-                      _vm._v("Descripcion")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-10" }, [
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.insignia.description,
-                            expression: "insignia.description"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          rows: "3",
-                          cols: "5",
-                          name: "description",
-                          placeholder: "Describa la insignia",
-                          maxlength: "150",
-                          required: ""
-                        },
-                        domProps: { value: _vm.insignia.description },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.insignia,
-                              "description",
-                              $event.target.value
-                            )
-                          }
+                  _c("div", { staticClass: "col-md-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.rango.nombre,
+                          expression: "rango.nombre"
                         }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "imagen" } }),
-                      _vm._v(" "),
-                      _c("input", {
-                        ref: "img",
-                        staticClass: "form-control-file",
-                        attrs: {
-                          type: "file",
-                          accept: "image/*",
-                          required: ""
-                        },
-                        on: { change: _vm.obtenerImagencrear }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("figure", [
-                      _c("img", {
-                        attrs: { width: "200", height: "200", src: _vm.imagen }
-                      })
-                    ])
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "name",
+                        placeholder: "Nombre de la rango",
+                        required: ""
+                      },
+                      domProps: { value: _vm.rango.nombre },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.rango, "nombre", $event.target.value)
+                        }
+                      }
+                    })
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(1)
-              ])
+                _c("div", { staticClass: "form-group" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "imagen" } }),
+                    _vm._v(" "),
+                    _c("input", {
+                      ref: "img",
+                      staticClass: "form-control-file",
+                      attrs: { type: "file", accept: "image/*", required: "" },
+                      on: { change: _vm.obtenerImagencrear }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("figure", [
+                    _c("img", {
+                      attrs: { width: "200", height: "200", src: _vm.imagen }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
             ])
-          ]
-        )
+          ])
+        ])
       ]
     ),
     _vm._v(" "),
@@ -449,149 +381,96 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.updateInsignia(_vm.fillInsignia)
+            return _vm.updateRango(_vm.fillRango)
           }
         }
       },
       [
-        _c(
-          "div",
-          { staticClass: "modal fade", attrs: { id: "editInsignia" } },
-          [
-            _c("div", { staticClass: "modal-dialog" }, [
-              _c("div", { staticClass: "modal-content" }, [
-                _vm._m(2),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body pb-0" }, [
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c("label", { staticClass: "col-form-label col-md-2" }, [
-                      _vm._v("Nombre")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-10" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.fillInsignia.name,
-                            expression: "fillInsignia.name"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", name: "name", required: "" },
-                        domProps: { value: _vm.fillInsignia.name },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.fillInsignia,
-                              "name",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
+        _c("div", { staticClass: "modal fade", attrs: { id: "editRango" } }, [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body pb-0" }, [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("label", { staticClass: "col-form-label col-md-2" }, [
+                    _vm._v("Nombre")
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c("label", { staticClass: "col-form-label col-md-2" }, [
-                      _vm._v("Descripcion")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-10" }, [
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.fillInsignia.description,
-                            expression: "fillInsignia.description"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          rows: "3",
-                          cols: "5",
-                          name: "description",
-                          placeholder: "Describa la insignia",
-                          maxlength: "150",
-                          required: ""
-                        },
-                        domProps: { value: _vm.fillInsignia.description },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.fillInsignia,
-                              "description",
-                              $event.target.value
-                            )
-                          }
+                  _c("div", { staticClass: "col-md-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.fillRango.nombre,
+                          expression: "fillRango.nombre"
                         }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label"),
-                      _vm._v(" "),
-                      _vm.estado == false
-                        ? _c("input", {
-                            staticClass: "form-control-file",
-                            attrs: {
-                              type: "file",
-                              accept: "image/*",
-                              equired: ""
-                            },
-                            on: { change: _vm.obtenerImagen }
-                          })
-                        : _c("input", {
-                            staticClass: "form-control-file",
-                            attrs: {
-                              type: "file",
-                              accept: "image/*",
-                              equired: ""
-                            },
-                            on: { change: _vm.obtenerImagenNueva }
-                          })
-                    ]),
-                    _vm._v(" "),
-                    _c("figure", [
-                      _vm.estado == false
-                        ? _c("img", {
-                            attrs: {
-                              width: "200",
-                              height: "200",
-                              src: _vm.imagen
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.estado == true
-                        ? _c("img", {
-                            attrs: {
-                              width: "200",
-                              height: "200",
-                              src: "imagenes/insignias/" + _vm.fillInsignia.icon
-                            }
-                          })
-                        : _vm._e()
-                    ])
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", name: "name", required: "" },
+                      domProps: { value: _vm.fillRango.nombre },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.fillRango, "nombre", $event.target.value)
+                        }
+                      }
+                    })
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(3)
-              ])
+                _c("div", { staticClass: "form-group" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label"),
+                    _vm._v(" "),
+                    _vm.estado == false
+                      ? _c("input", {
+                          staticClass: "form-control-file",
+                          attrs: {
+                            type: "file",
+                            accept: "image/*",
+                            equired: ""
+                          },
+                          on: { change: _vm.obtenerImagen }
+                        })
+                      : _c("input", {
+                          staticClass: "form-control-file",
+                          attrs: {
+                            type: "file",
+                            accept: "image/*",
+                            equired: ""
+                          },
+                          on: { change: _vm.obtenerImagenNueva }
+                        })
+                  ]),
+                  _vm._v(" "),
+                  _c("figure", [
+                    _vm.estado == false
+                      ? _c("img", {
+                          attrs: {
+                            width: "200",
+                            height: "200",
+                            src: _vm.imagen
+                          }
+                        })
+                      : _c("img", {
+                          attrs: {
+                            width: "200",
+                            height: "200",
+                            src: "imagenes/rangos/" + _vm.fillRango.avatar
+                          }
+                        })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(3)
             ])
-          ]
-        )
+          ])
+        ])
       ]
     ),
     _vm._v(" "),
@@ -600,7 +479,7 @@ var render = function() {
       { staticClass: "card" },
       [
         _c("div", { staticClass: "card-header" }, [
-          _c("h3", { staticClass: "card-title" }, [_vm._v("Insignias")]),
+          _c("h3", { staticClass: "card-title" }, [_vm._v("Rangos")]),
           _vm._v(" "),
           _c(
             "a",
@@ -609,7 +488,7 @@ var render = function() {
               attrs: { href: "#" },
               on: {
                 click: function($event) {
-                  return _vm.crearInsignia()
+                  return _vm.crearRango()
                 }
               }
             },
@@ -625,7 +504,7 @@ var render = function() {
               [
                 _c(
                   "paginate",
-                  { attrs: { name: "insignias", list: _vm.insignias, per: 5 } },
+                  { attrs: { name: "rangos", list: _vm.rangos, per: 5 } },
                   [
                     _c(
                       "table",
@@ -635,11 +514,9 @@ var render = function() {
                       [
                         _c("thead", [
                           _c("tr", [
-                            _c("th", [_vm._v("ID")]),
+                            _c("th", [_vm._v("#")]),
                             _vm._v(" "),
                             _c("th", [_vm._v("Nombre")]),
-                            _vm._v(" "),
-                            _c("th", [_vm._v("Descripcion")]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-center" }, [
                               _vm._v("Imagen")
@@ -653,24 +530,22 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "tbody",
-                          _vm._l(_vm.paginated("insignias"), function(
-                            insignia,
+                          _vm._l(_vm.paginated("rangos"), function(
+                            rango,
                             index
                           ) {
                             return _c("tr", { key: index }, [
-                              _c("td", { attrs: { width: "10px" } }, [
+                              _c("td", { attrs: { width: "8px" } }, [
                                 _vm._v(_vm._s(index + 1))
                               ]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(insignia.name))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(insignia.description))]),
+                              _c("td", [_vm._v(_vm._s(rango.nombre))]),
                               _vm._v(" "),
                               _c("td", { staticClass: "text-center" }, [
                                 _c("img", {
                                   staticClass: "img-responsive",
                                   attrs: {
-                                    src: "imagenes/insignias/" + insignia.icon,
+                                    src: "imagenes/rangos/" + rango.avatar,
                                     height: "60",
                                     width: "70"
                                   }
@@ -685,7 +560,7 @@ var render = function() {
                                     attrs: { href: "#" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.editarInsignia(insignia)
+                                        return _vm.editarRango(rango)
                                       }
                                     }
                                   },
@@ -704,10 +579,7 @@ var render = function() {
                                     attrs: { href: "#" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.eliminarInsignia(
-                                          insignia,
-                                          index
-                                        )
+                                        return _vm.eliminarRango(rango, index)
                                       }
                                     }
                                   },
@@ -730,7 +602,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("paginate-links", {
                   attrs: {
-                    for: "insignias",
+                    for: "rangos",
                     classes: {
                       ul: "pagination",
                       li: "page-item",
@@ -822,17 +694,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/insignias/insigniaComponent.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/insignias/insigniaComponent.vue ***!
-  \*****************************************************************/
+/***/ "./resources/js/components/rango/rango.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/rango/rango.vue ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./insigniaComponent.vue?vue&type=template&id=c467845c& */ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&");
-/* harmony import */ var _insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./insigniaComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./rango.vue?vue&type=template&id=e01a5bf8& */ "./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8&");
+/* harmony import */ var _rango_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./rango.vue?vue&type=script&lang=js& */ "./resources/js/components/rango/rango.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -842,9 +714,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _rango_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -854,38 +726,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/insignias/insigniaComponent.vue"
+component.options.__file = "resources/js/components/rango/rango.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/components/rango/rango.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/rango/rango.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./insigniaComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./rango.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8& ***!
+  \********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./insigniaComponent.vue?vue&type=template&id=c467845c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./rango.vue?vue&type=template&id=e01a5bf8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
