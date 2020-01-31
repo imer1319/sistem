@@ -23,7 +23,9 @@ Route::resource('pregunta','PreguntaController')->except(['show','edit','index']
 Route::resource('ejercicio','EjercicioController')->except(['index']);
 Route::resource('usuario','UsuarioController')->except(['index']);
 Route::resource('categoria','CategoriaController')->except(['index']);
-
+Route::get('numero_usuarios','AdminController@count_users');
+Route::get('numero_examenes','AdminController@count_examen');
+Route::get('numero_ejercicios','AdminController@count_ejercicio');
 // rutas para el usuario
 Route::get('/exam','UserController@examen');
 Route::get('/exam/{id}','UserController@darExamen');
@@ -33,8 +35,19 @@ Route::get('insig','UserController@insignia');
 Route::get('profile','UserController@perfil');
 Route::get('ranking','UserController@rankingMundial');
 Route::put('profile/{id}','UserController@updatePerfil');
+Route::get('maxGame/{id}','UserController@maxGame');
+Route::get('miID','UserController@miIdAuth');
 // games rutas
 Route::get('game','UserController@game');
 Route::get('puntuacion/{id}','UserController@rankingGame');
 Route::post('game','UserController@saveGame');
 Route::get('schult','UserController@game');
+Route::get('buscar-palabra','UserController@game');
+Route::get('buscar-numero','UserController@game');
+Route::get('par-impar','UserController@game');
+Route::get('borde-palabra','UserController@game');
+Route::get('palabra-piramide','UserController@game');
+Route::get('campo-visual','UserController@game');
+Route::get('schult-letra','UserController@game');
+Route::get('encuentra-palabra','UserController@game');
+Route::get('encuentra-numeros','UserController@game');

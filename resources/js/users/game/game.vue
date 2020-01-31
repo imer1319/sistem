@@ -25,7 +25,15 @@
 			return { 
 				games: [
 					{name:'schultz',icon:'schulte.png',url:'/schult'},
-					{name:'parpadeo veloz',icon:'parpadeo.png',url:'/parpadeo'}
+					{name:'buscar palabras',icon:'parpadeo.png',url:'/buscar-palabra'},
+					{name:'buscar numeros',icon:'parpadeo.png',url:'/buscar-numero'},
+					{name:'Par e Impar',icon:'parpadeo.png',url:'/par-impar'},
+					{name:'Borde de palabra',icon:'schulte.png',url:'/borde-palabra'},
+					{name:'palabra-piramide',icon:'schulte.png',url:'/palabra-piramide'},
+					{name:'campo-visual',icon:'schulte.png',url:'/campo-visual'},
+					{name:'schulte-letras',icon:'schulte.png',url:'/schult-letra'},
+					{name:'encuentra-palabra',icon:'schulte.png',url:'/encuentra-palabra'},
+					{name:'encuentra-numeros',icon:'schulte.png',url:'/encuentra-numeros'},
 					],
 			}
 		},

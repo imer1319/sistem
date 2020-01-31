@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/schultz.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/schultz.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/1-schultz.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/1-schultz.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -230,22 +230,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.obtenerDatosUsuario();
     this.mostrarPuntuacion();
+    this.maximoGame();
+    this.showUser();
   },
   data: function data() {
     return {
       nivel1: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       nivel2: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
       nivel3: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
-      nivel4: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
+      nivel4: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
       desordenar: [],
       ids1: ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1", "i1"],
       ids2: ["a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2", "i2", "j2", "k2", "l2", "m2", "n2", "o2", "p2"],
       ids3: ["a3", "b3", "c3", "d3", "e3", "f3", "g3", "h3", "i3", "j3", "k3", "l3", "m3", "n3", "o3", "p3", "q3", "r3", "s3", "t3", "u3", "v3", "w3", "x3", "y3"],
-      ids4: ["a4", "b4", "c4", "d4", "e4", "f4", "g4", "h4", "i4", "j4", "k4", "l4", "m4", "n4", "o4", "p4", "q4", "r4", "s4", "t4", "u4", "v4", "w4", "x4", "y4", "z4", "za4", "zb4", "zc4", "zd4", "ze4", "zf4", "zg4", "zh4", "zi4", "zj4"],
+      ids4: ["a4", "b4", "c4", "d4", "e4", "f4", "g4", "h4", "i4", "j4", "k4", "l4", "m4", "n4", "o4", "p4", "q4", "r4", "s4", "t4", "u4", "v4", "w4", "x4", "y4", "z4", "za4", "zb4", "zc4", "zd4"],
       actual: 0,
       buscando: 1,
       pasos: 1,
@@ -255,46 +264,73 @@ __webpack_require__.r(__webpack_exports__);
       colores: ["#0033CC", "#FF6666", "#669933", "#FFCC33"],
       miTemporizador: 0,
       contador: 3,
-      user: {},
+      user: null,
       guardarEjercicio: {
         user_id: '',
         ejercicio_id: '',
         puntos: ''
       },
-      recordMundial: []
+      recordMundial: [],
+      maximo: {},
+      usuario: {}
     };
   },
   methods: {
-    mostrarPuntuacion: function mostrarPuntuacion() {
+    showUser: function showUser() {
       var _this = this;
 
+      var url = "/profile";
+      axios.get(url).then(function (res) {
+        _this.usuario = res.data;
+      });
+    },
+    actualizarDatosUsuario: function actualizarDatosUsuario() {
+      var data = new FormData();
+      data.append('puntos', this.usuario.puntos + this.puntuacion / 15);
+      data.append('_method', 'PUT');
+      var url = "/profile/".concat(this.usuario.id);
+      axios.post(url, data).then(function (res) {});
+    },
+    maximoGame: function maximoGame() {
+      var _this2 = this;
+
+      axios.get("maxGame/" + 1).then(function (res) {
+        _this2.maximo = res.data;
+      });
+    },
+    mostrarPuntuacion: function mostrarPuntuacion() {
+      var _this3 = this;
+
       axios.get("/puntuacion/" + 1).then(function (res) {
-        _this.recordMundial = res.data;
+        _this3.recordMundial = res.data;
       });
     },
     obtenerDatosUsuario: function obtenerDatosUsuario() {
-      var _this2 = this;
+      var _this4 = this;
 
-      axios.get("/profile").then(function (res) {
-        _this2.user = res.data;
+      axios.get("/miID").then(function (res) {
+        _this4.user = res.data;
       });
     },
     guardarResultado: function guardarResultado() {
-      var _this3 = this;
+      var _this5 = this;
 
       this.guardarEjercicio.ejercicio_id = 1;
-      this.guardarEjercicio.user_id = this.user.id;
+      this.guardarEjercicio.user_id = this.user;
       this.guardarEjercicio.puntos = this.puntuacion;
       var formData = new FormData();
       formData.append('ejercicio_id', this.guardarEjercicio.ejercicio_id);
       formData.append('user_id', this.guardarEjercicio.user_id);
       formData.append('puntuacion', this.guardarEjercicio.puntos);
       axios.post('/game', formData).then(function (res) {
-        _this3.guardarEjercicio.ejercicio_id = "";
-        _this3.guardarEjercicio.user_id = "";
-        _this3.guardarEjercicio.puntos = "";
-        _this3.puntuacion = 0;
-        _this3.pasos = 6;
+        _this5.guardarEjercicio.ejercicio_id = "";
+        _this5.guardarEjercicio.user_id = "";
+        _this5.guardarEjercicio.puntos = "";
+
+        _this5.actualizarDatosUsuario();
+
+        _this5.puntuacion = 0;
+        _this5.pasos = 6;
       });
     },
     temporizame: function temporizame() {
@@ -328,7 +364,7 @@ __webpack_require__.r(__webpack_exports__);
         elem.style.background = "#FF6666";
       }
 
-      if (this.tiempo < 0 || this.buscando == 37) {
+      if (this.tiempo < 0 || this.buscando == 31) {
         this.finCronometro();
         this.pasos = 5;
         this.tiempo = 0;
@@ -1533,90 +1569,6 @@ __webpack_require__.r(__webpack_exports__);
           }
 
           break;
-
-        case "ze4":
-          var ze = document.getElementById("ze4");
-
-          if (this.nivel4[this.actual + 30] == this.buscando) {
-            ze.innerHTML = "";
-            this.puntuacion += 4;
-            this.buscando++;
-            this.esUltimo(this.buscando);
-          } else {
-            this.error_Encontrado(ze);
-          }
-
-          break;
-
-        case "zf4":
-          var zf = document.getElementById("zf4");
-
-          if (this.nivel4[this.actual + 31] == this.buscando) {
-            zf.innerHTML = "";
-            this.puntuacion += 4;
-            this.buscando++;
-            this.esUltimo(this.buscando);
-          } else {
-            this.error_Encontrado(zf);
-          }
-
-          break;
-
-        case "zg4":
-          var zg = document.getElementById("zg4");
-
-          if (this.nivel4[this.actual + 32] == this.buscando) {
-            zg.innerHTML = "";
-            this.puntuacion += 4;
-            this.buscando++;
-            this.esUltimo(this.buscando);
-          } else {
-            this.error_Encontrado(zg);
-          }
-
-          break;
-
-        case "zh4":
-          var zh = document.getElementById("zh4");
-
-          if (this.nivel4[this.actual + 33] == this.buscando) {
-            zh.innerHTML = "";
-            this.puntuacion += 4;
-            this.buscando++;
-            this.esUltimo(this.buscando);
-          } else {
-            this.error_Encontrado(zh);
-          }
-
-          break;
-
-        case "zi4":
-          var zi = document.getElementById("zi4");
-
-          if (this.nivel4[this.actual + 34] == this.buscando) {
-            zi.innerHTML = "";
-            this.puntuacion += 4;
-            this.buscando++;
-            this.esUltimo(this.buscando);
-          } else {
-            this.error_Encontrado(zi);
-          }
-
-          break;
-
-        case "zj4":
-          var zj = document.getElementById("zj4");
-
-          if (this.nivel4[this.actual + 35] == this.buscando) {
-            zj.innerHTML = "";
-            this.puntuacion += 4;
-            this.buscando++;
-            this.esUltimo(this.buscando);
-          } else {
-            this.error_Encontrado(zj);
-          }
-
-          break;
       }
     },
     esUltimo: function esUltimo(numero) {
@@ -1639,7 +1591,7 @@ __webpack_require__.r(__webpack_exports__);
           this.mostrar4();
         }
       } else if (this.pasos == 4) {
-        if (this.buscando == 37) {
+        if (this.buscando == 31) {
           this.pasos = 5;
         }
       }
@@ -1652,10 +1604,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/schultz.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/schultz.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/1-schultz.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/1-schultz.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1664,22 +1616,22 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#empezando , #empezando2{\r\n\tdisplay: none;\n}\n#vista-primera{\r\n\tdisplay: flex;\n}\n#tabla1{\r\n\tdisplay: none;\n}\n.tabla-juego >table{\r\n\ttable-layout: fixed;\n}\n.tabla-juego >th,.tabla-juego >td {\r\n\tword-wrap: break-word;\r\n\ttext-align: center;\r\n\theight: 65px;\r\n\tfont-size: 25px;\r\n\tfont-weight: bold;\n}\n.table-bordered {\r\n\tborder: 1px solid #666666;\n}\n.table-bordered th, .table-bordered td {\r\n\tborder: 1px solid #666666;\n}\n.rubberBand {\r\n\tbackground: #FE789D;\r\n\t-webkit-animation-name: rubberBand;\r\n\tanimation-name: rubberBand;\r\n\t-webkit-animation-duration: 1s;\r\n\tanimation-duration: 1s;\r\n\t-webkit-animation-fill-mode: both;\r\n\tanimation-fill-mode: both;\r\n\t--webkit-animation-timing-function: linear;\r\n\t-webkit-animation-timing-function: linear;\r\n\t        animation-timing-function: linear;\n}\n@-webkit-keyframes rubberBand {\n0% {\r\n\t\ttransform: scale3d(1, 1, 1);\n}\n30% {\r\n\t\ttransform: scale3d(1.25, 0.75, 1);\n}\n40% {\r\n\t\ttransform: scale3d(0.75, 1.25, 1);\n}\n50% {\r\n\t\ttransform: scale3d(1.15, 0.85, 1);\n}\n65% {\r\n\t\ttransform: scale3d(.95, 1.05, 1);\n}\n75% {\r\n\t\ttransform: scale3d(1.05, .95, 1);\n}\n100% {\r\n\t\ttransform: scale3d(1, 1, 1);\n}\n}\n@keyframes rubberBand {\n0% {\r\n\t\ttransform: scale3d(1, 1, 1);\n}\n30% {\r\n\t\ttransform: scale3d(1.25, 0.75, 1);\n}\n40% {\r\n\t\ttransform: scale3d(0.75, 1.25, 1);\n}\n50% {\r\n\t\ttransform: scale3d(1.15, 0.85, 1);\n}\n65% {\r\n\t\ttransform: scale3d(.95, 1.05, 1);\n}\n75% {\r\n\t\ttransform: scale3d(1.05, .95, 1);\n}\n100% {\r\n\t\ttransform: scale3d(1, 1, 1);\r\n\t\tbackground: transparent;\n}\n}\n#skill {\r\n\tmargin: auto;\r\n\tlist-style: none;\r\n\tposition: relative;\r\n\tline-height: 2em;\n}\n#skill li { \r\n\tbackground:#e9e5e2;\r\n\theight:20px; \r\n\tborder-radius:10px; \t \r\n\tbox-shadow: 0 1px 0px #bebbb9 inset, 0 1px 0 #fcfcfc;\n}\n#skill li h3 { \r\n\tposition:relative; \r\n\ttop:-25px;\n}\n.bar { \r\n\theight:16px; \r\n\tmargin:1px 2px;  \r\n\tposition:absolute;\r\n\tborder-radius:10px;\t \r\n\tbox-shadow: 0 1px 0px #fcfcfc inset, 0 1px 0 #bebbb9;\n}\n.graphic-design {\r\n\twidth:100%; \r\n\tbackground-color: #99CC66;\n}\n#temporizador{\r\n\tdisplay: none;\r\n\tmin-height: 100vh;\r\n\tposition: relative;\n}\n#numero{\r\n\ttop: 40%;\r\n\tleft: 50%;\r\n\tposition: absolute;\r\n\tfont-size:45px;\n}\r\n", ""]);
+exports.push([module.i, "\n.border-right{\r\n\tborder-right: 1px solid #dee2e6 !important;\n}\n#empezando , #empezando2{\r\n\tdisplay: none;\n}\n#vista-primera{\r\n\tdisplay: flex;\n}\n#tabla1{\r\n\tdisplay: none;\n}\n.fixed-table{\r\n\ttable-layout: fixed;\n}\n.th ,.td {\r\n\tword-wrap: break-word;\r\n\ttext-align: center;\r\n\theight: 65px;\r\n\tfont-size: 20px;\r\n\tfont-weight: bold;\r\n\tcursor: pointer;\n}\n.table-bordered {\r\n\tborder: 1px solid #666666;\n}\n.table-bordered th, .table-bordered td {\r\n\tborder: 1px solid #666666;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/schultz.vue?vue&type=style&index=0&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/schultz.vue?vue&type=style&index=0&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/1-schultz.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/1-schultz.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./schultz.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/schultz.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./1-schultz.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/1-schultz.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -1701,10 +1653,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/schultz.vue?vue&type=template&id=47a23306&":
-/*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/schultz.vue?vue&type=template&id=47a23306& ***!
-  \**********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/1-schultz.vue?vue&type=template&id=513c3ae1&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/1-schultz.vue?vue&type=template&id=513c3ae1& ***!
+  \************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1722,53 +1674,89 @@ var render = function() {
         _c("div", { staticClass: "col-md-8 col-sm-12" }, [
           _c("div", { staticClass: "card mb-3" }, [
             _c("div", { staticClass: "card-body" }, [
-              _c("h3", [_vm._v("Schulte")]),
-              _vm._v(" "),
-              _c("h3", [_vm._v("Record")]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "btn btn-primary btn-block",
-                  on: {
-                    click: function($event) {
-                      return _vm.temporizame()
-                    }
-                  }
-                },
-                [_vm._v("Iniciar")]
-              )
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-5" }, [
+                  _c("h3", { staticClass: "text-center" }, [_vm._v("Schulte")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "btn btn-primary btn-block",
+                      on: {
+                        click: function($event) {
+                          return _vm.temporizame()
+                        }
+                      }
+                    },
+                    [_vm._v("Iniciar\n\t\t\t\t\t\t\t\t\t")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-7" },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _vm._l(_vm.maximo, function(max, index) {
+                      return _c("div", [
+                        _c(
+                          "div",
+                          { staticClass: "card-footer row text-left" },
+                          [
+                            _c("h5", { staticClass: "col-md-6 col-12" }, [
+                              _vm._v(_vm._s(max.name))
+                            ]),
+                            _vm._v(" "),
+                            _c("h5", { staticClass: "col-md-6 col-12" }, [
+                              _vm._v(_vm._s(max.pivot.puntuacion))
+                            ])
+                          ]
+                        )
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card mb-3" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("p", [_vm._v("Puntuacion")]),
-              _vm._v(" "),
-              _c("table", { staticClass: "table table-striped" }, [
-                _vm._m(0),
+            _c(
+              "div",
+              { staticClass: "card-body" },
+              [
+                _c("h4", { staticClass: "text-center text-uppercase" }, [
+                  _vm._v("Tus records")
+                ]),
                 _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.recordMundial, function(punt, index) {
-                    return _c("tr", [
-                      _c("th", { attrs: { scope: "row" } }, [
-                        _vm._v(_vm._s(index + 1))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(punt.user_id))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(punt.puntuacion))])
+                _vm._m(1),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _vm._l(_vm.recordMundial, function(punt, index) {
+                  return _c("div", { staticClass: "row text-center" }, [
+                    _c("div", { staticClass: "col-2" }, [
+                      _vm._v(_vm._s(index + 1))
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _vm._v(_vm._s(punt.created_at))
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-4" }, [
+                      _vm._v(_vm._s(punt.puntuacion))
                     ])
-                  }),
-                  0
-                )
-              ])
-            ])
+                  ])
+                })
+              ],
+              2
+            )
           ])
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _vm._m(2)
       ])
     ]),
     _vm._v(" "),
@@ -1777,13 +1765,13 @@ var render = function() {
         _c("h5", [_vm._v("Puntuacion : " + _vm._s(_vm.puntuacion))])
       ]),
       _vm._v(" "),
-      _vm._m(2)
+      _vm._m(3)
     ]),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "col-12 text-center", attrs: { id: "empezando2" } },
-      [_c("h3", [_vm._v("Buscando : " + _vm._s(_vm.buscando))])]
+      [_c("h4", [_vm._v("Buscando : " + _vm._s(_vm.buscando))])]
     ),
     _vm._v(" "),
     _c("div", { attrs: { id: "temporizador" } }, [
@@ -1806,9 +1794,10 @@ var render = function() {
           attrs: { id: "tabla1" }
         },
         [
-          _c("table", { staticClass: "table table-bordered" }, [
+          _c("table", { staticClass: "table table-bordered fixed-table" }, [
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "a1" },
                 on: {
                   click: function($event) {
@@ -1818,6 +1807,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "b1" },
                 on: {
                   click: function($event) {
@@ -1827,6 +1817,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "c1" },
                 on: {
                   click: function($event) {
@@ -1838,6 +1829,7 @@ var render = function() {
             _vm._v(" "),
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "d1" },
                 on: {
                   click: function($event) {
@@ -1847,6 +1839,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "e1" },
                 on: {
                   click: function($event) {
@@ -1856,6 +1849,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "f1" },
                 on: {
                   click: function($event) {
@@ -1867,6 +1861,7 @@ var render = function() {
             _vm._v(" "),
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "g1" },
                 on: {
                   click: function($event) {
@@ -1876,6 +1871,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "h1" },
                 on: {
                   click: function($event) {
@@ -1885,6 +1881,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "i1" },
                 on: {
                   click: function($event) {
@@ -1911,9 +1908,10 @@ var render = function() {
           staticClass: "col-md-8 col-sm-12 m-auto tabla-juego"
         },
         [
-          _c("table", { staticClass: "table table-bordered" }, [
+          _c("table", { staticClass: "table table-bordered fixed-table" }, [
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "a2" },
                 on: {
                   click: function($event) {
@@ -1923,6 +1921,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "b2" },
                 on: {
                   click: function($event) {
@@ -1932,6 +1931,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "c2" },
                 on: {
                   click: function($event) {
@@ -1941,6 +1941,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "d2" },
                 on: {
                   click: function($event) {
@@ -1952,6 +1953,7 @@ var render = function() {
             _vm._v(" "),
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "e2" },
                 on: {
                   click: function($event) {
@@ -1961,6 +1963,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "f2" },
                 on: {
                   click: function($event) {
@@ -1970,6 +1973,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "g2" },
                 on: {
                   click: function($event) {
@@ -1979,6 +1983,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "h2" },
                 on: {
                   click: function($event) {
@@ -1990,6 +1995,7 @@ var render = function() {
             _vm._v(" "),
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "i2" },
                 on: {
                   click: function($event) {
@@ -1999,6 +2005,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "j2" },
                 on: {
                   click: function($event) {
@@ -2008,6 +2015,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "k2" },
                 on: {
                   click: function($event) {
@@ -2017,6 +2025,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "l2" },
                 on: {
                   click: function($event) {
@@ -2028,6 +2037,7 @@ var render = function() {
             _vm._v(" "),
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "m2" },
                 on: {
                   click: function($event) {
@@ -2037,6 +2047,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "n2" },
                 on: {
                   click: function($event) {
@@ -2046,6 +2057,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "o2" },
                 on: {
                   click: function($event) {
@@ -2055,6 +2067,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "p2" },
                 on: {
                   click: function($event) {
@@ -2081,9 +2094,10 @@ var render = function() {
           staticClass: "col-md-8 col-sm-12 m-auto tabla-juego"
         },
         [
-          _c("table", { staticClass: "table table-bordered" }, [
+          _c("table", { staticClass: "table table-bordered fixed-table" }, [
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "a3" },
                 on: {
                   click: function($event) {
@@ -2093,6 +2107,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "b3" },
                 on: {
                   click: function($event) {
@@ -2102,6 +2117,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "c3" },
                 on: {
                   click: function($event) {
@@ -2111,6 +2127,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "d3" },
                 on: {
                   click: function($event) {
@@ -2120,6 +2137,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "e3" },
                 on: {
                   click: function($event) {
@@ -2131,6 +2149,7 @@ var render = function() {
             _vm._v(" "),
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "f3" },
                 on: {
                   click: function($event) {
@@ -2140,6 +2159,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "g3" },
                 on: {
                   click: function($event) {
@@ -2149,6 +2169,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "h3" },
                 on: {
                   click: function($event) {
@@ -2158,6 +2179,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "i3" },
                 on: {
                   click: function($event) {
@@ -2167,6 +2189,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "j3" },
                 on: {
                   click: function($event) {
@@ -2178,6 +2201,7 @@ var render = function() {
             _vm._v(" "),
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "k3" },
                 on: {
                   click: function($event) {
@@ -2187,6 +2211,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "l3" },
                 on: {
                   click: function($event) {
@@ -2196,6 +2221,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "m3" },
                 on: {
                   click: function($event) {
@@ -2205,6 +2231,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "n3" },
                 on: {
                   click: function($event) {
@@ -2214,6 +2241,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "o3" },
                 on: {
                   click: function($event) {
@@ -2225,6 +2253,7 @@ var render = function() {
             _vm._v(" "),
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "p3" },
                 on: {
                   click: function($event) {
@@ -2234,6 +2263,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "q3" },
                 on: {
                   click: function($event) {
@@ -2243,6 +2273,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "r3" },
                 on: {
                   click: function($event) {
@@ -2252,6 +2283,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "s3" },
                 on: {
                   click: function($event) {
@@ -2261,6 +2293,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "t3" },
                 on: {
                   click: function($event) {
@@ -2272,6 +2305,7 @@ var render = function() {
             _vm._v(" "),
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "u3" },
                 on: {
                   click: function($event) {
@@ -2281,6 +2315,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "v3" },
                 on: {
                   click: function($event) {
@@ -2290,6 +2325,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "w3" },
                 on: {
                   click: function($event) {
@@ -2299,6 +2335,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "x3" },
                 on: {
                   click: function($event) {
@@ -2308,6 +2345,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "y3" },
                 on: {
                   click: function($event) {
@@ -2334,9 +2372,10 @@ var render = function() {
           staticClass: "col-md-8 col-sm-12 m-auto tabla-juego"
         },
         [
-          _c("table", { staticClass: "table table-bordered" }, [
+          _c("table", { staticClass: "table table-bordered fixed-table" }, [
             _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "a4" },
                 on: {
                   click: function($event) {
@@ -2346,6 +2385,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "b4" },
                 on: {
                   click: function($event) {
@@ -2355,6 +2395,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "c4" },
                 on: {
                   click: function($event) {
@@ -2364,6 +2405,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "d4" },
                 on: {
                   click: function($event) {
@@ -2373,16 +2415,8 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "e4" },
-                on: {
-                  click: function($event) {
-                    return _vm.press_4($event)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("td", {
-                attrs: { id: "f4" },
                 on: {
                   click: function($event) {
                     return _vm.press_4($event)
@@ -2393,6 +2427,17 @@ var render = function() {
             _vm._v(" "),
             _c("tr", [
               _c("td", {
+                staticClass: "td",
+                attrs: { id: "f4" },
+                on: {
+                  click: function($event) {
+                    return _vm.press_4($event)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                staticClass: "td",
                 attrs: { id: "g4" },
                 on: {
                   click: function($event) {
@@ -2402,6 +2447,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "h4" },
                 on: {
                   click: function($event) {
@@ -2411,6 +2457,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "i4" },
                 on: {
                   click: function($event) {
@@ -2420,15 +2467,19 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "j4" },
                 on: {
                   click: function($event) {
                     return _vm.press_4($event)
                   }
                 }
-              }),
-              _vm._v(" "),
+              })
+            ]),
+            _vm._v(" "),
+            _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "k4" },
                 on: {
                   click: function($event) {
@@ -2438,17 +2489,17 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "l4" },
                 on: {
                   click: function($event) {
                     return _vm.press_4($event)
                   }
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("tr", [
+              }),
+              _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "m4" },
                 on: {
                   click: function($event) {
@@ -2458,6 +2509,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "n4" },
                 on: {
                   click: function($event) {
@@ -2467,15 +2519,19 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "o4" },
                 on: {
                   click: function($event) {
                     return _vm.press_4($event)
                   }
                 }
-              }),
-              _vm._v(" "),
+              })
+            ]),
+            _vm._v(" "),
+            _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "p4" },
                 on: {
                   click: function($event) {
@@ -2485,6 +2541,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "q4" },
                 on: {
                   click: function($event) {
@@ -2494,17 +2551,17 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "r4" },
                 on: {
                   click: function($event) {
                     return _vm.press_4($event)
                   }
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("tr", [
+              }),
+              _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "s4" },
                 on: {
                   click: function($event) {
@@ -2514,15 +2571,19 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "t4" },
                 on: {
                   click: function($event) {
                     return _vm.press_4($event)
                   }
                 }
-              }),
-              _vm._v(" "),
+              })
+            ]),
+            _vm._v(" "),
+            _c("tr", [
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "u4" },
                 on: {
                   click: function($event) {
@@ -2532,6 +2593,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "v4" },
                 on: {
                   click: function($event) {
@@ -2541,6 +2603,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "w4" },
                 on: {
                   click: function($event) {
@@ -2550,7 +2613,18 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "x4" },
+                on: {
+                  click: function($event) {
+                    return _vm.press_4($event)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                staticClass: "td",
+                attrs: { id: "y4" },
                 on: {
                   click: function($event) {
                     return _vm.press_4($event)
@@ -2561,15 +2635,7 @@ var render = function() {
             _vm._v(" "),
             _c("tr", [
               _c("td", {
-                attrs: { id: "y4" },
-                on: {
-                  click: function($event) {
-                    return _vm.press_4($event)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("td", {
+                staticClass: "td",
                 attrs: { id: "z4" },
                 on: {
                   click: function($event) {
@@ -2579,6 +2645,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "za4" },
                 on: {
                   click: function($event) {
@@ -2588,6 +2655,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "zb4" },
                 on: {
                   click: function($event) {
@@ -2597,6 +2665,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "zc4" },
                 on: {
                   click: function($event) {
@@ -2606,63 +2675,8 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("td", {
+                staticClass: "td",
                 attrs: { id: "zd4" },
-                on: {
-                  click: function($event) {
-                    return _vm.press_4($event)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", {
-                attrs: { id: "ze4" },
-                on: {
-                  click: function($event) {
-                    return _vm.press_4($event)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("td", {
-                attrs: { id: "zf4" },
-                on: {
-                  click: function($event) {
-                    return _vm.press_4($event)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("td", {
-                attrs: { id: "zg4" },
-                on: {
-                  click: function($event) {
-                    return _vm.press_4($event)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("td", {
-                attrs: { id: "zh4" },
-                on: {
-                  click: function($event) {
-                    return _vm.press_4($event)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("td", {
-                attrs: { id: "zi4" },
-                on: {
-                  click: function($event) {
-                    return _vm.press_4($event)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("td", {
-                attrs: { id: "zj4" },
                 on: {
                   click: function($event) {
                     return _vm.press_4($event)
@@ -2753,14 +2767,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("usuario")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Puntuacion")])
-      ])
+    return _c("div", { staticClass: "text-center" }, [
+      _c("h5", [_vm._v("Record")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row font-weight-bold text-center" }, [
+      _c("div", { staticClass: "col-2" }, [_vm._v("#")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6" }, [_vm._v("Fecha")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-4" }, [_vm._v("Puntos")])
     ])
   },
   function() {
@@ -2784,6 +2804,17 @@ var staticRenderFns = [
               _vm._v(
                 "Some quick example text to build on the card title and make up the bulk of the card's content."
               )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-left" }, [
+              _c("p", [_c("b", [_vm._v("Tiempo: ")]), _vm._v("60 segundos")]),
+              _vm._v(" "),
+              _c("p", [
+                _c("b", [_vm._v("Correcta: ")]),
+                _vm._v("+2 +3 +4 puntos")
+              ]),
+              _vm._v(" "),
+              _c("p", [_c("b", [_vm._v("Incorrecta: ")]), _vm._v("-2 puntos")])
             ])
           ])
         ])
@@ -2812,18 +2843,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/users/game/schultz.vue":
-/*!*********************************************!*\
-  !*** ./resources/js/users/game/schultz.vue ***!
-  \*********************************************/
+/***/ "./resources/js/users/game/1-schultz.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/users/game/1-schultz.vue ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _schultz_vue_vue_type_template_id_47a23306___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./schultz.vue?vue&type=template&id=47a23306& */ "./resources/js/users/game/schultz.vue?vue&type=template&id=47a23306&");
-/* harmony import */ var _schultz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./schultz.vue?vue&type=script&lang=js& */ "./resources/js/users/game/schultz.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./schultz.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/game/schultz.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _1_schultz_vue_vue_type_template_id_513c3ae1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./1-schultz.vue?vue&type=template&id=513c3ae1& */ "./resources/js/users/game/1-schultz.vue?vue&type=template&id=513c3ae1&");
+/* harmony import */ var _1_schultz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./1-schultz.vue?vue&type=script&lang=js& */ "./resources/js/users/game/1-schultz.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _1_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./1-schultz.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/game/1-schultz.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -2834,9 +2865,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _schultz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _schultz_vue_vue_type_template_id_47a23306___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _schultz_vue_vue_type_template_id_47a23306___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _1_schultz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _1_schultz_vue_vue_type_template_id_513c3ae1___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _1_schultz_vue_vue_type_template_id_513c3ae1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -2846,54 +2877,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/users/game/schultz.vue"
+component.options.__file = "resources/js/users/game/1-schultz.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/users/game/schultz.vue?vue&type=script&lang=js&":
-/*!**********************************************************************!*\
-  !*** ./resources/js/users/game/schultz.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************/
+/***/ "./resources/js/users/game/1-schultz.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/users/game/1-schultz.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_schultz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./schultz.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/schultz.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_schultz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_1_schultz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./1-schultz.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/1-schultz.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_1_schultz_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/users/game/schultz.vue?vue&type=style&index=0&lang=css&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/users/game/schultz.vue?vue&type=style&index=0&lang=css& ***!
-  \******************************************************************************/
+/***/ "./resources/js/users/game/1-schultz.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/users/game/1-schultz.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./schultz.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/schultz.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_1_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./1-schultz.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/1-schultz.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_1_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_1_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_1_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_1_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_1_schultz_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/users/game/schultz.vue?vue&type=template&id=47a23306&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/users/game/schultz.vue?vue&type=template&id=47a23306& ***!
-  \****************************************************************************/
+/***/ "./resources/js/users/game/1-schultz.vue?vue&type=template&id=513c3ae1&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/users/game/1-schultz.vue?vue&type=template&id=513c3ae1& ***!
+  \******************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_schultz_vue_vue_type_template_id_47a23306___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./schultz.vue?vue&type=template&id=47a23306& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/schultz.vue?vue&type=template&id=47a23306&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_schultz_vue_vue_type_template_id_47a23306___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_1_schultz_vue_vue_type_template_id_513c3ae1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./1-schultz.vue?vue&type=template&id=513c3ae1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/1-schultz.vue?vue&type=template&id=513c3ae1&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_1_schultz_vue_vue_type_template_id_513c3ae1___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_schultz_vue_vue_type_template_id_47a23306___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_1_schultz_vue_vue_type_template_id_513c3ae1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

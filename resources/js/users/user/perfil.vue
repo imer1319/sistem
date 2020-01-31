@@ -53,8 +53,8 @@
 							</div>
 							<div class="col-sm-4 border-right">
 								<div class="description-block">
-									<h5 class="description-header">{{ usuario.email }}</h5>
-									<span class="description-text">CORREO</span>
+									<h5 class="description-header">{{ usuario.puntos }}</h5>
+									<span class="description-text">Puntuacion</span>
 								</div>
 							</div>
 							<div class="col-sm-4">

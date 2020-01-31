@@ -8,6 +8,7 @@ use App\Rango;
 use App\SaveGame;
 use App\Insignia;
 use App\Ejercicio;
+use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -91,7 +92,6 @@ class UserController extends Controller
         ],200);
         return $usuario;
     }
-    // game ejercicios
     public function game(Request $request)
     {
         return view('home');
@@ -112,24 +112,45 @@ class UserController extends Controller
     public function rankingGame(Request $request, $id)
     {
         if($request->ajax()){
-            $suma = DB::table('ejercicio_user')
+            $user = auth()->user()->id;
+            $usuario = DB::table('ejercicio_user')
+            ->where('user_id','=',$user)
+            ->where('ejercicio_id','=',$id)
             ->orderBy('puntuacion', 'desc')
             ->limit(3)
             ->get();
-            return $suma;
+            return $usuario;
         }
         return view('home');
     }
-    public function rankingMundial(Request $request)
+    public function maxGame(Request $request, $id)
     {
         if($request->ajax()){
-            $pool = User::select('name','puntos','avatar','curso')
-            ->orderBy('puntos','desc')
-            ->limit(5)
-            ->get();
-            return $pool;
-        }
-        return view('home');
+            $max = DB::table('ejercicio_user')
+            ->where('ejercicio_id','=',$id)
+            ->max('puntuacion');
+           $ejercicio = Ejercicio::find($id);
+           return $ejercicio->usuarios()->where('puntuacion','=',$max)->get();
+       }
+       return view('home');
+   }
+   public function rankingMundial(Request $request)
+   {
+    if($request->ajax()){
+       $rol = Role::find(2);
+       return $rol->users()
+       ->orderby('puntos','desc')
+       ->get();
+   }
+   return view('home');
+}
+public function miIdAuth(Request $request)
+{
+    if($request->ajax()){
+        $user = auth()->user()->id;
+        return $user;
     }
+    return view('home');
+}
 
 }

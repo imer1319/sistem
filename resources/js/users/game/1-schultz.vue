@@ -5,30 +5,38 @@
 				<div class="col-md-8 col-sm-12">
 					<div class="card mb-3">
 						<div class="card-body">
-							<h3>Schulte</h3>
-							<h3>Record</h3>
-							<div class="btn btn-primary btn-block" @click="temporizame()">Iniciar</div>
+							<div class="row">
+								<div class="col-5">
+									<h3 class="text-center">Schulte</h3>
+									<div class="btn btn-primary btn-block" @click="temporizame()">Iniciar
+									</div>
+								</div>
+								<div class="col-7">
+									<div class="text-center"><h5>Record</h5></div>
+									<div v-for="(max, index) in maximo">
+										<div class="card-footer row text-left">
+											<h5 class="col-md-6 col-12">{{ max.name }}</h5>
+											<h5 class="col-md-6 col-12">{{ max.pivot.puntuacion }}</h5>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="card mb-3">
 						<div class="card-body">
-							<p>Puntuacion</p>
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th scope="col">#</th>
-										<th scope="col">usuario</th>
-										<th scope="col">Puntuacion</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr v-for="(punt, index) in recordMundial">
-										<th scope="row">{{ index+1 }}</th>
-										<td>{{ punt.user_id }}</td>
-										<td>{{ punt.puntuacion }}</td>
-									</tr>
-								</tbody>
-							</table>
+							<h4 class="text-center text-uppercase">Tus records</h4>
+							<div class="row font-weight-bold text-center">
+								<div class="col-2">#</div>
+								<div class="col-6">Fecha</div>
+								<div class="col-4">Puntos</div>
+							</div>
+							<hr>
+							<div class="row text-center" v-for="(punt, index) in recordMundial">
+								<div class="col-2">{{ index+1 }}</div>
+								<div class="col-6">{{ punt.created_at }}</div>
+								<div class="col-4">{{ punt.puntuacion }}</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -39,6 +47,11 @@
 							style="filter: drop-shadow(5px 5px 10px #444); width: 80%;">
 							<div class="card-body">
 								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<div class="text-left">
+									<p><b>Tiempo: </b>60 segundos</p>
+									<p><b>Correcta: </b>+2 +3 +4 puntos</p>
+									<p><b>Incorrecta: </b>-2 puntos</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -58,147 +71,141 @@
 			</div>
 		</div>
 		<div class="col-12 text-center" id="empezando2">
-			<h3>Buscando : {{ buscando }}</h3>
+			<h4>Buscando : {{ buscando }}</h4>
 		</div>
 		<div id="temporizador">
 			<div id="numero">{{ contador }}</div>
 		</div>
 		<div class="row">
 			<div v-show="pasos == 1" class="col-md-8 col-sm-12 m-auto tabla-juego" id="tabla1">
-				<table class="table table-bordered">
+				<table class="table table-bordered fixed-table">
 					<tr>
-						<td @click="press_1($event)" id="a1"></td>
-						<td @click="press_1($event)" id="b1"></td>
-						<td @click="press_1($event)" id="c1"></td>
+						<td class="td" @click="press_1($event)" id="a1"></td>
+						<td class="td" @click="press_1($event)" id="b1"></td>
+						<td class="td" @click="press_1($event)" id="c1"></td>
 					</tr>
 					<tr>
-						<td @click="press_1($event)" id="d1"></td>
-						<td @click="press_1($event)" id="e1"></td>
-						<td @click="press_1($event)" id="f1"></td>
+						<td class="td" @click="press_1($event)" id="d1"></td>
+						<td class="td" @click="press_1($event)" id="e1"></td>
+						<td class="td" @click="press_1($event)" id="f1"></td>
 					</tr>
 					<tr>
-						<td @click="press_1($event)" id="g1"></td>
-						<td @click="press_1($event)" id="h1"></td>
-						<td @click="press_1($event)" id="i1"></td>
+						<td class="td" @click="press_1($event)" id="g1"></td>
+						<td class="td" @click="press_1($event)" id="h1"></td>
+						<td class="td" @click="press_1($event)" id="i1"></td>
 					</tr>
 				</table>
 			</div>
 			<div v-show="pasos == 2 "class="col-md-8 col-sm-12 m-auto tabla-juego">
-				<table class="table table-bordered">
+				<table class="table table-bordered fixed-table">
 					<tr>
-						<td @click="press_2($event)" id="a2"></td>
-						<td @click="press_2($event)" id="b2"></td>
-						<td @click="press_2($event)" id="c2"></td>
-						<td @click="press_2($event)" id="d2"></td>
+						<td class="td" @click="press_2($event)" id="a2"></td>
+						<td class="td" @click="press_2($event)" id="b2"></td>
+						<td class="td" @click="press_2($event)" id="c2"></td>
+						<td class="td" @click="press_2($event)" id="d2"></td>
 					</tr>
 					<tr>
-						<td @click="press_2($event)" id="e2"></td>
-						<td @click="press_2($event)" id="f2"></td>
-						<td @click="press_2($event)" id="g2"></td>
-						<td @click="press_2($event)" id="h2"></td>
+						<td class="td" @click="press_2($event)" id="e2"></td>
+						<td class="td" @click="press_2($event)" id="f2"></td>
+						<td class="td" @click="press_2($event)" id="g2"></td>
+						<td class="td" @click="press_2($event)" id="h2"></td>
 					</tr>
 					<tr>
-						<td @click="press_2($event)" id="i2"></td>
-						<td @click="press_2($event)" id="j2"></td>
-						<td @click="press_2($event)" id="k2"></td>
-						<td @click="press_2($event)" id="l2"></td>
+						<td class="td" @click="press_2($event)" id="i2"></td>
+						<td class="td" @click="press_2($event)" id="j2"></td>
+						<td class="td" @click="press_2($event)" id="k2"></td>
+						<td class="td" @click="press_2($event)" id="l2"></td>
 					</tr>
 					<tr>
-						<td @click="press_2($event)" id="m2"></td>
-						<td @click="press_2($event)" id="n2"></td>
-						<td @click="press_2($event)" id="o2"></td>
-						<td @click="press_2($event)" id="p2"></td>
+						<td class="td" @click="press_2($event)" id="m2"></td>
+						<td class="td" @click="press_2($event)" id="n2"></td>
+						<td class="td" @click="press_2($event)" id="o2"></td>
+						<td class="td" @click="press_2($event)" id="p2"></td>
 					</tr>
 				</table>
 			</div>
 			<div v-show="pasos == 3" class="col-md-8 col-sm-12 m-auto tabla-juego">
-				<table class="table table-bordered">
+				<table class="table table-bordered fixed-table">
 					<tr>
-						<td @click="press_3($event)" id="a3"></td>
-						<td @click="press_3($event)" id="b3"></td>
-						<td @click="press_3($event)" id="c3"></td>
-						<td @click="press_3($event)" id="d3"></td>
-						<td @click="press_3($event)" id="e3"></td>
+						<td class="td" @click="press_3($event)" id="a3"></td>
+						<td class="td" @click="press_3($event)" id="b3"></td>
+						<td class="td" @click="press_3($event)" id="c3"></td>
+						<td class="td" @click="press_3($event)" id="d3"></td>
+						<td class="td" @click="press_3($event)" id="e3"></td>
 					</tr>
 					<tr>
-						<td @click="press_3($event)" id="f3"></td>
-						<td @click="press_3($event)" id="g3"></td>
-						<td @click="press_3($event)" id="h3"></td>
-						<td @click="press_3($event)" id="i3"></td>
-						<td @click="press_3($event)" id="j3"></td>
+						<td class="td" @click="press_3($event)" id="f3"></td>
+						<td class="td" @click="press_3($event)" id="g3"></td>
+						<td class="td" @click="press_3($event)" id="h3"></td>
+						<td class="td" @click="press_3($event)" id="i3"></td>
+						<td class="td" @click="press_3($event)" id="j3"></td>
 					</tr>
 					<tr>
-						<td @click="press_3($event)" id="k3"></td>
-						<td @click="press_3($event)" id="l3"></td>
-						<td @click="press_3($event)" id="m3"></td>
-						<td @click="press_3($event)" id="n3"></td>
-						<td @click="press_3($event)" id="o3"></td>
+						<td class="td" @click="press_3($event)" id="k3"></td>
+						<td class="td" @click="press_3($event)" id="l3"></td>
+						<td class="td" @click="press_3($event)" id="m3"></td>
+						<td class="td" @click="press_3($event)" id="n3"></td>
+						<td class="td" @click="press_3($event)" id="o3"></td>
 					</tr>
 					<tr>
-						<td @click="press_3($event)" id="p3"></td>
-						<td @click="press_3($event)" id="q3"></td>
-						<td @click="press_3($event)" id="r3"></td>
-						<td @click="press_3($event)" id="s3"></td>
-						<td @click="press_3($event)" id="t3"></td>
+						<td class="td" @click="press_3($event)" id="p3"></td>
+						<td class="td" @click="press_3($event)" id="q3"></td>
+						<td class="td" @click="press_3($event)" id="r3"></td>
+						<td class="td" @click="press_3($event)" id="s3"></td>
+						<td class="td" @click="press_3($event)" id="t3"></td>
 					</tr>
 					<tr>
-						<td @click="press_3($event)" id="u3"></td>
-						<td @click="press_3($event)" id="v3"></td>
-						<td @click="press_3($event)" id="w3"></td>
-						<td @click="press_3($event)" id="x3"></td>
-						<td @click="press_3($event)" id="y3"></td>
+						<td class="td" @click="press_3($event)" id="u3"></td>
+						<td class="td" @click="press_3($event)" id="v3"></td>
+						<td class="td" @click="press_3($event)" id="w3"></td>
+						<td class="td" @click="press_3($event)" id="x3"></td>
+						<td class="td" @click="press_3($event)" id="y3"></td>
 					</tr>
 				</table>
 			</div>
 			<div v-show="pasos == 4" class="col-md-8 col-sm-12 m-auto tabla-juego">
-				<table class="table table-bordered">
+				<table class="table table-bordered fixed-table">
 					<tr>
-						<td @click="press_4($event)" id="a4"></td>
-						<td @click="press_4($event)" id="b4"></td>
-						<td @click="press_4($event)" id="c4"></td>
-						<td @click="press_4($event)" id="d4"></td>
-						<td @click="press_4($event)" id="e4"></td>
-						<td @click="press_4($event)" id="f4"></td>
+						<td class="td" @click="press_4($event)" id="a4"></td>
+						<td class="td" @click="press_4($event)" id="b4"></td>
+						<td class="td" @click="press_4($event)" id="c4"></td>
+						<td class="td" @click="press_4($event)" id="d4"></td>
+						<td class="td" @click="press_4($event)" id="e4"></td>
 					</tr>
 					<tr>
-						<td @click="press_4($event)" id="g4"></td>
-						<td @click="press_4($event)" id="h4"></td>
-						<td @click="press_4($event)" id="i4"></td>
-						<td @click="press_4($event)" id="j4"></td>
-						<td @click="press_4($event)" id="k4"></td>
-						<td @click="press_4($event)" id="l4"></td>
+						<td class="td" @click="press_4($event)" id="f4"></td>
+						<td class="td" @click="press_4($event)" id="g4"></td>
+						<td class="td" @click="press_4($event)" id="h4"></td>
+						<td class="td" @click="press_4($event)" id="i4"></td>
+						<td class="td" @click="press_4($event)" id="j4"></td>
 					</tr>
 					<tr>
-						<td @click="press_4($event)" id="m4"></td>
-						<td @click="press_4($event)" id="n4"></td>
-						<td @click="press_4($event)" id="o4"></td>
-						<td @click="press_4($event)" id="p4"></td>
-						<td @click="press_4($event)" id="q4"></td>
-						<td @click="press_4($event)" id="r4"></td>
+						<td class="td" @click="press_4($event)" id="k4"></td>
+						<td class="td" @click="press_4($event)" id="l4"></td>
+						<td class="td" @click="press_4($event)" id="m4"></td>
+						<td class="td" @click="press_4($event)" id="n4"></td>
+						<td class="td" @click="press_4($event)" id="o4"></td>
 					</tr>
 					<tr>
-						<td @click="press_4($event)" id="s4"></td>
-						<td @click="press_4($event)" id="t4"></td>
-						<td @click="press_4($event)" id="u4"></td>
-						<td @click="press_4($event)" id="v4"></td>
-						<td @click="press_4($event)" id="w4"></td>
-						<td @click="press_4($event)" id="x4"></td>
+						<td class="td" @click="press_4($event)" id="p4"></td>
+						<td class="td" @click="press_4($event)" id="q4"></td>
+						<td class="td" @click="press_4($event)" id="r4"></td>
+						<td class="td" @click="press_4($event)" id="s4"></td>
+						<td class="td" @click="press_4($event)" id="t4"></td>
 					</tr>
 					<tr>
-						<td @click="press_4($event)" id="y4"></td>
-						<td @click="press_4($event)" id="z4"></td>
-						<td @click="press_4($event)" id="za4"></td>
-						<td @click="press_4($event)" id="zb4"></td>
-						<td @click="press_4($event)" id="zc4"></td>
-						<td @click="press_4($event)" id="zd4"></td>
+						<td class="td" @click="press_4($event)" id="u4"></td>
+						<td class="td" @click="press_4($event)" id="v4"></td>
+						<td class="td" @click="press_4($event)" id="w4"></td>
+						<td class="td" @click="press_4($event)" id="x4"></td>
+						<td class="td" @click="press_4($event)" id="y4"></td>
 					</tr>
 					<tr>
-						<td @click="press_4($event)" id="ze4"></td>
-						<td @click="press_4($event)" id="zf4"></td>
-						<td @click="press_4($event)" id="zg4"></td>
-						<td @click="press_4($event)" id="zh4"></td>
-						<td @click="press_4($event)" id="zi4"></td>
-						<td @click="press_4($event)" id="zj4"></td>
+						<td class="td" @click="press_4($event)" id="z4"></td>
+						<td class="td" @click="press_4($event)" id="za4"></td>
+						<td class="td" @click="press_4($event)" id="zb4"></td>
+						<td class="td" @click="press_4($event)" id="zc4"></td>
+						<td class="td" @click="press_4($event)" id="zd4"></td>
 					</tr>
 				</table>
 			</div>
@@ -224,6 +231,8 @@
 		created:function() {
 			this.obtenerDatosUsuario()
 			this.mostrarPuntuacion()
+			this.maximoGame()
+			this.showUser()
 		},
 		data(){
 			return{
@@ -231,12 +240,12 @@
 				nivel2:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
 				nivel3:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
 				nivel4:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,
-				26,27,28,29,30,31,32,33,34,35,36],
+				26,27,28,29,30],
 				desordenar:[],
 				ids1: ["a1","b1","c1","d1","e1","f1","g1","h1","i1"],
 				ids2: ["a2","b2","c2","d2","e2","f2","g2","h2","i2","j2","k2","l2","m2","n2","o2","p2"],
 				ids3: ["a3","b3","c3","d3","e3","f3","g3","h3","i3","j3","k3","l3","m3","n3","o3","p3","q3","r3","s3","t3","u3","v3","w3","x3","y3"],
-				ids4: ["a4","b4","c4","d4","e4","f4","g4","h4","i4","j4","k4","l4","m4","n4","o4","p4","q4","r4","s4","t4","u4","v4","w4","x4","y4","z4","za4","zb4","zc4","zd4","ze4","zf4","zg4","zh4","zi4","zj4"],
+				ids4: ["a4","b4","c4","d4","e4","f4","g4","h4","i4","j4","k4","l4","m4","n4","o4","p4","q4","r4","s4","t4","u4","v4","w4","x4","y4","z4","za4","zb4","zc4","zd4"],
 				actual:0,
 				buscando:1,
 				pasos:1,
@@ -246,25 +255,47 @@
 				colores:["#0033CC","#FF6666","#669933","#FFCC33"],
 				miTemporizador:0,
 				contador:3,
-				user:{},
+				user:null,
 				guardarEjercicio:{user_id:'',ejercicio_id:'',puntos:''},
-				recordMundial:[]
+				recordMundial:[],
+				maximo:{},
+				usuario:{}
 			}
 		},
 		methods:{
+			showUser(){
+				var url ="/profile"
+				axios.get(url).then(res =>{
+					this.usuario = res.data
+				})
+			},
+			actualizarDatosUsuario(){
+				let data = new FormData();
+				data.append('puntos', this.usuario.puntos + this.puntuacion/15);
+				data.append('_method','PUT');
+				var url = `/profile/${this.usuario.id}`
+				axios.post(url, data).then(res=>{
+
+				})
+			},
+			maximoGame(){
+				axios.get("maxGame/"+1).then(res =>{
+					this.maximo = res.data
+				})
+			},
 			mostrarPuntuacion(){
 				axios.get("/puntuacion/"+1).then(res =>{
 					this.recordMundial = res.data
 				})
 			},
 			obtenerDatosUsuario(){
-				axios.get("/profile").then(res =>{
+				axios.get("/miID").then(res =>{
 					this.user = res.data
 				})
 			},
 			guardarResultado(){
 				this.guardarEjercicio.ejercicio_id = 1
-				this.guardarEjercicio.user_id = this.user.id
+				this.guardarEjercicio.user_id = this.user
 				this.guardarEjercicio.puntos = this.puntuacion
 
 				let formData = new FormData()
@@ -277,6 +308,7 @@
 					this.guardarEjercicio.ejercicio_id = ""
 					this.guardarEjercicio.user_id = ""
 					this.guardarEjercicio.puntos = ""
+					this.actualizarDatosUsuario()
 					this.puntuacion = 0
 					this.pasos = 6
 				})
@@ -309,7 +341,7 @@
 				}else if (this.tiempo<10) {
 					elem.style.background = "#FF6666"
 				}
-				if(this.tiempo < 0 || this.buscando == 37){
+				if(this.tiempo < 0 || this.buscando == 31){
 					this.finCronometro()
 					this.pasos = 5
 					this.tiempo = 0
@@ -701,30 +733,6 @@
 					var zd = document.getElementById("zd4");
 					if (this.nivel4[this.actual+29]==this.buscando){zd.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);}else{this.error_Encontrado(zd);}
 					break;
-					case "ze4":
-					var ze = document.getElementById("ze4");
-					if (this.nivel4[this.actual+30]==this.buscando){ze.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);}else{this.error_Encontrado(ze);}
-					break;
-					case "zf4":
-					var zf = document.getElementById("zf4");
-					if (this.nivel4[this.actual+31]==this.buscando){zf.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);}else{this.error_Encontrado(zf);}
-					break;
-					case "zg4":
-					var zg = document.getElementById("zg4");
-					if (this.nivel4[this.actual+32]==this.buscando){zg.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);}else{this.error_Encontrado(zg);}
-					break;
-					case "zh4":
-					var zh = document.getElementById("zh4");
-					if (this.nivel4[this.actual+33]==this.buscando){zh.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);}else{this.error_Encontrado(zh);}
-					break;
-					case "zi4":
-					var zi = document.getElementById("zi4");
-					if (this.nivel4[this.actual+34]==this.buscando){zi.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);}else{this.error_Encontrado(zi);}
-					break;
-					case "zj4":
-					var zj = document.getElementById("zj4");
-					if (this.nivel4[this.actual+35]==this.buscando){zj.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);}else{this.error_Encontrado(zj);}
-					break;
 				}
 			},
 			esUltimo(numero){
@@ -747,7 +755,7 @@
 						this.mostrar4()
 					}
 				}else if(this.pasos == 4){
-					if (this.buscando == 37) {
+					if (this.buscando == 31) {
 						this.pasos = 5
 					}
 				}
@@ -759,6 +767,9 @@
 	}
 </script>
 <style>
+.border-right{
+	border-right: 1px solid #dee2e6 !important;
+}
 #empezando , #empezando2{
 	display: none;
 }
@@ -768,134 +779,21 @@
 #tabla1{
 	display: none;
 }
-.tabla-juego >table{
+.fixed-table{
 	table-layout: fixed;
 }
-.tabla-juego >th,.tabla-juego >td {
+.th ,.td {
 	word-wrap: break-word;
 	text-align: center;
 	height: 65px;
-	font-size: 25px;
+	font-size: 20px;
 	font-weight: bold;
+	cursor: pointer;
 }
 .table-bordered {
 	border: 1px solid #666666;
 }
 .table-bordered th, .table-bordered td {
 	border: 1px solid #666666;
-}
-.rubberBand {
-	background: #FE789D;
-	-webkit-animation-name: rubberBand;
-	animation-name: rubberBand;
-	-webkit-animation-duration: 1s;
-	animation-duration: 1s;
-	-webkit-animation-fill-mode: both;
-	animation-fill-mode: both;
-	--webkit-animation-timing-function: linear;
-	animation-timing-function: linear;
-}
-@-webkit-keyframes rubberBand {
-	0% {
-		-webkit-transform: scale3d(1, 1, 1);
-		transform: scale3d(1, 1, 1);
-	}
-	30% {
-		-webkit-transform: scale3d(1.25, 0.75, 1);
-		transform: scale3d(1.25, 0.75, 1);
-	}
-	40% {
-		-webkit-transform: scale3d(0.75, 1.25, 1);
-		transform: scale3d(0.75, 1.25, 1);
-	}
-	50% {
-		-webkit-transform: scale3d(1.15, 0.85, 1);
-		transform: scale3d(1.15, 0.85, 1);
-	}
-	65% {
-		-webkit-transform: scale3d(.95, 1.05, 1);
-		transform: scale3d(.95, 1.05, 1);
-	}
-	75% {
-		-webkit-transform: scale3d(1.05, .95, 1);
-		transform: scale3d(1.05, .95, 1);
-	}
-	100% {
-		-webkit-transform: scale3d(1, 1, 1);
-		transform: scale3d(1, 1, 1);
-	}
-}
-@keyframes rubberBand {
-	0% {
-		-webkit-transform: scale3d(1, 1, 1);
-		transform: scale3d(1, 1, 1);
-	}
-	30% {
-		-webkit-transform: scale3d(1.25, 0.75, 1);
-		transform: scale3d(1.25, 0.75, 1);
-	}
-	40% {
-		-webkit-transform: scale3d(0.75, 1.25, 1);
-		transform: scale3d(0.75, 1.25, 1);
-	}
-	50% {
-		-webkit-transform: scale3d(1.15, 0.85, 1);
-		transform: scale3d(1.15, 0.85, 1);
-	}
-	65% {
-		-webkit-transform: scale3d(.95, 1.05, 1);
-		transform: scale3d(.95, 1.05, 1);
-	}
-	75% {
-		-webkit-transform: scale3d(1.05, .95, 1);
-		transform: scale3d(1.05, .95, 1);
-	}
-	100% {
-		-webkit-transform: scale3d(1, 1, 1);
-		transform: scale3d(1, 1, 1);
-		background: transparent;
-	}
-}
-#skill {
-	margin: auto;
-	list-style: none;
-	position: relative;
-	line-height: 2em;
-}
-
-#skill li { 
-	background:#e9e5e2;
-	height:20px; 
-	border-radius:10px; 	 
-	box-shadow: 0 1px 0px #bebbb9 inset, 0 1px 0 #fcfcfc;
-}
-
-#skill li h3 { 
-	position:relative; 
-	top:-25px;
-}
-
-.bar { 
-	height:16px; 
-	margin:1px 2px;  
-	position:absolute;
-	border-radius:10px;	 
-	box-shadow: 0 1px 0px #fcfcfc inset, 0 1px 0 #bebbb9;		
-}
-
-.graphic-design {
-	width:100%; 
-	background-color: #99CC66;
-}
-#temporizador{
-	display: none;
-	min-height: 100vh;
-	position: relative;
-}
-#numero{
-	top: 40%;
-	left: 50%;
-	position: absolute;
-	font-size:45px;
 }
 </style>

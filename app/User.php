@@ -3,6 +3,7 @@
 namespace App;
 use App\Role;
 use App\Insignia;
+use App\Ejercicio;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,6 +15,12 @@ class User extends Authenticatable
     public function insignias()
     {
         return $this->belongsToMany(Insignia::class)
+        ->withTimestamps();
+    }
+
+    public function ejercicios()
+    {
+        return $this->belongsToMany(Ejercicio::class)
         ->withTimestamps();
     }
 

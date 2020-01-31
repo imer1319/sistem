@@ -18,27 +18,27 @@
     </div>
 </template>
 <script>
- export default{
-  name:'exam',
-  created:function() {
-    this.mostrarExamen();
-},
-data() {
-    return { 
-        examens: [],
-        examen: {name: '',content:'', icon:''},
-        loading:true,
-    }
-},
-methods:{
-    mostrarExamen:function(){
-        axios.get('exam').then(res =>{
-            this.examens = res.data
-            this.loading = false;
-        })
+   export default{
+      name:'exam',
+      created:function() {
+        this.mostrarExamen();
     },
+    data() {
+        return { 
+            examens: [],
+            examen: {name: '',content:'', icon:''},
+            loading:true,
+        }
+    },
+    methods:{
+        mostrarExamen:function(){
+            axios.get('exam').then(res =>{
+                this.examens = res.data
+                this.loading = false;
+            })
+        },
 
-}
+    }
 }
 </script>
 <style>
