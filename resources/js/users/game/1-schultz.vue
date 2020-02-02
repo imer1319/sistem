@@ -44,7 +44,7 @@
 					<div class="card">
 						<div class="text-center">
 							<img src="/imagenes/libro.png" class="card-img-top mx-auto my-3" 
-							style="filter: drop-shadow(5px 5px 10px #444); width: 80%;">
+							style="filter: drop-shadow(5px 5px 10px #444); width: 50%;">
 							<div class="card-body">
 								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 								<div class="text-left">
@@ -77,7 +77,7 @@
 			<div id="numero">{{ contador }}</div>
 		</div>
 		<div class="row">
-			<div v-show="pasos == 1" class="col-md-8 col-sm-12 m-auto tabla-juego" id="tabla1">
+			<div v-show="pasos == 1" class="col-md-8 col-sm-12 m-auto" id="tabla1">
 				<table class="table table-bordered fixed-table">
 					<tr>
 						<td class="td" @click="press_1($event)" id="a1"></td>
@@ -96,7 +96,7 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 2 "class="col-md-8 col-sm-12 m-auto tabla-juego">
+			<div v-show="pasos == 2 "class="col-md-8 col-sm-12 m-auto">
 				<table class="table table-bordered fixed-table">
 					<tr>
 						<td class="td" @click="press_2($event)" id="a2"></td>
@@ -124,7 +124,7 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 3" class="col-md-8 col-sm-12 m-auto tabla-juego">
+			<div v-show="pasos == 3" class="col-md-8 col-sm-12 m-auto">
 				<table class="table table-bordered fixed-table">
 					<tr>
 						<td class="td" @click="press_3($event)" id="a3"></td>
@@ -163,7 +163,7 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 4" class="col-md-8 col-sm-12 m-auto tabla-juego">
+			<div v-show="pasos == 4" class="col-md-8 col-sm-12 m-auto">
 				<table class="table table-bordered fixed-table">
 					<tr>
 						<td class="td" @click="press_4($event)" id="a4"></td>
@@ -209,18 +209,29 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 5" class="col-md-8 col-sm-12 m-auto tabla-juego">
-				<div class="col-8 m-auto">
-					<form v-on:submit.prevent="guardarResultado">
-						<h3 class="text-uppercase">se acabo el tiempo</h3>
-						<img src="imagenes/tiempoterminado.jpg" alt="">
-						<input type="submit"value="Ver resultados" class="btn btn-primary btn-block">
-					</form>
+			<div v-show="pasos == 5" class="col-md-8 col-sm-12 m-auto">
+				<div class="card">
+					<div class="card-body">
+						<div class="col-8 m-auto text-center">
+							<form v-on:submit.prevent="guardarResultado">
+								<h3 class="text-uppercase">Se acabo el tiempo</h3>
+								<img src="imagenes/relogarena.png" alt="" width="60%">
+								<input type="submit"value="Ver resultados" class="btn btn-primary btn-block btn-lg">
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div v-show="pasos == 6" class="col-md-8 col-sm-12 m-auto">
-				<h3>estos son los resultados</h3>
-				<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block"> Ir al Inicio</router-link>
+				<div class="card animated bounceInRight">
+					<div class="card-body">
+						<h3 class="text-center">estos son los resultados</h3><hr>
+						<h4>tiempo : 00:00</h4><hr>
+						<h4>Puntuacion: {{ puntuacion }}</h4><hr>
+						<h4>Aumento: <b>+</b> {{ puntuacion/15 }}</h4><hr>
+						<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block"> Ir al Inicio</router-link>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -309,7 +320,6 @@
 					this.guardarEjercicio.user_id = ""
 					this.guardarEjercicio.puntos = ""
 					this.actualizarDatosUsuario()
-					this.puntuacion = 0
 					this.pasos = 6
 				})
 			},

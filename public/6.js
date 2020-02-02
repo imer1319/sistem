@@ -1,14 +1,26 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/3-buscar-numero.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/3-buscar-numero.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -162,7 +174,7 @@ __webpack_require__.r(__webpack_exports__);
       maximoPunto: [],
       misRecords: [],
       desordenar: [],
-      palabras: ['2336', '2077', '1985', '3797', '9693', '3566', '7852', '6802', '4740', ' 9952', '5495', '5342', '7735', '5807', '3320', '9344', '9657', '3091', '5163', '2638', '1085', '6323', '8944', '9734'],
+      palabras: ['Sensación', 'Ganado', 'Socorro', 'Lobotomía', 'Corazón', 'Cadera', 'Red', 'Patinar', 'Vegetal', 'Negativo', 'Arreglar', 'Erosión', 'Elástico', 'Campera', 'Preciosa', 'Pantera', 'Grabador', 'Galleta', 'Olvidarse', 'Actor', 'Hormonas', 'Pozo', 'Naranja', 'Derecha'],
       ids: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x'],
       buscar: null,
       puntuacion: 0,
@@ -176,14 +188,14 @@ __webpack_require__.r(__webpack_exports__);
     maximaPuntuacion: function maximaPuntuacion() {
       var _this = this;
 
-      axios.get("maxGame/" + 3).then(function (res) {
+      axios.get("maxGame/" + 2).then(function (res) {
         _this.maximoPunto = res.data;
       });
     },
     misPuntuaciones: function misPuntuaciones() {
       var _this2 = this;
 
-      axios.get("/puntuacion/" + 3).then(function (res) {
+      axios.get("/puntuacion/" + 2).then(function (res) {
         _this2.misRecords = res.data;
       });
     },
@@ -198,7 +210,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       var formData = new FormData();
-      formData.append('ejercicio_id', 3);
+      formData.append('ejercicio_id', 2);
       formData.append('user_id', this.perfil_usuario.id);
       formData.append('puntuacion', this.puntuacion);
       axios.post('/game', formData).then(function (res) {
@@ -210,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     actualizar_datos_usuario: function actualizar_datos_usuario() {
       var data = new FormData();
-      data.append('puntos', this.perfil_usuario.puntos + this.puntuacion / 15);
+      data.append('puntos', this.perfil_usuario.puntos + this.puntuacion / 3);
       data.append('_method', 'PUT');
       var url = "/profile/".concat(this.perfil_usuario.id);
       axios.post(url, data).then(function (res) {});
@@ -600,10 +612,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/3-buscar-numero.vue?vue&type=style&index=0&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/3-buscar-numero.vue?vue&type=style&index=0&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -619,15 +631,15 @@ exports.push([module.i, "\n#primera-vista{\r\n\tdisplay: flex;\n}\n#segunda-vist
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/3-buscar-numero.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/3-buscar-numero.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./3-buscar-numero.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/3-buscar-numero.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./2-buscaPalabra.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -649,10 +661,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/3-buscar-numero.vue?vue&type=template&id=232246a3&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/3-buscar-numero.vue?vue&type=template&id=232246a3& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0& ***!
+  \*****************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -672,7 +684,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-5" }, [
                 _c("h4", { staticClass: "text-center" }, [
-                  _vm._v("Busca numeros")
+                  _vm._v("Busca la palabra")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -1016,54 +1028,93 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row", attrs: { id: "tercera-vista" } }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("div", { staticClass: "col-8 m-auto" }, [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.guardarJuego($event)
-                }
-              }
-            },
-            [
-              _c("h3", { staticClass: "text-uppercase" }, [
-                _vm._v("se acabo el tiempo")
-              ]),
-              _vm._v(" "),
-              _c("img", {
-                attrs: { src: "imagenes/tiempoterminado.jpg", alt: "" }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "btn btn-primary btn-block",
-                attrs: { type: "submit", value: "Ver resultados" }
-              })
-            ]
-          )
+    _c(
+      "div",
+      {
+        staticClass: "col-md-8 col-sm-12 m-auto",
+        attrs: { id: "tercera-vista" }
+      },
+      [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "col-8 m-auto text-center" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.guardarJuego($event)
+                    }
+                  }
+                },
+                [
+                  _c("h3", { staticClass: "text-uppercase" }, [
+                    _vm._v("Se acabo el tiempo")
+                  ]),
+                  _vm._v(" "),
+                  _c("img", {
+                    attrs: {
+                      src: "imagenes/relogarena.png",
+                      alt: "",
+                      width: "60%"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "btn btn-primary btn-block btn-lg",
+                    attrs: { type: "submit", value: "Ver resultados" }
+                  })
+                ]
+              )
+            ])
+          ])
         ])
-      ])
-    ]),
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "row", attrs: { id: "cuarta-vista" } },
+      {
+        staticClass: "col-md-8 col-sm-12 m-auto",
+        attrs: { id: "cuarta-vista" }
+      },
       [
-        _c("h3", [_vm._v("estos son los resultados")]),
-        _vm._v(" "),
-        _c(
-          "router-link",
-          {
-            staticClass: "btn btn-primary m-auto btn-block",
-            attrs: { to: { name: "home" } }
-          },
-          [_vm._v("\n\t\t\t\tIr al Inicio\n\t\t\t")]
-        )
-      ],
-      1
+        _c("div", { staticClass: "card animated bounceInRight" }, [
+          _c(
+            "div",
+            { staticClass: "card-body" },
+            [
+              _c("h3", { staticClass: "text-center" }, [
+                _vm._v("estos son los resultados")
+              ]),
+              _vm._v(" "),
+              _c("h4", [_vm._v("tiempo : 00:00")]),
+              _c("hr"),
+              _vm._v(" "),
+              _c("h4", [_vm._v("Puntuacion: " + _vm._s(_vm.puntuacion))]),
+              _c("hr"),
+              _vm._v(" "),
+              _c("h4", [
+                _vm._v("Aumento: "),
+                _c("b", [_vm._v("+")]),
+                _vm._v(" " + _vm._s(_vm.puntuacion / 3))
+              ]),
+              _c("hr"),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-primary m-auto btn-block",
+                  attrs: { to: { name: "home" } }
+                },
+                [_vm._v("\n\t\t\t\t\tIr al Inicio\n\t\t\t\t")]
+              )
+            ],
+            1
+          )
+        ])
+      ]
     )
   ])
 }
@@ -1100,7 +1151,7 @@ var staticRenderFns = [
               staticClass: "card-img-top mx-auto my-3",
               staticStyle: {
                 filter: "drop-shadow(5px 5px 10px #444)",
-                width: "80%"
+                width: "50%"
               },
               attrs: { src: "/imagenes/libro.png" }
             }),
@@ -1112,7 +1163,16 @@ var staticRenderFns = [
                 )
               ]),
               _vm._v(" "),
-              _c("p", [_c("b", [_vm._v("Tiempo: ")]), _vm._v("60 segundos")])
+              _c("div", { staticClass: "text-left" }, [
+                _c("p", [_c("b", [_vm._v("Tiempo: ")]), _vm._v("60 segundos")]),
+                _vm._v(" "),
+                _c("p", [_c("b", [_vm._v("Correcta: ")]), _vm._v("+3 puntos")]),
+                _vm._v(" "),
+                _c("p", [
+                  _c("b", [_vm._v("Incorrecta: ")]),
+                  _vm._v("-2 puntos")
+                ])
+              ])
             ])
           ])
         ])
@@ -1141,18 +1201,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/users/game/3-buscar-numero.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/users/game/3-buscar-numero.vue ***!
-  \*****************************************************/
+/***/ "./resources/js/users/game/2-buscaPalabra.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/users/game/2-buscaPalabra.vue ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _3_buscar_numero_vue_vue_type_template_id_232246a3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./3-buscar-numero.vue?vue&type=template&id=232246a3& */ "./resources/js/users/game/3-buscar-numero.vue?vue&type=template&id=232246a3&");
-/* harmony import */ var _3_buscar_numero_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./3-buscar-numero.vue?vue&type=script&lang=js& */ "./resources/js/users/game/3-buscar-numero.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _3_buscar_numero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./3-buscar-numero.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/game/3-buscar-numero.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./2-buscaPalabra.vue?vue&type=template&id=09945bd0& */ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0&");
+/* harmony import */ var _2_buscaPalabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./2-buscaPalabra.vue?vue&type=script&lang=js& */ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./2-buscaPalabra.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1163,9 +1223,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _3_buscar_numero_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _3_buscar_numero_vue_vue_type_template_id_232246a3___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _3_buscar_numero_vue_vue_type_template_id_232246a3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _2_buscaPalabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1175,54 +1235,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/users/game/3-buscar-numero.vue"
+component.options.__file = "resources/js/users/game/2-buscaPalabra.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/users/game/3-buscar-numero.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/users/game/3-buscar-numero.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
+/***/ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_3_buscar_numero_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./3-buscar-numero.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/3-buscar-numero.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_3_buscar_numero_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./2-buscaPalabra.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/users/game/3-buscar-numero.vue?vue&type=style&index=0&lang=css&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/users/game/3-buscar-numero.vue?vue&type=style&index=0&lang=css& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_3_buscar_numero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./3-buscar-numero.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/3-buscar-numero.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_3_buscar_numero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_3_buscar_numero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_3_buscar_numero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_3_buscar_numero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_3_buscar_numero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./2-buscaPalabra.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/users/game/3-buscar-numero.vue?vue&type=template&id=232246a3&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/users/game/3-buscar-numero.vue?vue&type=template&id=232246a3& ***!
-  \************************************************************************************/
+/***/ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0& ***!
+  \***********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_3_buscar_numero_vue_vue_type_template_id_232246a3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./3-buscar-numero.vue?vue&type=template&id=232246a3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/3-buscar-numero.vue?vue&type=template&id=232246a3&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_3_buscar_numero_vue_vue_type_template_id_232246a3___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./2-buscaPalabra.vue?vue&type=template&id=09945bd0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_3_buscar_numero_vue_vue_type_template_id_232246a3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

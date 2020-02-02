@@ -237,6 +237,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.obtenerDatosUsuario();
@@ -329,7 +340,6 @@ __webpack_require__.r(__webpack_exports__);
 
         _this5.actualizarDatosUsuario();
 
-        _this5.puntuacion = 0;
         _this5.pasos = 6;
       });
     },
@@ -1790,7 +1800,7 @@ var render = function() {
               expression: "pasos == 1"
             }
           ],
-          staticClass: "col-md-8 col-sm-12 m-auto tabla-juego",
+          staticClass: "col-md-8 col-sm-12 m-auto",
           attrs: { id: "tabla1" }
         },
         [
@@ -1905,7 +1915,7 @@ var render = function() {
               expression: "pasos == 2 "
             }
           ],
-          staticClass: "col-md-8 col-sm-12 m-auto tabla-juego"
+          staticClass: "col-md-8 col-sm-12 m-auto"
         },
         [
           _c("table", { staticClass: "table table-bordered fixed-table" }, [
@@ -2091,7 +2101,7 @@ var render = function() {
               expression: "pasos == 3"
             }
           ],
-          staticClass: "col-md-8 col-sm-12 m-auto tabla-juego"
+          staticClass: "col-md-8 col-sm-12 m-auto"
         },
         [
           _c("table", { staticClass: "table table-bordered fixed-table" }, [
@@ -2369,7 +2379,7 @@ var render = function() {
               expression: "pasos == 4"
             }
           ],
-          staticClass: "col-md-8 col-sm-12 m-auto tabla-juego"
+          staticClass: "col-md-8 col-sm-12 m-auto"
         },
         [
           _c("table", { staticClass: "table table-bordered fixed-table" }, [
@@ -2699,35 +2709,43 @@ var render = function() {
               expression: "pasos == 5"
             }
           ],
-          staticClass: "col-md-8 col-sm-12 m-auto tabla-juego"
+          staticClass: "col-md-8 col-sm-12 m-auto"
         },
         [
-          _c("div", { staticClass: "col-8 m-auto" }, [
-            _c(
-              "form",
-              {
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.guardarResultado($event)
-                  }
-                }
-              },
-              [
-                _c("h3", { staticClass: "text-uppercase" }, [
-                  _vm._v("se acabo el tiempo")
-                ]),
-                _vm._v(" "),
-                _c("img", {
-                  attrs: { src: "imagenes/tiempoterminado.jpg", alt: "" }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "btn btn-primary btn-block",
-                  attrs: { type: "submit", value: "Ver resultados" }
-                })
-              ]
-            )
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "col-8 m-auto text-center" }, [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.guardarResultado($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("h3", { staticClass: "text-uppercase" }, [
+                      _vm._v("Se acabo el tiempo")
+                    ]),
+                    _vm._v(" "),
+                    _c("img", {
+                      attrs: {
+                        src: "imagenes/relogarena.png",
+                        alt: "",
+                        width: "60%"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "btn btn-primary btn-block btn-lg",
+                      attrs: { type: "submit", value: "Ver resultados" }
+                    })
+                  ]
+                )
+              ])
+            ])
           ])
         ]
       ),
@@ -2746,18 +2764,42 @@ var render = function() {
           staticClass: "col-md-8 col-sm-12 m-auto"
         },
         [
-          _c("h3", [_vm._v("estos son los resultados")]),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-primary m-auto btn-block",
-              attrs: { to: { name: "home" } }
-            },
-            [_vm._v(" Ir al Inicio")]
-          )
-        ],
-        1
+          _c("div", { staticClass: "card animated bounceInRight" }, [
+            _c(
+              "div",
+              { staticClass: "card-body" },
+              [
+                _c("h3", { staticClass: "text-center" }, [
+                  _vm._v("estos son los resultados")
+                ]),
+                _c("hr"),
+                _vm._v(" "),
+                _c("h4", [_vm._v("tiempo : 00:00")]),
+                _c("hr"),
+                _vm._v(" "),
+                _c("h4", [_vm._v("Puntuacion: " + _vm._s(_vm.puntuacion))]),
+                _c("hr"),
+                _vm._v(" "),
+                _c("h4", [
+                  _vm._v("Aumento: "),
+                  _c("b", [_vm._v("+")]),
+                  _vm._v(" " + _vm._s(_vm.puntuacion / 15))
+                ]),
+                _c("hr"),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-primary m-auto btn-block",
+                    attrs: { to: { name: "home" } }
+                  },
+                  [_vm._v(" Ir al Inicio")]
+                )
+              ],
+              1
+            )
+          ])
+        ]
       )
     ])
   ])
@@ -2794,7 +2836,7 @@ var staticRenderFns = [
             staticClass: "card-img-top mx-auto my-3",
             staticStyle: {
               filter: "drop-shadow(5px 5px 10px #444)",
-              width: "80%"
+              width: "50%"
             },
             attrs: { src: "/imagenes/libro.png" }
           }),
