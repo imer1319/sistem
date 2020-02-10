@@ -13,7 +13,7 @@
 								</div>
 								<div class="col-7">
 									<div class="text-center"><h5>Record</h5></div>
-									<div v-for="(max, index) in maximo">
+									<div v-for="(max, index) in maximoPunto">
 										<div class="card-footer row text-left">
 											<h5 class="col-md-6 col-12">{{ max.name }}</h5>
 											<h5 class="col-md-6 col-12">{{ max.pivot.puntuacion }}</h5>
@@ -32,7 +32,7 @@
 								<div class="col-4">Puntos</div>
 							</div>
 							<hr>
-							<div class="row text-center" v-for="(punt, index) in recordMundial">
+							<div class="row text-center" v-for="(punt, index) in misRecords">
 								<div class="col-2">{{ index+1 }}</div>
 								<div class="col-6">{{ punt.created_at }}</div>
 								<div class="col-4">{{ punt.puntuacion }}</div>
@@ -240,10 +240,9 @@
 <script>
 	export default{
 		created:function() {
-			this.obtenerDatosUsuario()
-			this.mostrarPuntuacion()
-			this.maximoGame()
-			this.showUser()
+			this.misPuntuaciones()
+			this.maximaPuntuacion()
+			this.obtener_datos_usuario()
 		},
 		data(){
 			return{
@@ -261,82 +260,68 @@
 				buscando:1,
 				pasos:1,
 				tiempo:100,
-				miTiempo:0,
+				temporizador_juego:0,
 				puntuacion :0,
 				colores:["#0033CC","#FF6666","#669933","#FFCC33"],
-				miTemporizador:0,
+				tres_segundos:0,
 				contador:3,
-				user:null,
-				guardarEjercicio:{user_id:'',ejercicio_id:'',puntos:''},
-				recordMundial:[],
-				maximo:{},
-				usuario:{}
+				misRecords:[],
+				maximoPunto:{},
+				perfil_usuario:{}
 			}
 		},
 		methods:{
-			showUser(){
+			obtener_datos_usuario(){
 				var url ="/profile"
 				axios.get(url).then(res =>{
-					this.usuario = res.data
+					this.perfil_usuario = res.data
+				})
+			},
+			maximaPuntuacion(){
+				axios.get("maxGame/"+1).then(res =>{
+					this.maximoPunto = res.data
+				})
+			},
+			misPuntuaciones(){
+				axios.get("/puntuacion/"+1).then(res =>{
+					this.misRecords = res.data
+				})
+			},
+			guardarResultado(){
+				let formData = new FormData()
+				formData.append('ejercicio_id',1)
+				formData.append('user_id', this.perfil_usuario.id)
+				formData.append('puntuacion', this.puntuacion)
+
+				axios.post('/game',formData)
+				.then(res=>{
+					this.actualizarDatosUsuario()
+					this.pasos = 6
 				})
 			},
 			actualizarDatosUsuario(){
 				let data = new FormData();
-				data.append('puntos', this.usuario.puntos + this.puntuacion/15);
+				data.append('puntos', this.perfil_usuario.puntos + this.puntuacion/15);
 				data.append('_method','PUT');
-				var url = `/profile/${this.usuario.id}`
+				var url = `/profile/${this.perfil_usuario.id}`
 				axios.post(url, data).then(res=>{
 
-				})
-			},
-			maximoGame(){
-				axios.get("maxGame/"+1).then(res =>{
-					this.maximo = res.data
-				})
-			},
-			mostrarPuntuacion(){
-				axios.get("/puntuacion/"+1).then(res =>{
-					this.recordMundial = res.data
-				})
-			},
-			obtenerDatosUsuario(){
-				axios.get("/miID").then(res =>{
-					this.user = res.data
-				})
-			},
-			guardarResultado(){
-				this.guardarEjercicio.ejercicio_id = 1
-				this.guardarEjercicio.user_id = this.user
-				this.guardarEjercicio.puntos = this.puntuacion
-
-				let formData = new FormData()
-				formData.append('ejercicio_id', this.guardarEjercicio.ejercicio_id)
-				formData.append('user_id', this.guardarEjercicio.user_id)
-				formData.append('puntuacion', this.guardarEjercicio.puntos)
-
-				axios.post('/game',formData)
-				.then(res=>{
-					this.guardarEjercicio.ejercicio_id = ""
-					this.guardarEjercicio.user_id = ""
-					this.guardarEjercicio.puntos = ""
-					this.actualizarDatosUsuario()
-					this.pasos = 6
 				})
 			},
 			temporizame(){
 				document.getElementById("vista-primera").style.display='none'
 				document.getElementById("temporizador").style.display='block'
-				this.miTemporizador = setInterval(this.empiezaTemporizar,1000)
+				this.tres_segundos = setInterval(this.pantalla_3_segundos,1000)
 			},
-			empiezaTemporizar(){
+			pantalla_3_segundos(){
 				this.contador--
 				if (this.contador <= 0) {
-					clearInterval(this.miTemporizador)
+					clearInterval(this.tres_segundos)
 					this.mostrar1()
 				}
 			},
-			finCronometro(){
-				clearInterval(this.miTiempo)
+			fin_cronometro(){
+				clearInterval(this.temporizador_juego)
 				document.getElementById("empezando").style.display='none'
 				document.getElementById("empezando2").style.display='none'
 			},
@@ -352,7 +337,7 @@
 					elem.style.background = "#FF6666"
 				}
 				if(this.tiempo < 0 || this.buscando == 31){
-					this.finCronometro()
+					this.fin_cronometro()
 					this.pasos = 5
 					this.tiempo = 0
 				}
@@ -369,7 +354,7 @@
 					var rand = Math.floor(Math.random()*this.colores.length)
 					dist.style.color = this.colores[rand]
 				}
-				this.miTiempo = setInterval(this.cronometro,1000);
+				this.temporizador_juego = setInterval(this.cronometro,1000);
 			},
 			mostrar2(){
 				this.desordenar = this.nivel2.sort(function(){return Math.random()-0.5})
@@ -772,7 +757,7 @@
 			},
 		},
 		beforeDestroy: function () {
-			clearInterval(this.miTiempo)
+			clearInterval(this.temporizador_juego)
 		}
 	}
 </script>

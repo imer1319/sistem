@@ -38,7 +38,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-4">
+			<div class="col-md-4">
 				<div class="card">
 					<div class="card-body">
 						<div class="text-center">
@@ -123,7 +123,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="tercera-vista"class="col-md-8 col-sm-12 m-auto">
+		<div id="tercera-vista"class="col-md-8 m-auto">
 			<div class="card">
 				<div class="card-body">
 					<div class="col-8 m-auto text-center">
@@ -136,7 +136,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="cuarta-vista"class="col-md-8 col-sm-12 m-auto">
+		<div id="cuarta-vista"class="col-md-8 m-auto">
 			<div class="card animated bounceInRight">
 				<div class="card-body">
 					<h3 class="text-center">estos son los resultados</h3>

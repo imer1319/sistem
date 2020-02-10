@@ -77,7 +77,7 @@
 			<div id="numero">{{ contador }}</div>
 		</div>
 		<div class="row">
-			<div v-show="pasos == 1" class="col-md-8 col-sm-12 m-auto tabla-juego" id="tabla1">
+			<div v-show="pasos == 1" class="col-md-8 col-sm-12 m-auto" id="tabla1">
 				<table class="table table-bordered fixed-table">
 					<tr>
 						<td class="td" @click="press_1($event)" id="a1"></td>
@@ -96,7 +96,7 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 2 "class="col-md-8 col-sm-12 m-auto tabla-juego">
+			<div v-show="pasos == 2 "class="col-md-8 col-sm-12 m-auto">
 				<table class="table table-bordered fixed-table">
 					<tr>
 						<td class="td" @click="press_2($event)" id="a2"></td>
@@ -124,7 +124,7 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 3" class="col-md-8 col-sm-12 m-auto tabla-juego">
+			<div v-show="pasos == 3" class="col-md-8 col-sm-12 m-auto">
 				<table class="table table-bordered fixed-table">
 					<tr>
 						<td class="td" @click="press_3($event)" id="a3"></td>
@@ -163,7 +163,7 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 4" class="col-md-8 col-sm-12 m-auto tabla-juego">
+			<div v-show="pasos == 4" class="col-md-8 col-sm-12 m-auto">
 				<table class="table table-bordered fixed-table">
 					<tr>
 						<td class="td" @click="press_4($event)" id="a4"></td>
@@ -209,22 +209,34 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 5" class="col-md-8 col-sm-12 m-auto tabla-juego">
-				<div class="col-8 m-auto">
-					<form v-on:submit.prevent="guardarResultado">
-						<h3 class="text-uppercase">se acabo el tiempo</h3>
-						<img src="imagenes/tiempoterminado.jpg" alt="">
-						<input type="submit"value="Ver resultados" class="btn btn-primary btn-block">
-					</form>
+			<div v-show="pasos == 5"class="col-md-8 m-auto">
+				<div class="card">
+					<div class="card-body">
+						<div class="col-8 m-auto text-center">
+							<form v-on:submit.prevent="guardarResultado">
+								<h3 class="text-uppercase">Se acabo el tiempo</h3>
+								<img src="imagenes/relogarena.png" alt="" width="60%">
+								<input type="submit"value="Ver resultados" class="btn btn-primary btn-block btn-lg">
+							</form>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div v-show="pasos == 6" class="col-md-8 col-sm-12 m-auto">
-				<h3>estos son los resultados</h3>
-				<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block"> Ir al Inicio</router-link>
+				<div v-show="pasos == 6" class="col-md-8 m-auto">
+					<div class="card animated bounceInRight">
+						<div class="card-body">
+							<h3 class="text-center">estos son los resultados</h3>
+							<h4>tiempo : 00:00</h4><hr>
+							<h4>Puntuacion: {{ puntuacion }}</h4><hr>
+							<h4>Aumento: <b>+</b> {{ puntuacion/3 }}</h4><hr>
+							<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
+								Ir al Inicio
+							</router-link>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </template>
 <script>
 	export default{
@@ -403,370 +415,370 @@
 					case "a1":
 					var a = document.getElementById("a1");
 					if (this.nivel1[0]==this.desordenar[this.buscando]){ a.innerHTML="";this.puntuacion++; this.buscando++;  this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(a);}
-				break;
-				case "b1":
-				var b = document.getElementById("b1");
-				if (this.nivel1[1]==this.desordenar[this.buscando]){b.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(b);}
-				break;
-				case "c1":
-				var c = document.getElementById("c1");
-				if (this.nivel1[2]==this.desordenar[this.buscando]){c.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(c);}
-				break;
-				case "d1":
-				var d = document.getElementById("d1");
-				if (this.nivel1[3]==this.desordenar[this.buscando]){d.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(d);}
-				break;
-				case "e1":
-				var e = document.getElementById("e1");
-				if (this.nivel1[4]==this.desordenar[this.buscando]){e.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(e);}
-				break;
-				case "f1":
-				var f = document.getElementById("f1");
-				if (this.nivel1[5]==this.desordenar[this.buscando]){f.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(f);}
-				break;
-				case "g1":
-				var g = document.getElementById("g1");
-				if (this.nivel1[6]==this.desordenar[this.buscando]){g.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(g);}
-				break;
-				case "h1":
-				var h = document.getElementById("h1");
-				if (this.nivel1[7]==this.desordenar[this.buscando]){h.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(h);}
-				break;
-				case "i1":
-				var i = document.getElementById("i1");
-				if (this.nivel1[8]==this.desordenar[this.buscando]){i.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(i);}
-				break;
-			}
-		},
-		press_2(event){
-			var targetId = event.currentTarget.id;
-			switch (targetId) {
-				case "a2":
-				var a = document.getElementById("a2");
-				if (this.nivel2[0]==this.desordenar[this.buscando]){ a.innerHTML=""; this.puntuacion+=2; this.buscando++;  this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(a);}
-				break;
-				case "b2":
-				var b = document.getElementById("b2");
-				if (this.nivel2[1]==this.desordenar[this.buscando]){b.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(b);}
-				break;
-				case "c2":
-				var c = document.getElementById("c2");
-				if (this.nivel2[2]==this.desordenar[this.buscando]){c.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(c);}
-				break;
-				case "d2":
-				var d = document.getElementById("d2");
-				if (this.nivel2[3]==this.desordenar[this.buscando]){d.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(d);}
-				break;
-				case "e2":
-				var e = document.getElementById("e2");
-				if (this.nivel2[4]==this.desordenar[this.buscando]){e.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(e);}
-				break;
-				case "f2":
-				var f = document.getElementById("f2");
-				if (this.nivel2[5]==this.desordenar[this.buscando]){f.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(f);}
-				break;
-				case "g2":
-				var g = document.getElementById("g2");
-				if (this.nivel2[6]==this.desordenar[this.buscando]){g.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(g);}
-				break;
-				case "h2":
-				var h = document.getElementById("h2");
-				if (this.nivel2[7]==this.desordenar[this.buscando]){h.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(h);}
-				break;
-				case "i2":
-				var i = document.getElementById("i2");
-				if (this.nivel2[8]==this.desordenar[this.buscando]){i.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(i);}
-				break;
-				case "j2":
-				var j = document.getElementById("j2");
-				if (this.nivel2[9]==this.desordenar[this.buscando]){j.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(j);}
-				break;
-				case "k2":
-				var k = document.getElementById("k2");
-				if (this.nivel2[10]==this.desordenar[this.buscando]){k.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(k);}
-				break;
-				case "l2":
-				var l = document.getElementById("l2");
-				if (this.nivel2[11]==this.desordenar[this.buscando]){l.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(l);}
-				break;
-				case "m2":
-				var m = document.getElementById("m2");
-				if (this.nivel2[12]==this.desordenar[this.buscando]){m.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(m);}
-				break;
-				case "n2":
-				var n = document.getElementById("n2");
-				if (this.nivel2[13]==this.desordenar[this.buscando]){n.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(n);}
-				break;
-				case "o2":
-				var o = document.getElementById("o2");
-				if (this.nivel2[14]==this.desordenar[this.buscando]){o.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(o);}
-				break;
-				case "p2":
-				var p = document.getElementById("p2");
-				if (this.nivel2[15]==this.desordenar[this.buscando]){p.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(p);}
-				break;
-			}
-		},
-		press_3(event){
-			var targetId = event.currentTarget.id;
-			switch (targetId) {
-				case "a3":
-				var a = document.getElementById("a3");
-				if (this.nivel3[this.actual] == this.desordenar[this.buscando]){ a.innerHTML="";this.puntuacion+=3; this.buscando++;  this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(a);}
-				break;
-				case "b3":
-				var b = document.getElementById("b3");
-				if (this.nivel3[1] == this.desordenar[this.buscando]){b.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(b);}
-				break;
-				case "c3":
-				var c = document.getElementById("c3");
-				if (this.nivel3[2] == this.desordenar[this.buscando]){c.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(c);}
-				break;
-				case "d3":
-				var d = document.getElementById("d3");
-				if (this.nivel3[3] == this.desordenar[this.buscando]){d.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(d);}
-				break;
-				case "e3":
-				var e = document.getElementById("e3");
-				if (this.nivel3[4] == this.desordenar[this.buscando]){e.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(e);}
-				break;
-				case "f3":
-				var f = document.getElementById("f3");
-				if (this.nivel3[5] == this.desordenar[this.buscando]){f.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(f);}
-				break;
-				case "g3":
-				var g = document.getElementById("g3");
-				if (this.nivel3[6] == this.desordenar[this.buscando]){g.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(g);}
-				break;
-				case "h3":
-				var h = document.getElementById("h3");
-				if (this.nivel3[7] == this.desordenar[this.buscando]){h.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(h);}
-				break;
-				case "i3":
-				var i = document.getElementById("i3");
-				if (this.nivel3[8] == this.desordenar[this.buscando]){i.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(i);}
-				break;
-				case "j3":
-				var j = document.getElementById("j3");
-				if (this.nivel3[9] == this.desordenar[this.buscando]){j.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(j);}
-				break;
-				case "k3":
-				var k = document.getElementById("k3");
-				if (this.nivel3[10] == this.desordenar[this.buscando]){k.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(k);}
-				break;
-				case "l3":
-				var l = document.getElementById("l3");
-				if (this.nivel3[11] == this.desordenar[this.buscando]){l.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(l);}
-				break;
-				case "m3":
-				var m = document.getElementById("m3");
-				if (this.nivel3[12] == this.desordenar[this.buscando]){m.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(m);}
-				break;
-				case "n3":
-				var n = document.getElementById("n3");
-				if (this.nivel3[13] == this.desordenar[this.buscando]){n.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(n);}
-				break;
-				case "o3":
-				var o = document.getElementById("o3");
-				if (this.nivel3[14] == this.desordenar[this.buscando]){o.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(o);}
-				break;
-				case "p3":
-				var p = document.getElementById("p3");
-				if (this.nivel3[15] == this.desordenar[this.buscando]){p.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(p);}
-				break;
-				case "q3":
-				var q = document.getElementById("q3");
-				if (this.nivel3[16] == this.desordenar[this.buscando]){q.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(q);}
-				break;
-				case "r3":
-				var r = document.getElementById("r3");
-				if (this.nivel3[17] == this.desordenar[this.buscando]){r.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(r);}
-				break;
-				case "s3":
-				var s = document.getElementById("s3");
-				if (this.nivel3[18] == this.desordenar[this.buscando]){s.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(s);}
-				break;
-				case "t3":
-				var t = document.getElementById("t3");
-				if (this.nivel3[19] == this.desordenar[this.buscando]){t.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(t);}
-				break;
-				case "u3":
-				var u = document.getElementById("u3");
-				if (this.nivel3[20] == this.desordenar[this.buscando]){u.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(u);}
-				break;
-				case "v3":
-				var v = document.getElementById("v3");
-				if (this.nivel3[21] == this.desordenar[this.buscando]){v.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(v);}
-				break;
-				case "w3":
-				var w = document.getElementById("w3");
-				if (this.nivel3[22] == this.desordenar[this.buscando]){w.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(w);}
-				break;
-				case "x3":
-				var x = document.getElementById("x3");
-				if (this.nivel3[23] == this.desordenar[this.buscando]){x.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(x);}
-				break;
-				case "y3":
-				var y = document.getElementById("y3");
-				if (this.nivel3[24] == this.desordenar[this.buscando]){y.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(y);}
-				break;
-			}
-		},
-		press_4(event){
-			var targetId = event.currentTarget.id;
-			switch (targetId) {
-				case "a4":
-				var a = document.getElementById("a4");
-				if (this.nivel4[0] == this.desordenar[this.buscando]){ a.innerHTML="";this.puntuacion+=4; this.buscando++;  this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(a);}
-				break;
-				case "b4":
-				var b = document.getElementById("b4");
-				if (this.nivel4[1] == this.desordenar[this.buscando]){b.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(b);}
-				break;
-				case "c4":
-				var c = document.getElementById("c4");
-				if (this.nivel4[2] == this.desordenar[this.buscando]){c.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(c);}
-				break;
-				case "d4":
-				var d = document.getElementById("d4");
-				if (this.nivel4[3] == this.desordenar[this.buscando]){d.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(d);}
-				break;
-				case "e4":
-				var e = document.getElementById("e4");
-				if (this.nivel4[4] == this.desordenar[this.buscando]){e.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(e);}
-				break;
-				case "f4":
-				var f = document.getElementById("f4");
-				if (this.nivel4[5] == this.desordenar[this.buscando]){f.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(f);}
-				break;
-				case "g4":
-				var g = document.getElementById("g4");
-				if (this.nivel4[6] == this.desordenar[this.buscando]){g.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(g);}
-				break;
-				case "h4":
-				var h = document.getElementById("h4");
-				if (this.nivel4[7] == this.desordenar[this.buscando]){h.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(h);}
-				break;
-				case "i4":
-				var i = document.getElementById("i4");
-				if (this.nivel4[8] == this.desordenar[this.buscando]){i.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(i);}
-				break;
-				case "j4":
-				var j = document.getElementById("j4");
-				if (this.nivel4[9] == this.desordenar[this.buscando]){j.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(j);}
-				break;
-				case "k4":
-				var k = document.getElementById("k4");
-				if (this.nivel4[10] == this.desordenar[this.buscando]){k.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(k);}
-				break;
-				case "l4":
-				var l = document.getElementById("l4");
-				if (this.nivel4[11] == this.desordenar[this.buscando]){l.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(l);}
-				break;
-				case "m4":
-				var m = document.getElementById("m4");
-				if (this.nivel4[12] == this.desordenar[this.buscando]){m.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(m);}
-				break;
-				case "n4":
-				var n = document.getElementById("n4");
-				if (this.nivel4[13] == this.desordenar[this.buscando]){n.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(n);}
-				break;
-				case "o4":
-				var o = document.getElementById("o4");
-				if (this.nivel4[14] == this.desordenar[this.buscando]){o.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(o);}
-				break;
-				case "p4":
-				var p = document.getElementById("p4");
-				if (this.nivel4[15] == this.desordenar[this.buscando]){p.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(p);}
-				break;
-				case "q4":
-				var q = document.getElementById("q4");
-				if (this.nivel4[16] == this.desordenar[this.buscando]){q.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(q);}
-				break;
-				case "r4":
-				var r = document.getElementById("r4");
-				if (this.nivel4[17] == this.desordenar[this.buscando]){r.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(r);}
-				break;
-				case "s4":
-				var s = document.getElementById("s4");
-				if (this.nivel4[18] == this.desordenar[this.buscando]){s.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(s);}
-				break;
-				case "t4":
-				var t = document.getElementById("t4");
-				if (this.nivel4[19] == this.desordenar[this.buscando]){t.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(t);}
-				break;
-				case "u4":
-				var u = document.getElementById("u4");
-				if (this.nivel4[20] == this.desordenar[this.buscando]){u.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(u);}
-				break;
-				case "v4":
-				var v = document.getElementById("v4");
-				if (this.nivel4[21] == this.desordenar[this.buscando]){v.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(v);}
-				break;
-				case "w4":
-				var w = document.getElementById("w4");
-				if (this.nivel4[22] == this.desordenar[this.buscando]){w.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(w);}
-				break;
-				case "x4":
-				var x = document.getElementById("x4");
-				if (this.nivel4[23] == this.desordenar[this.buscando]){x.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(x);}
-				break;
-				case "y4":
-				var y = document.getElementById("y4");
-				if (this.nivel4[24] == this.desordenar[this.buscando]){y.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(y);}
-				break;
-				case "z4":
-				var z = document.getElementById("z4");
-				if (this.nivel4[25] == this.desordenar[this.buscando]){z.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(z);}
-				break;
-				case "za4":
-				var za = document.getElementById("za4");
-				if (this.nivel4[26] == this.desordenar[this.buscando]){za.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(za);}
-				break;
-				case "zb4":
-				var zb = document.getElementById("zb4");
-				if (this.nivel4[27] == this.desordenar[this.buscando]){zb.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(zb);}
-				break;
-				case "zc4":
-				var zc = document.getElementById("zc4");
-				if (this.nivel4[28] == this.desordenar[this.buscando]){zc.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(zc);}
-				break;
-				case "zd4":
-				var zd = document.getElementById("zd4");
-				if (this.nivel4[29] == this.desordenar[this.buscando]){zd.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(zd);}
-				break;
-			}
-		},
-		esUltimo(numero){
-			if(this.pasos == 1){
-				if (this.buscando == 9) {
-					this.buscando = 0
-					this.pasos++
-					this.mostrar2()
+					break;
+					case "b1":
+					var b = document.getElementById("b1");
+					if (this.nivel1[1]==this.desordenar[this.buscando]){b.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(b);}
+					break;
+					case "c1":
+					var c = document.getElementById("c1");
+					if (this.nivel1[2]==this.desordenar[this.buscando]){c.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(c);}
+					break;
+					case "d1":
+					var d = document.getElementById("d1");
+					if (this.nivel1[3]==this.desordenar[this.buscando]){d.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(d);}
+					break;
+					case "e1":
+					var e = document.getElementById("e1");
+					if (this.nivel1[4]==this.desordenar[this.buscando]){e.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(e);}
+					break;
+					case "f1":
+					var f = document.getElementById("f1");
+					if (this.nivel1[5]==this.desordenar[this.buscando]){f.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(f);}
+					break;
+					case "g1":
+					var g = document.getElementById("g1");
+					if (this.nivel1[6]==this.desordenar[this.buscando]){g.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(g);}
+					break;
+					case "h1":
+					var h = document.getElementById("h1");
+					if (this.nivel1[7]==this.desordenar[this.buscando]){h.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(h);}
+					break;
+					case "i1":
+					var i = document.getElementById("i1");
+					if (this.nivel1[8]==this.desordenar[this.buscando]){i.innerHTML=""; this.puntuacion++; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(i);}
+					break;
 				}
-			}else if(this.pasos == 2){
-				if (this.buscando == 16) {
-					this.buscando = 0
-					this.pasos++
-					this.mostrar3()
+			},
+			press_2(event){
+				var targetId = event.currentTarget.id;
+				switch (targetId) {
+					case "a2":
+					var a = document.getElementById("a2");
+					if (this.nivel2[0]==this.desordenar[this.buscando]){ a.innerHTML=""; this.puntuacion+=2; this.buscando++;  this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(a);}
+					break;
+					case "b2":
+					var b = document.getElementById("b2");
+					if (this.nivel2[1]==this.desordenar[this.buscando]){b.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(b);}
+					break;
+					case "c2":
+					var c = document.getElementById("c2");
+					if (this.nivel2[2]==this.desordenar[this.buscando]){c.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(c);}
+					break;
+					case "d2":
+					var d = document.getElementById("d2");
+					if (this.nivel2[3]==this.desordenar[this.buscando]){d.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(d);}
+					break;
+					case "e2":
+					var e = document.getElementById("e2");
+					if (this.nivel2[4]==this.desordenar[this.buscando]){e.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(e);}
+					break;
+					case "f2":
+					var f = document.getElementById("f2");
+					if (this.nivel2[5]==this.desordenar[this.buscando]){f.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(f);}
+					break;
+					case "g2":
+					var g = document.getElementById("g2");
+					if (this.nivel2[6]==this.desordenar[this.buscando]){g.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(g);}
+					break;
+					case "h2":
+					var h = document.getElementById("h2");
+					if (this.nivel2[7]==this.desordenar[this.buscando]){h.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(h);}
+					break;
+					case "i2":
+					var i = document.getElementById("i2");
+					if (this.nivel2[8]==this.desordenar[this.buscando]){i.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(i);}
+					break;
+					case "j2":
+					var j = document.getElementById("j2");
+					if (this.nivel2[9]==this.desordenar[this.buscando]){j.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(j);}
+					break;
+					case "k2":
+					var k = document.getElementById("k2");
+					if (this.nivel2[10]==this.desordenar[this.buscando]){k.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(k);}
+					break;
+					case "l2":
+					var l = document.getElementById("l2");
+					if (this.nivel2[11]==this.desordenar[this.buscando]){l.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(l);}
+					break;
+					case "m2":
+					var m = document.getElementById("m2");
+					if (this.nivel2[12]==this.desordenar[this.buscando]){m.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(m);}
+					break;
+					case "n2":
+					var n = document.getElementById("n2");
+					if (this.nivel2[13]==this.desordenar[this.buscando]){n.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(n);}
+					break;
+					case "o2":
+					var o = document.getElementById("o2");
+					if (this.nivel2[14]==this.desordenar[this.buscando]){o.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(o);}
+					break;
+					case "p2":
+					var p = document.getElementById("p2");
+					if (this.nivel2[15]==this.desordenar[this.buscando]){p.innerHTML=""; this.puntuacion+=2; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(p);}
+					break;
 				}
-			}else if(this.pasos == 3){
-				if (this.buscando == 25) {
-					this.buscando = 0
-					this.pasos ++
-					this.mostrar4()
+			},
+			press_3(event){
+				var targetId = event.currentTarget.id;
+				switch (targetId) {
+					case "a3":
+					var a = document.getElementById("a3");
+					if (this.nivel3[this.actual] == this.desordenar[this.buscando]){ a.innerHTML="";this.puntuacion+=3; this.buscando++;  this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(a);}
+					break;
+					case "b3":
+					var b = document.getElementById("b3");
+					if (this.nivel3[1] == this.desordenar[this.buscando]){b.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(b);}
+					break;
+					case "c3":
+					var c = document.getElementById("c3");
+					if (this.nivel3[2] == this.desordenar[this.buscando]){c.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(c);}
+					break;
+					case "d3":
+					var d = document.getElementById("d3");
+					if (this.nivel3[3] == this.desordenar[this.buscando]){d.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(d);}
+					break;
+					case "e3":
+					var e = document.getElementById("e3");
+					if (this.nivel3[4] == this.desordenar[this.buscando]){e.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(e);}
+					break;
+					case "f3":
+					var f = document.getElementById("f3");
+					if (this.nivel3[5] == this.desordenar[this.buscando]){f.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(f);}
+					break;
+					case "g3":
+					var g = document.getElementById("g3");
+					if (this.nivel3[6] == this.desordenar[this.buscando]){g.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(g);}
+					break;
+					case "h3":
+					var h = document.getElementById("h3");
+					if (this.nivel3[7] == this.desordenar[this.buscando]){h.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(h);}
+					break;
+					case "i3":
+					var i = document.getElementById("i3");
+					if (this.nivel3[8] == this.desordenar[this.buscando]){i.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(i);}
+					break;
+					case "j3":
+					var j = document.getElementById("j3");
+					if (this.nivel3[9] == this.desordenar[this.buscando]){j.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(j);}
+					break;
+					case "k3":
+					var k = document.getElementById("k3");
+					if (this.nivel3[10] == this.desordenar[this.buscando]){k.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(k);}
+					break;
+					case "l3":
+					var l = document.getElementById("l3");
+					if (this.nivel3[11] == this.desordenar[this.buscando]){l.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(l);}
+					break;
+					case "m3":
+					var m = document.getElementById("m3");
+					if (this.nivel3[12] == this.desordenar[this.buscando]){m.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(m);}
+					break;
+					case "n3":
+					var n = document.getElementById("n3");
+					if (this.nivel3[13] == this.desordenar[this.buscando]){n.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(n);}
+					break;
+					case "o3":
+					var o = document.getElementById("o3");
+					if (this.nivel3[14] == this.desordenar[this.buscando]){o.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(o);}
+					break;
+					case "p3":
+					var p = document.getElementById("p3");
+					if (this.nivel3[15] == this.desordenar[this.buscando]){p.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(p);}
+					break;
+					case "q3":
+					var q = document.getElementById("q3");
+					if (this.nivel3[16] == this.desordenar[this.buscando]){q.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(q);}
+					break;
+					case "r3":
+					var r = document.getElementById("r3");
+					if (this.nivel3[17] == this.desordenar[this.buscando]){r.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(r);}
+					break;
+					case "s3":
+					var s = document.getElementById("s3");
+					if (this.nivel3[18] == this.desordenar[this.buscando]){s.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(s);}
+					break;
+					case "t3":
+					var t = document.getElementById("t3");
+					if (this.nivel3[19] == this.desordenar[this.buscando]){t.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(t);}
+					break;
+					case "u3":
+					var u = document.getElementById("u3");
+					if (this.nivel3[20] == this.desordenar[this.buscando]){u.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(u);}
+					break;
+					case "v3":
+					var v = document.getElementById("v3");
+					if (this.nivel3[21] == this.desordenar[this.buscando]){v.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(v);}
+					break;
+					case "w3":
+					var w = document.getElementById("w3");
+					if (this.nivel3[22] == this.desordenar[this.buscando]){w.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(w);}
+					break;
+					case "x3":
+					var x = document.getElementById("x3");
+					if (this.nivel3[23] == this.desordenar[this.buscando]){x.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(x);}
+					break;
+					case "y3":
+					var y = document.getElementById("y3");
+					if (this.nivel3[24] == this.desordenar[this.buscando]){y.innerHTML=""; this.puntuacion+=3; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(y);}
+					break;
 				}
-			}else if(this.pasos == 4){
-				if (this.buscando == 30) {
-					this.pasos = 5
+			},
+			press_4(event){
+				var targetId = event.currentTarget.id;
+				switch (targetId) {
+					case "a4":
+					var a = document.getElementById("a4");
+					if (this.nivel4[0] == this.desordenar[this.buscando]){ a.innerHTML="";this.puntuacion+=4; this.buscando++;  this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(a);}
+					break;
+					case "b4":
+					var b = document.getElementById("b4");
+					if (this.nivel4[1] == this.desordenar[this.buscando]){b.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(b);}
+					break;
+					case "c4":
+					var c = document.getElementById("c4");
+					if (this.nivel4[2] == this.desordenar[this.buscando]){c.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(c);}
+					break;
+					case "d4":
+					var d = document.getElementById("d4");
+					if (this.nivel4[3] == this.desordenar[this.buscando]){d.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(d);}
+					break;
+					case "e4":
+					var e = document.getElementById("e4");
+					if (this.nivel4[4] == this.desordenar[this.buscando]){e.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(e);}
+					break;
+					case "f4":
+					var f = document.getElementById("f4");
+					if (this.nivel4[5] == this.desordenar[this.buscando]){f.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(f);}
+					break;
+					case "g4":
+					var g = document.getElementById("g4");
+					if (this.nivel4[6] == this.desordenar[this.buscando]){g.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(g);}
+					break;
+					case "h4":
+					var h = document.getElementById("h4");
+					if (this.nivel4[7] == this.desordenar[this.buscando]){h.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(h);}
+					break;
+					case "i4":
+					var i = document.getElementById("i4");
+					if (this.nivel4[8] == this.desordenar[this.buscando]){i.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(i);}
+					break;
+					case "j4":
+					var j = document.getElementById("j4");
+					if (this.nivel4[9] == this.desordenar[this.buscando]){j.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(j);}
+					break;
+					case "k4":
+					var k = document.getElementById("k4");
+					if (this.nivel4[10] == this.desordenar[this.buscando]){k.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(k);}
+					break;
+					case "l4":
+					var l = document.getElementById("l4");
+					if (this.nivel4[11] == this.desordenar[this.buscando]){l.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(l);}
+					break;
+					case "m4":
+					var m = document.getElementById("m4");
+					if (this.nivel4[12] == this.desordenar[this.buscando]){m.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(m);}
+					break;
+					case "n4":
+					var n = document.getElementById("n4");
+					if (this.nivel4[13] == this.desordenar[this.buscando]){n.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(n);}
+					break;
+					case "o4":
+					var o = document.getElementById("o4");
+					if (this.nivel4[14] == this.desordenar[this.buscando]){o.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(o);}
+					break;
+					case "p4":
+					var p = document.getElementById("p4");
+					if (this.nivel4[15] == this.desordenar[this.buscando]){p.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(p);}
+					break;
+					case "q4":
+					var q = document.getElementById("q4");
+					if (this.nivel4[16] == this.desordenar[this.buscando]){q.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(q);}
+					break;
+					case "r4":
+					var r = document.getElementById("r4");
+					if (this.nivel4[17] == this.desordenar[this.buscando]){r.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(r);}
+					break;
+					case "s4":
+					var s = document.getElementById("s4");
+					if (this.nivel4[18] == this.desordenar[this.buscando]){s.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(s);}
+					break;
+					case "t4":
+					var t = document.getElementById("t4");
+					if (this.nivel4[19] == this.desordenar[this.buscando]){t.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(t);}
+					break;
+					case "u4":
+					var u = document.getElementById("u4");
+					if (this.nivel4[20] == this.desordenar[this.buscando]){u.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(u);}
+					break;
+					case "v4":
+					var v = document.getElementById("v4");
+					if (this.nivel4[21] == this.desordenar[this.buscando]){v.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(v);}
+					break;
+					case "w4":
+					var w = document.getElementById("w4");
+					if (this.nivel4[22] == this.desordenar[this.buscando]){w.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(w);}
+					break;
+					case "x4":
+					var x = document.getElementById("x4");
+					if (this.nivel4[23] == this.desordenar[this.buscando]){x.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(x);}
+					break;
+					case "y4":
+					var y = document.getElementById("y4");
+					if (this.nivel4[24] == this.desordenar[this.buscando]){y.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(y);}
+					break;
+					case "z4":
+					var z = document.getElementById("z4");
+					if (this.nivel4[25] == this.desordenar[this.buscando]){z.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(z);}
+					break;
+					case "za4":
+					var za = document.getElementById("za4");
+					if (this.nivel4[26] == this.desordenar[this.buscando]){za.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(za);}
+					break;
+					case "zb4":
+					var zb = document.getElementById("zb4");
+					if (this.nivel4[27] == this.desordenar[this.buscando]){zb.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(zb);}
+					break;
+					case "zc4":
+					var zc = document.getElementById("zc4");
+					if (this.nivel4[28] == this.desordenar[this.buscando]){zc.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(zc);}
+					break;
+					case "zd4":
+					var zd = document.getElementById("zd4");
+					if (this.nivel4[29] == this.desordenar[this.buscando]){zd.innerHTML=""; this.puntuacion+=4; this.buscando++; this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(zd);}
+					break;
 				}
-			}
+			},
+			esUltimo(numero){
+				if(this.pasos == 1){
+					if (this.buscando == 9) {
+						this.buscando = 0
+						this.pasos++
+						this.mostrar2()
+					}
+				}else if(this.pasos == 2){
+					if (this.buscando == 16) {
+						this.buscando = 0
+						this.pasos++
+						this.mostrar3()
+					}
+				}else if(this.pasos == 3){
+					if (this.buscando == 25) {
+						this.buscando = 0
+						this.pasos ++
+						this.mostrar4()
+					}
+				}else if(this.pasos == 4){
+					if (this.buscando == 30) {
+						this.pasos = 5
+					}
+				}
+			},
 		},
-	},
-	beforeDestroy: function () {
-		clearInterval(this.miTiempo)
+		beforeDestroy: function () {
+			clearInterval(this.miTiempo)
+		}
 	}
-}
 </script>
 <style>
 .border-right{

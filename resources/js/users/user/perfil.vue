@@ -41,7 +41,7 @@
 							</div>
 						</form>
 					</div>
-					<div class="card-footer">
+					<div class="card-footer profundidad">
 						<div class="row">
 							<div class="col-sm-4 border-right">
 								<div class="description-block">
@@ -68,51 +68,46 @@
 				</div>
 			</div>
 			<div class="col-sm-12 col-md-6">
-				<div class="card sombra">
+				<div class="card sombra ">
 					<div class="card-header p-2">
 						<ul class="nav nav-pills">
 							<li class="nav-item"><a class="nav-link active" href="#rango" data-toggle="tab">Rangos</a></li>
-							<li class="nav-item"><a class="nav-link " href="#insignia" data-toggle="tab">Insignias</a></li>
 							<li class="nav-item"><a class="nav-link" href="#datos" data-toggle="tab"
 								@click="editarUsuario()">Datos</a></li>
 							</ul>
 						</div>
-						<div class="card-body">
+						<div class="card-body rank">
 							<div class="tab-content">
-								<div class="tab-pane active" id="rango">
+								<div class="tab-pane active " id="rango">
 									<div class="text-center">
 										<div v-for="rango in rangos">
 											<div v-if="usuario.puntos < 100">
-												<div v-if="rango.nombre == 'Bronce'">
+												<div v-if="rango.nombre == 'huevo'">
 													<div class="text-center">
-														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="350px" width="70%">
+														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="400px" width="90%">
 													</div>
 												</div>
 											</div>
 											<div v-if="usuario.puntos >= 100 && usuario.puntos <500">
-												<div v-if="rango.nombre == 'Plata'">
+												<div v-if="rango.nombre == 'nivel #1'">
 													<div class="text-center">
-														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="400px" width="70%">
+														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="400px" width="90%">
 													</div>
 												</div>
 											</div>
 											<div v-if="usuario.puntos >= 500 && usuario.puntos <1000">
-												<div v-if="rango.nombre == 'Oro'">
+												<div v-if="rango.nombre == 'nivel #2'">
 													<div class="text-center">
-														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="400px" width="70%">
+														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="400px" width="90%">
 													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-								</div>
-								<div class="tab-pane" id="insignia">
-									<div class="row">
-										<div class="col-4" v-for="insig in insignias">
-											<div class="text-center m-3">
-												<img style="border-radius: 50%; height: 90%;width:90%;" 
-												:src="`/imagenes/insignias/${insig.icon}`">
-												<h5>{{ insig.name }}</h5>
+											<div v-if="usuario.puntos >=1000">
+												<div v-if="rango.nombre == 'nivel #3'">
+													<div class="text-center">
+														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="400px" width="90%">
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -122,25 +117,25 @@
 										<div class="col-sm-12">
 											<form v-on:submit.prevent="updateUsuario(fillUsuario)" enctype="multipart/form-data">
 												<div class="form-group row">
-													<label class="col-form-label col-md-3">Nombre</label>
+													<label class="col-form-label col-md-3 text-white">Nombre</label>
 													<div class="col-md-8">
 														<input type="text"  class="form-control" v-model="fillUsuario.name" placeholder="Escriba su nombre" required>
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-form-label col-md-3">Apellido Paterno</label>
+													<label class="col-form-label col-md-3 text-white">Apellido Paterno</label>
 													<div class="col-md-8">
 														<input type="text" class="form-control" v-model="fillUsuario.apellido_paterno" placeholder="Apellido paterno" required>
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-form-label col-md-3">Apellido Materno</label>
+													<label class="col-form-label col-md-3 text-white">Apellido Materno</label>
 													<div class="col-md-8">
 														<input type="text"class="form-control" v-model="fillUsuario.apellido_materno" placeholder="Apellido materno" required>
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-form-label col-md-3">Curso</label>
+													<label class="col-form-label col-md-3 text-white">Curso</label>
 													<div class="col-md-4">
 														<select v-model="fillUsuario.curso" class="form-control">
 															<option disabled value="">Seleccione el curso</option>
@@ -192,7 +187,6 @@
 			created() {
 				this.showUser();
 				this.showRango();
-				this.showInsignia();
 			},
 			data(){
 				return{
@@ -221,12 +215,6 @@
 					var url ="/rank"
 					axios.get(url).then(res =>{
 						this.rangos = res.data
-					})
-				},
-				showInsignia(){
-					var url ="/insig"
-					axios.get(url).then(res =>{
-						this.insignias = res.data
 					})
 				},
 				obtenerImagenNueva(e){
@@ -279,6 +267,8 @@
 						data.append('rango_id', 2);
 					}else if (this.fillUsuario.puntos >= 500 && this.fillUsuario.puntos < 1000) {
 						data.append('rango_id', 3);
+					}else if (this.fillUsuario.puntos >= 1000) {
+						data.append('rango_id', 4);
 					}
 					data.append('_method','PUT');
 					var url = `/profile/${fillUsuario.id}`;
@@ -371,7 +361,7 @@
 		vertical-align: middle;
 		border-style: none;
 	}
-	.card-footer {
+	.profundidad{
 		padding-top: 50px;
 	}
 	.bg-info {
@@ -415,5 +405,8 @@
 		width: 200px;
 		top: -70px;
 		z-index: 1000;
+	}
+	.rank{
+		background: #477DD9;
 	}
 </style>

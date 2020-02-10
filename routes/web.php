@@ -39,6 +39,7 @@ Route::get('maxGame/{id}','UserController@maxGame');
 Route::get('miID','UserController@miIdAuth');
 // games rutas
 Route::get('game','UserController@game');
+Route::get('ejercicios','UserController@game');
 Route::get('puntuacion/{id}','UserController@rankingGame');
 Route::post('game','UserController@saveGame');
 Route::get('schult','UserController@game');
@@ -51,3 +52,10 @@ Route::get('campo-visual','UserController@game');
 Route::get('schult-letra','UserController@game');
 Route::get('encuentra-palabra','UserController@game');
 Route::get('encuentra-numeros','UserController@game');
+
+//ruta ejercicios
+Route::get('parpadeo','UserController@game');
+Route::get('vertical','UserController@game');
+Route::get('horizontal','UserController@game');
+Route::get('aleatorio','UserController@game');
+

@@ -46,7 +46,11 @@
 							style="filter: drop-shadow(5px 5px 10px #444); width: 80%;">
 							<div class="card-body">
 								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<p><b>Tiempo: </b>60 segundos</p>
+								<div class="text-left">
+									<p><b>Tiempo: </b>60 segundos</p>
+									<p><b>Correcta: </b>+3 puntos</p>
+									<p><b>Incorrecta: </b>-2 puntos</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -85,22 +89,31 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" id="tercera-vista">
-			<div class="col-12">
-				<div class="col-8 m-auto">
-					<form v-on:submit.prevent="guardarJuego">
-						<h3 class="text-uppercase">se acabo el tiempo</h3>
-						<img src="imagenes/tiempoterminado.jpg" alt="">
-						<input type="submit"value="Ver resultados" class="btn btn-primary btn-block">
-					</form>
+		<div id="tercera-vista"class="col-md-8  m-auto">
+			<div class="card">
+				<div class="card-body">
+					<div class="col-8 m-auto text-center">
+						<form v-on:submit.prevent="guardarJuego">
+							<h3 class="text-uppercase">Se acabo el tiempo</h3>
+							<img src="imagenes/relogarena.png" alt="" width="60%">
+							<input type="submit"value="Ver resultados" class="btn btn-primary btn-block">
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row" id="cuarta-vista">
-			<h3>estos son los resultados</h3>
-			<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
-				Ir al Inicio
-			</router-link>
+		<div id="cuarta-vista"class="col-md-8 m-auto">
+			<div class="card animated bounceInRight">
+				<div class="card-body">
+					<h3 class="text-center">estos son los resultados</h3>
+					<h4>tiempo : 00:00</h4><hr>
+					<h4>Puntuacion: {{ puntuacion }}</h4><hr>
+					<h4>Aumento: <b>+</b> {{ puntuacion/3 }}</h4><hr>
+					<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
+						Ir al Inicio
+					</router-link>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -161,7 +174,7 @@
 			},
 			actualizar_datos_usuario(){
 				let data = new FormData();
-				data.append('puntos', this.perfil_usuario.puntos + this.puntuacion/15);
+				data.append('puntos', this.perfil_usuario.puntos + this.puntuacion/3);
 				data.append('_method','PUT');
 				var url = `/profile/${this.perfil_usuario.id}`
 				axios.post(url, data).then(res=>{
@@ -218,7 +231,7 @@
 			ocultar_buscando(){
 				this.bono+=5
 				if (this.bono == 10) {
-					this.muestrame_buscando = "___"
+					this.muestrame_buscando = "_ _ _ _"
 					clearInterval(this.interval)
 					this.bono = 0
 				}
@@ -230,42 +243,48 @@
 				},1000)
 				this.puntuacion-=2
 			},
+			solucion_encontrado(encontrado){
+				encontrado.innerHTML = " "
+				encontrado.classList.add('solucion');
+				setTimeout(function(){
+					encontrado.classList.remove('solucion')
+				},1000)
+				this.puntuacion+=3
+			},
 			precionar(event){
 				var targetId = event.currentTarget.id;
 				switch (targetId) {
 					case "a":
 					var a = document.getElementById("a");
-					if(this.desordenar[this.buscar]==this.desordenar[0]){a.innerHTML=" "; this.puntuacion+=3; this.empezarJuego();}else{this.error_Encontrado(a)}
+					if(this.desordenar[this.buscar]==this.desordenar[0]){this.solucion_encontrado(a);this.empezarJuego();}else{this.error_Encontrado(a)}
 					break;
 					case "b":
 					var b = document.getElementById("b");
-					if(this.desordenar[this.buscar]==this.desordenar[1]){
-						b.innerHTML=" "; this.puntuacion+=3; this.empezarJuego();
-					}else{this.error_Encontrado(b)}
+					if(this.desordenar[this.buscar]==this.desordenar[1]){this.solucion_encontrado(b);this.empezarJuego();}else{this.error_Encontrado(b)}
 					break;
 					case "c":
 					var c = document.getElementById("c");
-					if(this.desordenar[this.buscar]==this.desordenar[2]){c.innerHTML=" "; this.puntuacion+=3; this.empezarJuego();}else{this.error_Encontrado(c)}
+					if(this.desordenar[this.buscar]==this.desordenar[2]){this.solucion_encontrado(c);this.empezarJuego();}else{this.error_Encontrado(c)}
 					break;
 					case "d":
 					var d = document.getElementById("d");
-					if (this.desordenar[this.buscar]==this.desordenar[3]){d.innerHTML=" "; this.puntuacion+=3; this.empezarJuego();}else{this.error_Encontrado(d)}
+					if (this.desordenar[this.buscar]==this.desordenar[3]){this.solucion_encontrado(d);this.empezarJuego();}else{this.error_Encontrado(d)}
 					break;
 					case "e":
 					var e = document.getElementById("e");
-					if (this.desordenar[this.buscar]==this.desordenar[4]){e.innerHTML=" "; this.puntuacion+=3; this.empezarJuego();}else{this.error_Encontrado(e)}
+					if (this.desordenar[this.buscar]==this.desordenar[4]){this.solucion_encontrado(e);this.empezarJuego();}else{this.error_Encontrado(e)}
 					break;
 					case "f":
 					var f = document.getElementById("f");
-					if (this.desordenar[this.buscar]==this.desordenar[5]){f.innerHTML=" "; this.puntuacion+=3; this.empezarJuego();}else{this.error_Encontrado(f)}
+					if (this.desordenar[this.buscar]==this.desordenar[5]){this.solucion_encontrado(f);this.empezarJuego();}else{this.error_Encontrado(f)}
 					break;
 					case "g":
 					var g = document.getElementById("g");
-					if (this.desordenar[this.buscar]==this.desordenar[6]){g.innerHTML=" "; this.puntuacion+=3; this.empezarJuego();}else{this.error_Encontrado(g)}
+					if (this.desordenar[this.buscar]==this.desordenar[6]){this.solucion_encontrado(g);this.empezarJuego();}else{this.error_Encontrado(g)}
 					break;
 					case "h":
 					var h = document.getElementById("h");
-					if (this.desordenar[this.buscar]==this.desordenar[7]){h.innerHTML=" "; this.puntuacion+=3; this.empezarJuego();}else{this.error_Encontrado(h)}
+					if (this.desordenar[this.buscar]==this.desordenar[7]){this.solucion_encontrado(h);this.empezarJuego();}else{this.error_Encontrado(h)}
 					break;
 				}
 			},
@@ -299,5 +318,8 @@
 	border: 1px solid rgba(0, 0, 0, 0.125);
 	border-radius: 0.25rem;
 	padding: 1.25rem;
+}
+.solucion{
+	background: #36edc8;
 }
 </style>

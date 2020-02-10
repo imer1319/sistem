@@ -119,18 +119,20 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" id="tercera-vista">
-			<div class="col-12">
-				<div class="col-8 m-auto">
-					<form v-on:submit.prevent="guardarJuego">
-						<h3 class="text-uppercase">se acabo el tiempo</h3>
-						<img src="imagenes/tiempoterminado.jpg" alt="">
-						<input type="submit"value="Ver resultados" class="btn btn-primary btn-block">
-					</form>
+		<div id="tercera-vista" class="col-md-8 col-sm-12 m-auto">
+			<div class="card">
+				<div class="card-body">
+					<div class="col-8 m-auto text-center">
+						<form v-on:submit.prevent="guardarJuego">
+							<h3 class="text-uppercase">se acabo el tiempo</h3>
+							<img src="imagenes/tiempoterminado.jpg" alt="">
+							<input type="submit"value="Ver resultados" class="btn btn-primary btn-block">
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row" id="cuarta-vista">
+		<div id="cuarta-vista">
 			<h3>estos son los resultados</h3>
 			<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
 				Ir al Inicio

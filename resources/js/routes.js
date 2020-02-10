@@ -71,10 +71,16 @@ export const routes = [
 		component: () => import('./users/ranking.vue')
 	},
 	{
+		name: 'ejercicios',
+		path: '/ejercicios',
+		component: () => import('./users/ejercicios/ejercicios.vue')
+	},
+	{
 		name: 'game',
 		path: '/game',
 		component: () => import('./users/game/game.vue')
 	},
+	/*********--RUTA -- JUEGOS--**********/
 	{
 		name: 'schult',
 		path: '/schult',
@@ -124,5 +130,26 @@ export const routes = [
 		name: 'encuentra-numeros',
 		path: '/encuentra-numeros',
 		component: () => import('./users/game/11-encuentra-numeros.vue')
+	},
+	/********--RUTA -- EJERCICIOS--******/
+	{
+		name: 'parpadeo',
+		path: '/parpadeo',
+		component: () => import('./users/ejercicios/1-parpadeo.vue')
+	},
+	{
+		name: 'vertical',
+		path: '/vertical',
+		component: () => import('./users/ejercicios/2-vertical.vue')
+	},
+	{
+		name: 'horizontal',
+		path: '/horizontal',
+		component: () => import('./users/ejercicios/3-horizontal.vue')
+	},
+	{
+		name: 'aleatorio',
+		path: '/aleatorio',
+		component: () => import('./users/ejercicios/4-aleatorio.vue')
 	},
 ];

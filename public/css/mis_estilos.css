@@ -157,3 +157,44 @@
     background: linear-gradient(to bottom,  #74bcc9 0%,#d9de3a 0%,#70ae33 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#74bcc9', endColorstr='#70ae33',GradientType=0 );
 }
+.color8{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 12px;
+    text-align: center;
+    background: rgb(80,186,208);
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(80,186,208,1) 0%, rgba(115,177,231,1) 0%, rgba(80,186,208,1) 0%, rgba(80,186,208,1) 0%, rgba(13,75,99,1) 100%);
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(80,186,208,1) 0%,rgba(115,177,231,1) 0%,rgba(80,186,208,1) 0%,rgba(80,186,208,1) 0%,rgba(13,75,99,1) 100%); 
+    background: radial-gradient(ellipse at center,  rgba(80,186,208,1) 0%,rgba(115,177,231,1) 0%,rgba(80,186,208,1) 0%,rgba(80,186,208,1) 0%,rgba(13,75,99,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#50bad0', endColorstr='#0d4b63',GradientType=1 ); 
+}
+.color8:link{
+    text-decoration: none;
+}
+.img-hover-zoom {
+  height: 230px; /* [1.1] Set it as per your need */
+  overflow: hidden; /* [1.2] Hide the overflowing of child elements */
+}
+
+/* [2] Transition property for smooth transformation of images */
+.img-hover-zoom img {
+  transition: transform .3s ease;
+}
+
+/* [3] Finally, transforming the image when container gets hovered */
+.img-hover-zoom:hover img {
+  transform: scale(1.2);
+}
+/*********--Titulo principal--************/
+.titulo{
+    background: #F3C736;
+    color: white;
+    font-weight: 700;
+    font-size: 28px;
+    width: 80%;
+    height: 40px;
+    text-align: center;
+    margin: auto;
+    text-transform: uppercase;
+}

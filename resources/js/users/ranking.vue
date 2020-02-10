@@ -1,8 +1,9 @@
 <template>
 	<spinner v-if="loading"></spinner>
 	<div class="container-fluid" v-else>
+		<div class="titulo">ranking</div>
 		<div class="row">
-			<div class="col-md-5 col-sm-12 mb-3">
+			<div class="col-md-5 col-sm-12 mb-3 mt-4">
 				<div v-for="(ran, index) in rankings" 
 				v-if="ran.id == miIdentificador" 
 				class="text-center mb-3">
@@ -34,7 +35,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-7 col-12">
+		<div class="col-md-7 col-12 mt-4">
 			<div class="card">
 				<h3 class="text-center pt-4">Los mejores 10</h3>
 				<div class="card-body">

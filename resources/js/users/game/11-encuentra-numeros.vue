@@ -1,7 +1,7 @@
 <template>
 	<div class="container-fluid">
 		<div class="row" id="primera-vista">
-			<div class="col-12 col-md-8">
+			<div class="col-md-8">
 				<div class="card mb-3">
 					<div class="card-body">
 						<div class="row">
@@ -13,8 +13,8 @@
 								<div class="text-center"><h5>Record</h5></div>
 								<div v-for="(max, index) in maximoPunto">
 									<div class="card-footer row text-left">
-										<h5 class="col-md-6 col-12">{{ max.name }}</h5>
-										<h5 class="col-md-6 col-12">{{ max.pivot.puntuacion }}</h5>
+										<h5 class="col-md-6">{{ max.name }}</h5>
+										<h5 class="col-md-6">{{ max.pivot.puntuacion }}</h5>
 									</div>
 								</div>
 							</div>
@@ -38,7 +38,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-4">
+			<div class="col-md-4">
 				<div class="card">
 					<div class="card-body">
 						<div class="text-center">
@@ -46,7 +46,11 @@
 							style="filter: drop-shadow(5px 5px 10px #444); width: 80%;">
 							<div class="card-body">
 								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<p><b>Tiempo: </b>60 segundos</p>
+								<div class="text-left">
+									<p><b>Tiempo: </b>60 segundos</p>
+									<p><b>Correcta: </b>+3 puntos</p>
+									<p><b>Incorrecta: </b>-2 puntos</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -57,50 +61,57 @@
 			<div id="numero_3_seg">{{ contador }}</div>
 		</div>
 		<div class="row" id="segunda-vista">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-body ">
-						<div class="row">
-							<span class="col-4">Pts: {{ puntuacion }}</span>
-							<div class="col-8">
-								<ul id="skill">
-									<li>
-										<span class="bar graphic-design" id="progressBar"></span>
-									</li>
-								</ul>
-							</div>
+			<div class="card">
+				<div class="card-body ">
+					<div class="row">
+						<span class="col-4">Pts: {{ puntuacion }}</span>
+						<div class="col-8">
+							<ul id="skill">
+								<li>
+									<span class="bar graphic-design" id="progressBar"></span>
+								</li>
+							</ul>
 						</div>
-						<h4 class="text-center my-5">{{ muestrame_buscando }}</h4>
-						<div class="container-fluid row text-center">
-							<div class="contenedor-card col-6"@click="precionar($event)" id="a"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="b"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="c"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="d"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="e"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="f"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="g"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="h"></div>
-						</div>
+					</div>
+					<h4 class="text-center my-5">{{ muestrame_buscando }}</h4>
+					<div class="container-fluid row text-center">
+						<div class="contenedor-card col-6"@click="precionar($event)" id="a"></div>
+						<div class="contenedor-card col-6"@click="precionar($event)" id="b"></div>
+						<div class="contenedor-card col-6"@click="precionar($event)" id="c"></div>
+						<div class="contenedor-card col-6"@click="precionar($event)" id="d"></div>
+						<div class="contenedor-card col-6"@click="precionar($event)" id="e"></div>
+						<div class="contenedor-card col-6"@click="precionar($event)" id="f"></div>
+						<div class="contenedor-card col-6"@click="precionar($event)" id="g"></div>
+						<div class="contenedor-card col-6"@click="precionar($event)" id="h"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row" id="tercera-vista">
-			<div class="col-12">
-				<div class="col-8 m-auto">
-					<form v-on:submit.prevent="guardarJuego">
-						<h3 class="text-uppercase">se acabo el tiempo</h3>
-						<img src="imagenes/tiempoterminado.jpg" alt="">
-						<input type="submit"value="Ver resultados" class="btn btn-primary btn-block">
-					</form>
+		<div id="tercera-vista"class="col-md-8 m-auto">
+			<div class="card">
+				<div class="card-body">
+					<div class="col-8 m-auto text-center">
+						<form v-on:submit.prevent="guardarJuego">
+							<h3 class="text-uppercase">se acabo el tiempo</h3>
+							<img src="imagenes/relogarena.png" alt="" width="60%">
+							<input type="submit"value="Ver resultados" class="btn btn-primary  btn-block btn-lg">
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row" id="cuarta-vista">
-			<h3>estos son los resultados</h3>
-			<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
-				Ir al Inicio
-			</router-link>
+		<div id="cuarta-vista"class="col-md-8 m-auto">
+			<div class="card animated bounceInRight">
+				<div class="card-body">
+					<h3 class="text-center">estos son los resultados</h3>
+					<h4>tiempo : 00:00</h4><hr>
+					<h4>Puntuacion: {{ puntuacion }}</h4><hr>
+					<h4>Aumento: <b>+</b> {{ puntuacion/3 }}</h4><hr>
+					<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
+						Ir al Inicio
+					</router-link>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -161,7 +172,7 @@
 			},
 			actualizar_datos_usuario(){
 				let data = new FormData();
-				data.append('puntos', this.perfil_usuario.puntos + this.puntuacion/15);
+				data.append('puntos', this.perfil_usuario.puntos + this.puntuacion/3);
 				data.append('_method','PUT');
 				var url = `/profile/${this.perfil_usuario.id}`
 				axios.post(url, data).then(res=>{
@@ -218,7 +229,7 @@
 			ocultar_buscando(){
 				this.bono+=5
 				if (this.bono == 10) {
-					this.muestrame_buscando = "_ _ _"
+					this.muestrame_buscando = "_ _ _ _"
 					clearInterval(this.interval)
 					this.bono = 0
 				}
@@ -243,7 +254,7 @@
 				switch (targetId) {
 					case "a":
 					var a = document.getElementById("a");
-					if(this.desordenar[this.buscar]==this.desordenar[0]){a.is.solucion_encontrado(a);this.empezarJuego();}else{this.error_Encontrado(a)}
+					if(this.desordenar[this.buscar]==this.desordenar[0]){this.solucion_encontrado(a);this.empezarJuego();}else{this.error_Encontrado(a)}
 					break;
 					case "b":
 					var b = document.getElementById("b");
