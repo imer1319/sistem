@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[19],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -144,80 +144,109 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     var _this = this;
 
-    this.mostrarInsignia();
+    this.mostrarEjercicio();
+    this.mostrarCategoria();
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('agregado', function (data) {
-      _this.insignias.push(data);
+      _this.ejercicios.push(data);
     });
   },
   data: function data() {
     return {
-      insignias: [],
-      insignia: {
-        name: '',
-        description: '',
-        icon: ''
+      ejercicios: [],
+      categorias: [],
+      categoria: {
+        nombre: ''
       },
-      fillInsignia: {
+      ejercicio: {
         name: '',
         description: '',
-        icon: ''
+        icon: '',
+        categoria_id: ''
+      },
+      fillEjercicio: {
+        name: '',
+        description: '',
+        icon: '',
+        categoria_id: ''
       },
       imagenMiniatura: '',
       loading: true,
       estado: false,
-      paginate: ['insignias']
+      paginate: ['ejercicios']
     };
   },
   methods: {
-    confirmarDelete: function confirmarDelete() {
-      var resp = confirm("Estas seguro que deseas eliminarlo?");
-
-      if (resp == true) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    mostrarInsignia: function mostrarInsignia() {
+    mostrarEjercicio: function mostrarEjercicio() {
       var _this2 = this;
 
-      axios.get('insignia').then(function (res) {
-        _this2.insignias = res.data;
+      axios.get('ejercicio').then(function (res) {
+        _this2.ejercicios = res.data;
         _this2.loading = false;
       });
     },
-    crearInsignia: function crearInsignia() {
-      $('#createInsignia').modal('show');
+    mostrarCategoria: function mostrarCategoria() {
+      var _this3 = this;
+
+      axios.get('categoria').then(function (res) {
+        _this3.categorias = res.data;
+      });
     },
-    obtenerImagencrear: function obtenerImagencrear(e) {
-      var file = e.target.files[0];
-      this.insignia.icon = file;
-      this.cargarImagen(file);
+    crearEjercicio: function crearEjercicio() {
+      $('#createEjercicio').modal('show');
     },
     obtenerImagen: function obtenerImagen(e) {
       this.estado = true;
       var file = e.target.files[0];
-      this.fillInsignia.icon = file;
+      this.fillEjercicio.icon = file;
       this.cargarImagen(file);
     },
     obtenerImagenNueva: function obtenerImagenNueva(e) {
       this.estado = false;
       var file = e.target.files[0];
-      this.insignia.icon = file;
+      this.ejercicio.icon = file;
+      this.cargarImagen(file);
+    },
+    obtenerImagencrear: function obtenerImagencrear(e) {
+      var file = e.target.files[0];
+      this.ejercicio.icon = file;
       this.cargarImagen(file);
     },
     cargarImagen: function cargarImagen(file) {
-      var _this3 = this;
+      var _this4 = this;
 
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        _this3.imagenMiniatura = e.target.result;
+        _this4.imagenMiniatura = e.target.result;
       };
 
       reader.readAsDataURL(file);
@@ -231,61 +260,70 @@ __webpack_require__.r(__webpack_exports__);
         return true;
       }
     },
-    agregarInsignia: function agregarInsignia() {
-      var _this4 = this;
+    confirmarDelete: function confirmarDelete() {
+      var resp = confirm("Estas seguro que deseas eliminarlo?");
 
-      if (this.validarEspacios(this.insignia.name) == false || this.validarEspacios(this.insignia.description) == false || this.validarEspacios(this.insignia.icon) == false) {
-        alert("los campos no pueden estar vacios");
+      if (resp == true) {
+        return true;
       } else {
-        var formData = new FormData();
-        formData.append('name', this.insignia.name);
-        formData.append('description', this.insignia.description);
-        formData.append('icon', this.insignia.icon);
-        axios.post('/insignia', formData).then(function (res) {
-          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.insignia);
-          _this4.insignia.name = "";
-          _this4.insignia.description = "";
-          _this4.$refs.img.value = "";
-          _this4.imagenMiniatura = "";
-          $('#createInsignia').modal('hide');
-        });
+        return false;
       }
     },
-    eliminarInsignia: function eliminarInsignia(insignia, index) {
+    eliminarEjercicio: function eliminarEjercicio(ejercicio, index) {
       var _this5 = this;
 
       if (this.confirmarDelete() == true) {
-        axios["delete"]("/insignia/".concat(insignia.id)).then(function () {
-          _this5.insignias.splice(index, 1);
+        axios["delete"]("/ejercicio/".concat(ejercicio.id)).then(function () {
+          _this5.ejercicios.splice(index, 1);
         });
       }
     },
-    editarInsignia: function editarInsignia(insignia) {
+    editarEjercicio: function editarEjercicio(ejercicio) {
       this.estado = true;
-      this.fillInsignia.name = insignia.name;
-      this.fillInsignia.description = insignia.description;
-      this.fillInsignia.icon = insignia.icon;
-      this.fillInsignia.id = insignia.id;
-      $('#editInsignia').modal('show');
+      this.fillEjercicio.name = ejercicio.name;
+      this.fillEjercicio.description = ejercicio.description;
+      this.fillEjercicio.icon = ejercicio.icon;
+      this.fillEjercicio.id = ejercicio.id;
+      this.fillEjercicio.categoria_id = ejercicio.categoria_id;
+      $('#editarEjercicio').modal('show');
     },
-    updateInsignia: function updateInsignia(fillInsignia) {
+    updateEjercicio: function updateEjercicio(fillEjercicio) {
       var _this6 = this;
 
-      if (this.validarEspacios(this.fillInsignia.name) == false || this.validarEspacios(this.fillInsignia.description) == false || this.validarEspacios(this.fillInsignia.icon) == false) {
+      if (this.validarEspacios(this.fillEjercicio.name) == false || this.validarEspacios(this.fillEjercicio.description) == false || this.validarEspacios(this.fillEjercicio.icon) == false || this.validarEspacios(this.fillEjercicio.categoria_id) == false) {
         alert("los campos no pueden estar vacios");
       } else {
         var data = new FormData();
-        data.append('name', this.fillInsignia.name);
-        data.append('description', this.fillInsignia.description);
-        data.append('icon', this.insignia.icon);
+        data.append('name', this.fillEjercicio.name);
+        data.append('description', this.fillEjercicio.description);
+        data.append('icon', this.fillEjercicio.icon);
+        data.append('categoria_id', this.fillEjercicio.categoria_id);
         data.append('_method', 'PUT');
-        var url = "/insignia/".concat(fillInsignia.id);
+        var url = "/ejercicio/".concat(fillEjercicio.id);
         axios.post(url, data).then(function (res) {
-          _this6.mostrarInsignia();
+          _this6.mostrarEjercicio();
 
-          $('#editInsignia').modal('hide');
+          $('#editarEjercicio').modal('hide');
         });
       }
+    },
+    agregarEjercicio: function agregarEjercicio() {
+      var _this7 = this;
+
+      var formData = new FormData();
+      formData.append('name', this.ejercicio.name);
+      formData.append('description', this.ejercicio.description);
+      formData.append('icon', this.ejercicio.icon);
+      formData.append('categoria_id', this.ejercicio.categoria_id);
+      axios.post('ejercicio', formData).then(function (res) {
+        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.ejercicio);
+        _this7.ejercicio.name = "";
+        _this7.ejercicio.description = "";
+        _this7.ejercicio.categoria_id = "";
+        _this7.$refs.img.value = "";
+        _this7.imagenMiniatura = "";
+        $('#createEjercicio').modal('hide');
+      });
     }
   },
   computed: {
@@ -298,10 +336,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f& ***!
+  \***********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -321,14 +359,14 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.agregarInsignia($event)
+            return _vm.agregarEjercicio($event)
           }
         }
       },
       [
         _c(
           "div",
-          { staticClass: "modal fade", attrs: { id: "createInsignia" } },
+          { staticClass: "modal fade", attrs: { id: "createEjercicio" } },
           [
             _c("div", { staticClass: "modal-dialog" }, [
               _c("div", { staticClass: "modal-content" }, [
@@ -346,23 +384,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.insignia.name,
-                            expression: "insignia.name"
+                            value: _vm.ejercicio.name,
+                            expression: "ejercicio.name"
                           }
                         ],
                         staticClass: "form-control",
                         attrs: {
                           type: "text",
-                          placeholder: "Nombre de la insignia",
+                          placeholder: "Nombre de la ejercicio",
                           required: ""
                         },
-                        domProps: { value: _vm.insignia.name },
+                        domProps: { value: _vm.ejercicio.name },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.insignia, "name", $event.target.value)
+                            _vm.$set(_vm.ejercicio, "name", $event.target.value)
                           }
                         }
                       })
@@ -380,8 +418,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.insignia.description,
-                            expression: "insignia.description"
+                            value: _vm.ejercicio.description,
+                            expression: "ejercicio.description"
                           }
                         ],
                         staticClass: "form-control",
@@ -389,18 +427,18 @@ var render = function() {
                           rows: "3",
                           cols: "5",
                           name: "description",
-                          placeholder: "Describa la insignia",
+                          placeholder: "Describa la ejercicio",
                           maxlength: "150",
                           required: ""
                         },
-                        domProps: { value: _vm.insignia.description },
+                        domProps: { value: _vm.ejercicio.description },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
                             _vm.$set(
-                              _vm.insignia,
+                              _vm.ejercicio,
                               "description",
                               $event.target.value
                             )
@@ -434,6 +472,68 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("label", { staticClass: "col-form-label col-md-2" }, [
+                    _vm._v("Categoria")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.ejercicio.categoria_id,
+                            expression: "ejercicio.categoria_id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.ejercicio,
+                              "categoria_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Seleccione un elemento")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.categorias, function(categoria) {
+                          return _c(
+                            "option",
+                            { domProps: { value: categoria.id } },
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t\t\t" +
+                                  _vm._s(categoria.nombre) +
+                                  "\n\t\t\t\t\t\t\t\t\t"
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
                 _vm._m(1)
               ])
             ])
@@ -449,14 +549,14 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.updateInsignia(_vm.fillInsignia)
+            return _vm.updateEjercicio(_vm.fillEjercicio)
           }
         }
       },
       [
         _c(
           "div",
-          { staticClass: "modal fade", attrs: { id: "editInsignia" } },
+          { staticClass: "modal fade", attrs: { id: "editarEjercicio" } },
           [
             _c("div", { staticClass: "modal-dialog" }, [
               _c("div", { staticClass: "modal-content" }, [
@@ -474,20 +574,20 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.fillInsignia.name,
-                            expression: "fillInsignia.name"
+                            value: _vm.fillEjercicio.name,
+                            expression: "fillEjercicio.name"
                           }
                         ],
                         staticClass: "form-control",
                         attrs: { type: "text", name: "name", required: "" },
-                        domProps: { value: _vm.fillInsignia.name },
+                        domProps: { value: _vm.fillEjercicio.name },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
                             _vm.$set(
-                              _vm.fillInsignia,
+                              _vm.fillEjercicio,
                               "name",
                               $event.target.value
                             )
@@ -508,8 +608,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.fillInsignia.description,
-                            expression: "fillInsignia.description"
+                            value: _vm.fillEjercicio.description,
+                            expression: "fillEjercicio.description"
                           }
                         ],
                         staticClass: "form-control",
@@ -521,14 +621,14 @@ var render = function() {
                           maxlength: "150",
                           required: ""
                         },
-                        domProps: { value: _vm.fillInsignia.description },
+                        domProps: { value: _vm.fillEjercicio.description },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
                             _vm.$set(
-                              _vm.fillInsignia,
+                              _vm.fillEjercicio,
                               "description",
                               $event.target.value
                             )
@@ -572,18 +672,77 @@ var render = function() {
                               src: _vm.imagen
                             }
                           })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.estado == true
-                        ? _c("img", {
+                        : _c("img", {
                             attrs: {
                               width: "200",
                               height: "200",
-                              src: "imagenes/insignias/" + _vm.fillInsignia.icon
+                              src:
+                                "imagenes/ejercicios/" + _vm.fillEjercicio.icon
                             }
                           })
-                        : _vm._e()
                     ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("label", { staticClass: "col-form-label col-md-2" }, [
+                    _vm._v("Categoria")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.fillEjercicio.categoria_id,
+                            expression: "fillEjercicio.categoria_id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.fillEjercicio,
+                              "categoria_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { disabled: "", value: "" } }, [
+                          _vm._v("Seleccione un elemento")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.categorias, function(categoria) {
+                          return _c(
+                            "option",
+                            { domProps: { value: categoria.id } },
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t\t\t" +
+                                  _vm._s(categoria.nombre) +
+                                  "\n\t\t\t\t\t\t\t\t\t"
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
                   ])
                 ]),
                 _vm._v(" "),
@@ -600,7 +759,7 @@ var render = function() {
       { staticClass: "card" },
       [
         _c("div", { staticClass: "card-header" }, [
-          _c("h3", { staticClass: "card-title" }, [_vm._v("Insignias")]),
+          _c("h3", { staticClass: "card-title" }, [_vm._v("ejercicios")]),
           _vm._v(" "),
           _c(
             "a",
@@ -609,7 +768,7 @@ var render = function() {
               attrs: { href: "#" },
               on: {
                 click: function($event) {
-                  return _vm.crearInsignia()
+                  return _vm.crearEjercicio()
                 }
               }
             },
@@ -625,7 +784,9 @@ var render = function() {
               [
                 _c(
                   "paginate",
-                  { attrs: { name: "insignias", list: _vm.insignias, per: 5 } },
+                  {
+                    attrs: { name: "ejercicios", list: _vm.ejercicios, per: 5 }
+                  },
                   [
                     _c(
                       "table",
@@ -646,6 +807,10 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-center" }, [
+                              _vm._v("Categoria")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "text-center" }, [
                               _vm._v("Acciones")
                             ])
                           ])
@@ -653,8 +818,8 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "tbody",
-                          _vm._l(_vm.paginated("insignias"), function(
-                            insignia,
+                          _vm._l(_vm.paginated("ejercicios"), function(
+                            ejercicio,
                             index
                           ) {
                             return _c("tr", { key: index }, [
@@ -662,19 +827,24 @@ var render = function() {
                                 _vm._v(_vm._s(index + 1))
                               ]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(insignia.name))]),
+                              _c("td", [_vm._v(_vm._s(ejercicio.name))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(insignia.description))]),
+                              _c("td", [_vm._v(_vm._s(ejercicio.description))]),
                               _vm._v(" "),
                               _c("td", { staticClass: "text-center" }, [
                                 _c("img", {
                                   staticClass: "img-responsive",
                                   attrs: {
-                                    src: "imagenes/insignias/" + insignia.icon,
+                                    src:
+                                      "imagenes/ejercicios/" + ejercicio.icon,
                                     height: "60",
                                     width: "70"
                                   }
                                 })
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(_vm._s(ejercicio.categoria_id))
                               ]),
                               _vm._v(" "),
                               _c("td", { staticClass: "float-right" }, [
@@ -685,7 +855,7 @@ var render = function() {
                                     attrs: { href: "#" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.editarInsignia(insignia)
+                                        return _vm.editarEjercicio(ejercicio)
                                       }
                                     }
                                   },
@@ -704,8 +874,8 @@ var render = function() {
                                     attrs: { href: "#" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.eliminarInsignia(
-                                          insignia,
+                                        return _vm.eliminarEjercicio(
+                                          ejercicio,
                                           index
                                         )
                                       }
@@ -730,7 +900,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("paginate-links", {
                   attrs: {
-                    for: "insignias",
+                    for: "ejercicios",
                     classes: {
                       ul: "pagination",
                       li: "page-item",
@@ -822,17 +992,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/insignias/insigniaComponent.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/insignias/insigniaComponent.vue ***!
-  \*****************************************************************/
+/***/ "./resources/js/components/ejercicios/ejercicio.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/ejercicios/ejercicio.vue ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./insigniaComponent.vue?vue&type=template&id=c467845c& */ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&");
-/* harmony import */ var _insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./insigniaComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ejercicio.vue?vue&type=template&id=6974bf8f& */ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&");
+/* harmony import */ var _ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ejercicio.vue?vue&type=script&lang=js& */ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -842,9 +1012,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -854,38 +1024,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/insignias/insigniaComponent.vue"
+component.options.__file = "resources/js/components/ejercicios/ejercicio.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./insigniaComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ejercicio.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f& ***!
+  \*****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./insigniaComponent.vue?vue&type=template&id=c467845c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ejercicio.vue?vue&type=template&id=6974bf8f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

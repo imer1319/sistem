@@ -6,7 +6,7 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-5">
-								<h4 class="text-center">Busca la palabra</h4>
+								<h4 class="text-center">Busca numeros</h4>
 								<input type="button" value="Iniciar" class="btn btn-primary btn-block pb-0" @click="tres_segundos_pantalla()">
 							</div>
 							<div class="col-7">
@@ -42,11 +42,15 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="text-center">
-							<img src="/imagenes/libro.png" class="card-img-top mx-auto my-3" 
-							style="filter: drop-shadow(5px 5px 10px #444); width: 80%;">
+							<img src="/imagenes/consejos-juegos/consejo-buscar-numero.png" class="card-img-top mx-auto my-3" 
+							style="width: 70%;">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<p><b>Tiempo: </b>60 segundos</p>
+								<h4 class="card-text">Concéntrese y busca el numero  que indica que busques, antes de que se termine el tiempo</h4>
+								<div class="text-left">
+									<p><b>Tiempo: </b>60 segundos</p>
+									<p><b>Correcta: </b>+3 puntos</p>
+									<p><b>Incorrecta: </b>-2 puntos</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -119,26 +123,34 @@
 				</div>
 			</div>
 		</div>
-		<div id="tercera-vista" class="col-md-8 col-sm-12 m-auto">
+		<div id="tercera-vista"class="col-md-8 col-sm-12 m-auto">
 			<div class="card">
 				<div class="card-body">
 					<div class="col-8 m-auto text-center">
 						<form v-on:submit.prevent="guardarJuego">
 							<h3 class="text-uppercase">se acabo el tiempo</h3>
-							<img src="imagenes/tiempoterminado.jpg" alt="">
-							<input type="submit"value="Ver resultados" class="btn btn-primary btn-block">
+							<img src="imagenes/relogarena.png" alt="" width="60%">
+							<input type="submit"value="Ver resultados" class="btn btn-primary btn-block btn-lg">
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div id="cuarta-vista">
-			<h3>estos son los resultados</h3>
-			<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
-				Ir al Inicio
-			</router-link>
+		<div id="cuarta-vista"class="col-md-8 col-sm-12 m-auto">
+			<div class="card animated bounceInRight">
+				<div class="card-body">
+					<h3 class="text-center">estos son los resultados</h3>
+					<h4>tiempo : 00:00</h4><hr>
+					<h4>Puntuacion: {{ puntuacion }}</h4><hr>
+					<h4>Aumento: <b>+</b> {{ Math.floor(puntuacion/3) }}</h4><hr>
+					<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
+						Ir al Inicio
+					</router-link>
+				</div>
+			</div>
 		</div>
 	</div>
+</div>
 </template>
 <script>
 	export default{
@@ -153,7 +165,7 @@
 				maximoPunto:[],
 				misRecords:[],
 				desordenar:[],
-				palabras:['modo','modo','turno','turno','bata','bata','cadena','cadera','pino','pino','aspa','asta','carga','carga','brillo','brillo','turbo','tubo','uña','uña','pared','pared','peloton','peloton','riña','riña','cepa','sepa','cielo','hielo','tempo','templa','engaño','engaño','cena','cena'],
+				palabras:['2336','2077','1985','3797','9693','3566','7852','6802','4740',' 9952','5495','5342','7735','5807','3320','9344','9657','3091','5163','2638','1085','6323','8944','9734'],
 				ids:['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x'],
 				buscar:null,
 				puntuacion:0,
@@ -165,12 +177,12 @@
 		},
 		methods:{
 			maximaPuntuacion(){
-				axios.get("maxGame/"+2).then(res =>{
+				axios.get("maxGame/"+4).then(res =>{
 					this.maximoPunto = res.data
 				})
 			},
 			misPuntuaciones(){
-				axios.get("/puntuacion/"+2).then(res =>{
+				axios.get("/puntuacion/"+4).then(res =>{
 					this.misRecords = res.data
 				})
 			},
@@ -181,7 +193,7 @@
 			},
 			guardarJuego(){
 				let formData = new FormData()
-				formData.append('ejercicio_id', 2)
+				formData.append('ejercicio_id', 4)
 				formData.append('user_id', this.perfil_usuario.id)
 				formData.append('puntuacion', this.puntuacion)
 
@@ -193,8 +205,9 @@
 				})
 			},
 			actualizar_datos_usuario(){
+				var point = Math.floor(this.puntuacion/3)
 				let data = new FormData();
-				data.append('puntos', this.perfil_usuario.puntos + this.puntuacion/15);
+				data.append('puntos', this.perfil_usuario.puntos + point);
 				data.append('_method','PUT');
 				var url = `/profile/${this.perfil_usuario.id}`
 				axios.post(url, data).then(res=>{

@@ -221,28 +221,6 @@
 	}	
 </script>
 <style>
-.fuente{
-	font-weight: 600;
-	font-size: 20px;
-}
-.contenedores{
-	padding: 20px;
-	width: 600px;
-	height: 300px;
-	border: 2px solid #2d2d2d;
-	background: white;
-	display: flex;
-	justify-content: center;
-	margin: auto;
-}
-.separador{
-	width: 120px;
-}
-@media screen and (max-width:425px) and (min-width:320px) {
-	.contenedores{
-		width: 100%;height: 340px;
-	}
-}
 #segunda-vista{
 	display: none;
 }

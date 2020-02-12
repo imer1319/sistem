@@ -265,7 +265,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.fuente{\r\n\tfont-weight: 600;\r\n\tfont-size: 20px;\n}\n.contenedores{\r\n\tpadding: 20px;\r\n\twidth: 600px;\r\n\theight: 300px;\r\n\tborder: 2px solid #2d2d2d;\r\n\tbackground: white;\r\n\tdisplay: flex;\r\n\tjustify-content: center;\r\n\tmargin: auto;\n}\n.separador{\r\n\twidth: 120px;\n}\n@media screen and (max-width:425px) and (min-width:320px) {\n.contenedores{\r\n\t\twidth: 100%;height: 340px;\n}\n}\n#segunda-vista{\r\n\tdisplay: none;\n}\r\n", ""]);
+exports.push([module.i, "\n#segunda-vista{\r\n\tdisplay: none;\n}\r\n", ""]);
 
 // exports
 

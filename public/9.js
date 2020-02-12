@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -174,28 +174,31 @@ __webpack_require__.r(__webpack_exports__);
       maximoPunto: [],
       misRecords: [],
       desordenar: [],
-      palabras: ['Sensación', 'Ganado', 'Socorro', 'Lobotomía', 'Corazón', 'Cadera', 'Red', 'Patinar', 'Vegetal', 'Negativo', 'Arreglar', 'Erosión', 'Elástico', 'Campera', 'Preciosa', 'Pantera', 'Grabador', 'Galleta', 'Olvidarse', 'Actor', 'Hormonas', 'Pozo', 'Naranja', 'Derecha'],
+      numeros: ['2336', '2077', '1985', '3797', '9693', '3566', '7852', '6802', '4740', ' 9952', '5495', '5342', '7736', '5800', '3320', '9344', '9658', '3094', '5166', '2638', '1084', '6328', '8944', '9734'],
       ids: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x'],
-      buscar: null,
+      buscar: 'IMPARES',
       puntuacion: 0,
       tiempo: 100,
       tres_segundos: null,
+      contador: 3,
       temporizador_juego: null,
-      contador: 3
+      incrementador: 0,
+      resultado_mod: 1,
+      contador_par_impar: 0
     };
   },
   methods: {
     maximaPuntuacion: function maximaPuntuacion() {
       var _this = this;
 
-      axios.get("maxGame/" + 2).then(function (res) {
+      axios.get("maxGame/" + 7).then(function (res) {
         _this.maximoPunto = res.data;
       });
     },
     misPuntuaciones: function misPuntuaciones() {
       var _this2 = this;
 
-      axios.get("/puntuacion/" + 2).then(function (res) {
+      axios.get("/puntuacion/" + 7).then(function (res) {
         _this2.misRecords = res.data;
       });
     },
@@ -210,7 +213,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       var formData = new FormData();
-      formData.append('ejercicio_id', 2);
+      formData.append('ejercicio_id', 7);
       formData.append('user_id', this.perfil_usuario.id);
       formData.append('puntuacion', this.puntuacion);
       axios.post('/game', formData).then(function (res) {
@@ -221,8 +224,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     actualizar_datos_usuario: function actualizar_datos_usuario() {
+      var point = Math.floor(this.puntuacion / 3);
       var data = new FormData();
-      data.append('puntos', this.perfil_usuario.puntos + this.puntuacion / 3);
+      data.append('puntos', this.perfil_usuario.puntos + point);
       data.append('_method', 'PUT');
       var url = "/profile/".concat(this.perfil_usuario.id);
       axios.post(url, data).then(function (res) {});
@@ -268,17 +272,15 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     empezarJuego: function empezarJuego() {
-      this.desordenar = this.palabras.sort(function () {
+      this.desordenar = this.numeros.sort(function () {
         return Math.random() - 0.5;
       });
 
       for (var i = 0; i < this.desordenar.length; i++) {
         var dist = document.getElementById(this.ids[i]);
-        dist.innerHTML = this.desordenar[i];
+        var suma = parseInt(this.desordenar[i] - this.incrementador);
+        dist.innerHTML = suma;
       }
-
-      this.buscar = Math.floor(Math.random() * this.palabras.length);
-      document.getElementById("buscar").innerHTML = this.palabras[this.buscar];
     },
     error_Encontrado: function error_Encontrado(encontrado) {
       encontrado.classList.add('rubberBand');
@@ -294,10 +296,11 @@ __webpack_require__.r(__webpack_exports__);
         case "a":
           var a = document.getElementById("a");
 
-          if (this.desordenar[this.buscar] == this.desordenar[0]) {
+          if ((this.desordenar[0] - this.incrementador) % 2 == this.resultado_mod) {
             a.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(a);
           }
@@ -307,10 +310,11 @@ __webpack_require__.r(__webpack_exports__);
         case "b":
           var b = document.getElementById("b");
 
-          if (this.desordenar[this.buscar] == this.desordenar[1]) {
+          if ((this.desordenar[1] - this.incrementador) % 2 == this.resultado_mod) {
             b.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(b);
           }
@@ -320,10 +324,11 @@ __webpack_require__.r(__webpack_exports__);
         case "c":
           var c = document.getElementById("c");
 
-          if (this.desordenar[this.buscar] == this.desordenar[2]) {
+          if ((this.desordenar[2] - this.incrementador) % 2 == this.resultado_mod) {
             c.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(c);
           }
@@ -333,10 +338,11 @@ __webpack_require__.r(__webpack_exports__);
         case "d":
           var d = document.getElementById("d");
 
-          if (this.desordenar[this.buscar] == this.desordenar[3]) {
+          if ((this.desordenar[3] - this.incrementador) % 2 == this.resultado_mod) {
             d.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(d);
           }
@@ -346,10 +352,11 @@ __webpack_require__.r(__webpack_exports__);
         case "e":
           var e = document.getElementById("e");
 
-          if (this.desordenar[this.buscar] == this.desordenar[4]) {
+          if ((this.desordenar[4] - this.incrementador) % 2 == this.resultado_mod) {
             e.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(e);
           }
@@ -359,10 +366,11 @@ __webpack_require__.r(__webpack_exports__);
         case "f":
           var f = document.getElementById("f");
 
-          if (this.desordenar[this.buscar] == this.desordenar[5]) {
+          if ((this.desordenar[5] - this.incrementador) % 2 == this.resultado_mod) {
             f.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(f);
           }
@@ -372,10 +380,11 @@ __webpack_require__.r(__webpack_exports__);
         case "g":
           var g = document.getElementById("g");
 
-          if (this.desordenar[this.buscar] == this.desordenar[6]) {
+          if ((this.desordenar[6] - this.incrementador) % 2 == this.resultado_mod) {
             g.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(g);
           }
@@ -385,10 +394,11 @@ __webpack_require__.r(__webpack_exports__);
         case "h":
           var h = document.getElementById("h");
 
-          if (this.desordenar[this.buscar] == this.desordenar[7]) {
+          if ((this.desordenar[7] - this.incrementador) % 2 == this.resultado_mod) {
             h.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(h);
           }
@@ -398,10 +408,11 @@ __webpack_require__.r(__webpack_exports__);
         case "i":
           var i = document.getElementById("i");
 
-          if (this.desordenar[this.buscar] == this.desordenar[8]) {
+          if ((this.desordenar[8] - this.incrementador) % 2 == this.resultado_mod) {
             i.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(i);
           }
@@ -411,10 +422,11 @@ __webpack_require__.r(__webpack_exports__);
         case "j":
           var j = document.getElementById("j");
 
-          if (this.desordenar[this.buscar] == this.desordenar[9]) {
+          if ((this.desordenar[9] - this.incrementador) % 2 == this.resultado_mod) {
             j.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(j);
           }
@@ -424,10 +436,11 @@ __webpack_require__.r(__webpack_exports__);
         case "k":
           var k = document.getElementById("k");
 
-          if (this.desordenar[this.buscar] == this.desordenar[10]) {
+          if ((this.desordenar[10] - this.incrementador) % 2 == this.resultado_mod) {
             k.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(k);
           }
@@ -437,10 +450,11 @@ __webpack_require__.r(__webpack_exports__);
         case "l":
           var l = document.getElementById("l");
 
-          if (this.desordenar[this.buscar] == this.desordenar[11]) {
+          if ((this.desordenar[11] - this.incrementador) % 2 == this.resultado_mod) {
             l.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(l);
           }
@@ -450,10 +464,11 @@ __webpack_require__.r(__webpack_exports__);
         case "m":
           var m = document.getElementById("m");
 
-          if (this.desordenar[this.buscar] == this.desordenar[12]) {
+          if ((this.desordenar[12] - this.incrementador) % 2 == this.resultado_mod) {
             m.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(m);
           }
@@ -463,10 +478,11 @@ __webpack_require__.r(__webpack_exports__);
         case "n":
           var n = document.getElementById("n");
 
-          if (this.desordenar[this.buscar] == this.desordenar[13]) {
+          if ((this.desordenar[13] - this.incrementador) % 2 == this.resultado_mod) {
             n.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(n);
           }
@@ -476,10 +492,11 @@ __webpack_require__.r(__webpack_exports__);
         case "o":
           var o = document.getElementById("o");
 
-          if (this.desordenar[this.buscar] == this.desordenar[14]) {
+          if ((this.desordenar[14] - this.incrementador) % 2 == this.resultado_mod) {
             o.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(o);
           }
@@ -489,10 +506,11 @@ __webpack_require__.r(__webpack_exports__);
         case "p":
           var p = document.getElementById("p");
 
-          if (this.desordenar[this.buscar] == this.desordenar[15]) {
+          if ((this.desordenar[15] - this.incrementador) % 2 == this.resultado_mod) {
             p.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(p);
           }
@@ -502,10 +520,11 @@ __webpack_require__.r(__webpack_exports__);
         case "q":
           var q = document.getElementById("q");
 
-          if (this.desordenar[this.buscar] == this.desordenar[16]) {
+          if ((this.desordenar[16] - this.incrementador) % 2 == this.resultado_mod) {
             q.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(q);
           }
@@ -515,10 +534,11 @@ __webpack_require__.r(__webpack_exports__);
         case "r":
           var r = document.getElementById("r");
 
-          if (this.desordenar[this.buscar] == this.desordenar[17]) {
+          if ((this.desordenar[17] - this.incrementador) % 2 == this.resultado_mod) {
             r.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(r);
           }
@@ -528,10 +548,11 @@ __webpack_require__.r(__webpack_exports__);
         case "s":
           var s = document.getElementById("s");
 
-          if (this.desordenar[this.buscar] == this.desordenar[18]) {
+          if ((this.desordenar[18] - this.incrementador) % 2 == this.resultado_mod) {
             s.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(s);
           }
@@ -541,10 +562,11 @@ __webpack_require__.r(__webpack_exports__);
         case "t":
           var t = document.getElementById("t");
 
-          if (this.desordenar[this.buscar] == this.desordenar[19]) {
+          if ((this.desordenar[19] - this.incrementador) % 2 == this.resultado_mod) {
             t.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(t);
           }
@@ -554,10 +576,11 @@ __webpack_require__.r(__webpack_exports__);
         case "u":
           var u = document.getElementById("u");
 
-          if (this.desordenar[this.buscar] == this.desordenar[20]) {
+          if ((this.desordenar[20] - this.incrementador) % 2 == this.resultado_mod) {
             u.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(u);
           }
@@ -567,10 +590,11 @@ __webpack_require__.r(__webpack_exports__);
         case "v":
           var v = document.getElementById("v");
 
-          if (this.desordenar[this.buscar] == this.desordenar[21]) {
+          if ((this.desordenar[21] - this.incrementador) % 2 == this.resultado_mod) {
             v.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(v);
           }
@@ -580,10 +604,11 @@ __webpack_require__.r(__webpack_exports__);
         case "w":
           var w = document.getElementById("w");
 
-          if (this.desordenar[this.buscar] == this.desordenar[22]) {
+          if ((this.desordenar[22] - this.incrementador) % 2 == this.resultado_mod) {
             w.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(w);
           }
@@ -593,15 +618,35 @@ __webpack_require__.r(__webpack_exports__);
         case "x":
           var x = document.getElementById("x");
 
-          if (this.desordenar[this.buscar] == this.desordenar[23]) {
+          if ((this.desordenar[23] - this.incrementador) % 2 == this.resultado_mod) {
             x.innerHTML = " ";
             this.puntuacion += 3;
-            this.empezarJuego();
+            this.contador_par_impar++;
+            this.cambiar_numeros();
           } else {
             this.error_Encontrado(x);
           }
 
           break;
+      }
+    },
+    cambiar_numeros: function cambiar_numeros() {
+      if (this.resultado_mod == 1) {
+        if (this.contador_par_impar == 5) {
+          this.resultado_mod = 0;
+          this.contador_par_impar = 0;
+          this.incrementador += 1;
+          this.empezarJuego();
+          this.buscar = 'PARES';
+        }
+      } else if (this.resultado_mod == 0) {
+        if (this.contador_par_impar == 5) {
+          this.resultado_mod = 1;
+          this.contador_par_impar = 0;
+          this.incrementador += 1;
+          this.empezarJuego();
+          this.buscar = 'IMPARES';
+        }
       }
     }
   },
@@ -612,10 +657,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&":
-/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -631,15 +676,15 @@ exports.push([module.i, "\n#primera-vista{\r\n\tdisplay: flex;\n}\n#segunda-vist
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./2-buscaPalabra.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./7-par-impar.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -661,10 +706,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0& ***!
-  \*****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3& ***!
+  \**************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -684,7 +729,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-5" }, [
                 _c("h4", { staticClass: "text-center" }, [
-                  _vm._v("Busca la palabra")
+                  _vm._v("Par e Impar")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -779,7 +824,9 @@ var render = function() {
               _vm._m(3)
             ]),
             _vm._v(" "),
-            _c("h4", { staticClass: "text-center", attrs: { id: "buscar" } }),
+            _c("h4", { staticClass: "text-center" }, [
+              _vm._v(_vm._s(_vm.buscar))
+            ]),
             _vm._v(" "),
             _c(
               "table",
@@ -1030,7 +1077,10 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "col-md-8 m-auto", attrs: { id: "tercera-vista" } },
+      {
+        staticClass: "col-md-8 col-sm-12 m-auto",
+        attrs: { id: "tercera-vista" }
+      },
       [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-body" }, [
@@ -1072,7 +1122,10 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "col-md-8 m-auto", attrs: { id: "cuarta-vista" } },
+      {
+        staticClass: "col-md-8 col-sm-12 m-auto",
+        attrs: { id: "cuarta-vista" }
+      },
       [
         _c("div", { staticClass: "card animated bounceInRight" }, [
           _c(
@@ -1092,7 +1145,7 @@ var render = function() {
               _c("h4", [
                 _vm._v("Aumento: "),
                 _c("b", [_vm._v("+")]),
-                _vm._v(" " + _vm._s(_vm.puntuacion / 3))
+                _vm._v(" " + _vm._s(Math.floor(_vm.puntuacion / 3)))
               ]),
               _c("hr"),
               _vm._v(" "),
@@ -1137,23 +1190,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
+    return _c("div", { staticClass: "col-12 col-md-4" }, [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "text-center" }, [
             _c("img", {
               staticClass: "card-img-top mx-auto my-3",
-              staticStyle: {
-                filter: "drop-shadow(5px 5px 10px #444)",
-                width: "50%"
-              },
-              attrs: { src: "/imagenes/libro.png" }
+              staticStyle: { width: "60%" },
+              attrs: { src: "/imagenes/consejos-juegos/consejo-par-impar.png" }
             }),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _c("p", { staticClass: "card-text" }, [
+              _c("h4", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Some quick example text to build on the card title and make up the bulk of the card's content."
+                  "Encuentra lo antes posible el numero, siempre saldra uno par y el siguiente impar, antes de que se termine el tiempo"
                 )
               ]),
               _vm._v(" "),
@@ -1195,18 +1245,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/users/game/2-buscaPalabra.vue":
-/*!****************************************************!*\
-  !*** ./resources/js/users/game/2-buscaPalabra.vue ***!
-  \****************************************************/
+/***/ "./resources/js/users/game/7-par-impar.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/users/game/7-par-impar.vue ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./2-buscaPalabra.vue?vue&type=template&id=09945bd0& */ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0&");
-/* harmony import */ var _2_buscaPalabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./2-buscaPalabra.vue?vue&type=script&lang=js& */ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./2-buscaPalabra.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./7-par-impar.vue?vue&type=template&id=01534ac3& */ "./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3&");
+/* harmony import */ var _7_par_impar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./7-par-impar.vue?vue&type=script&lang=js& */ "./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./7-par-impar.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1217,9 +1267,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _2_buscaPalabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _7_par_impar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1229,54 +1279,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/users/game/2-buscaPalabra.vue"
+component.options.__file = "resources/js/users/game/7-par-impar.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************/
+/***/ "./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./2-buscaPalabra.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./7-par-impar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************************/
+/***/ "./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./2-buscaPalabra.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./7-par-impar.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0& ***!
-  \***********************************************************************************/
+/***/ "./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3& ***!
+  \********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./2-buscaPalabra.vue?vue&type=template&id=09945bd0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/2-buscaPalabra.vue?vue&type=template&id=09945bd0&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./7-par-impar.vue?vue&type=template&id=01534ac3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_2_buscaPalabra_vue_vue_type_template_id_09945bd0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

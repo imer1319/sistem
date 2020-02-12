@@ -286,6 +286,9 @@ __webpack_require__.r(__webpack_exports__);
           _this3.pregunta.respuestaC = "";
           _this3.pregunta.respuestaD = "";
           _this3.pregunta.esCorrecto = "";
+
+          _this3.mostrarPregunta();
+
           $('#createPregunta').modal('hide');
         });
       }

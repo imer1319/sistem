@@ -1,7 +1,7 @@
 <template>
 	<div class="container-fluid">
 		<div class="row" id="primera-vista">
-			<div class="col-md-8">
+			<div class="col-12 col-md-8">
 				<div class="card mb-3">
 					<div class="card-body">
 						<div class="row">
@@ -13,8 +13,8 @@
 								<div class="text-center"><h5>Record</h5></div>
 								<div v-for="(max, index) in maximoPunto">
 									<div class="card-footer row text-left">
-										<h5 class="col-md-6">{{ max.name }}</h5>
-										<h5 class="col-md-6">{{ max.pivot.puntuacion }}</h5>
+										<h5 class="col-md-6 col-12">{{ max.name }}</h5>
+										<h5 class="col-md-6 col-12">{{ max.pivot.puntuacion }}</h5>
 									</div>
 								</div>
 							</div>
@@ -38,14 +38,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-12 col-md-4">
 				<div class="card">
 					<div class="card-body">
 						<div class="text-center">
-							<img src="/imagenes/libro.png" class="card-img-top mx-auto my-3" 
-							style="filter: drop-shadow(5px 5px 10px #444); width: 80%;">
+							<img src="/imagenes/consejos-juegos/consejo-memorizar-palabra.png" class="card-img-top mx-auto my-3" 
+							style="width: 60%;">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<h4 class="card-text">Memoriza la palabra que aparecera y luego selecciona la correcta, antes de que se termine el tiempo</h4>
 								<div class="text-left">
 									<p><b>Tiempo: </b>60 segundos</p>
 									<p><b>Correcta: </b>+3 puntos</p>
@@ -61,40 +61,42 @@
 			<div id="numero_3_seg">{{ contador }}</div>
 		</div>
 		<div class="row" id="segunda-vista">
-			<div class="card">
-				<div class="card-body ">
-					<div class="row">
-						<span class="col-4">Pts: {{ puntuacion }}</span>
-						<div class="col-8">
-							<ul id="skill">
-								<li>
-									<span class="bar graphic-design" id="progressBar"></span>
-								</li>
-							</ul>
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body ">
+						<div class="row">
+							<span class="col-4">Pts: {{ puntuacion }}</span>
+							<div class="col-8">
+								<ul id="skill">
+									<li>
+										<span class="bar graphic-design" id="progressBar"></span>
+									</li>
+								</ul>
+							</div>
 						</div>
-					</div>
-					<h4 class="text-center my-5">{{ muestrame_buscando }}</h4>
-					<div class="container-fluid row text-center">
-						<div class="contenedor-card col-6"@click="precionar($event)" id="a"></div>
-						<div class="contenedor-card col-6"@click="precionar($event)" id="b"></div>
-						<div class="contenedor-card col-6"@click="precionar($event)" id="c"></div>
-						<div class="contenedor-card col-6"@click="precionar($event)" id="d"></div>
-						<div class="contenedor-card col-6"@click="precionar($event)" id="e"></div>
-						<div class="contenedor-card col-6"@click="precionar($event)" id="f"></div>
-						<div class="contenedor-card col-6"@click="precionar($event)" id="g"></div>
-						<div class="contenedor-card col-6"@click="precionar($event)" id="h"></div>
+						<h4 class="text-center my-5">{{ muestrame_buscando }}</h4>
+						<div class="container-fluid row text-center">
+							<div class="contenedor-card col-6"@click="precionar($event)" id="a"></div>
+							<div class="contenedor-card col-6"@click="precionar($event)" id="b"></div>
+							<div class="contenedor-card col-6"@click="precionar($event)" id="c"></div>
+							<div class="contenedor-card col-6"@click="precionar($event)" id="d"></div>
+							<div class="contenedor-card col-6"@click="precionar($event)" id="e"></div>
+							<div class="contenedor-card col-6"@click="precionar($event)" id="f"></div>
+							<div class="contenedor-card col-6"@click="precionar($event)" id="g"></div>
+							<div class="contenedor-card col-6"@click="precionar($event)" id="h"></div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div id="tercera-vista"class="col-md-8 m-auto">
+		<div id="tercera-vista"class="col-md-8  m-auto">
 			<div class="card">
 				<div class="card-body">
 					<div class="col-8 m-auto text-center">
 						<form v-on:submit.prevent="guardarJuego">
-							<h3 class="text-uppercase">se acabo el tiempo</h3>
+							<h3 class="text-uppercase">Se acabo el tiempo</h3>
 							<img src="imagenes/relogarena.png" alt="" width="60%">
-							<input type="submit"value="Ver resultados" class="btn btn-primary  btn-block btn-lg">
+							<input type="submit"value="Ver resultados" class="btn btn-primary btn-block">
 						</form>
 					</div>
 				</div>
@@ -106,7 +108,7 @@
 					<h3 class="text-center">estos son los resultados</h3>
 					<h4>tiempo : 00:00</h4><hr>
 					<h4>Puntuacion: {{ puntuacion }}</h4><hr>
-					<h4>Aumento: <b>+</b> {{ puntuacion/3 }}</h4><hr>
+					<h4>Aumento: <b>+</b> {{ Math.floor(puntuacion/3) }}</h4><hr>
 					<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
 						Ir al Inicio
 					</router-link>
@@ -128,7 +130,7 @@
 				maximoPunto:[],
 				misRecords:[],
 				desordenar:[],
-				palabras:['2336','2077','1985','3797','9693','3566','7852','6802','4740',' 9952','5495','5342','7735','5807','3320','9344','9657','3091','5163','2638','1085','6323','8944','9734'],
+				palabras:['Senso','Ganado','Socorro','Lobo','Corazón','Cadera','Red','Patinar','Vegetal','Negativo','Arreglo','Erosión','Elástico','Campera','Preciosa','Pantera','Grabador','Galleta','Olvidar','Actor','Hormonas','Pozo','Naranja','Derecha'],
 				ids:['a','b','c','d','e','f','g','h'],
 				buscar:null,
 				puntuacion:0,
@@ -143,12 +145,12 @@
 		},
 		methods:{
 			maximaPuntuacion(){
-				axios.get("maxGame/"+2).then(res =>{
+				axios.get("maxGame/"+5).then(res =>{
 					this.maximoPunto = res.data
 				})
 			},
 			misPuntuaciones(){
-				axios.get("/puntuacion/"+2).then(res =>{
+				axios.get("/puntuacion/"+5).then(res =>{
 					this.misRecords = res.data
 				})
 			},
@@ -159,7 +161,7 @@
 			},
 			guardarJuego(){
 				let formData = new FormData()
-				formData.append('ejercicio_id', 2)
+				formData.append('ejercicio_id', 5)
 				formData.append('user_id', this.perfil_usuario.id)
 				formData.append('puntuacion', this.puntuacion)
 
@@ -171,8 +173,9 @@
 				})
 			},
 			actualizar_datos_usuario(){
+				var point = Math.floor(this.puntuacion/3)
 				let data = new FormData();
-				data.append('puntos', this.perfil_usuario.puntos + this.puntuacion/3);
+				data.append('puntos', this.perfil_usuario.puntos + point);
 				data.append('_method','PUT');
 				var url = `/profile/${this.perfil_usuario.id}`
 				axios.post(url, data).then(res=>{
@@ -258,12 +261,11 @@
 					break;
 					case "b":
 					var b = document.getElementById("b");
-					if(this.desordenar[this.buscar]==this.desordenar[1]){this.solucion_encontrado(b); this.empezarJuego();
-					}else{this.error_Encontrado(b)}
+					if(this.desordenar[this.buscar]==this.desordenar[1]){this.solucion_encontrado(b);this.empezarJuego();}else{this.error_Encontrado(b)}
 					break;
 					case "c":
 					var c = document.getElementById("c");
-					if(this.desordenar[this.buscar]==this.desordenar[2]){this.solucion_encontrado(c); this.empezarJuego();}else{this.error_Encontrado(c)}
+					if(this.desordenar[this.buscar]==this.desordenar[2]){this.solucion_encontrado(c);this.empezarJuego();}else{this.error_Encontrado(c)}
 					break;
 					case "d":
 					var d = document.getElementById("d");
@@ -271,19 +273,19 @@
 					break;
 					case "e":
 					var e = document.getElementById("e");
-					if (this.desordenar[this.buscar]==this.desordenar[4]){this.solucion_encontrado(e); this.empezarJuego();}else{this.error_Encontrado(e)}
+					if (this.desordenar[this.buscar]==this.desordenar[4]){this.solucion_encontrado(e);this.empezarJuego();}else{this.error_Encontrado(e)}
 					break;
 					case "f":
 					var f = document.getElementById("f");
-					if (this.desordenar[this.buscar]==this.desordenar[5]){this.solucion_encontrado(f); this.empezarJuego();}else{this.error_Encontrado(f)}
+					if (this.desordenar[this.buscar]==this.desordenar[5]){this.solucion_encontrado(f);this.empezarJuego();}else{this.error_Encontrado(f)}
 					break;
 					case "g":
 					var g = document.getElementById("g");
-					if (this.desordenar[this.buscar]==this.desordenar[6]){this.solucion_encontrado(g); this.empezarJuego();}else{this.error_Encontrado(g)}
+					if (this.desordenar[this.buscar]==this.desordenar[6]){this.solucion_encontrado(g);this.empezarJuego();}else{this.error_Encontrado(g)}
 					break;
 					case "h":
 					var h = document.getElementById("h");
-					if (this.desordenar[this.buscar]==this.desordenar[7]){this.solucion_encontrado(h); this.empezarJuego();}else{this.error_Encontrado(h)}
+					if (this.desordenar[this.buscar]==this.desordenar[7]){this.solucion_encontrado(h);this.empezarJuego();}else{this.error_Encontrado(h)}
 					break;
 				}
 			},

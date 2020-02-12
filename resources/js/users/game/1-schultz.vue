@@ -34,7 +34,7 @@
 							<hr>
 							<div class="row text-center" v-for="(punt, index) in misRecords">
 								<div class="col-2">{{ index+1 }}</div>
-								<div class="col-6">{{ punt.created_at }}</div>
+								<h5 class="col-6 bg-primary text-white">{{ punt.created_at }}</h5>
 								<div class="col-4">{{ punt.puntuacion }}</div>
 							</div>
 						</div>
@@ -43,10 +43,10 @@
 				<div class="col-md-4 col-sm-12">
 					<div class="card">
 						<div class="text-center">
-							<img src="/imagenes/libro.png" class="card-img-top mx-auto my-3" 
-							style="filter: drop-shadow(5px 5px 10px #444); width: 50%;">
+							<img src="/imagenes/consejos-juegos/consejo-schulte.png" class="card-img-top mx-auto my-3" 
+							style="width: 50%;">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<h4 class="card-text">Concéntrese en el centro de la cuadrícula y encuentre todos los números, antes de que se termine el tiempo</h4>
 								<div class="text-left">
 									<p><b>Tiempo: </b>60 segundos</p>
 									<p><b>Correcta: </b>+2 +3 +4 puntos</p>
@@ -209,7 +209,7 @@
 					</tr>
 				</table>
 			</div>
-			<div v-show="pasos == 5" class="col-md-8 col-sm-12 m-auto">
+			<div v-show="pasos == 5" class="col-md-8  m-auto">
 				<div class="card">
 					<div class="card-body">
 						<div class="col-8 m-auto text-center">
@@ -228,7 +228,7 @@
 						<h3 class="text-center">estos son los resultados</h3><hr>
 						<h4>tiempo : 00:00</h4><hr>
 						<h4>Puntuacion: {{ puntuacion }}</h4><hr>
-						<h4>Aumento: <b>+</b> {{ puntuacion/15 }}</h4><hr>
+						<h4>Aumento: <b>+</b> {{ Math.floor(puntuacion/15) }}</h4><hr>
 						<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block"> Ir al Inicio</router-link>
 					</div>
 				</div>
@@ -292,7 +292,6 @@
 				formData.append('ejercicio_id',1)
 				formData.append('user_id', this.perfil_usuario.id)
 				formData.append('puntuacion', this.puntuacion)
-
 				axios.post('/game',formData)
 				.then(res=>{
 					this.actualizarDatosUsuario()
@@ -300,8 +299,9 @@
 				})
 			},
 			actualizarDatosUsuario(){
+				var point = Math.floor(this.puntuacion/15)
 				let data = new FormData();
-				data.append('puntos', this.perfil_usuario.puntos + this.puntuacion/15);
+				data.append('puntos', this.perfil_usuario.puntos + point);
 				data.append('_method','PUT');
 				var url = `/profile/${this.perfil_usuario.id}`
 				axios.post(url, data).then(res=>{

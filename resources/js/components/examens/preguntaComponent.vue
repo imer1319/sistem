@@ -239,6 +239,7 @@
 						this.pregunta.respuestaC = "";
 						this.pregunta.respuestaD = "";
 						this.pregunta.esCorrecto = "";
+						this.mostrarPregunta()
 						$('#createPregunta').modal('hide');
 					})
 				}

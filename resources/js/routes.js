@@ -87,19 +87,34 @@ export const routes = [
 		component: () => import('./users/game/1-schultz.vue')
 	},
 	{
+		name: 'schult-letra',
+		path: '/schult-letra',
+		component: () => import('./users/game/2-schulte-letras.vue')
+	},
+	{
 		name: 'buscar-palabra',
 		path: '/buscar-palabra',
-		component: () => import('./users/game/2-buscaPalabra.vue')
+		component: () => import('./users/game/3-busca-palabras.vue')
 	},
 	{
 		name: 'buscar-numero',
 		path: '/buscar-numero',
-		component: () => import('./users/game/3-buscar-numero.vue')
+		component: () => import('./users/game/4-buscar-numero.vue')
+	},
+	{
+		name: 'encuentra-palabra',
+		path: '/encuentra-palabra',
+		component: () => import('./users/game/5-recuerda-palabra.vue')
+	},
+	{
+		name: 'encuentra-numeros',
+		path: '/encuentra-numeros',
+		component: () => import('./users/game/6-recuerda-numeros.vue')
 	},
 	{
 		name: 'par-impar',
 		path: '/par-impar',
-		component: () => import('./users/game/4-par-impar.vue')
+		component: () => import('./users/game/7-par-impar.vue')
 	},
 	{
 		name: 'borde-palabra',
@@ -115,21 +130,6 @@ export const routes = [
 		name: 'campo-visual',
 		path: '/campo-visual',
 		component: () => import('./users/game/7-campo-visual.vue')
-	},
-	{
-		name: 'schult-letra',
-		path: '/schult-letra',
-		component: () => import('./users/game/8-schulte-letras.vue')
-	},
-	{
-		name: 'encuentra-palabra',
-		path: '/encuentra-palabra',
-		component: () => import('./users/game/9-encuentra-palabra.vue')
-	},
-	{
-		name: 'encuentra-numeros',
-		path: '/encuentra-numeros',
-		component: () => import('./users/game/11-encuentra-numeros.vue')
 	},
 	/********--RUTA -- EJERCICIOS--******/
 	{

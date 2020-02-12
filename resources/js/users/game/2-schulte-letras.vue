@@ -7,13 +7,13 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-5">
-									<h3 class="text-center">Schulte</h3>
+									<h4 class="text-center text-uppercase">Schulte letras</h4>
 									<div class="btn btn-primary btn-block" @click="temporizame()">Iniciar
 									</div>
 								</div>
 								<div class="col-7">
 									<div class="text-center"><h5>Record</h5></div>
-									<div v-for="(max, index) in maximo">
+									<div v-for="(max, index) in maximoPunto" v-if="index == 0">
 										<div class="card-footer row text-left">
 											<h5 class="col-md-6 col-12">{{ max.name }}</h5>
 											<h5 class="col-md-6 col-12">{{ max.pivot.puntuacion }}</h5>
@@ -32,9 +32,9 @@
 								<div class="col-4">Puntos</div>
 							</div>
 							<hr>
-							<div class="row text-center" v-for="(punt, index) in recordMundial">
+							<div class="row text-center" v-for="(punt, index) in misRecords">
 								<div class="col-2">{{ index+1 }}</div>
-								<div class="col-6">{{ punt.created_at }}</div>
+								<h5 class="col-6 bg-primary text-white">{{ punt.created_at }}</h5>
 								<div class="col-4">{{ punt.puntuacion }}</div>
 							</div>
 						</div>
@@ -43,10 +43,10 @@
 				<div class="col-md-4 col-sm-12">
 					<div class="card">
 						<div class="text-center">
-							<img src="/imagenes/libro.png" class="card-img-top mx-auto my-3" 
-							style="filter: drop-shadow(5px 5px 10px #444); width: 80%;">
+							<img src="/imagenes/consejos-juegos/consejo-schulte-letra.png" class="card-img-top mx-auto my-3" 
+							style="width: 50%;">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<h4 class="card-text">Concéntrese en el centro de la cuadrícula y encuentre todas las letras, antes de que se termine el tiempo</h4>
 								<div class="text-left">
 									<p><b>Tiempo: </b>60 segundos</p>
 									<p><b>Correcta: </b>+2 +3 +4 puntos</p>
@@ -221,17 +221,17 @@
 						</div>
 					</div>
 				</div>
-				<div v-show="pasos == 6" class="col-md-8 m-auto">
-					<div class="card animated bounceInRight">
-						<div class="card-body">
-							<h3 class="text-center">estos son los resultados</h3>
-							<h4>tiempo : 00:00</h4><hr>
-							<h4>Puntuacion: {{ puntuacion }}</h4><hr>
-							<h4>Aumento: <b>+</b> {{ puntuacion/3 }}</h4><hr>
-							<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
-								Ir al Inicio
-							</router-link>
-						</div>
+			</div>
+			<div v-show="pasos == 6" class="col-md-8 m-auto">
+				<div class="card animated bounceInRight">
+					<div class="card-body">
+						<h3 class="text-center">estos son los resultados</h3>
+						<h4>tiempo : 00:00</h4><hr>
+						<h4>Puntuacion: {{ puntuacion }}</h4><hr>
+						<h4>Aumento: <b>+</b> {{ Math.floor(puntuacion/3) }}</h4><hr>
+						<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
+							Ir al Inicio
+						</router-link>
 					</div>
 				</div>
 			</div>
@@ -241,10 +241,9 @@
 <script>
 	export default{
 		created:function() {
-			this.obtenerDatosUsuario()
-			this.mostrarPuntuacion()
-			this.maximoGame()
-			this.showUser()
+			this.misPuntuaciones()
+			this.maximaPuntuacion()
+			this.obtener_datos_usuario()
 		},
 		data(){
 			return{
@@ -266,62 +265,47 @@
 				miTemporizador:0,
 				contador:3,
 				busca_let:null,
-				user:null,
-				guardarEjercicio:{user_id:'',ejercicio_id:'',puntos:''},
-				recordMundial:[],
-				maximo:{},
-				usuario:{},
+				misRecords:[],
+				maximoPunto:{},
+				perfil_usuario:{},
 			}
 		},
 		methods:{
-			showUser(){
+			obtener_datos_usuario(){
 				var url ="/profile"
 				axios.get(url).then(res =>{
-					this.usuario = res.data
+					this.perfil_usuario = res.data
 				})
 			},
-			actualizarDatosUsuario(){
-				let data = new FormData();
-				data.append('puntos', this.usuario.puntos + this.puntuacion/15);
-				data.append('_method','PUT');
-				var url = `/profile/${this.usuario.id}`
-				axios.post(url, data).then(res=>{
-
+			maximaPuntuacion(){
+				axios.get("maxGame/"+2).then(res =>{
+					this.maximoPunto = res.data
 				})
 			},
-			maximoGame(){
-				axios.get("maxGame/"+1).then(res =>{
-					this.maximo = res.data
-				})
-			},
-			mostrarPuntuacion(){
-				axios.get("/puntuacion/"+1).then(res =>{
-					this.recordMundial = res.data
-				})
-			},
-			obtenerDatosUsuario(){
-				axios.get("/miID").then(res =>{
-					this.user = res.data
+			misPuntuaciones(){
+				axios.get("/puntuacion/"+2).then(res =>{
+					this.misRecords = res.data
 				})
 			},
 			guardarResultado(){
-				this.guardarEjercicio.ejercicio_id = 1
-				this.guardarEjercicio.user_id = this.user
-				this.guardarEjercicio.puntos = this.puntuacion
-
 				let formData = new FormData()
-				formData.append('ejercicio_id', this.guardarEjercicio.ejercicio_id)
-				formData.append('user_id', this.guardarEjercicio.user_id)
-				formData.append('puntuacion', this.guardarEjercicio.puntos)
-
+				formData.append('ejercicio_id', 2)
+				formData.append('user_id', this.perfil_usuario.id)
+				formData.append('puntuacion', this.puntuacion)
 				axios.post('/game',formData)
 				.then(res=>{
-					this.guardarEjercicio.ejercicio_id = ""
-					this.guardarEjercicio.user_id = ""
-					this.guardarEjercicio.puntos = ""
 					this.actualizarDatosUsuario()
-					this.puntuacion = 0
 					this.pasos = 6
+				})
+			},
+			actualizarDatosUsuario(){
+				var point = Math.floor(this.puntuacion/3)
+				let data = new FormData();
+				data.append('puntos', this.perfil_usuario.puntos + point);
+				data.append('_method','PUT');
+				var url = `/profile/${this.perfil_usuario.id}`
+				axios.post(url, data).then(res=>{
+
 				})
 			},
 			temporizame(){
@@ -524,7 +508,7 @@
 				switch (targetId) {
 					case "a3":
 					var a = document.getElementById("a3");
-					if (this.nivel3[this.actual] == this.desordenar[this.buscando]){ a.innerHTML="";this.puntuacion+=3; this.buscando++;  this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(a);}
+					if (this.nivel3[0] == this.desordenar[this.buscando]){ a.innerHTML="";this.puntuacion+=3; this.buscando++;  this.esUltimo(this.buscando);this.busca_let.innerHTML=this.desordenar[this.buscando]}else{this.error_Encontrado(a);}
 					break;
 					case "b3":
 					var b = document.getElementById("b3");

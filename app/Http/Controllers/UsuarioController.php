@@ -15,7 +15,7 @@ class UsuarioController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $roles = Role::find(1);
+            $roles = Role::find(2);
             return $roles->users;
         }
         return view('layouts.administrador');

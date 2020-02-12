@@ -29,41 +29,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.obtener_consejo();
+  },
   data: function data() {
     return {
       content: [{
         nombre: 'Lecciones',
         icono: 'lecciones.png',
         url: '/ejercicios',
-        background: 'color1'
+        background: 'color8'
       }, {
         nombre: 'examen',
         icono: 'examen.png',
         url: '/exam',
-        background: 'color1'
+        background: 'color8'
       }, {
         nombre: 'ejercicio',
         icono: 'ejercicios.png',
         url: 'game',
-        background: 'color1'
+        background: 'color8'
       }, {
-        nombre: 'puntuaciones',
+        nombre: 'Perfil',
         icono: 'puntuaciones.png',
         url: '/profile',
-        background: 'color1'
+        background: 'color8'
       }, {
-        nombre: 'posicion',
-        icono: 'posicion.png',
+        nombre: 'ranking',
+        icono: 'ranking.png',
         url: '/ranking',
-        background: 'color1'
+        background: 'color8'
       }, {
         nombre: 'insignia',
         icono: 'premios.png',
         url: '',
-        background: 'color1'
-      }]
+        background: 'color8'
+      }],
+      consejos: ['Aprende a usar tus ojos para leer más rápido', 'Ponte en forma, para darle más oxígeno a tu cerebro', 'Lee sobre el cerebro y su funcionamiento', 'No le digas a alguien que lea, primero que vea como lo disfrutas y él lo hará solo.', 'Aleja cualquier distraccion mientras lees', 'No te preocupes de la velocidad de lectura', 'Si lees lo que te gusta no te aburriras'],
+      consejo: null
     };
+  },
+  methods: {
+    obtener_consejo: function obtener_consejo() {
+      var ram = Math.floor(Math.random() * this.consejos.length);
+      this.consejo = this.consejos[ram];
+    }
   }
 });
 
@@ -85,11 +97,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "consejo" }, [_vm._v(_vm._s(_vm.consejo))]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
       _vm._l(_vm.content, function(contenido) {
-        return _c("div", { staticClass: "col-sm-12 col-md-6 col-lg-4" }, [
+        return _c("div", { staticClass: "col-6 col-md-4 col-lg-3" }, [
           _c(
             "div",
             { staticClass: "text-center" },
@@ -98,13 +112,17 @@ var render = function() {
                 _c("div", { staticClass: "my-2" }, [
                   _c(
                     "div",
-                    { staticClass: "card m-auto", class: contenido.background },
+                    {
+                      staticClass: "card card-primary card-outline radio-card",
+                      class: contenido.background
+                    },
                     [
-                      _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "card-body box-profile" }, [
                         _c("img", {
+                          staticClass: "card-img-top img-responsive",
                           attrs: {
                             src: "/imagenes/" + contenido.icono,
-                            height: "140"
+                            height: "170"
                           }
                         })
                       ]),
