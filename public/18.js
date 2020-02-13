@@ -193,6 +193,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showUser();
@@ -351,7 +371,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.sombra{\n\tbox-shadow: 0px 3px 2px #aab2bd;\n}\n.cont{\n\tposition: relative; \n\theight:120px; \n\twidth:120px;\n}\n.cont img{\n\theight:100%; \n\twidth:100%;\n}\n.cont a{\n\tposition: absolute;\n\tbottom: 15px;\n\tleft: 70px;\n\ttext-shadow: 0 0 10px #000;\n}\na i{\n\tcursor: pointer; \n\tfont-size: 25px;\n\tcolor: #fff;\n}\n.border-right {\n\tborder-right: 1px solid #dee2e6!important;\n}\n.description-block {\n\tdisplay: block;\n\tmargin: 10px 0;\n\ttext-align: center;\n}\n.widget-user .widget-user-image {\n\tleft: 50%;\n\tmargin-left: -45px;\n\tposition: absolute;\n\ttop: 80px;\n}\n.widget-user .widget-user-header {\n\tborder-top-left-radius: .25rem;\n\tborder-top-right-radius: .25rem;\n\theight: 135px;\n\tpadding: 1rem;\n\ttext-align: center;\n}\n.widget-user .widget-user-image>img {\n\tborder: 3px solid #fff;\n\theight: 100px;\n\twidth: 100px;\n}\n.elevation-2 {\n\tbox-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)!important;\n}\n.img-circle {\n\tborder-radius: 50%;\n}\nimg {\n\tvertical-align: middle;\n\tborder-style: none;\n}\n.profundidad{\n\tpadding-top: 50px;\n}\n.bg-info {\n\tbackground-color: #17a2b8!important;\n\tcolor: #fff;\n}\nh1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {\n\tmargin-bottom: 0.5rem;\n\tfont-weight: 500;\n\tline-height: 1.2;\n}\n\n/***********TOOLTIPS***********/\n.tooltipP{\n\tcursor: pointer;\n\tposition: relative;\n\ttext-align: center;\n}\n.tooltipP:hover .ttip{\n\tdisplay: block;\n}\n.ttip:before{\n\tborder-left: 6px solid transparent;\n\tborder-right: 6px solid transparent;\n\tborder-top: 6px solid #777777;\n\tbottom: -6px;\n\tcontent: \"\";\n\theight: 0;\n\tleft: 50%;\n\tmargin-left: -6px;\n\tposition: absolute;\n\twidth: 0;\n}\n.ttip{\n\tbackground: #777777;\n\tcolor: #fff;\n\tdisplay: none;\n\tleft: 30%;\n\tpadding: 10px 10px;\n\tposition: absolute;\n\twidth: 200px;\n\ttop: -70px;\n\tz-index: 1000;\n}\n.rank{\n\tbackground: #477DD9;\n}\n", ""]);
+exports.push([module.i, "\n.sombra{\n\tbox-shadow: 0px 3px 2px #aab2bd;\n}\n.cont{\n\tposition: relative; \n\theight:120px; \n\twidth:120px;\n}\n.cont img{\n\theight:100%; \n\twidth:100%;\n}\n.cont a{\n\tposition: absolute;\n\tbottom: 15px;\n\tleft: 70px;\n\ttext-shadow: 0 0 10px #000;\n}\na i{\n\tcursor: pointer; \n\tfont-size: 25px;\n\tcolor: #fff;\n}\n.border-right {\n\tborder-right: 1px solid #dee2e6!important;\n}\n.description-block {\n\tdisplay: block;\n\tmargin: 10px 0;\n\ttext-align: center;\n}\n.widget-user .widget-user-image {\n\tleft: 50%;\n\tmargin-left: -45px;\n\tposition: absolute;\n\ttop: 80px;\n}\n.widget-user .widget-user-header {\n\tborder-top-left-radius: .25rem;\n\tborder-top-right-radius: .25rem;\n\theight: 135px;\n\tpadding: 1rem;\n\ttext-align: center;\n}\n.widget-user .widget-user-image>img {\n\tborder: 3px solid #fff;\n\theight: 100px;\n\twidth: 100px;\n}\n.elevation-2 {\n\tbox-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)!important;\n}\n.img-circle {\n\tborder-radius: 50%;\n}\nimg {\n\tvertical-align: middle;\n\tborder-style: none;\n}\n.profundidad{\n\tpadding-top: 50px;\n}\n.bg-info {\n\tbackground-color: #5B90A3 !important;\n\tcolor: #fff;\n}\nh1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {\n\tmargin-bottom: 0.5rem;\n\tfont-weight: 500;\n\tline-height: 1.2;\n}\n\n/***********TOOLTIPS***********/\n.tooltipP{\n\tcursor: pointer;\n\tposition: relative;\n\ttext-align: center;\n}\n.tooltipP:hover .ttip{\n\tdisplay: block;\n}\n.ttip:before{\n\tborder-left: 6px solid transparent;\n\tborder-right: 6px solid transparent;\n\tborder-top: 6px solid #777777;\n\tbottom: -6px;\n\tcontent: \"\";\n\theight: 0;\n\tleft: 50%;\n\tmargin-left: -6px;\n\tposition: absolute;\n\twidth: 0;\n}\n.ttip{\n\tbackground: #777777;\n\tcolor: #fff;\n\tdisplay: none;\n\tleft: 30%;\n\tpadding: 10px 10px;\n\tposition: absolute;\n\twidth: 200px;\n\ttop: -70px;\n\tz-index: 1000;\n}\n.rank{\n\tbackground: #477DD9;\n}\n", ""]);
 
 // exports
 
@@ -627,7 +647,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "card-body rank" }, [
+                _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "tab-content" }, [
                     _c(
                       "div",
@@ -643,32 +663,6 @@ var render = function() {
                             return _c("div", [
                               _vm.usuario.puntos < 100
                                 ? _c("div", [
-                                    rango.nombre == "huevo"
-                                      ? _c("div", [
-                                          _c(
-                                            "div",
-                                            { staticClass: "text-center" },
-                                            [
-                                              _c("img", {
-                                                staticClass: "img-responsive",
-                                                attrs: {
-                                                  src:
-                                                    "imagenes/rangos/" +
-                                                    rango.avatar,
-                                                  height: "400px",
-                                                  width: "90%"
-                                                }
-                                              })
-                                            ]
-                                          )
-                                        ])
-                                      : _vm._e()
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.usuario.puntos >= 100 &&
-                              _vm.usuario.puntos < 500
-                                ? _c("div", [
                                     rango.nombre == "nivel #1"
                                       ? _c("div", [
                                           _c(
@@ -681,10 +675,11 @@ var render = function() {
                                                   src:
                                                     "imagenes/rangos/" +
                                                     rango.avatar,
-                                                  height: "400px",
-                                                  width: "90%"
+                                                  width: "50%"
                                                 }
-                                              })
+                                              }),
+                                              _vm._v(" "),
+                                              _c("h3", [_c("b", [_vm._v("I")])])
                                             ]
                                           )
                                         ])
@@ -692,8 +687,8 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.usuario.puntos >= 500 &&
-                              _vm.usuario.puntos < 1000
+                              _vm.usuario.puntos >= 100 &&
+                              _vm.usuario.puntos < 500
                                 ? _c("div", [
                                     rango.nombre == "nivel #2"
                                       ? _c("div", [
@@ -707,10 +702,13 @@ var render = function() {
                                                   src:
                                                     "imagenes/rangos/" +
                                                     rango.avatar,
-                                                  height: "400px",
-                                                  width: "90%"
+                                                  width: "50%"
                                                 }
-                                              })
+                                              }),
+                                              _vm._v(" "),
+                                              _c("h3", [
+                                                _c("b", [_vm._v("II")])
+                                              ])
                                             ]
                                           )
                                         ])
@@ -718,7 +716,8 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.usuario.puntos >= 1000
+                              _vm.usuario.puntos >= 500 &&
+                              _vm.usuario.puntos < 1000
                                 ? _c("div", [
                                     rango.nombre == "nivel #3"
                                       ? _c("div", [
@@ -732,10 +731,97 @@ var render = function() {
                                                   src:
                                                     "imagenes/rangos/" +
                                                     rango.avatar,
-                                                  height: "400px",
-                                                  width: "90%"
+                                                  width: "50%"
                                                 }
-                                              })
+                                              }),
+                                              _vm._v(" "),
+                                              _c("h3", [
+                                                _c("b", [_vm._v("III")])
+                                              ])
+                                            ]
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.usuario.puntos >= 1000 &&
+                              _vm.usuario.puntos < 5000
+                                ? _c("div", [
+                                    rango.nombre == "nivel #4"
+                                      ? _c("div", [
+                                          _c(
+                                            "div",
+                                            { staticClass: "text-center" },
+                                            [
+                                              _c("img", {
+                                                staticClass: "img-responsive",
+                                                attrs: {
+                                                  src:
+                                                    "imagenes/rangos/" +
+                                                    rango.avatar,
+                                                  width: "50%"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("h3", [
+                                                _c("b", [_vm._v("IV")])
+                                              ])
+                                            ]
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.usuario.puntos >= 5000 &&
+                              _vm.usuario.puntos < 10000
+                                ? _c("div", [
+                                    rango.nombre == "nivel #5"
+                                      ? _c("div", [
+                                          _c(
+                                            "div",
+                                            { staticClass: "text-center" },
+                                            [
+                                              _c("img", {
+                                                staticClass: "img-responsive",
+                                                attrs: {
+                                                  src:
+                                                    "imagenes/rangos/" +
+                                                    rango.avatar,
+                                                  width: "50%"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("h3", [_c("b", [_vm._v("V")])])
+                                            ]
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.usuario.puntos >= 10000
+                                ? _c("div", [
+                                    rango.nombre == "nivel #6"
+                                      ? _c("div", [
+                                          _c(
+                                            "div",
+                                            { staticClass: "text-center" },
+                                            [
+                                              _c("img", {
+                                                staticClass: "img-responsive",
+                                                attrs: {
+                                                  src:
+                                                    "imagenes/rangos/" +
+                                                    rango.avatar,
+                                                  width: "50%"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("h3", [
+                                                _c("b", [_vm._v("VI")])
+                                              ])
                                             ]
                                           )
                                         ])
@@ -770,10 +856,7 @@ var render = function() {
                                 _c("div", { staticClass: "form-group row" }, [
                                   _c(
                                     "label",
-                                    {
-                                      staticClass:
-                                        "col-form-label col-md-3 text-white"
-                                    },
+                                    { staticClass: "col-form-label col-md-3" },
                                     [_vm._v("Nombre")]
                                   ),
                                   _vm._v(" "),
@@ -813,10 +896,7 @@ var render = function() {
                                 _c("div", { staticClass: "form-group row" }, [
                                   _c(
                                     "label",
-                                    {
-                                      staticClass:
-                                        "col-form-label col-md-3 text-white"
-                                    },
+                                    { staticClass: "col-form-label col-md-3" },
                                     [_vm._v("Apellido Paterno")]
                                   ),
                                   _vm._v(" "),
@@ -860,10 +940,7 @@ var render = function() {
                                 _c("div", { staticClass: "form-group row" }, [
                                   _c(
                                     "label",
-                                    {
-                                      staticClass:
-                                        "col-form-label col-md-3 text-white"
-                                    },
+                                    { staticClass: "col-form-label col-md-3" },
                                     [_vm._v("Apellido Materno")]
                                   ),
                                   _vm._v(" "),
@@ -907,10 +984,7 @@ var render = function() {
                                 _c("div", { staticClass: "form-group row" }, [
                                   _c(
                                     "label",
-                                    {
-                                      staticClass:
-                                        "col-form-label col-md-3 text-white"
-                                    },
+                                    { staticClass: "col-form-label col-md-3" },
                                     [_vm._v("Curso")]
                                   ),
                                   _vm._v(" "),
@@ -1022,7 +1096,7 @@ var render = function() {
                                       _c(
                                         "button",
                                         {
-                                          staticClass: "btn btn-danger",
+                                          staticClass: "btn btn-warning",
                                           attrs: { type: "submit" }
                                         },
                                         [_vm._v("Actualizar")]

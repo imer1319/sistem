@@ -57112,43 +57112,43 @@ var routes = [{
   name: 'schult-letra',
   path: '/schult-letra',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./users/game/2-schulte-letras.vue */ "./resources/js/users/game/2-schulte-letras.vue"));
+    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./users/game/2-schulte-letras.vue */ "./resources/js/users/game/2-schulte-letras.vue"));
   }
 }, {
   name: 'buscar-palabra',
   path: '/buscar-palabra',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ./users/game/3-busca-palabras.vue */ "./resources/js/users/game/3-busca-palabras.vue"));
+    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./users/game/3-busca-palabras.vue */ "./resources/js/users/game/3-busca-palabras.vue"));
   }
 }, {
   name: 'buscar-numero',
   path: '/buscar-numero',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./users/game/4-buscar-numero.vue */ "./resources/js/users/game/4-buscar-numero.vue"));
+    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./users/game/4-buscar-numero.vue */ "./resources/js/users/game/4-buscar-numero.vue"));
   }
 }, {
   name: 'encuentra-palabra',
   path: '/encuentra-palabra',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./users/game/5-recuerda-palabra.vue */ "./resources/js/users/game/5-recuerda-palabra.vue"));
+    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./users/game/5-recuerda-palabra.vue */ "./resources/js/users/game/5-recuerda-palabra.vue"));
   }
 }, {
   name: 'encuentra-numeros',
   path: '/encuentra-numeros',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./users/game/6-recuerda-numeros.vue */ "./resources/js/users/game/6-recuerda-numeros.vue"));
+    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./users/game/6-recuerda-numeros.vue */ "./resources/js/users/game/6-recuerda-numeros.vue"));
   }
 }, {
   name: 'par-impar',
   path: '/par-impar',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./users/game/7-par-impar.vue */ "./resources/js/users/game/7-par-impar.vue"));
+    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./users/game/7-par-impar.vue */ "./resources/js/users/game/7-par-impar.vue"));
   }
 }, {
   name: 'borde-palabra',
   path: '/borde-palabra',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./users/game/5-borde-palabra.vue */ "./resources/js/users/game/5-borde-palabra.vue"));
+    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./users/game/5-borde-palabra.vue */ "./resources/js/users/game/5-borde-palabra.vue"));
   }
 }, {
   name: 'palabra-piramide',

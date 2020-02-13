@@ -109,7 +109,9 @@ __webpack_require__.r(__webpack_exports__);
             this.interval_letra = setInterval(this.interval_consonantes, 1000);
             break;
         }
-      } else if (this.selected_A == 'numeros') {
+      }
+
+      if (this.selected_A == 'numeros') {
         switch (this.selected_B) {
           case 'facil':
             document.getElementById("separar").style.width = '150px';
@@ -126,7 +128,9 @@ __webpack_require__.r(__webpack_exports__);
             this.interval_letra = setInterval(this.interval_numeros, 1000);
             break;
         }
-      } else if (this.selected_A == 'palabras') {
+      }
+
+      if (this.selected_A == 'palabras') {
         switch (this.selected_B) {
           case 'facil':
             document.getElementById("separar").style.display = 'none';
@@ -248,6 +252,9 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     }
+  },
+  beforeDestroy: function beforeDestroy() {
+    clearInterval(this.interval_letra);
   }
 });
 

@@ -93,7 +93,8 @@
 						this.interval_letra = setInterval(this.interval_consonantes,1000)
 						break
 					}
-				}else if (this.selected_A == 'numeros') {
+				}
+				if (this.selected_A == 'numeros') {
 					switch(this.selected_B){
 						case 'facil':
 						document.getElementById("separar").style.width = '150px'
@@ -108,7 +109,8 @@
 						this.interval_letra = setInterval(this.interval_numeros,1000)
 						break
 					}
-				}else if (this.selected_A == 'palabras') {
+				}
+				if (this.selected_A == 'palabras') {
 					switch(this.selected_B){
 						case 'facil':
 						document.getElementById("separar").style.display = 'none'
@@ -217,6 +219,9 @@
 					}
 				}
 			}
+		},	
+		beforeDestroy: function () {
+			clearInterval(this.interval_letra)
 		}
 	}	
 </script>
