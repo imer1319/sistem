@@ -9,7 +9,7 @@
 
   <title>{{ config('app.name', 'Laravel') }}</title>
   <!-- icono para el titulo -->
-  <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/es/img/favicon.ico?v=a8def514be8a">
+ <link rel="shortcut icon" href="imagenes/logo.png">
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
   <!-- Styles -->
@@ -67,7 +67,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('admin/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('admin/img/user2-160x160.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -95,7 +95,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('insignia') }}" class="nav-link">
-              <i class="nav-icon fas fa-trophy"></i>
+              <i class="nav-icon fas fa-ribbon"></i>
               <p>Insignias</p>
             </a>
           </li>
@@ -157,10 +157,10 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      Anything you want
+      UAJMS
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2019 Sistema Lectura Veloz.</strong>
+    <strong>Copyright &copy; 2020 Sistema Lectura Veloz.</strong>
   </footer>
 </div>
 <!-- ./wrapper -->

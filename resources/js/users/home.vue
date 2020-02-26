@@ -27,12 +27,12 @@
         data() {
             return { 
                 content :[
-                {nombre:'Lecciones',icono:'lecciones.png',url:'/ejercicios',background:'color8'},
+                {nombre:'Lecciones',icono:'ejercicios.png',url:'/ejercicios',background:'color8'},
                 {nombre:'examen',icono:'examen.png',url:'/exam',background:'color8'},
                 {nombre:'ejercicio',icono:'ejercicios.png',url:'game',background:'color8'},
-                {nombre:'Perfil',icono:'puntuaciones.png',url:'/profile',background:'color8'},
+                {nombre:'Perfil',icono:'user.png',url:'/profile',background:'color8'},
                 {nombre:'ranking',icono:'ranking.png',url:'/ranking',background:'color8'},
-                {nombre:'insignia',icono:'premios.png',url:'',background:'color8'},
+                {nombre:'Puntuaciones',icono:'puntuaciones.png',url:'/puntuacionExamen',background:'color8'},
                 ],
                 consejos:['Aprende a usar tus ojos para leer más rápido',
                 'Ponte en forma, para darle más oxígeno a tu cerebro',
@@ -40,7 +40,8 @@
                 'No le digas a alguien que lea, primero que vea como lo disfrutas y él lo hará solo.',
                 'Aleja cualquier distraccion mientras lees',
                 'No te preocupes de la velocidad de lectura',
-                'Si lees lo que te gusta no te aburriras'],
+                'Si lees lo que te gusta no te aburriras',
+                'La practica hace al maestro'],
                 consejo:null,
             }
         },

@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link rel="shortcut icon" href="imagenes/logo.png">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -21,20 +21,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
-    <style>
-        body{
-            background: url(imagenes/fondo.jpg) no-repeat center fixed;
-            display: table;
-            height: 100%;
-            position: relative;
-            width: 100%;
-            background-size: cover;
-        }
-    </style>
 </head>
 <body>
-    <div id="app" class="fondo">
-        <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #25546D;">
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #2B6A88;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Sistema Lectura Veloz') }}

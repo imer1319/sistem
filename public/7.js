@@ -116,20 +116,77 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showExamen();
     this.mostrarPregunta();
     this.obtenerID();
-  },
-  mounted: function mounted() {
-    if (this.step == 1) {
-      document.getElementById('pass1').classList.add("animated", "bounceInRight", "fast");
-      document.getElementById('paso1').classList.add("active");
-    }
+    this.examen_dado_resp();
   },
   data: function data() {
     return {
+      imagenes: {
+        imagen1: '../imagenes/logo.png',
+        imagen2: '../imagenes/imagen2.png',
+        imagen3: '../imagenes/cronometer.png',
+        imagen4: '../imagenes/relogarena.png'
+      },
       step: 1,
       muestra_exam: 0,
       examen: {},
@@ -160,10 +217,23 @@ __webpack_require__.r(__webpack_exports__);
       myTime: 0,
       cronometro: 0,
       result: '',
-      mensaje: 'Selecciona un inciso'
+      mensaje: 'Selecciona un inciso',
+      examen_dado: {},
+      loading: true,
+      vista: 0
     };
   },
   methods: {
+    examen_dado_resp: function examen_dado_resp() {
+      var _this = this;
+
+      var url = '/examendado/' + this.$route.params.id;
+      axios.get(url).then(function (res) {
+        _this.examen_dado = res.data;
+        _this.loading = false;
+        _this.vista = _this.examen_dado.estado;
+      });
+    },
     myTimer: function myTimer() {
       this.cronometro++;
     },
@@ -181,7 +251,7 @@ __webpack_require__.r(__webpack_exports__);
       this.result = minutes + ":" + seconds;
     },
     guardarExam: function guardarExam() {
-      var _this = this;
+      var _this2 = this;
 
       this.saveExam.exam_id = this.$route.params.id;
       this.saveExam.user_id = this.users.id;
@@ -191,19 +261,19 @@ __webpack_require__.r(__webpack_exports__);
       this.saveExam.estado = 1;
       var formData = new FormData();
       formData.append('exam_id', this.saveExam.exam_id);
-      formData.append('user_id', this.saveExam.exam_id);
+      formData.append('user_id', this.saveExam.user_id);
       formData.append('ppm', this.saveExam.ppm);
       formData.append('comprension', this.saveExam.comprension);
       formData.append('tiempo', this.saveExam.tiempo);
       formData.append('estado', this.saveExam.estado);
       axios.post('/exam', formData).then(function (res) {
-        _this.saveExam.exam_id = "";
-        _this.saveExam.user_id = "";
-        _this.saveExam.ppm = "";
-        _this.saveExam.comprension = "";
-        _this.saveExam.tiempo = "";
-        _this.saveExam.estado = "";
-        _this.muestra_exam = 4;
+        _this2.saveExam.exam_id = "";
+        _this2.saveExam.user_id = "";
+        _this2.saveExam.ppm = "";
+        _this2.saveExam.comprension = "";
+        _this2.saveExam.tiempo = "";
+        _this2.saveExam.estado = "";
+        _this2.muestra_exam = 4;
       });
     },
     siguiente: function siguiente(pregunta) {
@@ -237,29 +307,29 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     obtenerID: function obtenerID() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/profile").then(function (res) {
-        _this2.users = res.data;
+        _this3.users = res.data;
       });
     },
     mostrarPregunta: function mostrarPregunta() {
-      var _this3 = this;
+      var _this4 = this;
 
       var url = '/pregunta/' + this.$route.params.id;
       axios.get(url).then(function (res) {
-        _this3.preguntas = res.data;
-        _this3.loading = false;
+        _this4.preguntas = res.data;
+        _this4.loading = false;
       });
     },
     showExamen: function showExamen() {
-      var _this4 = this;
+      var _this5 = this;
 
       var url = this.$route.params.id;
       axios.get(url).then(function (res) {
-        _this4.examen = res.data;
+        _this5.examen = res.data;
 
-        _this4.leerDocumento();
+        _this5.leerDocumento();
       });
     },
     leerDocumento: function leerDocumento() {
@@ -354,515 +424,658 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.muestra_exam == 0,
-            expression: "muestra_exam==0"
-          }
-        ]
-      },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.step == 1,
-                expression: "step==1"
-              }
-            ],
-            attrs: { id: "pass1" }
-          },
-          [
-            _c("h2", [_vm._v("Paso 1")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "btn btn-success",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.next()
-                  }
-                }
-              },
-              [_vm._v("Siguiente")]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.step == 2,
-                expression: "step==2"
-              }
-            ],
-            attrs: { id: "pass2" }
-          },
-          [
-            _c("h2", [_vm._v("paso2")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "btn btn-success",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.next()
-                  }
-                }
-              },
-              [_vm._v("Siguiente")]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.step == 3,
-                expression: "step==3"
-              }
-            ],
-            attrs: { id: "pass3" }
-          },
-          [
-            _c("h2", [_vm._v("paso3")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "btn btn-success",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.next()
-                  }
-                }
-              },
-              [_vm._v("Empezar")]
-            )
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.muestra_exam == 1,
-            expression: "muestra_exam==1"
-          }
-        ]
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto pt-2",
-            staticStyle: { "box-shadow": "2px 2px 10px #666" }
-          },
-          [
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("span", { staticClass: "pull-right" }, [
-                  _vm._v(_vm._s(_vm.cronometro))
+  return _vm.loading
+    ? _c("spinner")
+    : _c("div", { staticClass: "container" }, [
+        _vm.vista == 1
+          ? _c("div", [
+              _c("div", { staticClass: "card col-12 col-md-8 m-auto" }, [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "text-center" }, [
+                    _vm._v("Este examen ya fue dado")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-6" }, [_vm._v("ppm")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _vm._v(_vm._s(_vm.examen_dado.ppm))
+                    ]),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _vm._v("Comprension")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _vm._v(_vm._s(_vm.examen_dado.comprension)),
+                      _c("b", { staticClass: "h5" }, [_vm._v(" %")])
+                    ]),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [_vm._v("tiempo")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _vm._v(_vm._s(_vm.examen_dado.tiempo)),
+                      _c("b", { staticClass: "h5" }, [_vm._v(" segundos")])
+                    ]),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [_vm._v("fecha")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _vm._v(_vm._s(_vm.examen_dado.created_at))
+                    ])
+                  ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c("h3", { staticClass: "text-center" }, [
-                _vm._v(_vm._s(_vm.examen.name))
-              ]),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-justify", attrs: { id: "test" } }),
-              _vm._v(" "),
-              _c("textarea", {
-                staticStyle: { display: "none" },
-                attrs: { id: "area", COLS: "40", ROWS: "10" }
-              })
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.vista == null
+          ? _c("div", [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.muestra_exam == 0,
+                      expression: "muestra_exam==0"
+                    }
+                  ]
+                },
+                [
+                  _c("div", { attrs: { id: "progressbar" } }, [
+                    _c(
+                      "li",
+                      { staticClass: "active", attrs: { id: "paso1" } },
+                      [_vm._v("Consejo 1")]
+                    ),
+                    _vm._v(" "),
+                    _c("li", { attrs: { id: "paso2" } }, [_vm._v("Consejo 2")]),
+                    _vm._v(" "),
+                    _c("li", { attrs: { id: "paso3" } }, [_vm._v("Consejo 3")])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.step == 1,
+                          expression: "step==1"
+                        }
+                      ],
+                      staticClass: "animated bounceInRight fast",
+                      attrs: { id: "pass1" }
+                    },
+                    [
+                      _c("div", { staticClass: "card" }, [
+                        _c("div", { staticClass: "card-body text-center" }, [
+                          _c("div", { staticClass: "m-auto col-md-5" }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm.imagenes.imagen1,
+                                height: "150",
+                                width: "100%"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("h4", [
+                            _vm._v("Hola, ¿Estas preparado para el examen?")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn btn-success m-auto",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.next()
+                                  }
+                                }
+                              },
+                              [_vm._v("Siguiente")]
+                            )
+                          ])
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.step == 2,
+                          expression: "step==2"
+                        }
+                      ],
+                      attrs: { id: "pass2" }
+                    },
+                    [
+                      _c("div", { staticClass: "card" }, [
+                        _c("div", { staticClass: "card-body text-center" }, [
+                          _c("div", { staticClass: "m-auto col-md-5" }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm.imagenes.imagen2,
+                                height: "150",
+                                width: "100%"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("h4", [
+                            _vm._v("Te haremos preguntas cuando termines")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn btn-success m-auto",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.next()
+                                  }
+                                }
+                              },
+                              [_vm._v("Siguiente")]
+                            )
+                          ])
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.step == 3,
+                          expression: "step==3"
+                        }
+                      ],
+                      attrs: { id: "pass3" }
+                    },
+                    [
+                      _c("div", [
+                        _c("div", { staticClass: "card" }, [
+                          _c("div", { staticClass: "card-body text-center" }, [
+                            _c("div", { staticClass: "m-auto col-md-5" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: _vm.imagenes.imagen3,
+                                  height: "150",
+                                  width: "100%"
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("h4", [
+                              _vm._v("Estaremos cronometrando tu avance")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "btn btn-success m-auto",
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.next()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Empezar\n\t\t\t\t\t\t\t\t")]
+                              )
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.muestra_exam == 1,
+                expression: "muestra_exam==1"
+              }
+            ]
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto pt-2",
+                staticStyle: { "box-shadow": "2px 2px 10px #666" }
+              },
+              [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h3", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(_vm.examen.name))
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("p", {
+                    staticClass: "text-justify",
+                    attrs: { id: "test" }
+                  }),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    staticStyle: { display: "none" },
+                    attrs: { id: "area", COLS: "40", ROWS: "10" }
+                  })
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "row mt-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "btn btn-success m-auto",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.mostrarPreguntas()
+                    }
+                  }
+                },
+                [_vm._v("Terminar")]
+              )
             ])
           ]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "row mt-4" }, [
-          _c(
-            "div",
-            {
-              staticClass: "btn btn-success m-auto",
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.mostrarPreguntas()
-                }
-              }
-            },
-            [_vm._v("Terminar")]
-          )
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.muestra_exam == 2,
-            expression: "muestra_exam==2"
-          }
-        ]
-      },
-      [
         _c(
           "div",
           {
-            staticClass:
-              "card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto",
-            staticStyle: { "box-shadow": "2px 2px 10px #666" }
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.muestra_exam == 2,
+                expression: "muestra_exam==2"
+              }
+            ]
           },
           [
             _c(
               "div",
-              { staticClass: "card-body" },
+              {
+                staticClass:
+                  "card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto",
+                staticStyle: { "box-shadow": "2px 2px 10px #666" }
+              },
               [
-                _c("h3", { staticClass: "text-center" }, [
-                  _vm._v("Las preguntas")
-                ]),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _vm._l(_vm.preguntas, function(pregunta, index) {
-                  return _c("div", { key: index }, [
-                    _c(
-                      "div",
-                      {
-                        directives: [
+                _c(
+                  "div",
+                  { staticClass: "card-body" },
+                  [
+                    _c("h3", { staticClass: "text-center" }, [
+                      _vm._v("Las preguntas")
+                    ]),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _vm._l(_vm.preguntas, function(pregunta, index) {
+                      return _c("div", { key: index }, [
+                        _c(
+                          "div",
                           {
-                            name: "show",
-                            rawName: "v-show",
-                            value: index == _vm.contador,
-                            expression: "index == contador"
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: index == _vm.contador,
+                                expression: "index == contador"
+                              }
+                            ]
+                          },
+                          [
+                            _c("h2", [_vm._v(_vm._s(pregunta.enunciado))]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("label", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.picked,
+                                      expression: "picked"
+                                    }
+                                  ],
+                                  attrs: { type: "radio", name: "radio" },
+                                  domProps: {
+                                    value: pregunta.respuestaA,
+                                    checked: _vm._q(
+                                      _vm.picked,
+                                      pregunta.respuestaA
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.picked = pregunta.respuestaA
+                                    }
+                                  }
+                                }),
+                                _vm._v(
+                                  _vm._s(pregunta.respuestaA) +
+                                    "\n\t\t\t\t\t\t\t"
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("label", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.picked,
+                                      expression: "picked"
+                                    }
+                                  ],
+                                  attrs: { type: "radio", name: "radio" },
+                                  domProps: {
+                                    value: pregunta.respuestaB,
+                                    checked: _vm._q(
+                                      _vm.picked,
+                                      pregunta.respuestaB
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.picked = pregunta.respuestaB
+                                    }
+                                  }
+                                }),
+                                _vm._v(
+                                  _vm._s(pregunta.respuestaB) +
+                                    "\n\t\t\t\t\t\t\t"
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("label", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.picked,
+                                      expression: "picked"
+                                    }
+                                  ],
+                                  attrs: { type: "radio", name: "radio" },
+                                  domProps: {
+                                    value: pregunta.respuestaC,
+                                    checked: _vm._q(
+                                      _vm.picked,
+                                      pregunta.respuestaC
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.picked = pregunta.respuestaC
+                                    }
+                                  }
+                                }),
+                                _vm._v(
+                                  _vm._s(pregunta.respuestaC) +
+                                    "\n\t\t\t\t\t\t\t"
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("label", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.picked,
+                                      expression: "picked"
+                                    }
+                                  ],
+                                  attrs: { type: "radio", name: "radio" },
+                                  domProps: {
+                                    value: pregunta.respuestaD,
+                                    checked: _vm._q(
+                                      _vm.picked,
+                                      pregunta.respuestaD
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.picked = pregunta.respuestaD
+                                    }
+                                  }
+                                }),
+                                _vm._v(
+                                  _vm._s(pregunta.respuestaD) +
+                                    "\n\t\t\t\t\t\t\t"
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("span", {
+                                staticStyle: { display: "none" },
+                                model: {
+                                  value: pregunta.esCorrecto,
+                                  callback: function($$v) {
+                                    _vm.$set(pregunta, "esCorrecto", $$v)
+                                  },
+                                  expression: "pregunta.esCorrecto"
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _vm.picked != ""
+                              ? _c("div", { staticClass: "row" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn btn-success",
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.siguiente(pregunta)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Siguiente")]
+                                  )
+                                ])
+                              : _c("div", [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "bg-success text-white p-1 m-1"
+                                    },
+                                    [_vm._v(_vm._s(_vm.mensaje))]
+                                  )
+                                ])
+                          ]
+                        )
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.muestra_exam == 3,
+                expression: "muestra_exam == 3"
+              }
+            ]
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto",
+                staticStyle: { "box-shadow": "2px 2px 10px #666" }
+              },
+              [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "m-auto col-8 text-center" }, [
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.guardarExam($event)
                           }
-                        ]
+                        }
                       },
                       [
-                        _c("h2", [_vm._v(_vm._s(pregunta.enunciado))]),
-                        _vm._v(" "),
-                        _c("div", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.picked,
-                                  expression: "picked"
-                                }
-                              ],
-                              attrs: { type: "radio", name: "radio" },
-                              domProps: {
-                                value: pregunta.respuestaA,
-                                checked: _vm._q(_vm.picked, pregunta.respuestaA)
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.picked = pregunta.respuestaA
-                                }
-                              }
-                            }),
-                            _vm._v(
-                              _vm._s(pregunta.respuestaA) + "\n\t\t\t\t\t\t\t"
-                            )
-                          ])
+                        _c("h3", { staticClass: "text-uppercase" }, [
+                          _vm._v("Se acabo el tiempo")
                         ]),
                         _vm._v(" "),
-                        _c("div", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.picked,
-                                  expression: "picked"
-                                }
-                              ],
-                              attrs: { type: "radio", name: "radio" },
-                              domProps: {
-                                value: pregunta.respuestaB,
-                                checked: _vm._q(_vm.picked, pregunta.respuestaB)
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.picked = pregunta.respuestaB
-                                }
-                              }
-                            }),
-                            _vm._v(
-                              _vm._s(pregunta.respuestaB) + "\n\t\t\t\t\t\t\t"
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.picked,
-                                  expression: "picked"
-                                }
-                              ],
-                              attrs: { type: "radio", name: "radio" },
-                              domProps: {
-                                value: pregunta.respuestaC,
-                                checked: _vm._q(_vm.picked, pregunta.respuestaC)
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.picked = pregunta.respuestaC
-                                }
-                              }
-                            }),
-                            _vm._v(
-                              _vm._s(pregunta.respuestaC) + "\n\t\t\t\t\t\t\t"
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.picked,
-                                  expression: "picked"
-                                }
-                              ],
-                              attrs: { type: "radio", name: "radio" },
-                              domProps: {
-                                value: pregunta.respuestaD,
-                                checked: _vm._q(_vm.picked, pregunta.respuestaD)
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.picked = pregunta.respuestaD
-                                }
-                              }
-                            }),
-                            _vm._v(
-                              _vm._s(pregunta.respuestaD) + "\n\t\t\t\t\t\t\t"
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", [
-                          _c("span", {
-                            staticStyle: { display: "none" },
-                            model: {
-                              value: pregunta.esCorrecto,
-                              callback: function($$v) {
-                                _vm.$set(pregunta, "esCorrecto", $$v)
-                              },
-                              expression: "pregunta.esCorrecto"
+                        _c("div", { staticClass: "m-auto col-md-7" }, [
+                          _c("img", {
+                            attrs: {
+                              src: _vm.imagenes.imagen4,
+                              height: "200",
+                              width: "100%"
                             }
                           })
                         ]),
                         _vm._v(" "),
-                        _vm.picked != ""
-                          ? _c("div", { staticClass: "row" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "btn btn-success",
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      return _vm.siguiente(pregunta)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Siguiente")]
-                              )
-                            ])
-                          : _c("div", [
-                              _c(
-                                "span",
-                                { staticClass: "bg-success text-white" },
-                                [_vm._v(_vm._s(_vm.mensaje))]
-                              )
-                            ])
+                        _c("input", {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit", value: "Mostrar Resultados" }
+                        })
                       ]
                     )
                   ])
-                })
-              ],
-              2
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.muestra_exam == 4,
+                expression: "muestra_exam == 4"
+              }
+            ]
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "card card-primary col-md-8 col-sm-12 m-auto",
+                staticStyle: { "box-shadow": "2px 2px 10px #666" }
+              },
+              [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h3", { staticClass: "text-center" }, [
+                    _vm._v("Resultados")
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("h4", [
+                    _vm._v("Respondidas Correctamente : " + _vm._s(_vm.cp))
+                  ]),
+                  _vm._v(" "),
+                  _c("h4", [
+                    _vm._v("Respondidas Erroneamente : " + _vm._s(10 - _vm.cp))
+                  ]),
+                  _vm._v(" "),
+                  _c("h4", [
+                    _vm._v("Numero de palabras : " + _vm._s(_vm.palabras))
+                  ]),
+                  _vm._v(" "),
+                  _c("h4", [
+                    _vm._v("Palabras por minuto : " + _vm._s(_vm.ppmR))
+                  ]),
+                  _vm._v(" "),
+                  _c("h4", [
+                    _vm._v("Tiempo en dar el examen : " + _vm._s(_vm.result))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "row" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-info m-auto",
+                          attrs: { to: { name: "home" } }
+                        },
+                        [_vm._v(" Ir al Inicio")]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ]
             )
           ]
         )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.muestra_exam == 3,
-            expression: "muestra_exam == 3"
-          }
-        ]
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto",
-            staticStyle: { "box-shadow": "2px 2px 10px #666" }
-          },
-          [
-            _c("div", { staticClass: "card-body" }, [
-              _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.guardarExam($event)
-                    }
-                  }
-                },
-                [
-                  _c("input", {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "submit", value: "Mostrar Resultados" }
-                  })
-                ]
-              )
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.muestra_exam == 4,
-            expression: "muestra_exam == 4"
-          }
-        ]
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto",
-            staticStyle: { "box-shadow": "2px 2px 10px #666" }
-          },
-          [
-            _c("div", { staticClass: "card-body" }, [
-              _c("h3", { staticClass: "text-center" }, [_vm._v("Resultados")]),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c("h4", [
-                _vm._v("Respondidas Correctamente : " + _vm._s(_vm.cp))
-              ]),
-              _vm._v(" "),
-              _c("h4", [
-                _vm._v("Respondidas Erroneamente : " + _vm._s(10 - _vm.cp))
-              ]),
-              _vm._v(" "),
-              _c("h4", [
-                _vm._v("Numero de palabras : " + _vm._s(_vm.palabras))
-              ]),
-              _vm._v(" "),
-              _c("h4", [_vm._v("Palabras por minuto : " + _vm._s(_vm.ppmR))]),
-              _vm._v(" "),
-              _c("h4", [
-                _vm._v("Tiempo en dar el examen : " + _vm._s(_vm.result))
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "row" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "btn btn-info m-auto",
-                      attrs: { to: { name: "home" } }
-                    },
-                    [_vm._v(" Ir al Inicio")]
-                  )
-                ],
-                1
-              )
-            ])
-          ]
-        )
-      ]
-    )
-  ])
+      ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "progressbar" } }, [
-      _c("li", { attrs: { id: "paso1" } }, [_vm._v("Consejo 1")]),
-      _vm._v(" "),
-      _c("li", { attrs: { id: "paso2" } }, [_vm._v("Consejo 2")]),
-      _vm._v(" "),
-      _c("li", { attrs: { id: "paso3" } }, [_vm._v("Consejo 3")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

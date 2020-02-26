@@ -1,7 +1,8 @@
 <?php
 
 namespace App;
-
+use App\User;
+use App\Pregunta;
 use Illuminate\Database\Eloquent\Model;
 
 class Exam extends Model
@@ -10,6 +11,10 @@ class Exam extends Model
 
 	public function pregunta()
 	{
-		return $this->hasMany('App\Pregunta');
+		return $this->hasMany(Pregunta::class);
+	}
+	public function usuarios()
+	{
+		return $this->belongsToMany(User::class);
 	}
 }

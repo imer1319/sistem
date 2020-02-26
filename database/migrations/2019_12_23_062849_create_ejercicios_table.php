@@ -18,8 +18,6 @@ class CreateEjerciciosTable extends Migration
             $table->string('name')->unique();
             $table->string('description');
             $table->string('icon');
-            $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->timestamps();
         });
     }

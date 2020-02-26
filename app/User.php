@@ -4,6 +4,7 @@ namespace App;
 use App\Role;
 use App\Insignia;
 use App\Ejercicio;
+use App\Exam;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,6 +13,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function exams()
+    {
+        return $this->belongsToMany(Exam::class)->withPivot('ppm','tiempo','comprension','created_at');
+    }
     public function insignias()
     {
         return $this->belongsToMany(Insignia::class)

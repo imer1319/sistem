@@ -16,7 +16,7 @@
 					</div>
 					<div class="card-footer pt-5">
 						<div class="row">
-							<div class="col-sm-6 border-right">
+							<div class="col-6 border-right">
 								<div class="description-block">
 									<h5 class="description-header">
 										# {{ index+1 }}
@@ -24,7 +24,7 @@
 									<span class="description-text">Ranking</span>
 								</div>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-6">
 								<div class="description-block">
 									<h5 class="description-header">{{ ran.puntos }}</h5>
 									<span class="description-text">Puntos</span>
@@ -94,7 +94,7 @@
 </script>
 <style>
 .contenedor{
-	background-color: #17a2b8;
+	background-color: #2B6A88;
 	height: 120px;
 	width: 100%;
 	z-index: 100;

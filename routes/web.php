@@ -29,6 +29,8 @@ Route::get('numero_ejercicios','AdminController@count_ejercicio');
 // rutas para el usuario
 Route::get('/exam','UserController@examen');
 Route::get('/exam/{id}','UserController@darExamen');
+Route::get('/examendado/{id}','UserController@examendado');
+Route::get('/puntuacionExamen','UserController@puntuacionExamen');
 Route::post('exam','UserController@saveExam');
 Route::get('rank','UserController@rango');
 Route::get('insig','UserController@insignia');
@@ -52,6 +54,7 @@ Route::get('campo-visual','UserController@game');
 Route::get('schult-letra','UserController@game');
 Route::get('encuentra-palabra','UserController@game');
 Route::get('encuentra-numeros','UserController@game');
+Route::get('iguales','UserController@game');
 
 //ruta ejercicios
 Route::get('parpadeo','UserController@game');

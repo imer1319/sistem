@@ -1,31 +1,81 @@
 <template>
-	<div class="container">
-		<div v-show="muestra_exam==0">
-			<div id="progressbar">
-				<li id="paso1">Consejo 1</li>
-				<li id="paso2">Consejo 2</li>
-				<li id="paso3">Consejo 3</li>
+	<spinner v-if="loading"></spinner>
+	<div class="container" v-else>
+		<div v-if="vista == 1">
+			<div class="card col-12 col-md-8 m-auto">
+				<div class="card-body">
+					<h5 class="text-center">Este examen ya fue dado</h5>
+					<div class="row">
+						<div class="col-6">ppm</div>
+						<div class="col-6">{{ examen_dado.ppm }}</div>
+						<hr>
+						<div class="col-6">Comprension</div>
+						<div class="col-6">{{ examen_dado.comprension }}<b class="h5"> %</b></div>
+						<hr>
+						<div class="col-6">tiempo</div>
+						<div class="col-6">{{ examen_dado.tiempo }}<b class="h5"> segundos</b></div>
+						<hr>
+						<div class="col-6">fecha</div>
+						<div class="col-6">{{ examen_dado.created_at }}</div>
+					</div>
+				</div>
 			</div>
-			<div id="pass1" v-show="step==1" >
-				<h2>Paso 1</h2>
-				<div class="btn btn-success" @click.prevent="next()">Siguiente</div>
-			</div>
-			<div id="pass2" v-show="step==2">
-				<h2>paso2</h2>
-				<div class="btn btn-success" @click.prevent="next()">Siguiente</div>
-			</div>
+		</div>
+		<div v-if="vista == null">
+			<div v-show="muestra_exam==0" >
+				<div id="progressbar">
+					<li id="paso1" class="active">Consejo 1</li>
+					<li id="paso2">Consejo 2</li>
+					<li id="paso3">Consejo 3</li>
+				</div>
+				<div id="pass1" v-show="step==1" class="animated bounceInRight fast">
+					<div class="card">
+						<div class="card-body text-center">
+							<div class="m-auto col-md-5">
+								<img :src="imagenes.imagen1" height="150" width="100%">
+							</div>
+							<h4>Hola, ¿Estas preparado para el examen?</h4>
+							<div class="row">
+								<div class="btn btn-success m-auto" @click.prevent="next()">Siguiente</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="pass2" v-show="step==2">
+					<div class="card">
+						<div class="card-body text-center">
+							<div class="m-auto col-md-5">
+								<img :src="imagenes.imagen2" height="150"width="100%">
+							</div>
+							<h4>Te haremos preguntas cuando termines</h4>
+							<div class="row">
+								<div class="btn btn-success m-auto" @click.prevent="next()">Siguiente</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-			<div id="pass3" v-show="step==3" >
-				<h2>paso3</h2>
-				<div class="btn btn-success" @click.prevent="next()" >Empezar</div>
+				<div id="pass3" v-show="step==3" >
+					<div>
+						<div class="card">
+							<div class="card-body text-center">
+								<div class="m-auto col-md-5">
+									<img :src="imagenes.imagen3" height="150"width="100%">
+								</div>
+								<h4>Estaremos cronometrando tu avance</h4>
+								<div class="row">
+									<div class="btn btn-success m-auto" @click.prevent="next()" >Empezar
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div v-show="muestra_exam==1">
 			<div class="card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto pt-2" style="box-shadow: 2px 2px 10px #666;">
 				<div class="card-body">
-					<div class="row">
-						<span class="pull-right">{{ cronometro }}</span>
-					</div>
 					<h3 class="text-center">{{ examen.name }}</h3>
 					<hr>
 					<p id="test" class="text-justify"></p>
@@ -71,7 +121,7 @@
 								<div class="btn btn-success" @click.prevent="siguiente(pregunta)">Siguiente</div>
 							</div>
 							<div v-else>
-								<span class="bg-success text-white">{{ mensaje }}</span>
+								<span class="bg-success text-white p-1 m-1">{{ mensaje }}</span>
 							</div>
 						</div>
 					</div>
@@ -81,14 +131,20 @@
 		<div v-show="muestra_exam == 3">
 			<div class="card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto" style="box-shadow: 2px 2px 10px #666;">
 				<div class="card-body">
-					<form v-on:submit.prevent="guardarExam">
-						<input type="submit"value="Mostrar Resultados" class="btn btn-primary">
-					</form>
+					<div class="m-auto col-8 text-center">
+						<form v-on:submit.prevent="guardarExam">
+							<h3 class="text-uppercase">Se acabo el tiempo</h3>
+							<div class="m-auto col-md-7">
+								<img :src="imagenes.imagen4" height="200"width="100%">
+							</div>
+							<input type="submit"value="Mostrar Resultados" class="btn btn-primary">
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div v-show="muestra_exam == 4">
-			<div class="card card-primary col-lg-12 col-12 col-sm-12 col-xl-10 m-auto" style="box-shadow: 2px 2px 10px #666;">
+			<div class="card card-primary col-md-8 col-sm-12 m-auto" style="box-shadow: 2px 2px 10px #666;">
 				<div class="card-body">
 					<h3 class="text-center">Resultados</h3>
 					<hr>
@@ -108,18 +164,19 @@
 <script type="text/javascript">
 	export default{
 		created:function() {
-			this.showExamen();
-			this.mostrarPregunta();
-			this.obtenerID();
-		},
-		mounted:function(){
-			if (this.step==1){
-				document.getElementById('pass1').classList.add("animated","bounceInRight","fast");
-				document.getElementById('paso1').classList.add("active");
-			}
+			this.showExamen()
+			this.mostrarPregunta()
+			this.obtenerID()
+			this.examen_dado_resp()
 		},
 		data(){
 			return{
+				imagenes:{
+					imagen1:'../imagenes/logo.png',
+					imagen2:'../imagenes/imagen2.png',
+					imagen3:'../imagenes/cronometer.png',
+					imagen4:'../imagenes/relogarena.png'
+				},
 				step : 1,
 				muestra_exam:0,
 				examen :{},
@@ -135,10 +192,21 @@
 				myTime: 0,
 				cronometro:0,
 				result:'',
-				mensaje:'Selecciona un inciso'
+				mensaje:'Selecciona un inciso',
+				examen_dado:{},
+				loading:true,
+				vista:0,
 			}
 		},
 		methods:{
+			examen_dado_resp(){
+				var url = '/examendado/'+this.$route.params.id;
+				axios.get(url).then(res =>{
+					this.examen_dado = res.data
+					this.loading = false
+					this.vista = this.examen_dado.estado
+				})
+			},
 			myTimer(){
 				this.cronometro++;
 			},
@@ -168,7 +236,7 @@
 
 				let formData = new FormData();
 				formData.append('exam_id', this.saveExam.exam_id);
-				formData.append('user_id', this.saveExam.exam_id);
+				formData.append('user_id', this.saveExam.user_id);
 				formData.append('ppm', this.saveExam.ppm);
 				formData.append('comprension', this.saveExam.comprension);
 				formData.append('tiempo', this.saveExam.tiempo);

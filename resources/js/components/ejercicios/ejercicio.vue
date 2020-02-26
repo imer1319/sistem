@@ -34,17 +34,6 @@
 								</figure>
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">Categoria</label>
-							<div class="col-md-8">
-								<select v-model="ejercicio.categoria_id" class="form-control">
-									<option disabled value="">Seleccione un elemento</option>
-									<option v-for="categoria in categorias" v-bind:value="categoria.id">
-										{{ categoria.nombre }}
-									</option>
-								</select>
-							</div>
-						</div>
 						<div class="modal-footer pb-0">
 							<div class="form-group row">
 								<div class="col-lg-6">
@@ -92,17 +81,6 @@
 								</figure>
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">Categoria</label>
-							<div class="col-md-8">
-								<select v-model="fillEjercicio.categoria_id" class="form-control">
-									<option disabled value="">Seleccione un elemento</option>
-									<option v-for="categoria in categorias" v-bind:value="categoria.id">
-										{{ categoria.nombre }}
-									</option>
-								</select>
-							</div>
-						</div>
 						<div class="modal-footer pb-0">
 							<div class="form-group row">
 								<div class="col-lg-6">
@@ -130,7 +108,6 @@
 								<th>Nombre</th>
 								<th>Descripcion</th>
 								<th class="text-center">Imagen</th>
-								<th class="text-center">Categoria</th>
 								<th class="text-center">Acciones</th>
 							</tr>
 						</thead>
@@ -140,7 +117,6 @@
 								<td>{{ejercicio.name}}</td>
 								<td>{{ejercicio.description}}</td>
 								<td class="text-center"><img :src="`imagenes/ejercicios/${ejercicio.icon}`" class="img-responsive" height="60" width="70"></td>
-								<td class="text-center">{{ejercicio.categoria_id}}</td>
 								<td class="float-right">
 									<a href="#" class="btn btn-warning" @click="editarEjercicio(ejercicio)"><i class="fas fa-pencil-alt"></i> Editar</a>
 									<a href="#" class="btn btn-danger" v-on:click="eliminarEjercicio(ejercicio,index)"><i class="far fa-trash-alt"></i> Eliminar</a>
@@ -161,7 +137,6 @@
 	export default {
 		created:function() {
 			this.mostrarEjercicio();
-			this.mostrarCategoria();
 			EventBus.$on('agregado',data =>{
 				this.ejercicios.push(data)
 			});
@@ -169,8 +144,6 @@
 		data() {
 			return { 
 				ejercicios: [],
-				categorias: [],
-				categoria:{nombre:''},
 				ejercicio: {name: '',description:'', icon:'',categoria_id:''},
 				fillEjercicio: {name: '',description:'', icon:'',categoria_id:''},
 				imagenMiniatura:'',
@@ -184,11 +157,6 @@
 				axios.get('ejercicio').then(res =>{
 					this.ejercicios = res.data
 					this.loading = false;
-				})
-			},
-			mostrarCategoria:function(){
-				axios.get('categoria').then(res =>{
-					this.categorias = res.data
 				})
 			},
 			crearEjercicio(){
@@ -244,7 +212,6 @@
 				this.fillEjercicio.description = ejercicio.description;
 				this.fillEjercicio.icon = ejercicio.icon;
 				this.fillEjercicio.id = ejercicio.id;
-				this.fillEjercicio.categoria_id = ejercicio.categoria_id;
 				$('#editarEjercicio').modal('show');
 			},
 			updateEjercicio:function(fillEjercicio){
@@ -255,7 +222,6 @@
 					data.append('name', this.fillEjercicio.name);
 					data.append('description', this.fillEjercicio.description);
 					data.append('icon', this.fillEjercicio.icon);
-					data.append('categoria_id', this.fillEjercicio.categoria_id);
 					data.append('_method','PUT');
 					var url = `/ejercicio/${fillEjercicio.id}`;
 					axios.post(url, data).then(res=>{
@@ -269,13 +235,11 @@
 				formData.append('name', this.ejercicio.name);
 				formData.append('description', this.ejercicio.description);
 				formData.append('icon', this.ejercicio.icon);
-				formData.append('categoria_id', this.ejercicio.categoria_id);
 				axios.post('ejercicio',formData)
 				.then(res=>{
 					EventBus.$emit('agregado', res.data.ejercicio);
 					this.ejercicio.name = "";
 					this.ejercicio.description = "";
-					this.ejercicio.categoria_id = "";
 					this.$refs.img.value = "";
 					this.imagenMiniatura = "";
 					$('#createEjercicio').modal('hide')

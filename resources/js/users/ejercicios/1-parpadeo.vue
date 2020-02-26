@@ -59,6 +59,8 @@
 				palabras_avanzada:['absorbente','banderola','bañadera','barandilla','barbaridad','barbarismo','barítono','barredora','benévola','benévolo','bolígrafo','cartílago','celebrado','centígrado','cerebelo','colateral','comparecer','comunero','condenarlo','configurar','contenedor','corpúsculo','crepúsculo','derogado','desabrido','desarmado','desatrancar','descarnado','descentrado','desinfectar','desistido','fantástico','favorito','ganadero','generoso','intimidar','kilómetro','minúsculo','monigote','ordenador','platónico','putrefacto','simbólico','tranquilidad'],
 				interval_letra:null,
 				contador_facil:30,
+				contador_normal:30,
+				contador_dificil:30,
 				perfil_usuario:{}
 			}
 		},
@@ -82,15 +84,15 @@
 					switch(this.selected_B){
 						case 'facil':
 						document.getElementById("separar").style.width = '150px'
-						this.interval_letra = setInterval(this.interval_consonantes,1000)
+						this.interval_letra = setInterval(this.interval_consonantes_facil,1000)
 						break
 						case 'normal':
 						document.getElementById("separar").style.width = '200px'
-						this.interval_letra = setInterval(this.interval_consonantes,1000)
+						this.interval_letra = setInterval(this.interval_consonantes_normal,1000)
 						break
 						case 'avanzado':
 						document.getElementById("separar").style.width = '250px'
-						this.interval_letra = setInterval(this.interval_consonantes,1000)
+						this.interval_letra = setInterval(this.interval_consonantes_avanzado,1000)
 						break
 					}
 				}
@@ -98,15 +100,15 @@
 					switch(this.selected_B){
 						case 'facil':
 						document.getElementById("separar").style.width = '150px'
-						this.interval_letra = setInterval(this.interval_numeros,1000)
+						this.interval_letra = setInterval(this.interval_numeros_facil,1000)
 						break
 						case 'normal':
 						document.getElementById("separar").style.width = '200px'
-						this.interval_letra = setInterval(this.interval_numeros,1000)
+						this.interval_letra = setInterval(this.interval_numeros_normal,1000)
 						break
 						case 'avanzado':
 						document.getElementById("separar").style.width = '250px'
-						this.interval_letra = setInterval(this.interval_numeros,1000)
+						this.interval_letra = setInterval(this.interval_numeros_avanzado,1000)
 						break
 					}
 				}
@@ -114,111 +116,145 @@
 					switch(this.selected_B){
 						case 'facil':
 						document.getElementById("separar").style.display = 'none'
-						this.interval_letra = setInterval(this.interval_palabras,1000)
+						this.interval_letra = setInterval(this.interval_palabras_facil,1000)
 						break
 						case 'normal':
 						document.getElementById("separar").style.display = 'none'
-						this.interval_letra = setInterval(this.interval_palabras,1000)
+						this.interval_letra = setInterval(this.interval_palabras_normal,1000)
 						break
 						case 'avanzado':
 						document.getElementById("separar").style.display = 'none'
-						this.interval_letra = setInterval(this.interval_palabras,1000)
+						this.interval_letra = setInterval(this.interval_palabras_dificil,1000)
 						break
 					}
 				}
 			},
-			interval_consonantes(){
+			interval_consonantes_facil(){
 				var conso = document.getElementById("letra1")
 				var vocal = document.getElementById("letra2")
 				var rand1 = Math.floor(Math.random()*this.consonantes.length)
 				var rand2 = Math.floor(Math.random()*this.vocales.length)
 				conso.innerHTML = this.consonantes[rand1]
 				vocal.innerHTML = this.vocales[rand2]
-				if (this.selected_B == 'facil') {
-					this.contador_facil--
-					if (this.contador_facil <= 0) {
-						clearInterval(this.interval_letra)
-						document.getElementById("primera-vista").style.display='none'
-						document.getElementById("segunda-vista").style.display='flex'
-					}
-				}else if (this.selected_B == 'medio') {
-					this.contador_facil--
-					if (this.contador_facil <= 0) {
-						clearInterval(this.interval_letra)
-						document.getElementById("primera-vista").style.display='none'
-						document.getElementById("segunda-vista").style.display='flex'
-					}
-				}else if (this.selected_B == 'avanzado') {
-					this.contador_facil--
-					if (this.contador_facil <= 0) {
-						clearInterval(this.interval_letra)
-						document.getElementById("primera-vista").style.display='none'
-						document.getElementById("segunda-vista").style.display='flex'
-					}
+				this.contador_facil--
+				if (this.contador_facil <= 0) {
+					clearInterval(this.interval_letra)
+					this.interval_letra = null
+					document.getElementById("primera-vista").style.display='none'
+					document.getElementById("segunda-vista").style.display='flex'
 				}
 			},
-			interval_numeros(){
+			interval_consonantes_normal(){
+				var conso = document.getElementById("letra1")
+				var vocal = document.getElementById("letra2")
+				var rand1 = Math.floor(Math.random()*this.consonantes.length)
+				var rand2 = Math.floor(Math.random()*this.vocales.length)
+				conso.innerHTML = this.consonantes[rand1]
+				vocal.innerHTML = this.vocales[rand2]
+				this.contador_normal--
+				if (this.contador_normal <= 0) {
+					clearInterval(this.interval_letra)
+					this.interval_letra = null
+					document.getElementById("primera-vista").style.display='none'
+					document.getElementById("segunda-vista").style.display='flex'
+				}
+			},
+			interval_consonantes_avanzado(){
+				var conso = document.getElementById("letra1")
+				var vocal = document.getElementById("letra2")
+				var rand1 = Math.floor(Math.random()*this.consonantes.length)
+				var rand2 = Math.floor(Math.random()*this.vocales.length)
+				conso.innerHTML = this.consonantes[rand1]
+				vocal.innerHTML = this.vocales[rand2]
+				this.contador_dificil--
+				if (this.contador_dificil <= 0) {
+					clearInterval(this.interval_letra)
+					this.interval_letra = null
+					document.getElementById("primera-vista").style.display='none'
+					document.getElementById("segunda-vista").style.display='flex'
+				}
+			},
+			interval_numeros_facil(){
 				var conso = document.getElementById("letra1")
 				var vocal = document.getElementById("letra2")
 				var rand1 = Math.floor(Math.random()*this.numeros.length)
 				var rand2 = Math.floor(Math.random()*this.numeros.length)
 				conso.innerHTML = this.numeros[rand1]
 				vocal.innerHTML = this.numeros[rand2]
-				if (this.selected_B == 'facil') {
-					this.contador_facil--
-					if (this.contador_facil <= 0) {
-						clearInterval(this.interval_letra)
-						document.getElementById("primera-vista").style.display='none'
-						document.getElementById("segunda-vista").style.display='flex'
-					}
-				}else if (this.selected_B == 'medio') {
-					this.contador_facil--
-					if (this.contador_facil <= 0) {
-						clearInterval(this.interval_letra)
-						document.getElementById("primera-vista").style.display='none'
-						document.getElementById("segunda-vista").style.display='flex'
-					}
-				}else if (this.selected_B == 'avanzado') {
-					this.contador_facil--
-					if (this.contador_facil <= 0) {
-						clearInterval(this.interval_letra)
-						document.getElementById("primera-vista").style.display='none'
-						document.getElementById("segunda-vista").style.display='flex'
-					}
+				this.contador_facil--
+				if (this.contador_facil <= 0) {
+					clearInterval(this.interval_letra)
+					this.interval_letra = null
+					document.getElementById("primera-vista").style.display='none'
+					document.getElementById("segunda-vista").style.display='flex'
 				}
 			},
-			interval_palabras(){
-				if (this.selected_B == 'facil') {
-					var rand2 = Math.floor(Math.random()*this.palabras_facil.length)
-					conso.innerHTML = this.palabras_facil[rand2]
-					this.contador_facil--
-					if (this.contador_facil <= 0) {
-						clearInterval(this.interval_letra)
-						document.getElementById("primera-vista").style.display='none'
-						document.getElementById("segunda-vista").style.display='flex'
-					}
-				}else if (this.selected_B == 'medio') {
-					var conso = document.getElementById("letra1")
-					var rand2 = Math.floor(Math.random()*this.palabras_media.length)
-					conso.innerHTML = this.palabras_media[rand2]
-					this.contador_facil--
-					if (this.contador_facil <= 0) {
-						clearInterval(this.interval_letra)
-						document.getElementById("primera-vista").style.display='none'
-						document.getElementById("segunda-vista").style.display='flex'
-					}
-				}else if (this.selected_B == 'avanzado') {
-					var conso = document.getElementById("letra1")
-					var rand2 = Math.floor(Math.random()*this.palabras_avanzada.length)
-					conso.innerHTML = this.palabras_avanzada[rand2]
-					this.contador_facil--
-					if (this.contador_facil <= 0) {
-						clearInterval(this.interval_letra)
-						document.getElementById("primera-vista").style.display='none'
-						document.getElementById("segunda-vista").style.display='flex'
-					}
+			interval_numeros_normal(){
+				var conso = document.getElementById("letra1")
+				var vocal = document.getElementById("letra2")
+				var rand1 = Math.floor(Math.random()*this.numeros.length)
+				var rand2 = Math.floor(Math.random()*this.numeros.length)
+				conso.innerHTML = this.numeros[rand1]
+				vocal.innerHTML = this.numeros[rand2]
+				this.contador_normal--
+				if (this.contador_normal <= 0) {
+					clearInterval(this.interval_letra)
+					this.interval_letra = null
+					document.getElementById("primera-vista").style.display='none'
+					document.getElementById("segunda-vista").style.display='flex'
 				}
-			}
+			},
+			interval_numeros_avanzado(){
+				var conso = document.getElementById("letra1")
+				var vocal = document.getElementById("letra2")
+				var rand1 = Math.floor(Math.random()*this.numeros.length)
+				var rand2 = Math.floor(Math.random()*this.numeros.length)
+				conso.innerHTML = this.numeros[rand1]
+				vocal.innerHTML = this.numeros[rand2]
+				this.contador_dificil--
+				if (this.contador_dificil <= 0) {
+					clearInterval(this.interval_letra)
+					this.interval_letra = null
+					document.getElementById("primera-vista").style.display='none'
+					document.getElementById("segunda-vista").style.display='flex'
+				}
+			},
+			interval_palabras_facil(){
+				var rand2 = Math.floor(Math.random()*this.palabras_facil.length)
+				conso.innerHTML = this.palabras_facil[rand2]
+				this.contador_facil--
+				if (this.contador_facil <= 0) {
+					clearInterval(this.interval_letra)
+					this.interval_letra = null
+					document.getElementById("primera-vista").style.display='none'
+					document.getElementById("segunda-vista").style.display='flex'
+				}
+			},
+			interval_palabras_normal(){
+				var conso = document.getElementById("letra1")
+				var rand2 = Math.floor(Math.random()*this.palabras_media.length)
+				conso.innerHTML = this.palabras_media[rand2]
+				this.contador_normal--
+				if (this.contador_normal <= 0) {
+					clearInterval(this.interval_letra)
+					this.interval_letra = null
+					document.getElementById("primera-vista").style.display='none'
+					document.getElementById("segunda-vista").style.display='flex'
+				}
+			},
+			interval_palabras_dificil(){
+				var conso = document.getElementById("letra1")
+				var rand2 = Math.floor(Math.random()*this.palabras_avanzada.length)
+				conso.innerHTML = this.palabras_avanzada[rand2]
+				this.contador_dificil--
+				if (this.contador_dificil <= 0) {
+					clearInterval(this.interval_letra)
+					this.interval_letra = null
+					document.getElementById("primera-vista").style.display='none'
+					document.getElementById("segunda-vista").style.display='flex'
+				}
+			},
+			
 		},	
 		beforeDestroy: function () {
 			clearInterval(this.interval_letra)

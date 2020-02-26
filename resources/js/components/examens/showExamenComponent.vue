@@ -1,6 +1,6 @@
 <template>
 	<div class="row">
-		<div class="col-lg-6">
+		<div class="col-12">
 			<div class="card card-primary card-outline">
 				<spinner v-if="loading"></spinner>
 				<div class="card-body box-profile" v-else>
@@ -15,7 +15,7 @@
 			</div>
 		</div>
 
-		<div class="col-lg-12">
+		<div class="col-12">
 			<pregunta/>
 		</div>
 	</div>

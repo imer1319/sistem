@@ -302,6 +302,19 @@
 				var point = Math.floor(this.puntuacion/3)
 				let data = new FormData();
 				data.append('puntos', this.perfil_usuario.puntos + point);
+				if (this.fillUsuario.puntos<100) {
+					data.append('rango_id', 1);
+				}else if (this.fillUsuario.puntos >= 100 && this.fillUsuario.puntos < 500) {
+					data.append('rango_id', 2);
+				}else if (this.fillUsuario.puntos >= 500 && this.fillUsuario.puntos < 1000) {
+					data.append('rango_id', 3);
+				}else if (this.fillUsuario.puntos >= 1000&& this.fillUsuario.puntos < 5000) {
+					data.append('rango_id', 4);
+				}else if (this.fillUsuario.puntos >= 5000&& this.fillUsuario.puntos < 10000) {
+					data.append('rango_id', 5);
+				}else if (this.fillUsuario.puntos > 10000) {
+					data.append('rango_id', 6);
+				}
 				data.append('_method','PUT');
 				var url = `/profile/${this.perfil_usuario.id}`
 				axios.post(url, data).then(res=>{

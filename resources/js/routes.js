@@ -71,6 +71,11 @@ export const routes = [
 		component: () => import('./users/ranking.vue')
 	},
 	{
+		name: 'puntuacionExamen',
+		path: '/puntuacionExamen',
+		component: () => import('./users/puntuacionExam.vue')
+	},
+	{
 		name: 'ejercicios',
 		path: '/ejercicios',
 		component: () => import('./users/ejercicios/ejercicios.vue')
@@ -117,19 +122,9 @@ export const routes = [
 		component: () => import('./users/game/7-par-impar.vue')
 	},
 	{
-		name: 'borde-palabra',
-		path: '/borde-palabra',
-		component: () => import('./users/game/5-borde-palabra.vue')
-	},
-	{
-		name: 'palabra-piramide',
-		path: '/palabra-piramide',
-		component: () => import('./users/game/6-piramide.vue')
-	},
-	{
-		name: 'campo-visual',
-		path: '/campo-visual',
-		component: () => import('./users/game/7-campo-visual.vue')
+		name: 'iguales',
+		path: '/iguales',
+		component: () => import('./users/game/8-campo-visual.vue')
 	},
 	/********--RUTA -- EJERCICIOS--******/
 	{

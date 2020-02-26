@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -140,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
       maximoPunto: [],
       misRecords: [],
       desordenar: [],
-      palabras: ['Senso', 'Ganado', 'Socorro', 'Lobo', 'Corazón', 'Cadera', 'Red', 'Patinar', 'Vegetal', 'Negativo', 'Arreglo', 'Erosión', 'Elástico', 'Campera', 'Preciosa', 'Pantera', 'Grabador', 'Galleta', 'Olvidar', 'Actor', 'Hormonas', 'Pozo', 'Naranja', 'Derecha'],
+      palabras: ['2336', '2077', '1985', '3797', '9693', '3566', '7852', '6802', '4740', ' 9952', '5495', '5342', '7735', '5807', '3320', '9344', '9657', '3091', '5163', '2638', '1085', '6323', '8944', '9734'],
       ids: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
       buscar: null,
       puntuacion: 0,
@@ -157,14 +157,14 @@ __webpack_require__.r(__webpack_exports__);
     maximaPuntuacion: function maximaPuntuacion() {
       var _this = this;
 
-      axios.get("maxGame/" + 5).then(function (res) {
+      axios.get("maxGame/" + 6).then(function (res) {
         _this.maximoPunto = res.data;
       });
     },
     misPuntuaciones: function misPuntuaciones() {
       var _this2 = this;
 
-      axios.get("/puntuacion/" + 5).then(function (res) {
+      axios.get("/puntuacion/" + 6).then(function (res) {
         _this2.misRecords = res.data;
       });
     },
@@ -179,7 +179,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       var formData = new FormData();
-      formData.append('ejercicio_id', 5);
+      formData.append('ejercicio_id', 6);
       formData.append('user_id', this.perfil_usuario.id);
       formData.append('puntuacion', this.puntuacion);
       axios.post('/game', formData).then(function (res) {
@@ -383,9 +383,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=style&index=0&lang=css&":
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=style&index=0&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=style&index=0&lang=css& ***!
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=style&index=0&lang=css& ***!
   \************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -402,15 +402,15 @@ exports.push([module.i, "\n#primera-vista{\r\n\tdisplay: flex;\n}\n#segunda-vist
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=style&index=0&lang=css&":
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=style&index=0&lang=css& ***!
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=style&index=0&lang=css& ***!
   \****************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./5-recuerda-palabra.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./6-recuerda-numeros.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -432,9 +432,9 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=template&id=3885c726&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=template&id=577b8890&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=template&id=3885c726& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=template&id=577b8890& ***!
   \*********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -449,7 +449,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
     _c("div", { staticClass: "row", attrs: { id: "primera-vista" } }, [
-      _c("div", { staticClass: "col-12 col-md-8" }, [
+      _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "card mb-3" }, [
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "row" }, [
@@ -478,11 +478,11 @@ var render = function() {
                   _vm._l(_vm.maximoPunto, function(max, index) {
                     return _c("div", [
                       _c("div", { staticClass: "card-footer row text-left" }, [
-                        _c("h5", { staticClass: "col-md-6 col-12" }, [
+                        _c("h5", { staticClass: "col-md-6" }, [
                           _vm._v(_vm._s(max.name))
                         ]),
                         _vm._v(" "),
-                        _c("h5", { staticClass: "col-md-6 col-12" }, [
+                        _c("h5", { staticClass: "col-md-6" }, [
                           _vm._v(_vm._s(max.pivot.puntuacion))
                         ])
                       ])
@@ -642,7 +642,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "col-md-8  m-auto", attrs: { id: "tercera-vista" } },
+      { staticClass: "col-md-8 m-auto", attrs: { id: "tercera-vista" } },
       [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-body" }, [
@@ -659,7 +659,7 @@ var render = function() {
                 },
                 [
                   _c("h3", { staticClass: "text-uppercase" }, [
-                    _vm._v("Se acabo el tiempo")
+                    _vm._v("se acabo el tiempo")
                   ]),
                   _vm._v(" "),
                   _c("img", {
@@ -671,7 +671,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("input", {
-                    staticClass: "btn btn-primary btn-block",
+                    staticClass: "btn btn-primary  btn-block btn-lg",
                     attrs: { type: "submit", value: "Ver resultados" }
                   })
                 ]
@@ -749,7 +749,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-md-4" }, [
+    return _c("div", { staticClass: "col-md-4" }, [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "text-center" }, [
@@ -757,14 +757,14 @@ var staticRenderFns = [
               staticClass: "card-img-top mx-auto my-3",
               staticStyle: { width: "60%" },
               attrs: {
-                src: "/imagenes/consejos-juegos/consejo-memorizar-palabra.png"
+                src: "/imagenes/consejos-juegos/consejo-memorizar-numero.png"
               }
             }),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("h4", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Memoriza la palabra que aparecera y luego selecciona la correcta, antes de que se termine el tiempo"
+                  "Memoriza el numero que aparecera y luego selecciona el correcto, antes de que se termine el tiempo"
                 )
               ]),
               _vm._v(" "),
@@ -806,18 +806,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/users/game/5-recuerda-palabra.vue":
+/***/ "./resources/js/users/game/6-recuerda-numeros.vue":
 /*!********************************************************!*\
-  !*** ./resources/js/users/game/5-recuerda-palabra.vue ***!
+  !*** ./resources/js/users/game/6-recuerda-numeros.vue ***!
   \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _5_recuerda_palabra_vue_vue_type_template_id_3885c726___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./5-recuerda-palabra.vue?vue&type=template&id=3885c726& */ "./resources/js/users/game/5-recuerda-palabra.vue?vue&type=template&id=3885c726&");
-/* harmony import */ var _5_recuerda_palabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./5-recuerda-palabra.vue?vue&type=script&lang=js& */ "./resources/js/users/game/5-recuerda-palabra.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _5_recuerda_palabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./5-recuerda-palabra.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/game/5-recuerda-palabra.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _6_recuerda_numeros_vue_vue_type_template_id_577b8890___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./6-recuerda-numeros.vue?vue&type=template&id=577b8890& */ "./resources/js/users/game/6-recuerda-numeros.vue?vue&type=template&id=577b8890&");
+/* harmony import */ var _6_recuerda_numeros_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./6-recuerda-numeros.vue?vue&type=script&lang=js& */ "./resources/js/users/game/6-recuerda-numeros.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _6_recuerda_numeros_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./6-recuerda-numeros.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/game/6-recuerda-numeros.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -828,9 +828,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _5_recuerda_palabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _5_recuerda_palabra_vue_vue_type_template_id_3885c726___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _5_recuerda_palabra_vue_vue_type_template_id_3885c726___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _6_recuerda_numeros_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _6_recuerda_numeros_vue_vue_type_template_id_577b8890___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _6_recuerda_numeros_vue_vue_type_template_id_577b8890___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -840,54 +840,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/users/game/5-recuerda-palabra.vue"
+component.options.__file = "resources/js/users/game/6-recuerda-numeros.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/users/game/5-recuerda-palabra.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/users/game/6-recuerda-numeros.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************!*\
-  !*** ./resources/js/users/game/5-recuerda-palabra.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/users/game/6-recuerda-numeros.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_5_recuerda_palabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./5-recuerda-palabra.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_5_recuerda_palabra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_6_recuerda_numeros_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./6-recuerda-numeros.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_6_recuerda_numeros_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/users/game/5-recuerda-palabra.vue?vue&type=style&index=0&lang=css&":
+/***/ "./resources/js/users/game/6-recuerda-numeros.vue?vue&type=style&index=0&lang=css&":
 /*!*****************************************************************************************!*\
-  !*** ./resources/js/users/game/5-recuerda-palabra.vue?vue&type=style&index=0&lang=css& ***!
+  !*** ./resources/js/users/game/6-recuerda-numeros.vue?vue&type=style&index=0&lang=css& ***!
   \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_5_recuerda_palabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./5-recuerda-palabra.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_5_recuerda_palabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_5_recuerda_palabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_5_recuerda_palabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_5_recuerda_palabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_5_recuerda_palabra_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_6_recuerda_numeros_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./6-recuerda-numeros.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_6_recuerda_numeros_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_6_recuerda_numeros_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_6_recuerda_numeros_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_6_recuerda_numeros_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_6_recuerda_numeros_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/users/game/5-recuerda-palabra.vue?vue&type=template&id=3885c726&":
+/***/ "./resources/js/users/game/6-recuerda-numeros.vue?vue&type=template&id=577b8890&":
 /*!***************************************************************************************!*\
-  !*** ./resources/js/users/game/5-recuerda-palabra.vue?vue&type=template&id=3885c726& ***!
+  !*** ./resources/js/users/game/6-recuerda-numeros.vue?vue&type=template&id=577b8890& ***!
   \***************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_5_recuerda_palabra_vue_vue_type_template_id_3885c726___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./5-recuerda-palabra.vue?vue&type=template&id=3885c726& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/5-recuerda-palabra.vue?vue&type=template&id=3885c726&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_5_recuerda_palabra_vue_vue_type_template_id_3885c726___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_6_recuerda_numeros_vue_vue_type_template_id_577b8890___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./6-recuerda-numeros.vue?vue&type=template&id=577b8890& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/6-recuerda-numeros.vue?vue&type=template&id=577b8890&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_6_recuerda_numeros_vue_vue_type_template_id_577b8890___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_5_recuerda_palabra_vue_vue_type_template_id_3885c726___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_6_recuerda_numeros_vue_vue_type_template_id_577b8890___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

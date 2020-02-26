@@ -3,81 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Laravel</title>
-  <style>
-    html,body{
-      height: 100%;
-      width: 100%;
-    }
-    .navbar{
-      background:#2F6988;
-      padding: 1% 0;
-      font-size: 1.2em;
-    }
-    .navbar-nav li a {
-      color: #d5d5d5;
-    }
-    .navbar-nav li a:hover{
-      color:#fff;
-    }
-    #home{
-      background: url(imagenes/landing/mountains.jpg) no-repeat center fixed;
-      display: table;
-      height: 100%;
-      position: relative;
-      width: 100%;
-      background-size: cover;
-    }
-    .loading-text{
-      display: table-cell;
-      text-align: center;
-      vertical-align: middle;
-      color: white
-    }
-    .loading-text h1{
-      font-size: 500%;
-      font-weight: 700;
-    }
-    .padding{
-      padding: 50px 0;
-    }
-    #fixed{
-      background: url(imagenes/landing/background.jpg) no-repeat center center fixed;
-      display: table;
-      height: 60%;
-      position: relative;
-      width:100%;
-      background-size: cover;
-    }
-    footer{
-      width: 100%;
-      background-color: #23415c;
-      padding: 5% 5% 6% 5%;
-      color: #fff;
-    }
-    .fa{
-      padding: 15px;
-      font-size: 25px;
-      color: #fff;
-    }
-    .fa:hover{
-      color: #d5d5d5;
-      text-decoration: none;
-    }
-    .icon{
-      max-width: 200px;
-    }
-    @media (max-width: 768px) {
-      .loading-text h1{
-        font-size: 300%;
-      }
-      .fa{
-        font-size: 20px;
-        padding: 10px;
-      }
-    }
-  </style>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>{{ config('app.name', 'Laravel') }}</title>
+  <link rel="shortcut icon" href="imagenes/logo.png">
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <script src="{{ asset('js/app.js') }}" defer></script>
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
   <!-- Bootstrap CSS -->
@@ -85,107 +15,85 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #25546D;">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav ml-auto">
-        @if (Route::has('login'))
-        @auth
-        <li class="nav-item">
-          <a href="{{ url('/home') }}" class="nav-link">Inicio</a>
-        </li>
-        @else
-        <li class="nav-item">
-          <a href="{{ route('login') }}" class="nav-link">Iniciar Sesión</a>
-        </li>
-        <li>
-          @if (Route::has('register'))
-          <a href="{{ route('register') }}" class="nav-link">Registrarse</a>
-        </li>
-        @endif
-        @endauth
-        @endif
-      </ul>
+<body style="overflow-x: hidden;">
+  <div id="app">
+    <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #2B6A88;">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url('/') }}">
+          {{ config('app.name', 'Sistema Lectura Veloz') }}
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            @guest
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
+            </li>
+            @if (Route::has('register'))
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+            </li>
+            @endif
+            @else
+            <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }} <span class="caret"></span>
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                {{ __('Cerrar Sesión') }}
+              </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+              </form>
+            </div>
+          </li>
+          @endguest
+        </ul>
+      </div>
     </div>
   </nav>
-  <div id="home">
-    <div class="loading-text">
-      <h1>Lectura veloz</h1>
-      <h3>empezar con los ejercicios</h3>
+  <main class="py-4">
+    <div class="row container">
+      <div class="col-5 text-center d-none d-md-block">
+        <img src="imagenes/inicio/fondo.png" alt="" width="80%">
+      </div>
+      <div class="col-md-7 my-auto">
+        <h2>Entrena con los diferentes tipos de ejercicios que te esperan...</h2><br>
+        <h5 class="text-justify">Este es un curso inspirado para que puedas mejorar a grandes escalas la velocidad de lectura actual que tienes en este momento.</h5>
+      </div>
     </div>
+    <h4 class="text-center p-4 text-white mt-3" style="background: #2E7294">¿Que se necesita para leer mas rapido?</h4>
+    <div class="row container">
+     <div class="col-6 col-md-3 text-center my-auto">
+       <img src="imagenes/inicio/leer.png" alt="" width="80%">
+     </div>
+     <div class="col-6 col-md-3 text-justify my-auto">
+       <h6>Utiliza un diccionario para tener una mejor comprension de lo que estas leyendo.</h6>
+     </div>
+     <div class="col-6 col-md-3 text-center my-auto">
+       <img src="imagenes/inicio/leer2.png" alt="" width="80%">
+     </div>
+     <div class="col-6 col-md-3 text-justify my-auto">
+       <h6>Utiliza alguna herramienta o incluso tus dedos para guiarte</h6>
+     </div>
+   </div>
+ </main>
+ <footer style="background: #163747" class="text-white text-center py-4">
+  <div class="col-md-9 m-auto">
+    <h4>Sistema lectura veloz para estudiantes de la U.E. Pdte. German Busch Nocturno.</h4>
   </div>
-  <div class="padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <img src="imagenes/landing/bootstrap.jpg" width="100%">
-        </div>
-        <div class="col-sm-6 text-center">
-          <h2>All About Using Bootstrap.</h2>
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore debitis facere perspiciatis sunt, incidunt a illo, quasi deserunt adipisci atque, optio tempore molestiae expedita, dolor suscipit asperiores nam est nihil!</p>
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore debitis facere perspiciatis sunt, incidunt a illo, quasi deserunt adipisci atque, optio tempore molestiae expedita, dolor suscipit asperiores nam est nihil!</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <h4>Built With Sass</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel maxime earum, maiores dolores. Numquam a unde officia, deserunt accusamus, eius tenetur aut dicta cum error repudiandae sapiente iure minima quos?</p>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <img src="imagenes/landing/ficha01.png" class="img-responsive" width="100%">
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <h4>And Less</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis tempora eligendi odio dicta incidunt dolore, repellat. Blanditiis aspernatur modi velit mollitia? Dignissimos eaque nesciunt quos voluptatibus aut minima. Beatae, alias!</p>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <img src="imagenes/landing/ficha02.png" class="img-responsive" width="100%">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="fixed"></div>
-  <div class="padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <h4>Here the cool thing about Bootstrap.</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto ut, magni eius, sunt similique sit porro possimus laboriosam, rerum modi laudantium soluta excepturi non aliquid illum. Iste praesentium, officiis facilis.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati quo omnis accusamus placeat ducimus ea quaerat, vero odit velit praesentium, at, dolor est neque commodi tempore quasi rem, vitae. Beatae?</p>
-        </div>
-        <div class="col-sm-6">
-          <img src="imagenes/landing/bootstrap2.png" width="100%">
-        </div>
-      </div>
-    </div>
-  </div>
-  <footer class="container-fluid text-center">
-    <div class="row">
-      <div class="col-sm-4">
-        <h3>Contacts Us</h3>
-        <br>
-        <h4>our address and contact info here.</h4>
-      </div>
-      <div class="col-sm-4">
-        <h3>Connect</h3>
-        <a href="#" class="fa fa-facebook"></a>
-        <a href="#" class="fa fa-twitter"></a>
-        <a href="#" class="fa fa-google"></a>
-        <a href="#" class="fa fa-instagram"></a>
-        <a href="#" class="fa fa-linkedin"></a>
-      </div>
-      <div class="col-sm-4">
-        <img src="imagenes/landing/b.png" width="100%" class="icon">
-      </div>
-    </div>
-  </footer>
-
+</footer>
+</div>
 </body>
 </html>

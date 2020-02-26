@@ -82,7 +82,7 @@
 									<div class="text-center">
 										<div v-for="rango in rangos">
 											<div v-if="usuario.puntos < 100">
-												<div v-if="rango.nombre == 'nivel #1'">
+												<div v-if="rango.nombre == 'rango #1'">
 													<div class="text-center">
 														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
 														<h3><b>I</b></h3>
@@ -90,7 +90,7 @@
 												</div>
 											</div>
 											<div v-if="usuario.puntos >= 100 && usuario.puntos <500">
-												<div v-if="rango.nombre == 'nivel #2'">
+												<div v-if="rango.nombre == 'rango #2'">
 													<div class="text-center">
 														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
 														<h3><b>II</b></h3>
@@ -98,7 +98,7 @@
 												</div>
 											</div>
 											<div v-if="usuario.puntos >= 500 && usuario.puntos <1000">
-												<div v-if="rango.nombre == 'nivel #3'">
+												<div v-if="rango.nombre == 'rango #3'">
 													<div class="text-center">
 														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
 														<h3><b>III</b></h3>
@@ -106,7 +106,7 @@
 												</div>
 											</div>
 											<div v-if="usuario.puntos >= 1000 && usuario.puntos < 5000">
-												<div v-if="rango.nombre == 'nivel #4'">
+												<div v-if="rango.nombre == 'rango #4'">
 													<div class="text-center">
 														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
 														<h3><b>IV</b></h3>
@@ -114,7 +114,7 @@
 												</div>
 											</div>
 											<div v-if="usuario.puntos >= 5000 && usuario.puntos < 10000">
-												<div v-if="rango.nombre == 'nivel #5'">
+												<div v-if="rango.nombre == 'rango #5'">
 													<div class="text-center">
 														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
 														<h3><b>V</b></h3>
@@ -122,7 +122,7 @@
 												</div>
 											</div>
 											<div v-if="usuario.puntos >=10000">
-												<div v-if="rango.nombre == 'nivel #6'">
+												<div v-if="rango.nombre == 'rango #6'">
 													<div class="text-center">
 														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
 														<h3><b>VI</b></h3>
@@ -188,7 +188,7 @@
 												</div>
 												<div class="form-group row">
 													<div class="offset-sm-2 col-sm-10">
-														<button type="submit" class="btn btn-warning">Actualizar</button>
+														<button type="submit" class="btn btn-success">Actualizar</button>
 													</div>
 												</div>
 											</form>
@@ -287,8 +287,12 @@
 						data.append('rango_id', 2);
 					}else if (this.fillUsuario.puntos >= 500 && this.fillUsuario.puntos < 1000) {
 						data.append('rango_id', 3);
-					}else if (this.fillUsuario.puntos >= 1000) {
+					}else if (this.fillUsuario.puntos >= 1000&& this.fillUsuario.puntos < 5000) {
 						data.append('rango_id', 4);
+					}else if (this.fillUsuario.puntos >= 5000&& this.fillUsuario.puntos < 10000) {
+						data.append('rango_id', 5);
+					}else if (this.fillUsuario.puntos > 10000) {
+						data.append('rango_id', 6);
 					}
 					data.append('_method','PUT');
 					var url = `/profile/${fillUsuario.id}`;
@@ -385,7 +389,7 @@
 		padding-top: 50px;
 	}
 	.bg-info {
-		background-color: #5B90A3 !important;
+		background-color: #2A6988 !important;
 		color: #fff;
 	}
 	h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {

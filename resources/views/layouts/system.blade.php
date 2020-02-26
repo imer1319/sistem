@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link rel="shortcut icon" href="imagenes/logo.png">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script
@@ -27,7 +27,7 @@
 </head>
 <body style="background: #F0F0F0;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #25546D; box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);">
+        <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #2B6A88; box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
