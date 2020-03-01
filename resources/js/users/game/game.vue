@@ -30,7 +30,7 @@
 				{name:'recordar palabra',icon:'recordar-palabra.png',url:'/encuentra-palabra',background:'color8'},
 				{name:'recordar numeros',icon:'recordar-numero.png',url:'/encuentra-numeros',background:'color8'},
 				{name:'Par o Impar',icon:'par - impar.png',url:'/par-impar',background:'color8'},
-				{name:'Iguales',icon:'par - impar.png',url:'/iguales',background:'color8'},
+				{name:'Iguales',icon:'campo-visual.png',url:'/iguales',background:'color8'},
 				],
 			}
 		},

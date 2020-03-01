@@ -57007,13 +57007,13 @@ var routes = [{
   name: 'usuario',
   path: '/usuario',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./components/usuario/usuario.vue */ "./resources/js/components/usuario/usuario.vue"));
+    return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./components/usuario/usuario.vue */ "./resources/js/components/usuario/usuario.vue"));
   }
 }, {
   name: 'shoex',
   path: '/usuario/:id',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./components/usuario/showUsuario.vue */ "./resources/js/components/usuario/showUsuario.vue"));
+    return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./components/usuario/showUsuario.vue */ "./resources/js/components/usuario/showUsuario.vue"));
   }
 }, {
   name: 'categoria',
@@ -57025,13 +57025,13 @@ var routes = [{
   name: 'ejercicio',
   path: '/ejercicio',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./components/ejercicios/ejercicio.vue */ "./resources/js/components/ejercicios/ejercicio.vue"));
+    return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./components/ejercicios/ejercicio.vue */ "./resources/js/components/ejercicios/ejercicio.vue"));
   }
 }, {
   name: 'perfil',
   path: '/perfil',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
+    return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
   }
 }, {
   name: 'examen',
@@ -57049,13 +57049,13 @@ var routes = [{
   name: 'insignia',
   path: '/insignia',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./components/insignias/insigniaComponent.vue */ "./resources/js/components/insignias/insigniaComponent.vue"));
+    return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./components/insignias/insigniaComponent.vue */ "./resources/js/components/insignias/insigniaComponent.vue"));
   }
 }, {
   name: 'rango',
   path: '/rango',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./components/rango/rango.vue */ "./resources/js/components/rango/rango.vue"));
+    return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./components/rango/rango.vue */ "./resources/js/components/rango/rango.vue"));
   }
 }, // esta es la parte de los usuarios....
 {
@@ -57068,13 +57068,13 @@ var routes = [{
   name: 'profile',
   path: '/profile',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./users/user/perfil.vue */ "./resources/js/users/user/perfil.vue"));
+    return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./users/user/perfil.vue */ "./resources/js/users/user/perfil.vue"));
   }
 }, {
   name: 'exam',
   path: '/exam',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ./users/exam/exam */ "./resources/js/users/exam/exam.vue"));
+    return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./users/exam/exam */ "./resources/js/users/exam/exam.vue"));
   }
 }, {
   name: 'showing',
@@ -57086,7 +57086,7 @@ var routes = [{
   name: 'ranking',
   path: '/ranking',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./users/ranking.vue */ "./resources/js/users/ranking.vue"));
+    return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./users/ranking.vue */ "./resources/js/users/ranking.vue"));
   }
 }, {
   name: 'puntuacionExamen',
@@ -57104,7 +57104,7 @@ var routes = [{
   name: 'game',
   path: '/game',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./users/game/game.vue */ "./resources/js/users/game/game.vue"));
+    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./users/game/game.vue */ "./resources/js/users/game/game.vue"));
   }
 },
 /*********--RUTA -- JUEGOS--**********/
@@ -57154,7 +57154,7 @@ var routes = [{
   name: 'iguales',
   path: '/iguales',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./users/game/8-campo-visual.vue */ "./resources/js/users/game/8-campo-visual.vue"));
+    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./users/game/8-campo-visual.vue */ "./resources/js/users/game/8-campo-visual.vue"));
   }
 },
 /********--RUTA -- EJERCICIOS--******/
@@ -57174,7 +57174,7 @@ var routes = [{
   name: 'horizontal',
   path: '/horizontal',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./users/ejercicios/3-horizontal.vue */ "./resources/js/users/ejercicios/3-horizontal.vue"));
+    return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ./users/ejercicios/3-horizontal.vue */ "./resources/js/users/ejercicios/3-horizontal.vue"));
   }
 }, {
   name: 'aleatorio',
@@ -57204,8 +57204,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! L:\sistem\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! L:\sistem\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\IMER\zz proyec\sistem\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\IMER\zz proyec\sistem\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

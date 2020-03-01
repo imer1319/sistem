@@ -297,8 +297,8 @@
 					data.append('_method','PUT');
 					var url = `/profile/${fillUsuario.id}`;
 					axios.post(url, data).then(res=>{
-						this.showUser();
-						this.alerta();
+						this.showUser()
+						this.alerta() 
 					})
 				},
 				editarAvatar:function(){
@@ -312,8 +312,8 @@
 					data.append('_method','PUT');
 					var url = `/profile/${fillUsuario.id}`;
 					axios.post(url, data).then(res=>{
-						this.showUser();
-						this.alerta();
+						this.showUser()
+						this.alerta()
 						$('#editAvatar').modal('hide')
 					})
 				},

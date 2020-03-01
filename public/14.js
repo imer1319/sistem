@@ -227,6 +227,21 @@ __webpack_require__.r(__webpack_exports__);
       var point = Math.floor(this.puntuacion / 3);
       var data = new FormData();
       data.append('puntos', this.perfil_usuario.puntos + point);
+
+      if (this.perfil_usuario.puntos < 100) {
+        data.append('rango_id', 1);
+      } else if (this.perfil_usuario.puntos >= 100 && this.perfil_usuario.puntos < 500) {
+        data.append('rango_id', 2);
+      } else if (this.perfil_usuario.puntos >= 500 && this.perfil_usuario.puntos < 1000) {
+        data.append('rango_id', 3);
+      } else if (this.perfil_usuario.puntos >= 1000 && this.perfil_usuario.puntos < 5000) {
+        data.append('rango_id', 4);
+      } else if (this.perfil_usuario.puntos >= 5000 && this.perfil_usuario.puntos < 10000) {
+        data.append('rango_id', 5);
+      } else if (this.perfil_usuario.puntos > 10000) {
+        data.append('rango_id', 6);
+      }
+
       data.append('_method', 'PUT');
       var url = "/profile/".concat(this.perfil_usuario.id);
       axios.post(url, data).then(function (res) {});

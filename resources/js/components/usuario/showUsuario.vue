@@ -38,23 +38,16 @@
 				<div class="card">
 					<div class="card-header p-2">
 						<ul class="nav nav-pills">
-							<li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Insignias</a></li>
-							<li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Rangos</a></li>
-							<li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab" @click="editarUsuario()">Editar Perfil</a></li>
+							<li class="nav-item"><a class="nav-link active" href="#insignias" data-toggle="tab">Insignias</a></li>
+							<li class="nav-item"><a class="nav-link" href="#perfil" data-toggle="tab" @click.prevent="editarUsuario()">Editar Perfil</a></li>
 						</ul>
-					</div><!-- /.card-header -->
+					</div>
 					<div class="card-body">
 						<div class="tab-content">
-							<div class="active tab-pane" id="activity">
+							<div class="active tab-pane" id="insignias">
 
 							</div>
-							<!-- /.tab-pane -->
-							<div class="tab-pane" id="timeline">
-
-							</div>
-							<!-- /.tab-pane -->
-
-							<div class="tab-pane" id="settings">
+							<div class="tab-pane" id="perfil">
 								<form v-on:submit="updateUsuario(fillUsuario)" enctype="multipart/form-data">
 									<div class="form-group row">
 										<label class="col-form-label col-md-2">Nombre</label>
@@ -98,17 +91,14 @@
 									</div>
 									<div class="form-group row">
 										<div class="offset-sm-2 col-sm-10">
-											<button type="submit" class="btn btn-danger">Submit</button>
+											<button type="submit" class="btn btn-danger">Actualizar</button>
 										</div>
 									</div>
 								</form>
 							</div>
-							<!-- /.tab-pane -->
 						</div>
-						<!-- /.tab-content -->
-					</div><!-- /.card-body -->
+					</div>
 				</div>
-				<!-- /.nav-tabs-custom -->
 			</div>
 		</div>
 	</div>
@@ -164,7 +154,6 @@
 				this.fillUsuario.avatar = this.usuario.avatar;
 				this.fillUsuario.curso = this.usuario.curso;
 				this.fillUsuario.id = this.usuario.id;
-				$('#editUsuarios').modal('show');
 			},
 			updateUsuario:function(fillUsuario){
 				let data = new FormData();

@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+    <div class="container">
         <div class="consejo">{{ consejo }}</div>
         <div class="row">
             <div class="col-6 col-md-4 col-lg-3"v-for="contenido in content">
@@ -20,7 +20,7 @@
     </div>
 </template>
 <script>
-	export default{
+    export default{
         created(){
             this.obtener_consejo()
         },
