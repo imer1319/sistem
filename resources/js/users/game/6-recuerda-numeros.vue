@@ -1,5 +1,8 @@
 <template>
 	<div class="container-fluid">
+		<div class="col-12 container-fluid">
+			<button type="button" class="btn btn-dark text-uppercase" onClick="history.back()">Regresar</button>
+		</div>
 		<div class="row" id="primera-vista">
 			<div class="col-md-8">
 				<div class="card mb-3">

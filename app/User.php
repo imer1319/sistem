@@ -15,12 +15,8 @@ class User extends Authenticatable
 
     public function exams()
     {
-        return $this->belongsToMany(Exam::class)->withPivot('ppm','tiempo','comprension','created_at');
-    }
-    public function insignias()
-    {
-        return $this->belongsToMany(Insignia::class)
-        ->withTimestamps();
+         return $this->belongsToMany('App\Exam','exam_user')
+        ->withPivot('ppm','tiempo','comprension','estado','created_at');
     }
 
     public function ejercicios()

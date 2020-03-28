@@ -94,12 +94,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('insignia') }}" class="nav-link">
-              <i class="nav-icon fas fa-ribbon"></i>
-              <p>Insignias</p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="{{ route('rango') }}" class="nav-link">
               <i class="nav-icon fas fa-trophy"></i>
               <p>Rangos</p>

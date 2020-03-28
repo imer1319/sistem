@@ -7,13 +7,8 @@ use App\Categoria;
 use App\User;
 class Ejercicio extends Model
 {
-	protected $fillable = ['name','description','icon','categoria_id'];
+	protected $fillable = ['name'];
 	
-	public function categoria()
-	{
-		return $this->belongsTo(Categoria::class,'categoria_id');
-	}
-
 	public function usuarios()
 	{
 		return $this->belongsToMany(User::class)->withPivot('puntuacion');

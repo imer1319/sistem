@@ -14,7 +14,8 @@ class RangoController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            return Rango::all();
+            $rango =  Rango::get();
+            return $rango;
         }
         return view('layouts.administrador');
     }
@@ -54,15 +55,4 @@ class RangoController extends Controller
         ],200);
         return $rango;
     }
-    public function destroy($id)
-    {
-       $rango = Rango::find($id);
-       $file_path = public_path().'/imagenes/rangos/'.$rango->avatar;
-       if(is_file($file_path)){unlink($file_path);}
-       $rango->delete();
-       return response()->json([
-        "message" => "Eliminado correctamente",
-        "rango" => $rango
-    ],200);
-   }
 }

@@ -13,8 +13,9 @@ class Exam extends Model
 	{
 		return $this->hasMany(Pregunta::class);
 	}
-	public function usuarios()
+	public function users()
 	{
-		return $this->belongsToMany(User::class);
+		 return $this->belongsToMany('App\User','exam_user')
+		->withPivot('ppm','tiempo','comprension','estado','created_at');
 	}
 }

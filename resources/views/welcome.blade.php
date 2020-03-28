@@ -13,45 +13,51 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
   <style>
-    .cabecera{
-      height: 40px;
-    }
-    .top-right {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-    }
-    .links > a {
+    .li{
       color: #fff;
-      padding: 0 25px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .1rem;
+    }
+    .links a{
       text-decoration: none;
-      text-transform: uppercase;
+      padding-left: 8px;
     }
   </style>
-
 </head>
 <body style="overflow-x: hidden;">
   <div id="app">
-    <div class="cabecera" style="background-color: #2B6A88;">
-      @if (Route::has('login'))
-      <div class="top-right links">
-        @auth
-        <a href="{{ url('/home') }}">Inicio</a>
-        @else
-        <a href="{{ route('login') }}">Iniciar Sesión</a>
+    <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #2B6A88;">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-        @if (Route::has('register'))
-        <a href="{{ route('register') }}">Registrarse</a>
-        @endif
-        @endauth
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Left Side Of Navbar -->
+          <ul class="navbar-nav mr-auto">
+
+          </ul>
+
+          <!-- Right Side Of Navbar -->
+          <ul class="navbar-nav ml-auto">
+            <!-- Authentication Links -->
+           
+           @if (Route::has('login'))
+            <li class="top-right links">
+              @auth
+              <a href="{{ url('/home') }}" style="color: #fff;">Inicio</a>
+              @else
+              <a href="{{ route('login') }}" style="color: #fff;">Iniciar Sesión</a>
+
+              @if (Route::has('register'))
+              <a href="{{ route('register') }}" style="color: #fff;">Registrarse</a>
+              @endif
+              @endauth
+            </li>
+            @endif
+          </ul>
+        </div>
       </div>
-      @endif
-    </div>
+    </nav>
     <main class="py-4">
       <div class="row container">
         <div class="col-5 text-center d-none d-md-block">

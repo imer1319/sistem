@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[20],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -107,120 +107,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     var _this = this;
 
-    this.mostrarInsignia();
+    this.mostrarEjercicio();
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('agregado', function (data) {
-      _this.insignias.push(data);
+      _this.ejercicios.push(data);
     });
   },
   data: function data() {
     return {
-      insignias: [],
-      insignia: {
-        name: '',
-        description: '',
-        icon: ''
+      ejercicios: [],
+      ejercicio: {
+        name: ''
       },
-      fillInsignia: {
-        name: '',
-        description: '',
-        icon: ''
+      fillEjercicio: {
+        name: ''
       },
-      imagenMiniatura: '',
-      loading: true,
       estado: false,
-      paginate: ['insignias']
+      loading: true,
+      paginate: ['ejercicios']
     };
   },
   methods: {
-    confirmarDelete: function confirmarDelete() {
-      var resp = confirm("Estas seguro que deseas eliminarlo?");
-
-      if (resp == true) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    mostrarInsignia: function mostrarInsignia() {
+    mostrarEjercicio: function mostrarEjercicio() {
       var _this2 = this;
 
-      axios.get('insignia').then(function (res) {
-        _this2.insignias = res.data;
+      axios.get('ejercicio').then(function (res) {
+        _this2.ejercicios = res.data;
         _this2.loading = false;
       });
     },
-    crearInsignia: function crearInsignia() {
-      $('#createInsignia').modal('show');
-    },
-    obtenerImagencrear: function obtenerImagencrear(e) {
-      var file = e.target.files[0];
-      this.insignia.icon = file;
-      this.cargarImagen(file);
-    },
-    obtenerImagen: function obtenerImagen(e) {
-      this.estado = true;
-      var file = e.target.files[0];
-      this.fillInsignia.icon = file;
-      this.cargarImagen(file);
-    },
-    obtenerImagenNueva: function obtenerImagenNueva(e) {
-      this.estado = false;
-      var file = e.target.files[0];
-      this.insignia.icon = file;
-      this.cargarImagen(file);
-    },
-    cargarImagen: function cargarImagen(file) {
-      var _this3 = this;
-
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        _this3.imagenMiniatura = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
+    crearEjercicio: function crearEjercicio() {
+      $('#createEjercicio').modal('show');
     },
     validarEspacios: function validarEspacios(parametro) {
       var patron = /^\s+$/;
@@ -231,77 +152,49 @@ __webpack_require__.r(__webpack_exports__);
         return true;
       }
     },
-    agregarInsignia: function agregarInsignia() {
-      var _this4 = this;
-
-      if (this.validarEspacios(this.insignia.name) == false || this.validarEspacios(this.insignia.description) == false || this.validarEspacios(this.insignia.icon) == false) {
-        alert("los campos no pueden estar vacios");
-      } else {
-        var formData = new FormData();
-        formData.append('name', this.insignia.name);
-        formData.append('description', this.insignia.description);
-        formData.append('icon', this.insignia.icon);
-        axios.post('/insignia', formData).then(function (res) {
-          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.insignia);
-          _this4.insignia.name = "";
-          _this4.insignia.description = "";
-          _this4.$refs.img.value = "";
-          _this4.imagenMiniatura = "";
-          $('#createInsignia').modal('hide');
-        });
-      }
-    },
-    eliminarInsignia: function eliminarInsignia(insignia, index) {
-      var _this5 = this;
-
-      if (this.confirmarDelete() == true) {
-        axios["delete"]("/insignia/".concat(insignia.id)).then(function () {
-          _this5.insignias.splice(index, 1);
-        });
-      }
-    },
-    editarInsignia: function editarInsignia(insignia) {
+    editarEjercicio: function editarEjercicio(ejercicio) {
       this.estado = true;
-      this.fillInsignia.name = insignia.name;
-      this.fillInsignia.description = insignia.description;
-      this.fillInsignia.icon = insignia.icon;
-      this.fillInsignia.id = insignia.id;
-      $('#editInsignia').modal('show');
+      this.fillEjercicio.name = ejercicio.name;
+      this.fillEjercicio.id = ejercicio.id;
+      $('#editarEjercicio').modal('show');
     },
-    updateInsignia: function updateInsignia(fillInsignia) {
-      var _this6 = this;
+    updateEjercicio: function updateEjercicio(fillEjercicio) {
+      var _this3 = this;
 
-      if (this.validarEspacios(this.fillInsignia.name) == false || this.validarEspacios(this.fillInsignia.description) == false || this.validarEspacios(this.fillInsignia.icon) == false) {
+      if (this.validarEspacios(this.fillEjercicio.name) == false) {
         alert("los campos no pueden estar vacios");
       } else {
         var data = new FormData();
-        data.append('name', this.fillInsignia.name);
-        data.append('description', this.fillInsignia.description);
-        data.append('icon', this.insignia.icon);
+        data.append('name', this.fillEjercicio.name);
         data.append('_method', 'PUT');
-        var url = "/insignia/".concat(fillInsignia.id);
+        var url = "/ejercicio/".concat(fillEjercicio.id);
         axios.post(url, data).then(function (res) {
-          _this6.mostrarInsignia();
+          _this3.mostrarEjercicio();
 
-          $('#editInsignia').modal('hide');
+          $('#editarEjercicio').modal('hide');
         });
       }
-    }
-  },
-  computed: {
-    imagen: function imagen() {
-      this.estado = false;
-      return this.imagenMiniatura;
+    },
+    agregarEjercicio: function agregarEjercicio() {
+      var _this4 = this;
+
+      var formData = new FormData();
+      formData.append('name', this.ejercicio.name);
+      axios.post('ejercicio', formData).then(function (res) {
+        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.ejercicio);
+        _this4.ejercicio.name = "";
+        $('#createEjercicio').modal('hide');
+      });
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f& ***!
+  \***********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -321,14 +214,14 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.agregarInsignia($event)
+            return _vm.agregarEjercicio($event)
           }
         }
       },
       [
         _c(
           "div",
-          { staticClass: "modal fade", attrs: { id: "createInsignia" } },
+          { staticClass: "modal fade", attrs: { id: "createEjercicio" } },
           [
             _c("div", { staticClass: "modal-dialog" }, [
               _c("div", { staticClass: "modal-content" }, [
@@ -346,89 +239,25 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.insignia.name,
-                            expression: "insignia.name"
+                            value: _vm.ejercicio.name,
+                            expression: "ejercicio.name"
                           }
                         ],
                         staticClass: "form-control",
                         attrs: {
                           type: "text",
-                          placeholder: "Nombre de la insignia",
+                          placeholder: "Nombre de la ejercicio",
                           required: ""
                         },
-                        domProps: { value: _vm.insignia.name },
+                        domProps: { value: _vm.ejercicio.name },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.insignia, "name", $event.target.value)
+                            _vm.$set(_vm.ejercicio, "name", $event.target.value)
                           }
                         }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c("label", { staticClass: "col-form-label col-md-2" }, [
-                      _vm._v("Descripcion")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-10" }, [
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.insignia.description,
-                            expression: "insignia.description"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          rows: "3",
-                          cols: "5",
-                          name: "description",
-                          placeholder: "Describa la insignia",
-                          maxlength: "150",
-                          required: ""
-                        },
-                        domProps: { value: _vm.insignia.description },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.insignia,
-                              "description",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "imagen" } }),
-                      _vm._v(" "),
-                      _c("input", {
-                        ref: "img",
-                        staticClass: "form-control-file",
-                        attrs: {
-                          type: "file",
-                          accept: "image/*",
-                          required: ""
-                        },
-                        on: { change: _vm.obtenerImagencrear }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("figure", [
-                      _c("img", {
-                        attrs: { width: "200", height: "200", src: _vm.imagen }
                       })
                     ])
                   ])
@@ -449,14 +278,14 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.updateInsignia(_vm.fillInsignia)
+            return _vm.updateEjercicio(_vm.fillEjercicio)
           }
         }
       },
       [
         _c(
           "div",
-          { staticClass: "modal fade", attrs: { id: "editInsignia" } },
+          { staticClass: "modal fade", attrs: { id: "editarEjercicio" } },
           [
             _c("div", { staticClass: "modal-dialog" }, [
               _c("div", { staticClass: "modal-content" }, [
@@ -474,115 +303,26 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.fillInsignia.name,
-                            expression: "fillInsignia.name"
+                            value: _vm.fillEjercicio.name,
+                            expression: "fillEjercicio.name"
                           }
                         ],
                         staticClass: "form-control",
                         attrs: { type: "text", name: "name", required: "" },
-                        domProps: { value: _vm.fillInsignia.name },
+                        domProps: { value: _vm.fillEjercicio.name },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
                             _vm.$set(
-                              _vm.fillInsignia,
+                              _vm.fillEjercicio,
                               "name",
                               $event.target.value
                             )
                           }
                         }
                       })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c("label", { staticClass: "col-form-label col-md-2" }, [
-                      _vm._v("Descripcion")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-10" }, [
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.fillInsignia.description,
-                            expression: "fillInsignia.description"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          rows: "3",
-                          cols: "5",
-                          name: "description",
-                          placeholder: "Describa la insignia",
-                          maxlength: "150",
-                          required: ""
-                        },
-                        domProps: { value: _vm.fillInsignia.description },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.fillInsignia,
-                              "description",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label"),
-                      _vm._v(" "),
-                      _vm.estado == false
-                        ? _c("input", {
-                            staticClass: "form-control-file",
-                            attrs: {
-                              type: "file",
-                              accept: "image/*",
-                              equired: ""
-                            },
-                            on: { change: _vm.obtenerImagen }
-                          })
-                        : _c("input", {
-                            staticClass: "form-control-file",
-                            attrs: {
-                              type: "file",
-                              accept: "image/*",
-                              equired: ""
-                            },
-                            on: { change: _vm.obtenerImagenNueva }
-                          })
-                    ]),
-                    _vm._v(" "),
-                    _c("figure", [
-                      _vm.estado == false
-                        ? _c("img", {
-                            attrs: {
-                              width: "200",
-                              height: "200",
-                              src: _vm.imagen
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.estado == true
-                        ? _c("img", {
-                            attrs: {
-                              width: "200",
-                              height: "200",
-                              src: "imagenes/insignias/" + _vm.fillInsignia.icon
-                            }
-                          })
-                        : _vm._e()
                     ])
                   ])
                 ]),
@@ -600,7 +340,7 @@ var render = function() {
       { staticClass: "card" },
       [
         _c("div", { staticClass: "card-header" }, [
-          _c("h3", { staticClass: "card-title" }, [_vm._v("Insignias")]),
+          _c("h3", { staticClass: "card-title" }, [_vm._v("ejercicios")]),
           _vm._v(" "),
           _c(
             "a",
@@ -609,7 +349,7 @@ var render = function() {
               attrs: { href: "#" },
               on: {
                 click: function($event) {
-                  return _vm.crearInsignia()
+                  return _vm.crearEjercicio()
                 }
               }
             },
@@ -625,7 +365,9 @@ var render = function() {
               [
                 _c(
                   "paginate",
-                  { attrs: { name: "insignias", list: _vm.insignias, per: 5 } },
+                  {
+                    attrs: { name: "ejercicios", list: _vm.ejercicios, per: 5 }
+                  },
                   [
                     _c(
                       "table",
@@ -639,12 +381,6 @@ var render = function() {
                             _vm._v(" "),
                             _c("th", [_vm._v("Nombre")]),
                             _vm._v(" "),
-                            _c("th", [_vm._v("Descripcion")]),
-                            _vm._v(" "),
-                            _c("th", { staticClass: "text-center" }, [
-                              _vm._v("Imagen")
-                            ]),
-                            _vm._v(" "),
                             _c("th", { staticClass: "text-center" }, [
                               _vm._v("Acciones")
                             ])
@@ -653,8 +389,8 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "tbody",
-                          _vm._l(_vm.paginated("insignias"), function(
-                            insignia,
+                          _vm._l(_vm.paginated("ejercicios"), function(
+                            ejercicio,
                             index
                           ) {
                             return _c("tr", { key: index }, [
@@ -662,20 +398,7 @@ var render = function() {
                                 _vm._v(_vm._s(index + 1))
                               ]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(insignia.name))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(insignia.description))]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "text-center" }, [
-                                _c("img", {
-                                  staticClass: "img-responsive",
-                                  attrs: {
-                                    src: "imagenes/insignias/" + insignia.icon,
-                                    height: "60",
-                                    width: "70"
-                                  }
-                                })
-                              ]),
+                              _c("td", [_vm._v(_vm._s(ejercicio.name))]),
                               _vm._v(" "),
                               _c("td", { staticClass: "float-right" }, [
                                 _c(
@@ -685,7 +408,7 @@ var render = function() {
                                     attrs: { href: "#" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.editarInsignia(insignia)
+                                        return _vm.editarEjercicio(ejercicio)
                                       }
                                     }
                                   },
@@ -694,28 +417,6 @@ var render = function() {
                                       staticClass: "fas fa-pencil-alt"
                                     }),
                                     _vm._v(" Editar")
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-danger",
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.eliminarInsignia(
-                                          insignia,
-                                          index
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "far fa-trash-alt"
-                                    }),
-                                    _vm._v(" Eliminar")
                                   ]
                                 )
                               ])
@@ -730,7 +431,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("paginate-links", {
                   attrs: {
-                    for: "insignias",
+                    for: "ejercicios",
                     classes: {
                       ul: "pagination",
                       li: "page-item",
@@ -822,17 +523,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/insignias/insigniaComponent.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/insignias/insigniaComponent.vue ***!
-  \*****************************************************************/
+/***/ "./resources/js/components/ejercicios/ejercicio.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/ejercicios/ejercicio.vue ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./insigniaComponent.vue?vue&type=template&id=c467845c& */ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&");
-/* harmony import */ var _insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./insigniaComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ejercicio.vue?vue&type=template&id=6974bf8f& */ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&");
+/* harmony import */ var _ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ejercicio.vue?vue&type=script&lang=js& */ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -842,9 +543,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -854,38 +555,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/insignias/insigniaComponent.vue"
+component.options.__file = "resources/js/components/ejercicios/ejercicio.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./insigniaComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ejercicio.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f& ***!
+  \*****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./insigniaComponent.vue?vue&type=template&id=c467845c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insignias/insigniaComponent.vue?vue&type=template&id=c467845c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ejercicio.vue?vue&type=template&id=6974bf8f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_insigniaComponent_vue_vue_type_template_id_c467845c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

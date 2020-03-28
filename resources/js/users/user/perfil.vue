@@ -2,6 +2,9 @@
 	<div class="col-12">
 		<spinner v-if="loading"></spinner>
 		<div class="row" v-else>
+			<div class="col-12 container-fluid">
+				<button type="button" class="btn btn-dark text-uppercase" onClick="history.back()">Regresar</button>
+			</div>
 			<div class="col-sm-12 col-md-6 mb-3">
 				<div class="card sombra">
 					<div class="card-widget widget-user">
@@ -19,17 +22,14 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="exampleModalLabel">Editar Avatar</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
 										</div>
 										<div class="modal-body">
 											<div class="form-group">
 												<div class="form-group">
-													<input type="file" @change="obtenerImagenNueva" class="form-control-file" accept="image/*" required>
+													<input type="file" @change="obtenerImagenNueva" class="form-control-file" ref="img" accept="image/*" required>
 												</div>
 												<figure>
-													<img width="200" height="200" :src="imagen" v-show="estado == true">
+													<img width="200" height="200" :src="imagen" v-show="estado == true" accept="image/*">
 												</figure>
 											</div>
 										</div>
@@ -61,6 +61,32 @@
 								<div class="description-block">
 									<h5 class="description-header">{{ usuario.curso }}</h5>
 									<span class="description-text">CURSO</span>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="description-block">
+									<h5 class="description-header">
+										<span v-if="inicializando">
+											{{ inicializando.pivot.ppm }} ppm
+										</span>
+										<span v-else>
+											0
+										</span>
+									</h5>
+									<span class="description-text">VELOCIDAD INICIAL</span>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="description-block">
+									<h5 class="description-header">
+										<span v-if="inicializando">
+											{{ inicializando.pivot.comprension }} %
+										</span>
+										<span v-else>
+											0
+										</span>
+									</h5>
+									<span class="description-text">COMPRENSION INICIAL</span>
 								</div>
 							</div>
 						</div>
@@ -145,13 +171,13 @@
 												<div class="form-group row">
 													<label class="col-form-label col-md-3">Apellido Paterno</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" v-model="fillUsuario.apellido_paterno" placeholder="Apellido paterno" required>
+														<input type="text" class="form-control" v-model="fillUsuario.apellido_paterno" placeholder="Apellido paterno">
 													</div>
 												</div>
 												<div class="form-group row">
 													<label class="col-form-label col-md-3">Apellido Materno</label>
 													<div class="col-md-8">
-														<input type="text"class="form-control" v-model="fillUsuario.apellido_materno" placeholder="Apellido materno" required>
+														<input type="text"class="form-control" v-model="fillUsuario.apellido_materno" placeholder="Apellido materno">
 													</div>
 												</div>
 												<div class="form-group row">
@@ -205,14 +231,14 @@
 	<script>
 		export default{
 			created() {
-				this.showUser();
-				this.showRango();
+				this.puntuaciones_iniciales()
+				this.showUser()
+				this.showRango()
 			},
 			data(){
 				return{
 					usuario :{},
 					rangos:[],
-					insignias:[],
 					loading:true,
 					fillUsuario: {name: '',apellido_paterno:'', avatar:'',email:'',
 					apellido_materno:'',rango_id:'',curso:''},
@@ -221,9 +247,17 @@
 					selected:'',
 					cursos:'',
 					seccion:'',
+					inicializando:{},
 				}
 			},
 			methods:{
+				puntuaciones_iniciales(){
+					var url ="/inicializando"
+					axios.get(url).then(res =>{
+						this.inicializando = res.data
+						this.loading = false;
+					})
+				},
 				showUser(){
 					var url ="/profile"
 					axios.get(url).then(res =>{
@@ -276,6 +310,13 @@
 					})
 				},
 				updateUsuario:function(fillUsuario){
+					
+					if (this.fillUsuario.apellido_materno == null) {
+						this.fillUsuario.apellido_materno = ""
+					}
+					if (this.fillUsuario.apellido_paterno == null) {
+						this.fillUsuario.apellido_paterno = ""
+					}
 					let data = new FormData();
 					data.append('name', this.fillUsuario.name);
 					data.append('apellido_paterno', this.fillUsuario.apellido_paterno);
@@ -304,6 +345,8 @@
 				editarAvatar:function(){
 					this.fillUsuario.avatar = this.usuario.avatar;
 					this.fillUsuario.id = this.usuario.id;
+					this.estado = false
+					this.$refs.img.value = null
 					$('#editAvatar').modal('show');
 				},
 				updateAvatar:function(fillUsuario){

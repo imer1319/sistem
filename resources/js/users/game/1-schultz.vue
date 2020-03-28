@@ -1,6 +1,9 @@
 <template>
 	<div class="col-12">
 		<div>
+			<div class="col-12 container-fluid">
+				<button type="button" class="btn btn-dark text-uppercase" onClick="history.back()">Regresar</button>
+			</div>
 			<div class="row" id="vista-primera">
 				<div class="col-md-8 col-sm-12">
 					<div class="card mb-3">

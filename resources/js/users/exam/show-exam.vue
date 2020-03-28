@@ -2,6 +2,9 @@
 	<spinner v-if="loading"></spinner>
 	<div class="container" v-else>
 		<div v-if="vista == 1">
+			<div class="col-12 container-fluid">
+				<button type="button" class="btn btn-dark text-uppercase" onClick="history.back()">Regresar</button>
+			</div>
 			<div class="card col-12 col-md-8 m-auto">
 				<div class="card-body">
 					<h5 class="text-center">Este examen ya fue dado</h5>
@@ -22,6 +25,9 @@
 			</div>
 		</div>
 		<div v-if="vista == null">
+			<div class="col-12 container-fluid">
+				<button type="button" class="btn btn-dark text-uppercase" onClick="history.back()" v-show="muestra_exam == 0">Regresar</button>
+			</div>
 			<div v-show="muestra_exam==0" >
 				<div id="progressbar">
 					<li id="paso1" class="active">Consejo 1</li>
@@ -133,7 +139,7 @@
 				<div class="card-body">
 					<div class="m-auto col-8 text-center">
 						<form v-on:submit.prevent="guardarExam">
-							<h3 class="text-uppercase">Se acabo el tiempo</h3>
+							<h3 class="text-uppercase">Ver puntuaciones de este examen</h3>
 							<div class="m-auto col-md-7">
 								<img :src="imagenes.imagen4" height="200"width="100%">
 							</div>
@@ -318,7 +324,8 @@
 				var textArea = document.getElementById("area").value;
 				this.palabras = textArea.match(/[^\s]+/g).length;
 			}
-		}
+		},
+
 	}
 </script>
 <style>

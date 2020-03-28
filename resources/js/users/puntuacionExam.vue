@@ -1,8 +1,11 @@
 <template>
 	<div class="container">
+		<div class="col-12 container-fluid">
+			<button type="button" class="btn btn-dark text-uppercase" onClick="history.back()">Regresar</button>
+		</div>
 		<h5 class="text-center">Puntuaciones de examen</h5>
 		<div v-for="(punt,index) in puntuaciones">
-			<div class="card col-12 col-md-8 m-auto">
+			<div class="card col-12 col-md-8 mx-auto mb-2">
 				<div class="card-body">
 					<div class="row">
 						<div class="col-6">Titulo</div>

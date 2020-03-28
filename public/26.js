@@ -1,14 +1,25 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[26],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/exam/exam.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/exam/exam.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/puntuacionExam.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/puntuacionExam.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -29,23 +40,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'exam',
   created: function created() {
-    this.mostrarExamen();
+    this.puntuacionExamen();
   },
   data: function data() {
     return {
-      examens: [],
-      loading: true
+      puntuaciones: []
     };
   },
   methods: {
-    mostrarExamen: function mostrarExamen() {
+    puntuacionExamen: function puntuacionExamen() {
       var _this = this;
 
-      axios.get('exam').then(function (res) {
-        _this.examens = res.data;
-        _this.loading = false;
+      var url = '/puntuacionExamen';
+      axios.get(url).then(function (res) {
+        _this.puntuaciones = res.data;
       });
     }
   }
@@ -53,10 +62,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/exam/exam.vue?vue&type=template&id=31646cba&":
-/*!*******************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/exam/exam.vue?vue&type=template&id=31646cba& ***!
-  \*******************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/puntuacionExam.vue?vue&type=template&id=796a4580&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/puntuacionExam.vue?vue&type=template&id=796a4580& ***!
+  \************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -68,79 +77,104 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.loading
-    ? _c("spinner")
-    : _c("div", [
-        _c("h3", { staticClass: "titulo" }, [_vm._v("Examen")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "row container" },
-          _vm._l(_vm.examens, function(examen, index) {
-            return _c(
-              "div",
-              { key: index, staticClass: "col-6 col-md-4 col-lg-3 mt-4" },
-              [
-                _c("div", { staticClass: "card card-primary card-outline" }, [
-                  _c("img", {
-                    staticClass: "img-responsive p-2 m-auto",
-                    attrs: {
-                      src: "/imagenes/examen/" + examen.icon,
-                      height: "180",
-                      width: "80%"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("h5", { staticClass: "text-bold text-center" }, [
-                      _vm._v(_vm._s(examen.name))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "mx-2" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-info btn-block",
-                          attrs: {
-                            to: { name: "showing", params: { id: examen.id } }
-                          }
-                        },
-                        [_vm._v("Dar Examen")]
-                      )
-                    ],
-                    1
-                  )
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-center" }, [
+        _vm._v("Puntuaciones de examen")
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.puntuaciones, function(punt, index) {
+        return _c("div", [
+          _c("div", { staticClass: "card col-12 col-md-8 mx-auto mb-2" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-6" }, [_vm._v("Titulo")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [
+                  _vm._v(_vm._s(punt.name))
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [_vm._v("ppm")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [
+                  _vm._v(_vm._s(punt.pivot.ppm))
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [_vm._v("Comprension")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [
+                  _vm._v(_vm._s(punt.pivot.comprension)),
+                  _c("b", { staticClass: "h5" }, [_vm._v(" %")])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [_vm._v("tiempo")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [
+                  _vm._v(_vm._s(punt.pivot.tiempo)),
+                  _c("b", { staticClass: "h5" }, [_vm._v(" segundos")])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [_vm._v("fecha")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [
+                  _vm._v(_vm._s(punt.pivot.created_at))
                 ])
-              ]
-            )
-          }),
-          0
-        )
-      ])
+              ])
+            ])
+          ])
+        ])
+      })
+    ],
+    2
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 container-fluid" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-dark text-uppercase",
+          attrs: { type: "button", onClick: "history.back()" }
+        },
+        [_vm._v("Regresar")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/users/exam/exam.vue":
-/*!******************************************!*\
-  !*** ./resources/js/users/exam/exam.vue ***!
-  \******************************************/
+/***/ "./resources/js/users/puntuacionExam.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/users/puntuacionExam.vue ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _exam_vue_vue_type_template_id_31646cba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./exam.vue?vue&type=template&id=31646cba& */ "./resources/js/users/exam/exam.vue?vue&type=template&id=31646cba&");
-/* harmony import */ var _exam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exam.vue?vue&type=script&lang=js& */ "./resources/js/users/exam/exam.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _puntuacionExam_vue_vue_type_template_id_796a4580___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./puntuacionExam.vue?vue&type=template&id=796a4580& */ "./resources/js/users/puntuacionExam.vue?vue&type=template&id=796a4580&");
+/* harmony import */ var _puntuacionExam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./puntuacionExam.vue?vue&type=script&lang=js& */ "./resources/js/users/puntuacionExam.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -149,9 +183,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _exam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _exam_vue_vue_type_template_id_31646cba___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _exam_vue_vue_type_template_id_31646cba___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _puntuacionExam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _puntuacionExam_vue_vue_type_template_id_796a4580___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _puntuacionExam_vue_vue_type_template_id_796a4580___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -161,38 +195,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/users/exam/exam.vue"
+component.options.__file = "resources/js/users/puntuacionExam.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/users/exam/exam.vue?vue&type=script&lang=js&":
-/*!*******************************************************************!*\
-  !*** ./resources/js/users/exam/exam.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************/
+/***/ "./resources/js/users/puntuacionExam.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/users/puntuacionExam.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_exam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./exam.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/exam/exam.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_exam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_puntuacionExam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./puntuacionExam.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/puntuacionExam.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_puntuacionExam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/users/exam/exam.vue?vue&type=template&id=31646cba&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/users/exam/exam.vue?vue&type=template&id=31646cba& ***!
-  \*************************************************************************/
+/***/ "./resources/js/users/puntuacionExam.vue?vue&type=template&id=796a4580&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/users/puntuacionExam.vue?vue&type=template&id=796a4580& ***!
+  \******************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_exam_vue_vue_type_template_id_31646cba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./exam.vue?vue&type=template&id=31646cba& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/exam/exam.vue?vue&type=template&id=31646cba&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_exam_vue_vue_type_template_id_31646cba___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_puntuacionExam_vue_vue_type_template_id_796a4580___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./puntuacionExam.vue?vue&type=template&id=796a4580& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/puntuacionExam.vue?vue&type=template&id=796a4580&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_puntuacionExam_vue_vue_type_template_id_796a4580___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_exam_vue_vue_type_template_id_31646cba___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_puntuacionExam_vue_vue_type_template_id_796a4580___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

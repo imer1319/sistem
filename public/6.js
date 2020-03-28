@@ -29,6 +29,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -129,42 +130,46 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row" },
-      _vm._l(_vm.ejercicios, function(ejer, index) {
-        return _c(
-          "div",
-          { key: index, staticClass: "col-6 col-md-4 col-lg-3 mt-4" },
-          [
-            _c("router-link", { attrs: { to: ejer.url } }, [
-              _c(
-                "div",
-                {
-                  staticClass: "card card-primary card-outline radio-card",
-                  class: ejer.background
-                },
-                [
-                  _c("div", { staticClass: "card-body box-profile" }, [
-                    _c("img", {
-                      staticClass: "card-img-top img-responsive",
-                      attrs: {
-                        src: "/imagenes/ejercicios/" + ejer.icon,
-                        width: "100%"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-block" }, [
-                      _c("span", { staticClass: "text-bold text-center" }, [
-                        _vm._v(_vm._s(ejer.name))
+      [
+        _vm._l(_vm.ejercicios, function(ejer, index) {
+          return _c(
+            "div",
+            { key: index, staticClass: "col-6 col-md-4 col-lg-3 mt-4" },
+            [
+              _c("router-link", { attrs: { to: ejer.url } }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "card card-primary card-outline radio-card",
+                    class: ejer.background
+                  },
+                  [
+                    _c("div", { staticClass: "card-body box-profile" }, [
+                      _c("img", {
+                        staticClass: "card-img-top img-responsive",
+                        attrs: {
+                          src: "/imagenes/ejercicios/" + ejer.icon,
+                          width: "100%"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-block" }, [
+                        _c("span", { staticClass: "text-bold text-center" }, [
+                          _vm._v(_vm._s(ejer.name))
+                        ])
                       ])
                     ])
-                  ])
-                ]
-              )
-            ])
-          ],
-          1
-        )
-      }),
-      0
+                  ]
+                )
+              ])
+            ],
+            1
+          )
+        }),
+        _vm._v(" "),
+        _c("span", [_vm._v("Lecciones")])
+      ],
+      2
     )
   ])
 }

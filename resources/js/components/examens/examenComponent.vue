@@ -21,7 +21,7 @@
 							<div class="form-group">
 								<div class="form-group">
 									<label for="imagen">Contenido</label>
-									<input type="file" @change="obtenerArchivocrear" class="form-control-file" ref="texto" accept=".txt" required/>
+									<input type="file" @change="obtenerArchivocrear" class="form-control-file" ref="txt" accept=".txt" required/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -83,7 +83,7 @@
 							<div class="modal-footer pb-0">
 								<div class="form-group row">
 									<div class="col-lg-6">
-										<input type="submit" name="enviar" value="Crear Registro" class="btn btn-primary pull-right">
+										<input type="submit" name="enviar" value="Editar Registro" class="btn btn-primary pull-right">
 									</div>
 								</div>
 							</div>
@@ -210,18 +210,18 @@
 				if (this.validarEspacios(this.examen.name)==false||this.validarEspacios(this.examen.content)==false||this.validarEspacios(this.examen.icon)==false) {
 					alert("los campos no pueden estar vacios")
 				}else{
-					let formData = new FormData();
-					formData.append('name', this.examen.name);
-					formData.append('content', this.examen.content);
-					formData.append('icon', this.examen.icon);
+					let formData = new FormData()
+					formData.append('name', this.examen.name)
+					formData.append('content', this.examen.content)
+					formData.append('icon', this.examen.icon)
 					axios.post('/examen',formData)
 					.then(res=>{
-						EventBus.$emit('agregado', res.data.examen);
-						this.examen.name = "";
-						this.$refs.texto.value="";
-						this.$refs.img.value = "";
-						this.imagenMiniatura = "";
-						$('#creaExamen').modal('hide');
+						EventBus.$emit('agregado', res.data.examen)
+						this.examen.name = ""
+						this.$refs.txt.value=null
+						this.$refs.img.value = null
+						this.imagenMiniatura = null
+						$('#creaExamen').modal('hide')
 					})
 				}	
 			},

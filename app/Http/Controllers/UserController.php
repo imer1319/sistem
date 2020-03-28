@@ -27,25 +27,37 @@ class UserController extends Controller
         }
         return view('home');
     }
-    public function insignia(Request $request)
-    {
-        if($request->ajax()){
-            $insignia =  Insignia::get();
-            return $insignia;
-        }
-        return view('home');
-    }
     public function examen(Request $request)
     {
         if($request->ajax()){
-            $examen = Exam::get();
+            $user = auth()->user()->id;
+            $consulta = Exam::whereDoesntHave('users', function($q)
+                use($user){
+                    $q->where('user_id',$user);
+                })
+            ->get();
+            return $consulta;
+        }
+        return view('home');
+    }
+
+    public function examenes_dados(Request $request)
+    {
+        if($request->ajax()){
+            $user = auth()->user()->id;
+            $examen = DB::table('exams')
+            ->join('exam_user','exams.id','=','exam_user.exam_id')
+            ->select('exams.icon','exam_user.estado','exams.name','exam_user.user_id','exam_user.exam_id','exams.id')
+            ->where('exam_user.user_id','=',$user)
+            ->get();
             return $examen;
         }
         return view('home');
     }
     public function puntuacionExamen(Request $request)
     {
-        if($request->ajax()){
+        if($request->ajax())
+        {
            $user = auth()->user()->id;
            $usuario = User::find($user);
            return $usuario->exams;
@@ -54,7 +66,8 @@ class UserController extends Controller
    }
    public function examendado(Request $request, $id)
    {
-    if($request->ajax()){
+    if($request->ajax())
+    {
         $user = auth()->user()->id;
         $usuario = SaveExam::where('exam_id','=',$id)
         ->where('user_id','=',$user)
@@ -66,11 +79,13 @@ class UserController extends Controller
 }
 public function darExamen(Request $request , $id)
 {
-    if($request->ajax()){
+    if($request->ajax())
+    {
         return Exam::find($id);
     }
     return view('home');
 }
+
 public function saveExam(Request $request)
 {
     $saveExam = new Save();
@@ -89,7 +104,8 @@ public function saveExam(Request $request)
 }
 public function perfil(Request $request)
 {
-    if($request->ajax()){
+    if($request->ajax())
+    {
         $user = auth()->user();
         return $user;
     }
@@ -99,7 +115,8 @@ public function updatePerfil(Request $request, $id)
 {
     $usuario = User::find($id);
     $usuario->fill($request->except('avatar'));
-    if ($file = $request->hasFile('avatar')) {
+    if ($file = $request->hasFile('avatar'))
+    {
         $file = $request->file('avatar');
         $url = time().$file->getClientOriginalName();
         $file->move(public_path().'/imagenes/usuario',$url);
@@ -108,7 +125,8 @@ public function updatePerfil(Request $request, $id)
         $usuario->avatar = $url;
     }
     $usuario->save();
-    return response()->json([
+    return response()
+    ->json([
         "message" => "Actualizado correctamente",
         "usuario" => $usuario
     ],200);
@@ -125,7 +143,8 @@ public function saveGame(Request $request)
     $savGame->user_id = $request->user_id;
     $savGame->puntuacion = $request->puntuacion;
     $savGame->save();
-    return response()->json([
+    return response()
+    ->json([
         "message" => "Creado correctamente",
         "savGame" => $savGame
     ],200);
@@ -133,7 +152,8 @@ public function saveGame(Request $request)
 }
 public function rankingGame(Request $request, $id)
 {
-    if($request->ajax()){
+    if($request->ajax())
+    {
         $user = auth()->user()->id;
         $usuario = DB::table('ejercicio_user')
         ->where('user_id','=',$user)
@@ -147,18 +167,23 @@ public function rankingGame(Request $request, $id)
 }
 public function maxGame(Request $request, $id)
 {
-    if($request->ajax()){
+    if($request->ajax())
+    {
         $max = DB::table('ejercicio_user')
         ->where('ejercicio_id','=',$id)
         ->max('puntuacion');
         $ejercicio = Ejercicio::find($id);
-        return $ejercicio->usuarios()->where('puntuacion','=',$max)->get();
+        return $ejercicio
+        ->usuarios()
+        ->where('puntuacion','=',$max)
+        ->get();
     }
     return view('home');
 }
 public function rankingMundial(Request $request)
 {
-    if($request->ajax()){
+    if($request->ajax())
+    {
      $rol = Role::find(2);
      return $rol->users()
      ->orderby('puntos','desc')
@@ -168,11 +193,21 @@ public function rankingMundial(Request $request)
 }
 public function miIdAuth(Request $request)
 {
-    if($request->ajax()){
+    if($request->ajax())
+    {
         $user = auth()->user()->id;
         return $user;
     }
     return view('home');
 }
 
+public function iniciales(Request $request)
+{
+    if($request->ajax())
+    {
+        $user = auth()->user()->exams()->first();
+        return $user;
+    }
+    return view('home');
+}
 }

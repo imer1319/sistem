@@ -36,6 +36,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.puntuacionExamen();
@@ -78,6 +81,8 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c("h5", { staticClass: "text-center" }, [
         _vm._v("Puntuaciones de examen")
       ]),
@@ -135,7 +140,23 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 container-fluid" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-dark text-uppercase",
+          attrs: { type: "button", onClick: "history.back()" }
+        },
+        [_vm._v("Regresar")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

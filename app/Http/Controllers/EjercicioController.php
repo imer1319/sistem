@@ -21,15 +21,8 @@ public function index(Request $request)
 }
 public function store(Request $request)
 {
-    if ($request->hasFile('icon')) {
-        $file = $request->file('icon');
-        $url = time().$file->getClientOriginalName();
-        $file->move(public_path().'/imagenes/ejercicios',$url);
-    }
     $ejercicio = new Ejercicio();
     $ejercicio->name = $request->name;
-    $ejercicio->description = $request->description;
-    $ejercicio->icon = $url;
     $ejercicio->save();
     return response()->json([
         "message" => "Creado correctamente",
@@ -39,32 +32,12 @@ public function store(Request $request)
 }
 public function update(Request $request, $id)
 {
-    $ejercicio = Ejercicio::find($id);
-    $ejercicio->fill($request->except('icon'));
-    if ($file = $request->hasFile('icon')) {
-        $file = $request->file('icon');
-        $url = time().$file->getClientOriginalName();
-        $file->move(public_path().'/imagenes/ejercicios',$url);
-        $file_path = public_path().'/imagenes/ejercicios/'.$ejercicio->icon;
-        if(is_file($file_path)){unlink($file_path);}
-        $ejercicio->icon = $url;
-    }
-    $ejercicio->save();
-    return response()->json([
+    $ejercicio = Ejercicio::find($id)->update($request->all());
+    return response()
+    ->json([
         "message" => "Actualizado correctamente",
         "ejercicio" => $ejercicio
     ],200);
     return $ejercicio;
-}
-public function destroy($id)
-{
-   $ejercicio = Ejercicio::find($id);
-   $file_path = public_path().'/imagenes/ejercicios/'.$ejercicio->icon;
-   if(is_file($file_path)){unlink($file_path);}
-   $ejercicio->delete();
-   return response()->json([
-    "message" => "Eliminado correctamente",
-    "ejercicio" => $ejercicio
-],200);
 }
 }

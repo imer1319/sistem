@@ -1,14 +1,47 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[15],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/8-campo-visual.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/8-campo-visual.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -140,47 +173,35 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      perfil_usuario: {},
       maximoPunto: [],
       misRecords: [],
-      perfil_usuario: {},
-      tres_segundos: null,
-      temporizador_juego: null,
-      contador: 3,
+      desordenar: [],
+      numeros: ['2336', '2077', '1985', '3797', '9693', '3566', '7852', '6802', '4740', ' 9952', '5495', '5342', '7736', '5800', '3320', '9344', '9658', '3094', '5166', '2638', '1084', '6328', '8944', '9734'],
+      ids: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x'],
+      buscar: 'IMPARES',
       puntuacion: 0,
       tiempo: 100,
-      igualdades: [0, 1],
-      igual: null,
-      letras: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y'],
-      arriba: {
-        x: 3,
-        y: 2
-      },
-      derecha: {
-        x: 4,
-        y: 3
-      },
-      abajo: {
-        x: 3,
-        y: 4
-      },
-      izquierda: {
-        x: 2,
-        y: 3
-      }
+      tres_segundos: null,
+      contador: 3,
+      temporizador_juego: null,
+      incrementador: 0,
+      resultado_mod: 1,
+      contador_par_impar: 0
     };
   },
   methods: {
     maximaPuntuacion: function maximaPuntuacion() {
       var _this = this;
 
-      axios.get("maxGame/" + 8).then(function (res) {
+      axios.get("maxGame/" + 7).then(function (res) {
         _this.maximoPunto = res.data;
       });
     },
     misPuntuaciones: function misPuntuaciones() {
       var _this2 = this;
 
-      axios.get("/puntuacion/" + 8).then(function (res) {
+      axios.get("/puntuacion/" + 7).then(function (res) {
         _this2.misRecords = res.data;
       });
     },
@@ -195,7 +216,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       var formData = new FormData();
-      formData.append('ejercicio_id', 8);
+      formData.append('ejercicio_id', 7);
       formData.append('user_id', this.perfil_usuario.id);
       formData.append('puntuacion', this.puntuacion);
       axios.post('/game', formData).then(function (res) {
@@ -227,6 +248,12 @@ __webpack_require__.r(__webpack_exports__);
       data.append('_method', 'PUT');
       var url = "/profile/".concat(this.perfil_usuario.id);
       axios.post(url, data).then(function (res) {});
+    },
+    tres_segundos_pantalla: function tres_segundos_pantalla() {
+      document.getElementById("primera-vista").style.display = 'none';
+      document.getElementById("pantalla_3_seg").style.display = 'block';
+      document.getElementById("numero_3_seg").style.display = 'block';
+      this.tres_segundos = setInterval(this.pantalla_3_segundos, 1000);
     },
     pantalla_3_segundos: function pantalla_3_segundos() {
       this.contador--;
@@ -262,90 +289,383 @@ __webpack_require__.r(__webpack_exports__);
         this.fin_cronometro();
       }
     },
-    tres_segundos_pantalla: function tres_segundos_pantalla() {
-      document.getElementById("primera-vista").style.display = 'none';
-      document.getElementById("pantalla_3_seg").style.display = 'block';
-      document.getElementById("numero_3_seg").style.display = 'block';
-      this.tres_segundos = setInterval(this.pantalla_3_segundos, 1000);
-    },
     empezarJuego: function empezarJuego() {
-      var tabla = "<table class='tabb m-auto'>";
-      var letra_posicion = Math.floor(Math.random() * this.letras.length);
-      var rand_cartesiano = Math.floor(Math.random() * 4);
-      this.igual = Math.floor(Math.random() * this.igualdades.length);
+      this.desordenar = this.numeros.sort(function () {
+        return Math.random() - 0.5;
+      });
 
-      for (var i = 0; i < 7; i++) {
-        tabla += "<tr>";
+      for (var i = 0; i < this.desordenar.length; i++) {
+        var dist = document.getElementById(this.ids[i]);
+        var suma = parseInt(this.desordenar[i] - this.incrementador);
+        dist.innerHTML = suma;
+      }
+    },
+    error_Encontrado: function error_Encontrado(encontrado) {
+      encontrado.classList.add('rubberBand');
+      setTimeout(function () {
+        encontrado.classList.remove('rubberBand');
+      }, 1000);
+      this.puntuacion -= 2;
+    },
+    precionar: function precionar(event) {
+      var targetId = event.currentTarget.id;
 
-        for (var j = 0; j < 7; j++) {
-          var rand = Math.floor(Math.random() * this.letras.length);
+      switch (targetId) {
+        case "a":
+          var a = document.getElementById("a");
 
-          if (this.igual == 1) {
-            if (i == this.arriba.x && j == this.arriba.y || i == this.derecha.x && j == this.derecha.y || i == this.abajo.x && j == this.abajo.y || i == this.izquierda.x && j == this.izquierda.y) {
-              tabla += "<td class='tdd'>" + "<div class='color'>" + this.letras[letra_posicion] + "</div>" + "</td>";
-            } else {
-              tabla += "<td class='tdd'>" + "<div>" + this.letras[rand] + "</div>" + "</td>";
-            }
-          } else if (this.igual == 0) {
-            if (rand_cartesiano == 0) {
-              if (i == this.arriba.x && j == this.arriba.y) {
-                tabla += "<td class='tdd'>" + "<div class='color'>" + this.letras[rand] + "</div>" + "</td>";
-              } else if (i == this.derecha.x && j == this.derecha.y || i == this.abajo.x && j == this.abajo.y || i == this.izquierda.x && j == this.izquierda.y) {
-                tabla += "<td class='tdd'>" + "<div class='color'>" + this.letras[letra_posicion] + "</div>" + "</td>";
-              } else {
-                tabla += "<td class='tdd'>" + "<div>" + this.letras[rand] + "</div>" + "</td>";
-              }
-            } else if (rand_cartesiano == 1) {
-              if (i == this.derecha.x && j == this.derecha.y) {
-                tabla += "<td class='tdd'>" + "<div class='color'>" + this.letras[rand] + "</div>" + "</td>";
-              } else if (i == this.arriba.x && j == this.arriba.y || i == this.abajo.x && j == this.abajo.y || i == this.izquierda.x && j == this.izquierda.y) {
-                tabla += "<td class='tdd'>" + "<div class='color'>" + this.letras[letra_posicion] + "</div>" + "</td>";
-              } else {
-                tabla += "<td class='tdd'>" + "<div>" + this.letras[rand] + "</div>" + "</td>";
-              }
-            } else if (rand_cartesiano == 2) {
-              if (i == this.abajo.x && j == this.abajo.y) {
-                tabla += "<td class='tdd'>" + "<div class='color'>" + this.letras[rand] + "</div>" + "</td>";
-              } else if (i == this.arriba.x && j == this.arriba.y || i == this.derecha.x && j == this.derecha.y || i == this.izquierda.x && j == this.izquierda.y) {
-                tabla += "<td class='tdd'>" + "<div class='color'>" + this.letras[letra_posicion] + "</div>" + "</td>";
-              } else {
-                tabla += "<td class='tdd'>" + "<div>" + this.letras[rand] + "</div>" + "</td>";
-              }
-            } else if (rand_cartesiano == 3) {
-              if (i == this.izquierda.x && j == this.izquierda.y) {
-                tabla += "<td class='tdd'>" + "<div class='color'>" + this.letras[rand] + "</div>" + "</td>";
-              } else if (i == this.arriba.x && j == this.arriba.y || i == this.derecha.x && j == this.derecha.y || i == this.abajo.x && j == this.abajo.y) {
-                tabla += "<td class='tdd'>" + "<div class='color'>" + this.letras[letra_posicion] + "</div>" + "</td>";
-              } else {
-                tabla += "<td class='tdd'>" + "<div>" + this.letras[rand] + "</div>" + "</td>";
-              }
-            }
+          if ((this.desordenar[0] - this.incrementador) % 2 == this.resultado_mod) {
+            a.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(a);
           }
+
+          break;
+
+        case "b":
+          var b = document.getElementById("b");
+
+          if ((this.desordenar[1] - this.incrementador) % 2 == this.resultado_mod) {
+            b.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(b);
+          }
+
+          break;
+
+        case "c":
+          var c = document.getElementById("c");
+
+          if ((this.desordenar[2] - this.incrementador) % 2 == this.resultado_mod) {
+            c.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(c);
+          }
+
+          break;
+
+        case "d":
+          var d = document.getElementById("d");
+
+          if ((this.desordenar[3] - this.incrementador) % 2 == this.resultado_mod) {
+            d.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(d);
+          }
+
+          break;
+
+        case "e":
+          var e = document.getElementById("e");
+
+          if ((this.desordenar[4] - this.incrementador) % 2 == this.resultado_mod) {
+            e.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(e);
+          }
+
+          break;
+
+        case "f":
+          var f = document.getElementById("f");
+
+          if ((this.desordenar[5] - this.incrementador) % 2 == this.resultado_mod) {
+            f.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(f);
+          }
+
+          break;
+
+        case "g":
+          var g = document.getElementById("g");
+
+          if ((this.desordenar[6] - this.incrementador) % 2 == this.resultado_mod) {
+            g.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(g);
+          }
+
+          break;
+
+        case "h":
+          var h = document.getElementById("h");
+
+          if ((this.desordenar[7] - this.incrementador) % 2 == this.resultado_mod) {
+            h.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(h);
+          }
+
+          break;
+
+        case "i":
+          var i = document.getElementById("i");
+
+          if ((this.desordenar[8] - this.incrementador) % 2 == this.resultado_mod) {
+            i.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(i);
+          }
+
+          break;
+
+        case "j":
+          var j = document.getElementById("j");
+
+          if ((this.desordenar[9] - this.incrementador) % 2 == this.resultado_mod) {
+            j.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(j);
+          }
+
+          break;
+
+        case "k":
+          var k = document.getElementById("k");
+
+          if ((this.desordenar[10] - this.incrementador) % 2 == this.resultado_mod) {
+            k.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(k);
+          }
+
+          break;
+
+        case "l":
+          var l = document.getElementById("l");
+
+          if ((this.desordenar[11] - this.incrementador) % 2 == this.resultado_mod) {
+            l.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(l);
+          }
+
+          break;
+
+        case "m":
+          var m = document.getElementById("m");
+
+          if ((this.desordenar[12] - this.incrementador) % 2 == this.resultado_mod) {
+            m.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(m);
+          }
+
+          break;
+
+        case "n":
+          var n = document.getElementById("n");
+
+          if ((this.desordenar[13] - this.incrementador) % 2 == this.resultado_mod) {
+            n.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(n);
+          }
+
+          break;
+
+        case "o":
+          var o = document.getElementById("o");
+
+          if ((this.desordenar[14] - this.incrementador) % 2 == this.resultado_mod) {
+            o.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(o);
+          }
+
+          break;
+
+        case "p":
+          var p = document.getElementById("p");
+
+          if ((this.desordenar[15] - this.incrementador) % 2 == this.resultado_mod) {
+            p.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(p);
+          }
+
+          break;
+
+        case "q":
+          var q = document.getElementById("q");
+
+          if ((this.desordenar[16] - this.incrementador) % 2 == this.resultado_mod) {
+            q.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(q);
+          }
+
+          break;
+
+        case "r":
+          var r = document.getElementById("r");
+
+          if ((this.desordenar[17] - this.incrementador) % 2 == this.resultado_mod) {
+            r.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(r);
+          }
+
+          break;
+
+        case "s":
+          var s = document.getElementById("s");
+
+          if ((this.desordenar[18] - this.incrementador) % 2 == this.resultado_mod) {
+            s.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(s);
+          }
+
+          break;
+
+        case "t":
+          var t = document.getElementById("t");
+
+          if ((this.desordenar[19] - this.incrementador) % 2 == this.resultado_mod) {
+            t.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(t);
+          }
+
+          break;
+
+        case "u":
+          var u = document.getElementById("u");
+
+          if ((this.desordenar[20] - this.incrementador) % 2 == this.resultado_mod) {
+            u.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(u);
+          }
+
+          break;
+
+        case "v":
+          var v = document.getElementById("v");
+
+          if ((this.desordenar[21] - this.incrementador) % 2 == this.resultado_mod) {
+            v.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(v);
+          }
+
+          break;
+
+        case "w":
+          var w = document.getElementById("w");
+
+          if ((this.desordenar[22] - this.incrementador) % 2 == this.resultado_mod) {
+            w.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(w);
+          }
+
+          break;
+
+        case "x":
+          var x = document.getElementById("x");
+
+          if ((this.desordenar[23] - this.incrementador) % 2 == this.resultado_mod) {
+            x.innerHTML = " ";
+            this.puntuacion += 3;
+            this.contador_par_impar++;
+            this.cambiar_numeros();
+          } else {
+            this.error_Encontrado(x);
+          }
+
+          break;
+      }
+    },
+    cambiar_numeros: function cambiar_numeros() {
+      if (this.resultado_mod == 1) {
+        if (this.contador_par_impar == 5) {
+          this.resultado_mod = 0;
+          this.contador_par_impar = 0;
+          this.incrementador += 1;
+          this.empezarJuego();
+          this.buscar = 'PARES';
         }
-
-        tabla += "</tr>";
+      } else if (this.resultado_mod == 0) {
+        if (this.contador_par_impar == 5) {
+          this.resultado_mod = 1;
+          this.contador_par_impar = 0;
+          this.incrementador += 1;
+          this.empezarJuego();
+          this.buscar = 'IMPARES';
+        }
       }
-
-      tabla += "</table>";
-      document.getElementById("resultado").innerHTML = tabla;
-    },
-    iguales: function iguales() {
-      if (this.igual == 1) {
-        this.puntuacion += 3;
-      } else {
-        this.puntuacion -= 2;
-      }
-
-      this.empezarJuego();
-    },
-    diferentes: function diferentes() {
-      if (this.igual == 0) {
-        this.puntuacion += 3;
-      } else {
-        this.puntuacion -= 2;
-      }
-
-      this.empezarJuego();
     }
   },
   beforeDestroy: function beforeDestroy() {
@@ -355,10 +675,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/8-campo-visual.vue?vue&type=style&index=0&lang=css&":
-/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/8-campo-visual.vue?vue&type=style&index=0&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -367,22 +687,22 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.color{\r\n\tbackground: #2d2d2d;\r\n\tcolor: white;\r\n\tborder-radius: 50%;\r\n\twidth: 100%;height: 100%;\r\n\tpadding-top: 8px;\n}\n.tabb{\r\n\ttable-layout: fixed;\r\n\twidth: 280px;\n}\n.tdd {\r\n\twidth: 40px;\r\n\theight: 40px;\r\n\tword-wrap: break-word;\r\n\ttext-align: center;\n}\n#primera-vista{\r\n\tdisplay: flex;\n}\n#segunda-vista,#tercera-vista,#cuarta-vista{\r\n\tdisplay: none;\n}\n#pantalla_3_seg{\r\n\tdisplay: none;\r\n\tmin-height: 100vh;\r\n\tposition: relative;\n}\n#numero_3_seg{\r\n\tdisplay: none;\r\n\ttop: 40%;\r\n\tleft: 50%;\r\n\tposition: absolute;\r\n\tfont-size:45px;\n}\r\n", ""]);
+exports.push([module.i, "\n#primera-vista{\r\n\tdisplay: flex;\n}\n#segunda-vista,#tercera-vista,#cuarta-vista{\r\n\tdisplay: none;\n}\n#pantalla_3_seg{\r\n\tdisplay: none;\r\n\tmin-height: 100vh;\r\n\tposition: relative;\n}\n#numero_3_seg{\r\n\tdisplay: none;\r\n\ttop: 40%;\r\n\tleft: 50%;\r\n\tposition: absolute;\r\n\tfont-size:45px;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/8-campo-visual.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/8-campo-visual.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./8-campo-visual.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/8-campo-visual.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./7-par-impar.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -404,10 +724,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/8-campo-visual.vue?vue&type=template&id=61dcd208&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/8-campo-visual.vue?vue&type=template&id=61dcd208& ***!
-  \*****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3& ***!
+  \**************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -420,6 +740,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c("div", { staticClass: "row", attrs: { id: "primera-vista" } }, [
       _c("div", { staticClass: "col-12 col-md-8" }, [
         _c("div", { staticClass: "card mb-3" }, [
@@ -427,7 +749,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-5" }, [
                 _c("h4", { staticClass: "text-center" }, [
-                  _vm._v("Busca la palabra")
+                  _vm._v("Par e Impar")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -445,7 +767,7 @@ var render = function() {
                 "div",
                 { staticClass: "col-7" },
                 [
-                  _vm._m(0),
+                  _vm._m(1),
                   _vm._v(" "),
                   _vm._l(_vm.maximoPunto, function(max, index) {
                     return _c("div", [
@@ -476,7 +798,7 @@ var render = function() {
                 _vm._v("Tus records")
               ]),
               _vm._v(" "),
-              _vm._m(1),
+              _vm._m(2),
               _vm._v(" "),
               _c("hr"),
               _vm._v(" "),
@@ -501,7 +823,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(2)
+      _vm._m(3)
     ]),
     _vm._v(" "),
     _c("div", { attrs: { id: "pantalla_3_seg" } }, [
@@ -519,46 +841,255 @@ var render = function() {
                 _vm._v("Puntos: " + _vm._s(_vm.puntuacion))
               ]),
               _vm._v(" "),
-              _vm._m(3)
+              _vm._m(4)
             ]),
             _vm._v(" "),
-            _vm._m(4),
+            _c("h4", { staticClass: "text-center" }, [
+              _vm._v(_vm._s(_vm.buscar))
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "row mt-1" }, [
-              _c("div", { staticClass: "d-flex m-auto" }, [
-                _c("span", { staticClass: "col-6 text-md-right" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass: "btn btn-primary",
+            _c(
+              "table",
+              {
+                staticClass:
+                  "table table-bordered m-auto text-center col-md-8 pt-1"
+              },
+              [
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td", {
+                      attrs: { id: "a" },
                       on: {
                         click: function($event) {
-                          $event.preventDefault()
-                          return _vm.diferentes()
+                          return _vm.precionar($event)
                         }
                       }
-                    },
-                    [_vm._v("diferentes")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("span", { staticClass: "col-6 text-md-left" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass: "btn btn-primary",
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "b" },
                       on: {
                         click: function($event) {
-                          $event.preventDefault()
-                          return _vm.iguales()
+                          return _vm.precionar($event)
                         }
                       }
-                    },
-                    [_vm._v("Iguales")]
-                  )
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "c" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", {
+                      attrs: { id: "d" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "e" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "f" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", {
+                      attrs: { id: "g" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "h" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "i" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", {
+                      attrs: { id: "j" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "k" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "l" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", {
+                      attrs: { id: "m" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "n" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "o" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", {
+                      attrs: { id: "p" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "q" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "r" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", {
+                      attrs: { id: "s" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "t" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "u" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", {
+                      attrs: { id: "v" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "w" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      attrs: { id: "x" },
+                      on: {
+                        click: function($event) {
+                          return _vm.precionar($event)
+                        }
+                      }
+                    })
+                  ])
                 ])
-              ])
-            ])
+              ]
+            )
           ])
         ])
       ])
@@ -566,7 +1097,10 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "col-md-8 m-auto", attrs: { id: "tercera-vista" } },
+      {
+        staticClass: "col-md-8 col-sm-12 m-auto",
+        attrs: { id: "tercera-vista" }
+      },
       [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-body" }, [
@@ -608,7 +1142,10 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "col-md-8 m-auto", attrs: { id: "cuarta-vista" } },
+      {
+        staticClass: "col-md-8 col-sm-12 m-auto",
+        attrs: { id: "cuarta-vista" }
+      },
       [
         _c("div", { staticClass: "card animated bounceInRight" }, [
           _c(
@@ -653,6 +1190,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 container-fluid" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-dark text-uppercase",
+          attrs: { type: "button", onClick: "history.back()" }
+        },
+        [_vm._v("Regresar")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
       _c("h5", [_vm._v("Record")])
     ])
@@ -673,22 +1225,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
+    return _c("div", { staticClass: "col-12 col-md-4" }, [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "text-center" }, [
             _c("img", {
               staticClass: "card-img-top mx-auto my-3",
-              staticStyle: { width: "70%" },
-              attrs: {
-                src: "/imagenes/consejos-juegos/consejo-campo-visual.png"
-              }
+              staticStyle: { width: "60%" },
+              attrs: { src: "/imagenes/consejos-juegos/consejo-par-impar.png" }
             }),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("h4", { staticClass: "card-text" }, [
                 _vm._v(
-                  "Concéntrese y preciona si son iguales o diferentes las letras que estan coloreadas, antes de que se termine el tiempo"
+                  "Encuentra lo antes posible el numero, siempre saldra uno par y el siguiente impar, antes de que se termine el tiempo"
                 )
               ]),
               _vm._v(" "),
@@ -722,16 +1272,6 @@ var staticRenderFns = [
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8 text-center m-auto" }, [
-        _c("div", { attrs: { id: "resultado" } })
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -740,18 +1280,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/users/game/8-campo-visual.vue":
-/*!****************************************************!*\
-  !*** ./resources/js/users/game/8-campo-visual.vue ***!
-  \****************************************************/
+/***/ "./resources/js/users/game/7-par-impar.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/users/game/7-par-impar.vue ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _8_campo_visual_vue_vue_type_template_id_61dcd208___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./8-campo-visual.vue?vue&type=template&id=61dcd208& */ "./resources/js/users/game/8-campo-visual.vue?vue&type=template&id=61dcd208&");
-/* harmony import */ var _8_campo_visual_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./8-campo-visual.vue?vue&type=script&lang=js& */ "./resources/js/users/game/8-campo-visual.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _8_campo_visual_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./8-campo-visual.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/game/8-campo-visual.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./7-par-impar.vue?vue&type=template&id=01534ac3& */ "./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3&");
+/* harmony import */ var _7_par_impar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./7-par-impar.vue?vue&type=script&lang=js& */ "./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./7-par-impar.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -762,9 +1302,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _8_campo_visual_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _8_campo_visual_vue_vue_type_template_id_61dcd208___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _8_campo_visual_vue_vue_type_template_id_61dcd208___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _7_par_impar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -774,54 +1314,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/users/game/8-campo-visual.vue"
+component.options.__file = "resources/js/users/game/7-par-impar.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/users/game/8-campo-visual.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/users/game/8-campo-visual.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************/
+/***/ "./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_8_campo_visual_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./8-campo-visual.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/8-campo-visual.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_8_campo_visual_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./7-par-impar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/users/game/8-campo-visual.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/users/game/8-campo-visual.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************************/
+/***/ "./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_8_campo_visual_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./8-campo-visual.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/8-campo-visual.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_8_campo_visual_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_8_campo_visual_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_8_campo_visual_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_8_campo_visual_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_8_campo_visual_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./7-par-impar.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/users/game/8-campo-visual.vue?vue&type=template&id=61dcd208&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/users/game/8-campo-visual.vue?vue&type=template&id=61dcd208& ***!
-  \***********************************************************************************/
+/***/ "./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3& ***!
+  \********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_8_campo_visual_vue_vue_type_template_id_61dcd208___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./8-campo-visual.vue?vue&type=template&id=61dcd208& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/8-campo-visual.vue?vue&type=template&id=61dcd208&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_8_campo_visual_vue_vue_type_template_id_61dcd208___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./7-par-impar.vue?vue&type=template&id=01534ac3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/game/7-par-impar.vue?vue&type=template&id=01534ac3&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_8_campo_visual_vue_vue_type_template_id_61dcd208___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_7_par_impar_vue_vue_type_template_id_01534ac3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

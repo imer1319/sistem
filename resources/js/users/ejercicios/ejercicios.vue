@@ -15,6 +15,7 @@
 				</div>
 			</router-link>
 		</div>
+		<span>Lecciones</span>
 	</div>
 </div>
 </template>

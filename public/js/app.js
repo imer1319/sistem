@@ -57007,37 +57007,31 @@ var routes = [{
   name: 'usuario',
   path: '/usuario',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./components/usuario/usuario.vue */ "./resources/js/components/usuario/usuario.vue"));
+    return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./components/usuario/usuario.vue */ "./resources/js/components/usuario/usuario.vue"));
   }
 }, {
   name: 'shoex',
   path: '/usuario/:id',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./components/usuario/showUsuario.vue */ "./resources/js/components/usuario/showUsuario.vue"));
-  }
-}, {
-  name: 'categoria',
-  path: '/categoria',
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/ejercicios/categoria.vue */ "./resources/js/components/ejercicios/categoria.vue"));
+    return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./components/usuario/showUsuario.vue */ "./resources/js/components/usuario/showUsuario.vue"));
   }
 }, {
   name: 'ejercicio',
   path: '/ejercicio',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./components/ejercicios/ejercicio.vue */ "./resources/js/components/ejercicios/ejercicio.vue"));
+    return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./components/ejercicios/ejercicio.vue */ "./resources/js/components/ejercicios/ejercicio.vue"));
   }
 }, {
   name: 'perfil',
   path: '/perfil',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
+    return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
   }
 }, {
   name: 'examen',
   path: '/examen',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/examens/examenComponent.vue */ "./resources/js/components/examens/examenComponent.vue"));
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/examens/examenComponent.vue */ "./resources/js/components/examens/examenComponent.vue"));
   }
 }, {
   name: 'show',
@@ -57046,53 +57040,47 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./components/examens/showExamenComponent.vue */ "./resources/js/components/examens/showExamenComponent.vue"));
   }
 }, {
-  name: 'insignia',
-  path: '/insignia',
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./components/insignias/insigniaComponent.vue */ "./resources/js/components/insignias/insigniaComponent.vue"));
-  }
-}, {
   name: 'rango',
   path: '/rango',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./components/rango/rango.vue */ "./resources/js/components/rango/rango.vue"));
+    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/rango/rango.vue */ "./resources/js/components/rango/rango.vue"));
   }
 }, // esta es la parte de los usuarios....
 {
   name: 'home',
   path: '/home',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ./users/home */ "./resources/js/users/home.vue"));
+    return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ./users/home */ "./resources/js/users/home.vue"));
   }
 }, {
   name: 'profile',
   path: '/profile',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./users/user/perfil.vue */ "./resources/js/users/user/perfil.vue"));
+    return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./users/user/perfil.vue */ "./resources/js/users/user/perfil.vue"));
   }
 }, {
   name: 'exam',
   path: '/exam',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./users/exam/exam */ "./resources/js/users/exam/exam.vue"));
+    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./users/exam/exam */ "./resources/js/users/exam/exam.vue"));
   }
 }, {
   name: 'showing',
   path: '/exam/:id',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./users/exam/show-exam */ "./resources/js/users/exam/show-exam.vue"));
+    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./users/exam/show-exam */ "./resources/js/users/exam/show-exam.vue"));
   }
 }, {
   name: 'ranking',
   path: '/ranking',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./users/ranking.vue */ "./resources/js/users/ranking.vue"));
+    return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./users/ranking.vue */ "./resources/js/users/ranking.vue"));
   }
 }, {
   name: 'puntuacionExamen',
   path: '/puntuacionExamen',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! ./users/puntuacionExam.vue */ "./resources/js/users/puntuacionExam.vue"));
+    return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./users/puntuacionExam.vue */ "./resources/js/users/puntuacionExam.vue"));
   }
 }, {
   name: 'ejercicios',
@@ -57104,7 +57092,7 @@ var routes = [{
   name: 'game',
   path: '/game',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./users/game/game.vue */ "./resources/js/users/game/game.vue"));
+    return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./users/game/game.vue */ "./resources/js/users/game/game.vue"));
   }
 },
 /*********--RUTA -- JUEGOS--**********/
@@ -57112,49 +57100,49 @@ var routes = [{
   name: 'schult',
   path: '/schult',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./users/game/1-schultz.vue */ "./resources/js/users/game/1-schultz.vue"));
+    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./users/game/1-schultz.vue */ "./resources/js/users/game/1-schultz.vue"));
   }
 }, {
   name: 'schult-letra',
   path: '/schult-letra',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./users/game/2-schulte-letras.vue */ "./resources/js/users/game/2-schulte-letras.vue"));
+    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./users/game/2-schulte-letras.vue */ "./resources/js/users/game/2-schulte-letras.vue"));
   }
 }, {
   name: 'buscar-palabra',
   path: '/buscar-palabra',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./users/game/3-busca-palabras.vue */ "./resources/js/users/game/3-busca-palabras.vue"));
+    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./users/game/3-busca-palabras.vue */ "./resources/js/users/game/3-busca-palabras.vue"));
   }
 }, {
   name: 'buscar-numero',
   path: '/buscar-numero',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./users/game/4-buscar-numero.vue */ "./resources/js/users/game/4-buscar-numero.vue"));
+    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./users/game/4-buscar-numero.vue */ "./resources/js/users/game/4-buscar-numero.vue"));
   }
 }, {
   name: 'encuentra-palabra',
   path: '/encuentra-palabra',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./users/game/5-recuerda-palabra.vue */ "./resources/js/users/game/5-recuerda-palabra.vue"));
+    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./users/game/5-recuerda-palabra.vue */ "./resources/js/users/game/5-recuerda-palabra.vue"));
   }
 }, {
   name: 'encuentra-numeros',
   path: '/encuentra-numeros',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./users/game/6-recuerda-numeros.vue */ "./resources/js/users/game/6-recuerda-numeros.vue"));
+    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./users/game/6-recuerda-numeros.vue */ "./resources/js/users/game/6-recuerda-numeros.vue"));
   }
 }, {
   name: 'par-impar',
   path: '/par-impar',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./users/game/7-par-impar.vue */ "./resources/js/users/game/7-par-impar.vue"));
+    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./users/game/7-par-impar.vue */ "./resources/js/users/game/7-par-impar.vue"));
   }
 }, {
   name: 'iguales',
   path: '/iguales',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./users/game/8-campo-visual.vue */ "./resources/js/users/game/8-campo-visual.vue"));
+    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./users/game/8-campo-visual.vue */ "./resources/js/users/game/8-campo-visual.vue"));
   }
 },
 /********--RUTA -- EJERCICIOS--******/
@@ -57174,7 +57162,7 @@ var routes = [{
   name: 'horizontal',
   path: '/horizontal',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ./users/ejercicios/3-horizontal.vue */ "./resources/js/users/ejercicios/3-horizontal.vue"));
+    return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./users/ejercicios/3-horizontal.vue */ "./resources/js/users/ejercicios/3-horizontal.vue"));
   }
 }, {
   name: 'aleatorio',
@@ -57204,8 +57192,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\IMER\zz proyec\sistem\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\IMER\zz proyec\sistem\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! L:\sistem\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! L:\sistem\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

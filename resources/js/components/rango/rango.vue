@@ -104,8 +104,7 @@
 								<td>{{rango.nombre}}</td>
 								<td class="text-center"><img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="60" width="70"></td>
 								<td class="float-right">
-									<a href="#" class="btn btn-warning" @click="editarRango(rango)"><i class="fas fa-pencil-alt"></i> Editar</a>
-									<a href="#" class="btn btn-danger" v-on:click="eliminarRango(rango,index)"><i class="far fa-trash-alt"></i> Eliminar</a>
+									<a href="#" class="btn btn-warning" @click="editarRango(rango)"><i class="fas fa-pencil-alt"></i> Editar</a>					
 								</td>
 							</tr>
 						</tbody>
@@ -139,12 +138,6 @@
 			}
 		},
 		methods:{
-			confirmarDelete(){
-				var resp = confirm("Estas seguro que deseas eliminarlo?");
-				if (resp == true) {
-					return true
-				}else{ return false }
-			},
 			mostrarRango:function(){
 				axios.get('rango').then(res =>{
 					this.rangos = res.data
@@ -202,14 +195,6 @@
 					})
 				}
 			},
-			eliminarRango:function(rango,index){
-				if (this.confirmarDelete()==true) {
-					axios.delete(`/rango/${rango.id}`)
-					.then(()=>{
-						this.rangos.splice(index,1); 
-					})
-				}
-			},
 			editarRango:function (rango){
 				this.estado = true;
 				this.fillRango.nombre = rango.nombre;
@@ -241,3 +226,8 @@
 		}
 	}
 </script>
+<style>
+	a{
+		color: #fff;
+	}
+</style>
