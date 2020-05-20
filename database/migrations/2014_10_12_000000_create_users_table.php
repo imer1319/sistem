@@ -21,10 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('apellido_paterno')->nullable();
             $table->string('apellido_materno')->nullable();
-            $table->string('curso')->nullable();
             $table->string('avatar')->default('default.png');
             $table->unsignedBigInteger('puntos')->default(10);
+            $table->unsignedBigInteger('ppm_inicial')->default(0);
+            $table->unsignedBigInteger('comprension_inicial')->default(0);
             $table->unsignedBigInteger('rango_id')->nullable();
+            $table->unsignedBigInteger('avance_curso')->default(1);
             $table->foreign('rango_id')->references('id')->on('rangos');
             $table->rememberToken();
             $table->timestamps();

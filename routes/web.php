@@ -3,6 +3,16 @@
 Route::get('/', function () {
 	return view('welcome');
 });
+Route::view('/lecciones', 'home');
+Route::view('/curso', 'home');
+Route::view('/schulte-curso', 'home');
+Route::view('/shultele-curso', 'home');
+Route::view('/search-course-numbers', 'home');
+Route::view('/search-words-course', 'home');
+Route::view('/remember-numbers', 'home');
+Route::view('/remember-words', 'home');
+Route::view('/odd-even', 'home');
+Route::view('/visual-field', 'home');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
@@ -28,7 +38,6 @@ Route::get('/examendado/{id}','UserController@examendado');
 Route::get('/puntuacionExamen','UserController@puntuacionExamen');
 Route::post('exam','UserController@saveExam');
 Route::get('rank','UserController@rango');
-Route::get('insig','UserController@insignia');
 Route::get('profile','UserController@perfil');
 Route::get('ranking','UserController@rankingMundial');
 Route::put('profile/{id}','UserController@updatePerfil');

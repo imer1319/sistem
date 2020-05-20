@@ -4,29 +4,29 @@
 			<h3 class="animated fadeInLeft">Perfil del administrador</h3>
 			<div class="row">
 				<div class="col-md-4 col-6">
-					<div class="card text-white bg-primary mb-3">
+					<div class="card border-primary mb-3">
 						<div class="m-auto card-header">Numero de usuarios</div>
 						<div class="card-body row text-center">
-							<div class="col-6">{{ numero_usuarios }}</div>
-							<div class="col-6"><i class="fas fa-user"></i></div>
+							<div class="col-6"> <h1>{{ numero_usuarios }}</h1></div>
+							<div class="col-6"><h1><i class="fas fa-user"></i></h1></div>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4 col-6">
-					<div class="card text-white bg-success mb-3">
+					<div class="card border-success mb-3">
 						<div class="m-auto card-header">Numero de examenes</div>
 						<div class="card-body row text-center">
-							<div class="col-6">{{ numero_examenes }}</div>
-							<div class="col-6"><i class="fas fa-user"></i></div>
+							<div class="col-6"> <h1>{{ numero_examenes }}</h1></div>
+							<div class="col-6"><h1><i class="fas fa-file-contract"></i></h1></div>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4 col-6">
-					<div class="card text-white bg-danger mb-3">
+					<div class="card border-danger mb-3">
 						<div class="m-auto card-header">Numero de ejercicios</div>
 						<div class="card-body row text-center">
-							<div class="col-6">{{ numero_ejercicios }}</div>
-							<div class="col-6"><i class="fas fa-user"></i></div>
+							<div class="col-6"> <h1>{{ numero_ejercicios }}</h1></div>
+							<div class="col-6"><h1><i class="fas fa-gamepad"></i></h1></div>
 						</div>
 					</div>
 				</div>

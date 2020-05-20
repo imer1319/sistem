@@ -1,39 +1,39 @@
 export const routes = [
-	{
-		name:'usuario',
-		path: '/usuario', 
-		component: () => import('./components/usuario/usuario.vue'),
-	},
-	{
-		name:'shoex',
-		path: '/usuario/:id', 
-		component: () => import('./components/usuario/showUsuario.vue'),
-	},
-	{
-		name:'ejercicio',
-		path: '/ejercicio', 
-		component: () => import('./components/ejercicios/ejercicio.vue'),
-	},
-	{
-		name:'perfil',
-		path: '/perfil', 
-		component: () => import('./components/perfil.vue'),
-	},
-	{
-		name:'examen',
-		path: '/examen', 
-		component: () => import('./components/examens/examenComponent.vue'),
-	},
-	{
-		name: 'show',
-		path: '/examen/:id',
-		component: () => import('./components/examens/showExamenComponent.vue')
-	},
-	{
-		name: 'rango',
-		path: '/rango',
-		component: () => import('./components/rango/rango.vue')
-	},
+{
+	name:'usuario',
+	path: '/usuario', 
+	component: () => import('./components/usuario/usuario.vue'),
+},
+{
+	name:'shoex',
+	path: '/usuario/:id', 
+	component: () => import('./components/usuario/showUsuario.vue'),
+},
+{
+	name:'ejercicio',
+	path: '/ejercicio', 
+	component: () => import('./components/ejercicios/ejercicio.vue'),
+},
+{
+	name:'perfil',
+	path: '/perfil', 
+	component: () => import('./components/perfil.vue'),
+},
+{
+	name:'examen',
+	path: '/examen', 
+	component: () => import('./components/examens/examenComponent.vue'),
+},
+{
+	name: 'show',
+	path: '/examen/:id',
+	component: () => import('./components/examens/showExamenComponent.vue')
+},
+{
+	name: 'rango',
+	path: '/rango',
+	component: () => import('./components/rango/rango.vue')
+},
 	// esta es la parte de los usuarios....
 	{
 		name: 'home',
@@ -74,6 +74,57 @@ export const routes = [
 		name: 'game',
 		path: '/game',
 		component: () => import('./users/game/game.vue')
+	},
+	{
+		name: 'lecciones',
+		path: '/lecciones',
+		component: () => import('./users/lecciones/lecciones.vue')
+	},
+	/************** RUTAS PARA EL CURSO*************/
+	{
+		name: 'curso',
+		path: '/curso',
+		component: () => import('./users/curso/curso.vue')
+	},
+	{
+		name: 'shulte-curso',
+		path: '/shulte-curso',
+		component: () => import('./users/curso/avances-curso/2-schulte.vue')
+	},
+	{
+		name: 'shultele-curso',
+		path: '/shultele-curso',
+		component: () => import('./users/curso/avances-curso/3-schulte-letra.vue')
+	},
+	{
+		name: 'search-numbers',
+		path: '/search-course-numbers',
+		component: () => import('./users/curso/avances-curso/4-buscar-numero.vue')
+	},
+	{
+		name: 'search-words',
+		path: '/search-words-course',
+		component: () => import('./users/curso/avances-curso/5-buscar-palabra.vue')
+	},
+	{
+		name: 'remember-number',
+		path: '/remember-numbers',
+		component: () => import('./users/curso/avances-curso/6-recordar-numero.vue')
+	},
+	{
+		name: 'remember-word',
+		path: '/remember-words',
+		component: () => import('./users/curso/avances-curso/7-recordar-palabra.vue')
+	},
+	{
+		name: 'old-impar',
+		path: '/odd-even',
+		component: () => import('./users/curso/avances-curso/8-par-impar.vue')
+	},
+	{
+		name: 'campo-visual',
+		path: '/visual-field',
+		component: () => import('./users/curso/avances-curso/9-campo-visual.vue')
 	},
 	/*********--RUTA -- JUEGOS--**********/
 	{
@@ -137,4 +188,4 @@ export const routes = [
 		path: '/aleatorio',
 		component: () => import('./users/ejercicios/4-aleatorio.vue')
 	},
-];
+	];

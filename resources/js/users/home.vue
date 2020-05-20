@@ -1,19 +1,56 @@
 <template>
-    <div class="container">
-        <div class="consejo">{{ consejo }}</div>
-        <div class="row">
-            <div class="col-6 col-md-4 col-lg-3"v-for="contenido in content">
-                <div class="text-center">
-                    <router-link :to="contenido.url">
-                        <div class="my-2">
-                            <div class="card card-primary card-outline radio-card":class="contenido.background">
-                                <div class="card-body box-profile">
-                                    <img class="card-img-top img-responsive" :src="`/imagenes/${contenido.icono}`"height="170">
+    <div>
+        <spinner v-if="loading"></spinner>
+        <div v-else>
+            <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+                <div class="container">
+                    <a class="navbar-brand text-white">Lectura Veloz</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item px-md-3">
+                                <h5 class="mb-0">
+                                    <a class="nav-link text-warning">{{ usuario.puntos }} Pts.</a>
+                                </h5>
+                            </li>
+                            <li class="nav-item">
+                                <img :src="`/imagenes/usuario/${usuario.avatar}`" class="rounded-circle pb-0" height="40" width="40">
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{usuario.name}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <router-link class="dropdown-item" to="/profile">
+                                        Mi perfil
+                                    </router-link>
+                                    <a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión
+                                    </a>
                                 </div>
-                                <span class="text-center text-uppercase">{{ contenido.nombre }}</span>
-                            </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container-fluid my-2">
+                <div class="consejo">{{ consejo }}</div>
+                <div class="row">
+                    <div class="col-6 col-md-4 col-lg-3"v-for="contenido in content">
+                        <div class="text-center">
+                            <router-link :to="contenido.url">
+                                <div class="my-2">
+                                    <div class="card" :class="contenido.background">
+                                        <div class="card-body box-profile">
+                                            <img class="card-img-top img-responsive" :src="`/imagenes/${contenido.icono}`"height="170">
+                                        </div>
+                                        <span class="text-center text-uppercase">{{ contenido.nombre }}</span>
+                                    </div>
+                                </div>
+                            </router-link>
                         </div>
-                    </router-link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,16 +60,18 @@
     export default{
         created(){
             this.obtener_consejo()
+            this.showUser()
         },
-        data() {
+        data(){
             return { 
                 content :[
                 {nombre:'Lecciones',icono:'ejercicios.png',url:'/ejercicios',background:'color8'},
-                {nombre:'examen',icono:'examen.png',url:'/exam',background:'color8'},
                 {nombre:'ejercicio',icono:'ejercicios.png',url:'game',background:'color8'},
                 {nombre:'Perfil',icono:'user.png',url:'/profile',background:'color8'},
                 {nombre:'ranking',icono:'ranking.png',url:'/ranking',background:'color8'},
                 {nombre:'Puntuaciones',icono:'puntuaciones.png',url:'/puntuacionExamen',background:'color8'},
+                {nombre:'Curso',icono:'puntuaciones.png',url:'/curso',background:'color8'},
+                {nombre:'Lecciones',icono:'puntuaciones.png',url:'/lecciones',background:'color8'},
                 ],
                 consejos:['Aprende a usar tus ojos para leer más rápido',
                 'Ponte en forma, para darle más oxígeno a tu cerebro',
@@ -43,12 +82,21 @@
                 'Si lees lo que te gusta no te aburriras',
                 'La practica hace al maestro'],
                 consejo:null,
+                usuario:{},
+                loading:true,
             }
         },
         methods:{
             obtener_consejo(){
                 var ram = Math.floor(Math.random()*this.consejos.length)
                 this.consejo = this.consejos[ram]
+            },
+            showUser(){
+                var url ="/profile"
+                axios.get(url).then(res =>{
+                    this.usuario = res.data
+                    this.loading = false
+                })
             },
         }
     }

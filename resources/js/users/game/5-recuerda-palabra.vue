@@ -1,120 +1,155 @@
 <template>
-	<div class="container-fluid">
-		<div class="col-12 container-fluid">
-			<button type="button" class="btn btn-dark text-uppercase" onClick="history.back()">Regresar</button>
-		</div>
-		<div class="row" id="primera-vista">
-			<div class="col-12 col-md-8">
-				<div class="card mb-3">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-5">
-								<h4 class="text-center">Busca la palabra</h4>
-								<input type="button" value="Iniciar" class="btn btn-primary btn-block pb-0" @click="tres_segundos_pantalla()">
+	<div>
+		<spinner v-if="loading"></spinner>
+		<div v-else>
+			<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+				<div class="container">
+					<a class="navbar-brand text-white">Lectura Veloz</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavDropdown">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item px-md-3">
+								<h5 class="mb-0">
+									<a class="nav-link text-warning">{{ usuario.puntos }} Pts.</a>
+								</h5>
+							</li>
+							<li class="nav-item">
+								<img :src="`/imagenes/usuario/${usuario.avatar}`" class="rounded-circle pb-0" height="40" width="40">
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{usuario.name}}
+								</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									<router-link class="dropdown-item" to="/profile">
+										Mi perfil
+									</router-link>
+									<a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión
+									</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<div class="container-fluid">
+				<div class="col-12 container-fluid">
+					<button type="button" class="btn btn-dark text-uppercase" onClick="history.back()">Regresar</button>
+				</div>
+				<div class="row" id="primera-vista">
+					<div class="col-12 col-md-8">
+						<div class="card mb-3">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-5">
+										<h4 class="text-center">Busca la palabra</h4>
+										<input type="button" value="Iniciar" class="btn btn-primary btn-block pb-0" @click="tres_segundos_pantalla()">
+									</div>
+									<div class="col-7">
+										<div class="text-center"><h5>Record</h5></div>
+										<div v-for="(max, index) in maximoPunto">
+											<div class="card-footer row text-left">
+												<h5 class="col-md-6 col-12">{{ max.name }}</h5>
+												<h5 class="col-md-6 col-12">{{ max.pivot.puntuacion }}</h5>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="col-7">
-								<div class="text-center"><h5>Record</h5></div>
-								<div v-for="(max, index) in maximoPunto">
-									<div class="card-footer row text-left">
-										<h5 class="col-md-6 col-12">{{ max.name }}</h5>
-										<h5 class="col-md-6 col-12">{{ max.pivot.puntuacion }}</h5>
+						</div>
+						<div class="card mb-3">
+							<div class="card-body">
+								<h4 class="text-center text-uppercase">Tus records</h4>
+								<div class="row font-weight-bold text-center">
+									<div class="col-2">#</div>
+									<div class="col-6">Fecha</div>
+									<div class="col-4">Puntos</div>
+								</div>
+								<hr>
+								<div class="row text-center" v-for="(punt, index) in misRecords">
+									<div class="col-2">{{ index+1 }}</div>
+									<h5 class="col-6">{{ obtenerFecha(punt.created_at) }}</h5>
+									<div class="col-4">{{ punt.puntuacion }}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="text-center">
+									<img src="/imagenes/consejos-juegos/consejo-memorizar-palabra.png" class="card-img-top mx-auto my-3" 
+									style="width: 60%;">
+									<div class="card-body">
+										<h4 class="card-text">Memoriza la palabra que aparecera y luego selecciona la correcta, antes de que se termine el tiempo</h4>
+										<div class="text-left">
+											<p><b>Tiempo: </b>60 segundos</p>
+											<p><b>Correcta: </b>+3 puntos</p>
+											<p><b>Incorrecta: </b>-2 puntos</p>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="card mb-3">
-					<div class="card-body">
-						<h4 class="text-center text-uppercase">Tus records</h4>
-						<div class="row font-weight-bold text-center">
-							<div class="col-2">#</div>
-							<div class="col-6">Fecha</div>
-							<div class="col-4">Puntos</div>
-						</div>
-						<hr>
-						<div class="row text-center" v-for="(punt, index) in misRecords">
-							<div class="col-2">{{ index+1 }}</div>
-							<div class="col-6">{{ punt.created_at }}</div>
-							<div class="col-4">{{ punt.puntuacion }}</div>
-						</div>
-					</div>
+				<div id="pantalla_3_seg">
+					<div id="numero_3_seg">{{ contador }}</div>
 				</div>
-			</div>
-			<div class="col-12 col-md-4">
-				<div class="card">
-					<div class="card-body">
-						<div class="text-center">
-							<img src="/imagenes/consejos-juegos/consejo-memorizar-palabra.png" class="card-img-top mx-auto my-3" 
-							style="width: 60%;">
-							<div class="card-body">
-								<h4 class="card-text">Memoriza la palabra que aparecera y luego selecciona la correcta, antes de que se termine el tiempo</h4>
-								<div class="text-left">
-									<p><b>Tiempo: </b>60 segundos</p>
-									<p><b>Correcta: </b>+3 puntos</p>
-									<p><b>Incorrecta: </b>-2 puntos</p>
+				<div class="row" id="segunda-vista">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body ">
+								<div class="row">
+									<span class="col-4">Pts: {{ puntuacion }}</span>
+									<div class="col-8">
+										<ul id="skill">
+											<li>
+												<span class="bar graphic-design" id="progressBar"></span>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<h4 class="text-center my-5">{{ muestrame_buscando }}</h4>
+								<div class="container-fluid row text-center">
+									<div class="contenedor-card col-6"@click="precionar($event)" id="a"></div>
+									<div class="contenedor-card col-6"@click="precionar($event)" id="b"></div>
+									<div class="contenedor-card col-6"@click="precionar($event)" id="c"></div>
+									<div class="contenedor-card col-6"@click="precionar($event)" id="d"></div>
+									<div class="contenedor-card col-6"@click="precionar($event)" id="e"></div>
+									<div class="contenedor-card col-6"@click="precionar($event)" id="f"></div>
+									<div class="contenedor-card col-6"@click="precionar($event)" id="g"></div>
+									<div class="contenedor-card col-6"@click="precionar($event)" id="h"></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div id="pantalla_3_seg">
-			<div id="numero_3_seg">{{ contador }}</div>
-		</div>
-		<div class="row" id="segunda-vista">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-body ">
-						<div class="row">
-							<span class="col-4">Pts: {{ puntuacion }}</span>
-							<div class="col-8">
-								<ul id="skill">
-									<li>
-										<span class="bar graphic-design" id="progressBar"></span>
-									</li>
-								</ul>
+				<div id="tercera-vista"class="col-md-8  m-auto">
+					<div class="card">
+						<div class="card-body">
+							<div class="col-8 m-auto text-center">
+								<h3 class="text-uppercase">Se acabo el tiempo</h3>
+								<img src="imagenes/relogarena.png" alt="" width="60%">
+								<div v-if="puntuacion > 0" @click.prevent="guardarJuego()" class="btn btn-primary btn-block btn-lg">Se acabó el tiempo</div>
+								<router-link v-else to="/game" class="btn btn-primary btn-block"> Volver al curso</router-link>
 							</div>
 						</div>
-						<h4 class="text-center my-5">{{ muestrame_buscando }}</h4>
-						<div class="container-fluid row text-center">
-							<div class="contenedor-card col-6"@click="precionar($event)" id="a"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="b"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="c"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="d"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="e"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="f"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="g"></div>
-							<div class="contenedor-card col-6"@click="precionar($event)" id="h"></div>
+					</div>
+				</div>
+				<div id="cuarta-vista"class="col-md-8 m-auto">
+					<div class="card animated bounceInRight">
+						<div class="card-body">
+							<h3 class="text-center">estos son los resultados</h3>
+							<h4>tiempo : 00:00</h4><hr>
+							<h4>Puntuacion: {{ puntuacion }}</h4><hr>
+							<h4>Aumento: <b>+</b> {{ Math.floor(puntuacion/3) }}</h4><hr>
+							<router-link to="/game" class="btn btn-primary btn-block"> Volver a los ejercicios</router-link>
+							<router-link to="/home" class="btn btn-primary btn-block"> Volver al inicio</router-link>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-		<div id="tercera-vista"class="col-md-8  m-auto">
-			<div class="card">
-				<div class="card-body">
-					<div class="col-8 m-auto text-center">
-						<form v-on:submit.prevent="guardarJuego">
-							<h3 class="text-uppercase">Se acabo el tiempo</h3>
-							<img src="imagenes/relogarena.png" alt="" width="60%">
-							<input type="submit"value="Ver resultados" class="btn btn-primary btn-block">
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="cuarta-vista"class="col-md-8 m-auto">
-			<div class="card animated bounceInRight">
-				<div class="card-body">
-					<h3 class="text-center">estos son los resultados</h3>
-					<h4>tiempo : 00:00</h4><hr>
-					<h4>Puntuacion: {{ puntuacion }}</h4><hr>
-					<h4>Aumento: <b>+</b> {{ Math.floor(puntuacion/3) }}</h4><hr>
-					<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
-						Ir al Inicio
-					</router-link>
 				</div>
 			</div>
 		</div>
@@ -123,13 +158,13 @@
 <script>
 	export default{
 		created:function() {
+			this.showUser()
 			this.maximaPuntuacion()
 			this.misPuntuaciones()
-			this.obtener_datos_usuario()
 		},
 		data(){
 			return{
-				perfil_usuario:{},
+				usuario:{},
 				maximoPunto:[],
 				misRecords:[],
 				desordenar:[],
@@ -144,9 +179,13 @@
 				muestrame_buscando:'',
 				bono:0,
 				interval:null,
+				loading:true
 			}
 		},
 		methods:{
+			obtenerFecha(fecha){
+				return moment(fecha).fromNow()
+			},
 			maximaPuntuacion(){
 				axios.get("maxGame/"+5).then(res =>{
 					this.maximoPunto = res.data
@@ -157,15 +196,17 @@
 					this.misRecords = res.data
 				})
 			},
-			obtener_datos_usuario(){
-				axios.get("/profile").then(res =>{
-					this.perfil_usuario = res.data
+			showUser(){
+				var url ="/profile"
+				axios.get(url).then(res =>{
+					this.usuario = res.data
+					this.loading = false
 				})
 			},
 			guardarJuego(){
 				let formData = new FormData()
 				formData.append('ejercicio_id', 5)
-				formData.append('user_id', this.perfil_usuario.id)
+				formData.append('user_id', this.usuario.id)
 				formData.append('puntuacion', this.puntuacion)
 
 				axios.post('/game',formData)
@@ -177,23 +218,24 @@
 			},
 			actualizar_datos_usuario(){
 				var point = Math.floor(this.puntuacion/3)
+				this.usuario.puntos += point;
 				let data = new FormData();
-				data.append('puntos', this.perfil_usuario.puntos + point);
-				if (this.perfil_usuario.puntos<100) {
+				data.append('puntos', this.usuario.puntos);
+				if (this.usuario.puntos<100) {
 					data.append('rango_id', 1);
-				}else if (this.perfil_usuario.puntos >= 100 && this.perfil_usuario.puntos < 500) {
+				}else if (this.usuario.puntos >= 100 && this.usuario.puntos < 500) {
 					data.append('rango_id', 2);
-				}else if (this.perfil_usuario.puntos >= 500 && this.perfil_usuario.puntos < 1000) {
+				}else if (this.usuario.puntos >= 500 && this.usuario.puntos < 1000) {
 					data.append('rango_id', 3);
-				}else if (this.perfil_usuario.puntos >= 1000&& this.perfil_usuario.puntos < 5000) {
+				}else if (this.usuario.puntos >= 1000&& this.usuario.puntos < 5000) {
 					data.append('rango_id', 4);
-				}else if (this.perfil_usuario.puntos >= 5000&& this.perfil_usuario.puntos < 10000) {
+				}else if (this.usuario.puntos >= 5000&& this.usuario.puntos < 10000) {
 					data.append('rango_id', 5);
-				}else if (this.perfil_usuario.puntos > 10000) {
+				}else if (this.usuario.puntos > 10000) {
 					data.append('rango_id', 6);
 				}
 				data.append('_method','PUT');
-				var url = `/profile/${this.perfil_usuario.id}`
+				var url = `/profile/${this.usuario.id}`
 				axios.post(url, data).then(res=>{
 
 				})

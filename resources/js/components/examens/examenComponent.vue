@@ -71,12 +71,12 @@
 							</div>
 							<div class="form-group">
 								<div class="form-group">
-									<label></label>
-									<input type="file" class="form-control-file" @change="obtenerImagen" v-if="estado == false" accept="image/*" equired>
-									<input type="file" class="form-control-file" @change="obtenerImagenNueva" v-else accept="image/*" equired>
+									<input type="file" class="form-control-file" @change="obtenerImagen" accept="image/*" ref="imagenEdit" v-if="estado == true" equired>
+									<input type="file" class="form-control-file" @change="obtenerImagenNueva" accept="image/*" ref="imagenEdit" v-if="estado == false" equired>
+									
 									<figure>
-										<img width="200" height="200" :src="imagen" v-if="estado == false">
-										<img width="200" height="200" :src="`imagenes/examen/${fillExamen.icon}`" v-else>
+										<img v-if="estado == true" width="200" height="200" :src="`imagenes/examen/${fillExamen.icon}`">
+										<img v-if="estado == false" width="200" height="200" :src="imagen">
 									</figure>
 								</div>
 							</div>
@@ -95,13 +95,13 @@
 		<!-- listar los examenes -->
 		<div class="card">
 			<div class="card-header">
-				<h3 class="card-title">Examenes</h3>
-				<a href="#" class="btn btn-success float-right" v-on:click="crearExamen()"><i class="fas fa-plus"></i> Crear Nuevo</a>
+				<h2 class="card-title">Examenes</h2>
+				<a class="btn btn-success float-right text-white" v-on:click="crearExamen()"><i class="fas fa-plus"></i> Crear Nuevo</a>
 			</div>
 			<spinner v-if="loading"></spinner>
 			<div class="card-body" v-else>
 				<paginate name="examens" :list="examens" :per="4">
-					<table class="table table-bordered table-striped py-5">
+					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -120,8 +120,7 @@
 								<td class="text-center" colspan="2">
 									<router-link :to="{name : 'show',params:{id:examen.id}}" class="btn btn-info"><i class="fas fa-eye"></i> Ver
 									</router-link>
-									<a href="#" class="btn btn-warning color-letra" @click="editarExamen(examen)"><i class="fas fa-pencil-alt"></i> Editar</a>
-									<a href="#" class="btn btn-danger color-letra" v-on:click="eliminarExamen(examen,index)"><i class="far fa-trash-alt"></i> Eliminar</a>
+									<a class="btn btn-warning text-white" @click="editarExamen(examen)"><i class="fas fa-pencil-alt"></i> Editar</a>
 								</td>
 							</tr>
 						</tbody>
@@ -182,15 +181,14 @@
 				this.fillExamen.content = arch;
 			},
 			obtenerImagen(e){
-				this.estado = true;
+				this.estado = false
 				let file = e.target.files[0];
 				this.fillExamen.icon = file;
 				this.cargarImagen(file);
 			},
 			obtenerImagenNueva(e){
-				this.estado = false;
 				let file = e.target.files[0];
-				this.examen.icon = file;
+				this.fillExamen.icon = file;
 				this.cargarImagen(file);
 			},
 			cargarImagen(file){
@@ -205,6 +203,22 @@
 				if (patron.test(parametro)) {
 					return false
 				}else{return true}
+			},
+			alerta:function(icono,titulo){
+				const Toast = this.$swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 2000,
+					onOpen: (toast) => {
+						toast.addEventListener('mouseenter', this.$swal.stopTimer)
+						toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+					}
+				})
+				Toast.fire({
+					icon: icono,
+					title: titulo
+				})
 			},
 			agregarExamen(){
 				if (this.validarEspacios(this.examen.name)==false||this.validarEspacios(this.examen.content)==false||this.validarEspacios(this.examen.icon)==false) {
@@ -221,23 +235,10 @@
 						this.$refs.txt.value=null
 						this.$refs.img.value = null
 						this.imagenMiniatura = null
+						this.alerta('success','Se a agregado correctamente')
 						$('#creaExamen').modal('hide')
 					})
 				}	
-			},
-			confirmarDelete(){
-				var resp = confirm("Estas seguro que deseas eliminarlo?");
-				if (resp == true) {
-					return true
-				}else{ return false }
-			},
-			eliminarExamen:function(examen,index){
-				if (this.confirmarDelete()==true) {
-					axios.delete(`/examen/${examen.id}`)
-					.then(()=>{
-						this.examens.splice(index,1); 
-					})
-				}
 			},
 			editarExamen:function (examen){
 				this.estado = true;
@@ -254,11 +255,13 @@
 					let data = new FormData();
 					data.append('name', this.fillExamen.name);
 					data.append('content', this.fillExamen.content);
-					data.append('icon', this.examen.icon);
+					data.append('icon', this.fillExamen.icon);
 					data.append('_method','PUT');
 					var url = `/examen/${fillExamen.id}`;
 					axios.post(url, data).then(res=>{
+						this.$refs.imagenEdit.value = "";
 						this.mostrarExamen();
+						this.alerta('warning','Se a modificado el registro')
 						$('#edit').modal('hide');
 					})
 				}
@@ -266,15 +269,8 @@
 		},
 		computed:{
 			imagen(){
-				this.estado = false;
 				return this.imagenMiniatura;
 			} 
 		}
 	}
 </script>
-
-<style>
-.color-letra, .color-letra:hover{
-	color: white;
-}
-</style>

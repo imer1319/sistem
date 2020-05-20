@@ -16,6 +16,7 @@
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
 
+    <script src="{{ asset('js/script.js') }}"></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -25,9 +26,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
 </head>
-<body style="background: #F0F0F0;">
+<body style="background: #F0F0F0; overflow-x: hidden;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #2B6A88;">
+        <nav class="navbar navbar-expand-md navbar-dark shadow-sm bg-primary" style="display: none;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Sistema Lectura Veloz') }}
@@ -55,10 +56,6 @@
                         </li>
                         @endif
                         @else
-                        <li>
-                            <img src="imagenes/usuario/{{ Auth::user()->avatar }}" class="rounded-circle pb-0" height="40" width="40">
-                        </li>
-
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -81,8 +78,7 @@
             </div>
         </div>
     </nav>
-
-    <main class="py-2">
+    <main>
         <App/>
     </main>
 

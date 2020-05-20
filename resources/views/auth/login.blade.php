@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card" style="box-shadow: 2px 2px 10px #666;">
-                <div class="text-center pt-3">{{ __('Iniciar Sesión') }}</div>
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="text-center pt-3 h3">{{ __('Iniciar Sesión') }}</div>
                 <div class="img text-center">
                     <img src="imagenes/logo.png" style="width: 120px; border-radius: 20%; filter: drop-shadow(5px 5px 10px #444);">
                 </div>

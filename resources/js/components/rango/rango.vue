@@ -59,14 +59,14 @@
 							</div>
 							<div class="form-group">
 								<div class="form-group">
-									<label></label>
-									<input type="file" class="form-control-file" @change="obtenerImagen" v-if="estado == false" accept="image/*" equired>
-									<input type="file" class="form-control-file" @change="obtenerImagenNueva" v-else  accept="image/*" equired>
+									<input type="file" class="form-control-file" @change="obtenerImagen" accept="image/*" ref="imagenEdit" v-if="estado == true" equired>
+									<input type="file" class="form-control-file" @change="obtenerImagenNueva" accept="image/*" ref="imagenEdit" v-if="estado == false" equired>
+									
+									<figure>
+										<img v-if="estado == true" width="200" height="200" :src="`imagenes/rangos/${fillRango.avatar}`">
+										<img v-if="estado == false" width="200" height="200" :src="imagen">
+									</figure>
 								</div>
-								<figure>
-									<img width="200" height="200" :src="imagen" v-if="estado == false">
-									<img width="200" height="200" :src="`imagenes/rangos/${fillRango.avatar}`" v-else>
-								</figure>
 							</div>
 						</div>
 						<div class="modal-footer pb-0">
@@ -83,16 +83,16 @@
 		<!-- listar las rangos -->
 		<div class="card">
 			<div class="card-header">
-				<h3 class="card-title">Rangos</h3>
-				<a href="#" class="btn btn-success float-right"  v-on:click="crearRango()"><i class="fas fa-plus"></i> Crear Nuevo</a>
+				<h2 class="card-title">Rangos</h2>
+				<a class="btn btn-success float-right text-white"  v-on:click="crearRango()"><i class="fas fa-plus"></i> Crear Nuevo</a>
 			</div>
 			<spinner v-if="loading"></spinner>
 			<div class="card-body" v-else>
 				<paginate name="rangos" :list="rangos" :per="5">
-					<table class="table table-bordered table-striped py-5">
+					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th>ID</th>
 								<th>Nombre</th>
 								<th class="text-center">Imagen</th>
 								<th class="text-center">Acciones</th>
@@ -103,8 +103,8 @@
 								<td width="8px">{{ index+1}}</td>
 								<td>{{rango.nombre}}</td>
 								<td class="text-center"><img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" height="60" width="70"></td>
-								<td class="float-right">
-									<a href="#" class="btn btn-warning" @click="editarRango(rango)"><i class="fas fa-pencil-alt"></i> Editar</a>					
+								<td class="text-center">
+									<a class="btn btn-warning text-white" @click.prevent="editarRango(rango)"><i class="fas fa-pencil-alt"></i> Editar</a>					
 								</td>
 							</tr>
 						</tbody>
@@ -133,8 +133,9 @@
 				fillRango: {nombre: '', avatar:''},
 				imagenMiniatura:'',
 				loading:true,
-				estado:false,
 				paginate:['rangos'],
+
+				estado:true,
 			}
 		},
 		methods:{
@@ -153,15 +154,14 @@
 				this.cargarImagen(file);
 			},
 			obtenerImagen(e){
-				this.estado = true;
+				this.estado = false
 				let file = e.target.files[0];
 				this.fillRango.avatar = file;
 				this.cargarImagen(file);
 			},
 			obtenerImagenNueva(e){
-				this.estado = false;
 				let file = e.target.files[0];
-				this.rango.avatar = file;
+				this.fillRango.avatar = file;
 				this.cargarImagen(file);
 			},
 			cargarImagen(file){
@@ -177,6 +177,22 @@
 					return false
 				}else{return true}
 			},
+			alerta:function(icono,titulo){
+				const Toast = this.$swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 2000,
+					onOpen: (toast) => {
+						toast.addEventListener('mouseenter', this.$swal.stopTimer)
+						toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+					}
+				})
+				Toast.fire({
+					icon: icono,
+					title: titulo
+				})
+			},
 			agregarRango(){
 				if (this.validarEspacios(this.rango.nombre)==false||this.validarEspacios(this.rango.avatar)==false) {
 					alert("los campos no pueden estar vacios")
@@ -191,6 +207,7 @@
 						this.rango.nombre = "";
 						this.$refs.img.value = "";
 						this.imagenMiniatura = "";
+						this.alerta('success','Se a agregado correctamente')
 						$('#createRango').modal('hide')
 					})
 				}
@@ -208,11 +225,13 @@
 				}else{
 					let data = new FormData();
 					data.append('nombre', this.fillRango.nombre);
-					data.append('avatar', this.rango.avatar);
+					data.append('avatar', this.fillRango.avatar);
 					data.append('_method','PUT');
 					var url = `/rango/${fillRango.id}`;
 					axios.post(url, data).then(res=>{
+						this.$refs.imagenEdit.value = "";
 						this.mostrarRango();
+						this.alerta('warning','Se a modificado el registro')
 						$('#editRango').modal('hide');
 					})
 				}
@@ -220,14 +239,13 @@
 		},
 		computed:{
 			imagen(){
-				this.estado = false;
 				return this.imagenMiniatura;
 			} 
 		}
 	}
 </script>
 <style>
-	a{
-		color: #fff;
-	}
+a{
+	color: #fff;
+}
 </style>

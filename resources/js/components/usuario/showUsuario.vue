@@ -48,50 +48,50 @@
 								<div class="text-center">
 									<div v-for="rango in rangos">
 										<div v-if="usuario.puntos < 100">
-											<div v-if="rango.nombre == 'rango #1'">
+											<div v-if="rango.nombre == 'Rango #1'">
 												<div class="text-center">
 													<img :src="`../imagenes/rangos/${rango.avatar}`" class="img-responsive" width="30%">
-													<h3><b>I</b></h3>
+													<h3><b>Bronce</b></h3>
 												</div>
 											</div>
 										</div>
 										<div v-if="usuario.puntos >= 100 && usuario.puntos <500">
-											<div v-if="rango.nombre == 'rango #2'">
+											<div v-if="rango.nombre == 'Rango #2'">
 												<div class="text-center">
 													<img :src="`../imagenes/rangos/${rango.avatar}`" class="img-responsive" width="30%">
-													<h3><b>II</b></h3>
+													<h3><b>Plata</b></h3>
 												</div>
 											</div>
 										</div>
 										<div v-if="usuario.puntos >= 500 && usuario.puntos <1000">
-											<div v-if="rango.nombre == 'rango #3'">
+											<div v-if="rango.nombre == 'Rango #3'">
 												<div class="text-center">
 													<img :src="`../imagenes/rangos/${rango.avatar}`" class="img-responsive" width="30%">
-													<h3><b>III</b></h3>
+													<h3><b>Oro</b></h3>
 												</div>
 											</div>
 										</div>
 										<div v-if="usuario.puntos >= 1000 && usuario.puntos < 5000">
-											<div v-if="rango.nombre == 'rango #4'">
+											<div v-if="rango.nombre == 'Rango #4'">
 												<div class="text-center">
 													<img :src="`../imagenes/rangos/${rango.avatar}`" class="img-responsive" width="30%">
-													<h3><b>IV</b></h3>
+													<h3><b>Platino</b></h3>
 												</div>
 											</div>
 										</div>
 										<div v-if="usuario.puntos >= 5000 && usuario.puntos < 10000">
-											<div v-if="rango.nombre == 'rango #5'">
+											<div v-if="rango.nombre == 'Rango #5'">
 												<div class="text-center">
 													<img :src="`../imagenes/rangos/${rango.avatar}`" class="img-responsive" width="30%">
-													<h3><b>V</b></h3>
+													<h3><b>Diamante</b></h3>
 												</div>
 											</div>
 										</div>
 										<div v-if="usuario.puntos >=10000">
-											<div v-if="rango.nombre == 'rango #6'">
+											<div v-if="rango.nombre == 'Rango #6'">
 												<div class="text-center">
 													<img :src="`../imagenes/rangos/${rango.avatar}`" class="img-responsive" width="30%">
-													<h3><b>VI</b></h3>
+													<h3><b>Campeones</b></h3>
 												</div>
 											</div>
 										</div>

@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/rango/rango.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -129,93 +129,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     var _this = this;
 
-    this.mostrarExamen();
+    this.mostrarRango();
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('agregado', function (data) {
-      _this.examens.push(data);
+      _this.rangos.push(data);
     });
   },
   data: function data() {
     return {
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      examens: [],
-      examen: {
-        name: '',
-        content: '',
-        icon: ''
+      rangos: [],
+      rango: {
+        nombre: '',
+        avatar: ''
       },
-      fillExamen: {
-        name: '',
-        content: '',
-        icon: ''
+      fillRango: {
+        nombre: '',
+        avatar: ''
       },
       imagenMiniatura: '',
-      respuestas: [],
-      respuesta: {
-        respuesta: '',
-        examen_id: ''
-      },
       loading: true,
-      estado: false,
-      id_examen: '',
-      paginate: ['examens']
+      paginate: ['rangos'],
+      estado: true
     };
   },
   methods: {
-    crearExamen: function crearExamen() {
-      $('#creaExamen').modal('show');
-    },
-    mostrarExamen: function mostrarExamen() {
+    mostrarRango: function mostrarRango() {
       var _this2 = this;
 
-      axios.get('examen').then(function (res) {
-        _this2.examens = res.data;
+      axios.get('rango').then(function (res) {
+        _this2.rangos = res.data;
         _this2.loading = false;
       });
     },
-    obtenerArchivocrear: function obtenerArchivocrear(e) {
-      var arch = e.target.files[0];
-      this.examen.content = arch;
+    crearRango: function crearRango() {
+      $('#createRango').modal('show');
     },
     obtenerImagencrear: function obtenerImagencrear(e) {
       var file = e.target.files[0];
-      this.examen.icon = file;
+      this.rango.avatar = file;
       this.cargarImagen(file);
     },
-    obtenerArchivo: function obtenerArchivo(e) {
-      var arch = e.target.files[0];
-      this.fillExamen.content = arch;
-    },
     obtenerImagen: function obtenerImagen(e) {
-      this.estado = true;
+      this.estado = false;
       var file = e.target.files[0];
-      this.fillExamen.icon = file;
+      this.fillRango.avatar = file;
       this.cargarImagen(file);
     },
     obtenerImagenNueva: function obtenerImagenNueva(e) {
-      this.estado = false;
       var file = e.target.files[0];
-      this.examen.icon = file;
+      this.fillRango.avatar = file;
       this.cargarImagen(file);
     },
     cargarImagen: function cargarImagen(file) {
@@ -238,75 +204,77 @@ __webpack_require__.r(__webpack_exports__);
         return true;
       }
     },
-    agregarExamen: function agregarExamen() {
+    alerta: function alerta(icono, titulo) {
       var _this4 = this;
 
-      if (this.validarEspacios(this.examen.name) == false || this.validarEspacios(this.examen.content) == false || this.validarEspacios(this.examen.icon) == false) {
+      var Toast = this.$swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        onOpen: function onOpen(toast) {
+          toast.addEventListener('mouseenter', _this4.$swal.stopTimer);
+          toast.addEventListener('mouseleave', _this4.$swal.resumeTimer);
+        }
+      });
+      Toast.fire({
+        icon: icono,
+        title: titulo
+      });
+    },
+    agregarRango: function agregarRango() {
+      var _this5 = this;
+
+      if (this.validarEspacios(this.rango.nombre) == false || this.validarEspacios(this.rango.avatar) == false) {
         alert("los campos no pueden estar vacios");
       } else {
         var formData = new FormData();
-        formData.append('name', this.examen.name);
-        formData.append('content', this.examen.content);
-        formData.append('icon', this.examen.icon);
-        axios.post('/examen', formData).then(function (res) {
-          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.examen);
-          _this4.examen.name = "";
-          _this4.$refs.txt.value = null;
-          _this4.$refs.img.value = null;
-          _this4.imagenMiniatura = null;
-          $('#creaExamen').modal('hide');
+        formData.append('nombre', this.rango.nombre);
+        formData.append('avatar', this.rango.avatar);
+        axios.post('/rango', formData).then(function (res) {
+          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.rango);
+          _this5.rango.nombre = "";
+          _this5.$refs.img.value = "";
+          _this5.imagenMiniatura = "";
+
+          _this5.alerta('success', 'Se a agregado correctamente');
+
+          $('#createRango').modal('hide');
         });
       }
     },
-    confirmarDelete: function confirmarDelete() {
-      var resp = confirm("Estas seguro que deseas eliminarlo?");
-
-      if (resp == true) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    eliminarExamen: function eliminarExamen(examen, index) {
-      var _this5 = this;
-
-      if (this.confirmarDelete() == true) {
-        axios["delete"]("/examen/".concat(examen.id)).then(function () {
-          _this5.examens.splice(index, 1);
-        });
-      }
-    },
-    editarExamen: function editarExamen(examen) {
+    editarRango: function editarRango(rango) {
       this.estado = true;
-      this.fillExamen.name = examen.name;
-      this.fillExamen.content = examen.content;
-      this.fillExamen.icon = examen.icon;
-      this.fillExamen.id = examen.id;
-      $('#edit').modal('show');
+      this.fillRango.nombre = rango.nombre;
+      this.fillRango.avatar = rango.avatar;
+      this.fillRango.id = rango.id;
+      $('#editRango').modal('show');
     },
-    updateExamen: function updateExamen(fillExamen) {
+    updateRango: function updateRango(fillRango) {
       var _this6 = this;
 
-      if (this.validarEspacios(this.fillExamen.name) == false || this.validarEspacios(this.fillExamen.content) == false || this.validarEspacios(this.fillExamen.icon) == false) {
+      if (this.validarEspacios(this.fillRango.nombre) == false || this.validarEspacios(this.fillRango.avatar) == false) {
         alert("los campos no pueden estar vacios");
       } else {
         var data = new FormData();
-        data.append('name', this.fillExamen.name);
-        data.append('content', this.fillExamen.content);
-        data.append('icon', this.examen.icon);
+        data.append('nombre', this.fillRango.nombre);
+        data.append('avatar', this.fillRango.avatar);
         data.append('_method', 'PUT');
-        var url = "/examen/".concat(fillExamen.id);
+        var url = "/rango/".concat(fillRango.id);
         axios.post(url, data).then(function (res) {
-          _this6.mostrarExamen();
+          _this6.$refs.imagenEdit.value = "";
 
-          $('#edit').modal('hide');
+          _this6.mostrarRango();
+
+          _this6.alerta('warning', 'Se a modificado el registro');
+
+          $('#editRango').modal('hide');
         });
       }
     }
   },
   computed: {
     imagen: function imagen() {
-      this.estado = false;
       return this.imagenMiniatura;
     }
   }
@@ -314,10 +282,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=style&index=0&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/examens/examenComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/rango/rango.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -326,22 +294,22 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.color-letra, .color-letra:hover{\r\n\tcolor: white;\n}\r\n", ""]);
+exports.push([module.i, "\na{\r\n\tcolor: #fff;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=style&index=0&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/examens/examenComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/rango/rango.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./examenComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./rango.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -363,10 +331,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236& ***!
-  \**************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8& ***!
+  \**************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -386,12 +354,12 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.agregarExamen($event)
+            return _vm.agregarRango($event)
           }
         }
       },
       [
-        _c("div", { staticClass: "modal fade", attrs: { id: "creaExamen" } }, [
+        _c("div", { staticClass: "modal fade", attrs: { id: "createRango" } }, [
           _c("div", { staticClass: "modal-dialog" }, [
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(0),
@@ -408,41 +376,26 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.examen.name,
-                          expression: "examen.name"
+                          value: _vm.rango.nombre,
+                          expression: "rango.nombre"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: {
                         type: "text",
                         name: "name",
-                        placeholder: "Nombre de la examen",
+                        placeholder: "Nombre de la rango",
                         required: ""
                       },
-                      domProps: { value: _vm.examen.name },
+                      domProps: { value: _vm.rango.nombre },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.examen, "name", $event.target.value)
+                          _vm.$set(_vm.rango, "nombre", $event.target.value)
                         }
                       }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "imagen" } }, [
-                      _vm._v("Contenido")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "txt",
-                      staticClass: "form-control-file",
-                      attrs: { type: "file", accept: ".txt", required: "" },
-                      on: { change: _vm.obtenerArchivocrear }
                     })
                   ])
                 ]),
@@ -454,12 +407,7 @@ var render = function() {
                     _c("input", {
                       ref: "img",
                       staticClass: "form-control-file",
-                      attrs: {
-                        type: "file",
-                        id: "f1",
-                        accept: "image/*",
-                        equired: ""
-                      },
+                      attrs: { type: "file", accept: "image/*", required: "" },
                       on: { change: _vm.obtenerImagencrear }
                     })
                   ]),
@@ -486,12 +434,12 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.updateExamen(_vm.fillExamen)
+            return _vm.updateRango(_vm.fillRango)
           }
         }
       },
       [
-        _c("div", { staticClass: "modal fade", attrs: { id: "edit" } }, [
+        _c("div", { staticClass: "modal fade", attrs: { id: "editRango" } }, [
           _c("div", { staticClass: "modal-dialog" }, [
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(2),
@@ -508,24 +456,19 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.fillExamen.name,
-                          expression: "fillExamen.name"
+                          value: _vm.fillRango.nombre,
+                          expression: "fillRango.nombre"
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        name: "name",
-                        placeholder: "Nombre de la examen",
-                        required: ""
-                      },
-                      domProps: { value: _vm.fillExamen.name },
+                      attrs: { type: "text", name: "name", required: "" },
+                      domProps: { value: _vm.fillRango.nombre },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.fillExamen, "name", $event.target.value)
+                          _vm.$set(_vm.fillRango, "nombre", $event.target.value)
                         }
                       }
                     })
@@ -534,25 +477,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "imagen" } }, [
-                      _vm._v("Contenido")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "texto",
-                      staticClass: "form-control-file",
-                      attrs: { type: "file", accept: ".txt" },
-                      on: { change: _vm.obtenerArchivo }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label"),
-                    _vm._v(" "),
-                    _vm.estado == false
+                    _vm.estado == true
                       ? _c("input", {
+                          ref: "imagenEdit",
                           staticClass: "form-control-file",
                           attrs: {
                             type: "file",
@@ -561,7 +488,11 @@ var render = function() {
                           },
                           on: { change: _vm.obtenerImagen }
                         })
-                      : _c("input", {
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.estado == false
+                      ? _c("input", {
+                          ref: "imagenEdit",
                           staticClass: "form-control-file",
                           attrs: {
                             type: "file",
@@ -569,9 +500,20 @@ var render = function() {
                             equired: ""
                           },
                           on: { change: _vm.obtenerImagenNueva }
-                        }),
+                        })
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("figure", [
+                      _vm.estado == true
+                        ? _c("img", {
+                            attrs: {
+                              width: "200",
+                              height: "200",
+                              src: "imagenes/rangos/" + _vm.fillRango.avatar
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
                       _vm.estado == false
                         ? _c("img", {
                             attrs: {
@@ -580,19 +522,13 @@ var render = function() {
                               src: _vm.imagen
                             }
                           })
-                        : _c("img", {
-                            attrs: {
-                              width: "200",
-                              height: "200",
-                              src: "imagenes/examen/" + _vm.fillExamen.icon
-                            }
-                          })
+                        : _vm._e()
                     ])
                   ])
-                ]),
-                _vm._v(" "),
-                _vm._m(3)
-              ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(3)
             ])
           ])
         ])
@@ -604,16 +540,15 @@ var render = function() {
       { staticClass: "card" },
       [
         _c("div", { staticClass: "card-header" }, [
-          _c("h3", { staticClass: "card-title" }, [_vm._v("Examenes")]),
+          _c("h2", { staticClass: "card-title" }, [_vm._v("Rangos")]),
           _vm._v(" "),
           _c(
             "a",
             {
-              staticClass: "btn btn-success float-right",
-              attrs: { href: "#" },
+              staticClass: "btn btn-success float-right text-white",
               on: {
                 click: function($event) {
-                  return _vm.crearExamen()
+                  return _vm.crearRango()
                 }
               }
             },
@@ -629,13 +564,11 @@ var render = function() {
               [
                 _c(
                   "paginate",
-                  { attrs: { name: "examens", list: _vm.examens, per: 4 } },
+                  { attrs: { name: "rangos", list: _vm.rangos, per: 5 } },
                   [
                     _c(
                       "table",
-                      {
-                        staticClass: "table table-bordered table-striped py-5"
-                      },
+                      { staticClass: "table table-bordered table-hover" },
                       [
                         _c("thead", [
                           _c("tr", [
@@ -643,9 +576,9 @@ var render = function() {
                             _vm._v(" "),
                             _c("th", [_vm._v("Nombre")]),
                             _vm._v(" "),
-                            _c("th", [_vm._v("Contenido")]),
-                            _vm._v(" "),
-                            _c("th", [_vm._v("Imagen")]),
+                            _c("th", { staticClass: "text-center" }, [
+                              _vm._v("Imagen")
+                            ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-center" }, [
                               _vm._v("Acciones")
@@ -655,109 +588,48 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "tbody",
-                          _vm._l(_vm.paginated("examens"), function(
-                            examen,
+                          _vm._l(_vm.paginated("rangos"), function(
+                            rango,
                             index
                           ) {
                             return _c("tr", { key: index }, [
-                              _c("td", { attrs: { width: "10px" } }, [
+                              _c("td", { attrs: { width: "8px" } }, [
                                 _vm._v(_vm._s(index + 1))
                               ]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(examen.name))]),
+                              _c("td", [_vm._v(_vm._s(rango.nombre))]),
                               _vm._v(" "),
-                              _c("td", [
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(
-                                      examen.content.substring(
-                                        examen.content.length,
-                                        10
-                                      )
-                                    )
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
+                              _c("td", { staticClass: "text-center" }, [
                                 _c("img", {
                                   staticClass: "img-responsive",
                                   attrs: {
-                                    src: "/imagenes/examen/" + examen.icon,
-                                    height: "40",
-                                    width: "40"
+                                    src: "imagenes/rangos/" + rango.avatar,
+                                    height: "60",
+                                    width: "70"
                                   }
                                 })
                               ]),
                               _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "text-center",
-                                  attrs: { colspan: "2" }
-                                },
-                                [
-                                  _c(
-                                    "router-link",
-                                    {
-                                      staticClass: "btn btn-info",
-                                      attrs: {
-                                        to: {
-                                          name: "show",
-                                          params: { id: examen.id }
-                                        }
+                              _c("td", { staticClass: "text-center" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-warning text-white",
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.editarRango(rango)
                                       }
-                                    },
-                                    [
-                                      _c("i", { staticClass: "fas fa-eye" }),
-                                      _vm._v(" Ver\n\t\t\t\t\t\t\t\t")
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass:
-                                        "btn btn-warning color-letra",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.editarExamen(examen)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-pencil-alt"
-                                      }),
-                                      _vm._v(" Editar")
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-danger color-letra",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.eliminarExamen(
-                                            examen,
-                                            index
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "far fa-trash-alt"
-                                      }),
-                                      _vm._v(" Eliminar")
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-pencil-alt"
+                                    }),
+                                    _vm._v(" Editar")
+                                  ]
+                                )
+                              ])
                             ])
                           }),
                           0
@@ -769,7 +641,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("paginate-links", {
                   attrs: {
-                    for: "examens",
+                    for: "rangos",
                     classes: {
                       ul: "pagination",
                       li: "page-item",
@@ -844,7 +716,11 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-lg-6" }, [
           _c("input", {
             staticClass: "btn btn-primary pull-right",
-            attrs: { type: "submit", name: "enviar", value: "Editar Registro" }
+            attrs: {
+              type: "submit",
+              name: "enviar",
+              value: "Actualizar Registro"
+            }
           })
         ])
       ])
@@ -857,18 +733,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/examens/examenComponent.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/examens/examenComponent.vue ***!
-  \*************************************************************/
+/***/ "./resources/js/components/rango/rango.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/rango/rango.vue ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./examenComponent.vue?vue&type=template&id=24862236& */ "./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236&");
-/* harmony import */ var _examenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./examenComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _examenComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./examenComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/examens/examenComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./rango.vue?vue&type=template&id=e01a5bf8& */ "./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8&");
+/* harmony import */ var _rango_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./rango.vue?vue&type=script&lang=js& */ "./resources/js/components/rango/rango.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _rango_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./rango.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/rango/rango.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -879,9 +755,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _examenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _rango_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -891,54 +767,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/examens/examenComponent.vue"
+component.options.__file = "resources/js/components/rango/rango.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/components/rango/rango.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/rango/rango.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./examenComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./rango.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/examens/examenComponent.vue?vue&type=style&index=0&lang=css&":
-/*!**********************************************************************************************!*\
-  !*** ./resources/js/components/examens/examenComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \**********************************************************************************************/
+/***/ "./resources/js/components/rango/rango.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/rango/rango.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./examenComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./rango.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8& ***!
+  \********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./examenComponent.vue?vue&type=template&id=24862236& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./rango.vue?vue&type=template&id=e01a5bf8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rango/rango.vue?vue&type=template&id=e01a5bf8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_rango_vue_vue_type_template_id_e01a5bf8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

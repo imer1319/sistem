@@ -1,9 +1,9 @@
 <template>
 	<div class="row">
-		<div class="col-12">
+		<spinner v-if="loading"></spinner>
+		<div class="col-12" v-else>
 			<div class="card card-primary card-outline">
-				<spinner v-if="loading"></spinner>
-				<div class="card-body box-profile" v-else>
+				<div class="card-body box-profile">
 					<div class="text-center">
 						<img class="profile-user-img img-fluid img-circle img-responsive"
 						:src="`/imagenes/examen/${examen.icon}`">
@@ -13,10 +13,11 @@
 					<p id="test" class="text-justify"></p>
 				</div>
 			</div>
-		</div>
 
-		<div class="col-12">
-			<pregunta/>
+			<div class="col-12">
+				<pregunta/>
+			</div>
+			
 		</div>
 	</div>
 </template>
@@ -65,7 +66,7 @@
 	}
 </script>
 <style>
-	.profile-user-img {
-		height: 100px;
-	}
+.profile-user-img {
+	height: 100px;
+}
 </style>

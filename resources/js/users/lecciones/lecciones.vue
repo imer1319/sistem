@@ -1,0 +1,164 @@
+<template>
+	<div>
+		<spinner v-if="loading"></spinner>
+		<div v-else>
+			<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+				<div class="container">
+					<a class="navbar-brand text-white">Lectura Veloz</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavDropdown">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item px-md-3">
+								<h5 class="mb-0">
+									<a class="nav-link text-warning">{{ usuario.puntos }} Pts.</a>
+								</h5>
+							</li>
+							<li class="nav-item">
+								<img :src="`/imagenes/usuario/${usuario.avatar}`" class="rounded-circle pb-0" height="40" width="40">
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{usuario.name}}
+								</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									<router-link class="dropdown-item" to="/profile">
+										Mi perfil
+									</router-link>
+									<a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión
+									</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<div class="container-fluid">
+				<router-link class="btn btn-dark text-uppercase" to="/home">
+					Regresar
+				</router-link>
+			</div>
+			<div class="d-flex" id="wrapper">
+				<div id="sidebar-wrapper">
+					<div class="nav flex-column nav-pills list-group" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+							¿Qué es la lectura veloz?
+						</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+							Beneficios de la lectura
+						</a>
+						<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+							¿Como aumentar la velocidad?
+						</a>
+						<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+							Settings
+						</a>
+					</div>
+				</div>
+				<div id="page-content-wrapper">
+					<div class="tab-content" id="v-pills-tabContent">
+						<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+							<div class="btn btn-primary" @click.prevent="mostrarSidebar()">
+								<span class="navbar-toggler-icon"></span>
+							</div>
+							<p class="lead text-justify">Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et 
+							</p>
+						</div>
+						<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+							<p class="lead">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate molestias aspernatur incidunt, veniam tenetur quod explicabo eaque optio, saepe nostrum cupiditate iusto temporibus vero dolorem nihil facilis praesentium corrupti similique.
+							</p>
+						</div>
+						<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+							<p class="lead">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, doloremque temporibus non, illum perspiciatis recusandae ad qui vitae, deserunt esse eos hic repellat. Impedit minima ducimus itaque omnis voluptate ratione.
+							</p>
+						</div>
+						<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+							<p class="lead">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique eum assumenda, ipsam eligendi quibusdam esse animi, ipsum voluptatum, ab porro natus quis maxime rem facere eius reiciendis odio ratione odit.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<script>
+	export default{
+		created(){
+			this.showUser()
+		},
+		data(){
+			return {
+				usuario:{},
+				loading:true,
+				mostrar:true,
+			}
+		},
+		methods:{
+			showUser(){
+				var url ="/profile"
+				axios.get(url).then(res =>{
+					this.usuario = res.data
+					this.loading = false
+				})
+			},
+			mostrarSidebar(){
+				if (this.mostrar == true) {
+					document.getElementById("wrapper").classList.add("toggled")
+					this.mostrar = false
+				}else{
+					document.getElementById("wrapper").classList.remove('toggled')
+					this.mostrar = true
+				}
+
+			}
+		}
+	}
+</script>
+<style>
+#sidebar-wrapper {
+	min-height: 100vh;
+	margin-left: -15rem;
+	-webkit-transition: margin .25s ease-out;
+	-moz-transition: margin .25s ease-out;
+	-o-transition: margin .25s ease-out;
+	transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+	padding: 0.875rem 1.25rem;
+	font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+	width: 15rem;
+}
+
+#page-content-wrapper {
+	min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+	margin-left: 0;
+}
+
+@media (min-width: 768px) {
+	#sidebar-wrapper {
+		margin-left: 0;
+	}
+
+	#page-content-wrapper {
+		min-width: 0;
+		width: 100%;
+	}
+
+	#wrapper.toggled #sidebar-wrapper {
+		margin-left: -15rem;
+	}
+}
+
+</style>

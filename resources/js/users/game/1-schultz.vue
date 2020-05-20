@@ -1,11 +1,44 @@
 <template>
-	<div class="col-12">
-		<div>
+	<div>
+		<spinner v-if="loading"></spinner>
+		<div v-else>
+			<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+				<div class="container">
+					<a class="navbar-brand text-white">Lectura Veloz</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavDropdown">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item px-md-3">
+								<h5 class="mb-0">
+									<a class="nav-link text-warning">{{ usuario.puntos }} Pts.</a>
+								</h5>
+							</li>
+							<li class="nav-item">
+								<img :src="`/imagenes/usuario/${usuario.avatar}`" class="rounded-circle pb-0" height="40" width="40">
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{usuario.name}}
+								</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									<router-link class="dropdown-item" to="/profile">
+										Mi perfil
+									</router-link>
+									<a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión
+									</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
 			<div class="col-12 container-fluid">
 				<button type="button" class="btn btn-dark text-uppercase" onClick="history.back()">Regresar</button>
 			</div>
 			<div class="row" id="vista-primera">
-				<div class="col-md-8 col-sm-12">
+				<div class="col-md-8">
 					<div class="card mb-3">
 						<div class="card-body">
 							<div class="row">
@@ -35,9 +68,9 @@
 								<div class="col-4">Puntos</div>
 							</div>
 							<hr>
-							<div class="row text-center" v-for="(punt, index) in misRecords">
+							<div class="row text-center"v-for="(punt, index) in misRecords">
 								<div class="col-2">{{ index+1 }}</div>
-								<h5 class="col-6 bg-primary text-white">{{ punt.created_at }}</h5>
+								<h5 class="col-6">{{ obtenerFecha(punt.created_at) }}</h5>
 								<div class="col-4">{{ punt.puntuacion }}</div>
 							</div>
 						</div>
@@ -60,192 +93,191 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id="empezando">
-			<div class="col-sm-5 col-md-5">
-				<h5>Puntuacion : {{ puntuacion }}</h5>
+			<div id="empezando">
+				<div class="col-sm-5 col-md-5">
+					<h5>Puntuacion : {{ puntuacion }}</h5>
+				</div>
+				<div class="col-sm-7 col-md-7">
+					<ul id="skill">
+						<li>
+							<span class="bar graphic-design" id="progressBar"></span>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div class="col-sm-7 col-md-7">
-				<ul id="skill">
-					<li>
-						<span class="bar graphic-design" id="progressBar"></span>
-					</li>
-				</ul>
+			<div class="col-12 text-center" id="empezando2">
+				<h4>Buscando : {{ buscando }}</h4>
 			</div>
-		</div>
-		<div class="col-12 text-center" id="empezando2">
-			<h4>Buscando : {{ buscando }}</h4>
-		</div>
-		<div id="temporizador">
-			<div id="numero">{{ contador }}</div>
-		</div>
-		<div class="row">
-			<div v-show="pasos == 1" class="col-md-8 col-sm-12 m-auto" id="tabla1">
-				<table class="table table-bordered fixed-table">
-					<tr>
-						<td class="td" @click="press_1($event)" id="a1"></td>
-						<td class="td" @click="press_1($event)" id="b1"></td>
-						<td class="td" @click="press_1($event)" id="c1"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_1($event)" id="d1"></td>
-						<td class="td" @click="press_1($event)" id="e1"></td>
-						<td class="td" @click="press_1($event)" id="f1"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_1($event)" id="g1"></td>
-						<td class="td" @click="press_1($event)" id="h1"></td>
-						<td class="td" @click="press_1($event)" id="i1"></td>
-					</tr>
-				</table>
+			<div id="temporizador">
+				<div id="numero">{{ contador }}</div>
 			</div>
-			<div v-show="pasos == 2 "class="col-md-8 col-sm-12 m-auto">
-				<table class="table table-bordered fixed-table">
-					<tr>
-						<td class="td" @click="press_2($event)" id="a2"></td>
-						<td class="td" @click="press_2($event)" id="b2"></td>
-						<td class="td" @click="press_2($event)" id="c2"></td>
-						<td class="td" @click="press_2($event)" id="d2"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_2($event)" id="e2"></td>
-						<td class="td" @click="press_2($event)" id="f2"></td>
-						<td class="td" @click="press_2($event)" id="g2"></td>
-						<td class="td" @click="press_2($event)" id="h2"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_2($event)" id="i2"></td>
-						<td class="td" @click="press_2($event)" id="j2"></td>
-						<td class="td" @click="press_2($event)" id="k2"></td>
-						<td class="td" @click="press_2($event)" id="l2"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_2($event)" id="m2"></td>
-						<td class="td" @click="press_2($event)" id="n2"></td>
-						<td class="td" @click="press_2($event)" id="o2"></td>
-						<td class="td" @click="press_2($event)" id="p2"></td>
-					</tr>
-				</table>
-			</div>
-			<div v-show="pasos == 3" class="col-md-8 col-sm-12 m-auto">
-				<table class="table table-bordered fixed-table">
-					<tr>
-						<td class="td" @click="press_3($event)" id="a3"></td>
-						<td class="td" @click="press_3($event)" id="b3"></td>
-						<td class="td" @click="press_3($event)" id="c3"></td>
-						<td class="td" @click="press_3($event)" id="d3"></td>
-						<td class="td" @click="press_3($event)" id="e3"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_3($event)" id="f3"></td>
-						<td class="td" @click="press_3($event)" id="g3"></td>
-						<td class="td" @click="press_3($event)" id="h3"></td>
-						<td class="td" @click="press_3($event)" id="i3"></td>
-						<td class="td" @click="press_3($event)" id="j3"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_3($event)" id="k3"></td>
-						<td class="td" @click="press_3($event)" id="l3"></td>
-						<td class="td" @click="press_3($event)" id="m3"></td>
-						<td class="td" @click="press_3($event)" id="n3"></td>
-						<td class="td" @click="press_3($event)" id="o3"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_3($event)" id="p3"></td>
-						<td class="td" @click="press_3($event)" id="q3"></td>
-						<td class="td" @click="press_3($event)" id="r3"></td>
-						<td class="td" @click="press_3($event)" id="s3"></td>
-						<td class="td" @click="press_3($event)" id="t3"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_3($event)" id="u3"></td>
-						<td class="td" @click="press_3($event)" id="v3"></td>
-						<td class="td" @click="press_3($event)" id="w3"></td>
-						<td class="td" @click="press_3($event)" id="x3"></td>
-						<td class="td" @click="press_3($event)" id="y3"></td>
-					</tr>
-				</table>
-			</div>
-			<div v-show="pasos == 4" class="col-md-8 col-sm-12 m-auto">
-				<table class="table table-bordered fixed-table">
-					<tr>
-						<td class="td" @click="press_4($event)" id="a4"></td>
-						<td class="td" @click="press_4($event)" id="b4"></td>
-						<td class="td" @click="press_4($event)" id="c4"></td>
-						<td class="td" @click="press_4($event)" id="d4"></td>
-						<td class="td" @click="press_4($event)" id="e4"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_4($event)" id="f4"></td>
-						<td class="td" @click="press_4($event)" id="g4"></td>
-						<td class="td" @click="press_4($event)" id="h4"></td>
-						<td class="td" @click="press_4($event)" id="i4"></td>
-						<td class="td" @click="press_4($event)" id="j4"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_4($event)" id="k4"></td>
-						<td class="td" @click="press_4($event)" id="l4"></td>
-						<td class="td" @click="press_4($event)" id="m4"></td>
-						<td class="td" @click="press_4($event)" id="n4"></td>
-						<td class="td" @click="press_4($event)" id="o4"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_4($event)" id="p4"></td>
-						<td class="td" @click="press_4($event)" id="q4"></td>
-						<td class="td" @click="press_4($event)" id="r4"></td>
-						<td class="td" @click="press_4($event)" id="s4"></td>
-						<td class="td" @click="press_4($event)" id="t4"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_4($event)" id="u4"></td>
-						<td class="td" @click="press_4($event)" id="v4"></td>
-						<td class="td" @click="press_4($event)" id="w4"></td>
-						<td class="td" @click="press_4($event)" id="x4"></td>
-						<td class="td" @click="press_4($event)" id="y4"></td>
-					</tr>
-					<tr>
-						<td class="td" @click="press_4($event)" id="z4"></td>
-						<td class="td" @click="press_4($event)" id="za4"></td>
-						<td class="td" @click="press_4($event)" id="zb4"></td>
-						<td class="td" @click="press_4($event)" id="zc4"></td>
-						<td class="td" @click="press_4($event)" id="zd4"></td>
-					</tr>
-				</table>
-			</div>
-			<div v-show="pasos == 5" class="col-md-8  m-auto">
-				<div class="card">
-					<div class="card-body">
-						<div class="col-8 m-auto text-center">
-							<form v-on:submit.prevent="guardarResultado">
+			<div class="row">
+				<div v-show="pasos == 1" class="col-md-8 col-sm-12 m-auto" id="tabla1">
+					<table class="table table-bordered fixed-table">
+						<tr>
+							<td class="td" @click="press_1($event)" id="a1"></td>
+							<td class="td" @click="press_1($event)" id="b1"></td>
+							<td class="td" @click="press_1($event)" id="c1"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_1($event)" id="d1"></td>
+							<td class="td" @click="press_1($event)" id="e1"></td>
+							<td class="td" @click="press_1($event)" id="f1"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_1($event)" id="g1"></td>
+							<td class="td" @click="press_1($event)" id="h1"></td>
+							<td class="td" @click="press_1($event)" id="i1"></td>
+						</tr>
+					</table>
+				</div>
+				<div v-show="pasos == 2 "class="col-md-8 col-sm-12 m-auto">
+					<table class="table table-bordered fixed-table">
+						<tr>
+							<td class="td" @click="press_2($event)" id="a2"></td>
+							<td class="td" @click="press_2($event)" id="b2"></td>
+							<td class="td" @click="press_2($event)" id="c2"></td>
+							<td class="td" @click="press_2($event)" id="d2"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_2($event)" id="e2"></td>
+							<td class="td" @click="press_2($event)" id="f2"></td>
+							<td class="td" @click="press_2($event)" id="g2"></td>
+							<td class="td" @click="press_2($event)" id="h2"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_2($event)" id="i2"></td>
+							<td class="td" @click="press_2($event)" id="j2"></td>
+							<td class="td" @click="press_2($event)" id="k2"></td>
+							<td class="td" @click="press_2($event)" id="l2"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_2($event)" id="m2"></td>
+							<td class="td" @click="press_2($event)" id="n2"></td>
+							<td class="td" @click="press_2($event)" id="o2"></td>
+							<td class="td" @click="press_2($event)" id="p2"></td>
+						</tr>
+					</table>
+				</div>
+				<div v-show="pasos == 3" class="col-md-8 col-sm-12 m-auto">
+					<table class="table table-bordered fixed-table">
+						<tr>
+							<td class="td" @click="press_3($event)" id="a3"></td>
+							<td class="td" @click="press_3($event)" id="b3"></td>
+							<td class="td" @click="press_3($event)" id="c3"></td>
+							<td class="td" @click="press_3($event)" id="d3"></td>
+							<td class="td" @click="press_3($event)" id="e3"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_3($event)" id="f3"></td>
+							<td class="td" @click="press_3($event)" id="g3"></td>
+							<td class="td" @click="press_3($event)" id="h3"></td>
+							<td class="td" @click="press_3($event)" id="i3"></td>
+							<td class="td" @click="press_3($event)" id="j3"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_3($event)" id="k3"></td>
+							<td class="td" @click="press_3($event)" id="l3"></td>
+							<td class="td" @click="press_3($event)" id="m3"></td>
+							<td class="td" @click="press_3($event)" id="n3"></td>
+							<td class="td" @click="press_3($event)" id="o3"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_3($event)" id="p3"></td>
+							<td class="td" @click="press_3($event)" id="q3"></td>
+							<td class="td" @click="press_3($event)" id="r3"></td>
+							<td class="td" @click="press_3($event)" id="s3"></td>
+							<td class="td" @click="press_3($event)" id="t3"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_3($event)" id="u3"></td>
+							<td class="td" @click="press_3($event)" id="v3"></td>
+							<td class="td" @click="press_3($event)" id="w3"></td>
+							<td class="td" @click="press_3($event)" id="x3"></td>
+							<td class="td" @click="press_3($event)" id="y3"></td>
+						</tr>
+					</table>
+				</div>
+				<div v-show="pasos == 4" class="col-md-8 col-sm-12 m-auto">
+					<table class="table table-bordered fixed-table">
+						<tr>
+							<td class="td" @click="press_4($event)" id="a4"></td>
+							<td class="td" @click="press_4($event)" id="b4"></td>
+							<td class="td" @click="press_4($event)" id="c4"></td>
+							<td class="td" @click="press_4($event)" id="d4"></td>
+							<td class="td" @click="press_4($event)" id="e4"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_4($event)" id="f4"></td>
+							<td class="td" @click="press_4($event)" id="g4"></td>
+							<td class="td" @click="press_4($event)" id="h4"></td>
+							<td class="td" @click="press_4($event)" id="i4"></td>
+							<td class="td" @click="press_4($event)" id="j4"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_4($event)" id="k4"></td>
+							<td class="td" @click="press_4($event)" id="l4"></td>
+							<td class="td" @click="press_4($event)" id="m4"></td>
+							<td class="td" @click="press_4($event)" id="n4"></td>
+							<td class="td" @click="press_4($event)" id="o4"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_4($event)" id="p4"></td>
+							<td class="td" @click="press_4($event)" id="q4"></td>
+							<td class="td" @click="press_4($event)" id="r4"></td>
+							<td class="td" @click="press_4($event)" id="s4"></td>
+							<td class="td" @click="press_4($event)" id="t4"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_4($event)" id="u4"></td>
+							<td class="td" @click="press_4($event)" id="v4"></td>
+							<td class="td" @click="press_4($event)" id="w4"></td>
+							<td class="td" @click="press_4($event)" id="x4"></td>
+							<td class="td" @click="press_4($event)" id="y4"></td>
+						</tr>
+						<tr>
+							<td class="td" @click="press_4($event)" id="z4"></td>
+							<td class="td" @click="press_4($event)" id="za4"></td>
+							<td class="td" @click="press_4($event)" id="zb4"></td>
+							<td class="td" @click="press_4($event)" id="zc4"></td>
+							<td class="td" @click="press_4($event)" id="zd4"></td>
+						</tr>
+					</table>
+				</div>
+				<div v-show="pasos == 5" class="col-md-8  m-auto">
+					<div class="card">
+						<div class="card-body">
+							<div class="col-8 m-auto text-center">
 								<h3 class="text-uppercase">Se acabo el tiempo</h3>
 								<img src="imagenes/relogarena.png" alt="" width="60%">
-								<input type="submit"value="Ver resultados" class="btn btn-primary btn-block btn-lg">
-							</form>
+								<div v-if="puntuacion > 0" @click.prevent="guardarJuego()" class="btn btn-primary btn-block btn-lg">Se acabó el tiempo</div>
+								<router-link v-else to="/game" class="btn btn-primary btn-block"> Volver al curso</router-link>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div v-show="pasos == 6" class="col-md-8 col-sm-12 m-auto">
-				<div class="card animated bounceInRight">
-					<div class="card-body">
-						<h3 class="text-center">estos son los resultados</h3><hr>
-						<h4>tiempo : 00:00</h4><hr>
-						<h4>Puntuacion: {{ puntuacion }}</h4><hr>
-						<h4>Aumento: <b>+</b> {{ Math.floor(puntuacion/15) }}</h4><hr>
-						<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block"> Ir al Inicio</router-link>
+				<div v-show="pasos == 6" class="col-md-8 col-sm-12 m-auto">
+					<div class="card animated bounceInRight">
+						<div class="card-body">
+							<h3 class="text-center">Estos son los resultados</h3><hr>
+							<h4>tiempo : 00:00</h4><hr>
+							<h4>Puntuacion: {{ puntuacion }}</h4><hr>
+							<h4 class="text-warning">Aumento: <b>+</b> {{ Math.floor(puntuacion/13) }}</h4><hr>
+							<router-link to="/game" class="btn btn-primary btn-block"> Volver a los ejercicios</router-link>
+							<router-link to="/home" class="btn btn-primary btn-block"> Volver al inicio</router-link>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </template>
 <script>
 	export default{
 		created:function() {
+			this.showUser()
 			this.misPuntuaciones()
 			this.maximaPuntuacion()
-			this.obtener_datos_usuario()
 		},
 		data(){
 			return{
@@ -265,19 +297,23 @@
 				tiempo:100,
 				temporizador_juego:0,
 				puntuacion :0,
-				colores:["#0033CC","#FF6666","#669933","#FFCC33"],
 				tres_segundos:0,
 				contador:3,
 				misRecords:[],
 				maximoPunto:{},
-				perfil_usuario:{}
+				usuario:{},
+				loading:true,
 			}
 		},
 		methods:{
-			obtener_datos_usuario(){
+			obtenerFecha(fecha){
+				return moment(fecha).fromNow()
+			},
+			showUser(){
 				var url ="/profile"
 				axios.get(url).then(res =>{
-					this.perfil_usuario = res.data
+					this.usuario = res.data
+					this.loading = false
 				})
 			},
 			maximaPuntuacion(){
@@ -290,10 +326,10 @@
 					this.misRecords = res.data
 				})
 			},
-			guardarResultado(){
+			guardarJuego(){
 				let formData = new FormData()
 				formData.append('ejercicio_id',1)
-				formData.append('user_id', this.perfil_usuario.id)
+				formData.append('user_id', this.usuario.id)
 				formData.append('puntuacion', this.puntuacion)
 				axios.post('/game',formData)
 				.then(res=>{
@@ -302,24 +338,24 @@
 				})
 			},
 			actualizarDatosUsuario(){
-				var point = Math.floor(this.puntuacion/15)
+				var point = Math.floor(this.puntuacion/13)
 				let data = new FormData();
-				data.append('puntos', this.perfil_usuario.puntos + point);
-				if (this.perfil_usuario.puntos<100) {
+				data.append('puntos', this.usuario.puntos + point);
+				if (this.usuario.puntos<100) {
 					data.append('rango_id', 1);
-				}else if (this.perfil_usuario.puntos >= 100 && this.perfil_usuario.puntos < 500) {
+				}else if (this.usuario.puntos >= 100 && this.usuario.puntos < 500) {
 					data.append('rango_id', 2);
-				}else if (this.perfil_usuario.puntos >= 500 && this.perfil_usuario.puntos < 1000) {
+				}else if (this.usuario.puntos >= 500 && this.usuario.puntos < 1000) {
 					data.append('rango_id', 3);
-				}else if (this.perfil_usuario.puntos >= 1000&& this.perfil_usuario.puntos < 5000) {
+				}else if (this.usuario.puntos >= 1000&& this.usuario.puntos < 5000) {
 					data.append('rango_id', 4);
-				}else if (this.perfil_usuario.puntos >= 5000&& this.perfil_usuario.puntos < 10000) {
+				}else if (this.usuario.puntos >= 5000&& this.usuario.puntos < 10000) {
 					data.append('rango_id', 5);
-				}else if (this.perfil_usuario.puntos > 10000) {
+				}else if (this.usuario.puntos > 10000) {
 					data.append('rango_id', 6);
 				}
 				data.append('_method','PUT');
-				var url = `/profile/${this.perfil_usuario.id}`
+				var url = `/profile/${this.usuario.id}`
 				axios.post(url, data).then(res=>{
 
 				})
@@ -367,8 +403,6 @@
 				for (var i = 0; i <this.desordenar.length; i++) {
 					var dist = document.getElementById(this.ids1[i])
 					dist.innerHTML=this.desordenar[i]
-					var rand = Math.floor(Math.random()*this.colores.length)
-					dist.style.color = this.colores[rand]
 				}
 				this.temporizador_juego = setInterval(this.cronometro,1000);
 			},
@@ -377,8 +411,6 @@
 				for (var i = 0; i <this.desordenar.length; i++) {
 					var dist = document.getElementById(this.ids2[i])
 					dist.innerHTML=this.desordenar[i]
-					var rand = Math.floor(Math.random()*this.colores.length)
-					dist.style.color = this.colores[rand]
 				}
 			},
 			mostrar3(){
@@ -386,8 +418,6 @@
 				for (var i = 0; i <this.desordenar.length; i++) {
 					var dist = document.getElementById(this.ids3[i])
 					dist.innerHTML=this.desordenar[i]
-					var rand = Math.floor(Math.random()*this.colores.length)
-					dist.style.color = this.colores[rand]
 				}
 			},
 			mostrar4(){
@@ -395,8 +425,6 @@
 				for (var i = 0; i <this.desordenar.length; i++) {
 					var dist = document.getElementById(this.ids4[i])
 					dist.innerHTML=this.desordenar[i]
-					var rand = Math.floor(Math.random()*this.colores.length)
-					dist.style.color = this.colores[rand]
 				}
 			},
 			error_Encontrado(encontrado){
@@ -774,6 +802,7 @@
 		},
 		beforeDestroy: function () {
 			clearInterval(this.temporizador_juego)
+			clearInterval(this.tres_segundos)
 		}
 	}
 </script>

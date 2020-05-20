@@ -130,12 +130,12 @@
 		<div class="card">
 			<div class="card-header">
 				<h3 class="card-title">Preguntas <span>{{ contador }}</span> de 10</h3>
-				<a href="#" class="btn btn-success float-right" v-on:click.prevent="crearPregunta()"><i class="fas fa-plus"></i> Crear Nuevo</a>
+				<a class="btn btn-success float-right" id="btn_agragar" @click.prevent="crearPregunta()"><i class="fas fa-plus"></i> Crear Nuevo</a>
 			</div>
 			<spinner v-if="loading"></spinner>
 			<div class="card-body" v-else>
 				<paginate name="preguntas" :list="preguntas" :per="5">
-					<table class="table table-bordered table-striped py-5">
+					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -155,9 +155,8 @@
 									<span><b>D) </b></span>{{ pregunta.respuestaD }}<br>
 								</td>
 								<td>{{ pregunta.esCorrecto }}</td>
-								<td class="float-right" colspan="3">
+								<td class="text-center">
 									<a href="#" class="btn btn-warning color-letra" @click.prevent="editarPregunta(pregunta)"><i class="fas fa-pencil-alt"></i> Editar</a>
-									<a href="#" class="btn btn-danger color-letra" v-on:click.prevent="eliminarPregunta(pregunta,index)"><i class="far fa-trash-alt"></i> Eliminar</a>
 								</td>
 							</tr>
 						</tbody>
@@ -204,6 +203,9 @@
 					this.preguntas = res.data;
 					this.loading = false;
 					this.contador = this.preguntas.length;
+					if (this.contador >= 10 ) {
+						document.getElementById("btn_agragar").classList.add('disabled')
+					}
 				})
 			},
 			crearPregunta(){
@@ -214,6 +216,22 @@
 				if (patron.test(parametro)) {
 					return false
 				}else{return true}
+			},
+			alerta:function(icono,titulo){
+				const Toast = this.$swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 2000,
+					onOpen: (toast) => {
+						toast.addEventListener('mouseenter', this.$swal.stopTimer)
+						toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+					}
+				})
+				Toast.fire({
+					icon: icono,
+					title: titulo
+				})
 			},
 			agregarPregunta(){
 				if (this.validarEspacios(this.pregunta.enunciado)==false||this.validarEspacios(this.pregunta.respuestaA)==false||this.validarEspacios(this.pregunta.respuestaB)==false||this.validarEspacios(this.pregunta.respuestaC)==false||this.validarEspacios(this.pregunta.respuestaD)==false||this.validarEspacios(this.pregunta.esCorrecto)==false) {
@@ -232,6 +250,7 @@
 					if (this.pregunta.esCorrecto == "D") {formData.append('esCorrecto', this.pregunta.respuestaD);}
 					axios.post('/pregunta',formData)
 					.then(res=>{
+						$('#createPregunta').modal('hide');
 						EventBus.$emit('add-pregunta', res.data.pregunta);
 						this.pregunta.enunciado = "";
 						this.pregunta.respuestaA = "";
@@ -240,21 +259,7 @@
 						this.pregunta.respuestaD = "";
 						this.pregunta.esCorrecto = "";
 						this.mostrarPregunta()
-						$('#createPregunta').modal('hide');
-					})
-				}
-			},
-			confirmarDelete(){
-				var resp = confirm("Estas seguro que deseas eliminarlo?");
-				if (resp == true) {
-					return true
-				}else{ return false }
-			},
-			eliminarPregunta:function(pregunta,index){
-				if (this.confirmarDelete()==true) {
-					axios.delete(`/pregunta/${pregunta.id}`)
-					.then(()=>{
-						this.preguntas.splice(index,1); 
+						this.alerta('success','Se a agregado correctamente')
 					})
 				}
 			},
@@ -289,6 +294,7 @@
 					var url = `/pregunta/${fillpregunta.id}`;
 					axios.post(url, data).then(res=>{
 						this.mostrarPregunta();
+						this.alerta('warning','Se a modificado el registro')
 						$('#editarPregunta').modal('hide');
 					})
 				}
@@ -299,6 +305,9 @@
 
 <style>
 .color-letra, .color-letra:hover{
+	color: white;
+}
+#btn_agragar, #btn_agragar:hover{
 	color: white;
 }
 </style>

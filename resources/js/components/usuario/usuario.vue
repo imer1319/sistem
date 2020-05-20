@@ -44,7 +44,7 @@
 						<div class="card card-primary card-outline">
 							<div class="card-body box-profile">
 								<div class="text-center">
-									<img class="profile-user-img img-circle"
+									<img class="profile-user-img rounded"
 									:src="`imagenes/usuario/${usuario.avatar}`" height="120" width="100%">
 								</div>
 								<h3 class="profile-username text-center">{{usuario.name}}</h3>

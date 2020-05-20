@@ -1,8 +1,37 @@
 <template>
-    <spinner v-if="loading"></spinner>
-    <div v-else>
-        <div class="col-12 container-fluid">
-            <button type="button" class="btn btn-dark text-uppercase" onClick="history.back()">Regresar</button>
+    <div>
+        <spinner v-if="loading"></spinner>
+        <div v-else>
+            <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #2B6A88;">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Laravel</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ml-auto">
+                            <li>
+                                <img :src="`/imagenes/usuario/${usuario.avatar}`" class="rounded-circle pb-0" height="40" width="40">
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{usuario.name}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                  <a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión
+                                  </a>
+                                  <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                                  @csrf</form>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </nav>
+          <div class="container-fluid">
+            <router-link class="btn btn-dark text-uppercase" to="/home">
+                Regresar
+            </router-link>
         </div>
         <h3 class="text-center"> Examenes</h3>
         <div class="row container m-auto">
@@ -37,10 +66,12 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 <script>
  export default{
   created() {
+    this.showUser()
     this.mostrarExamen()
     this.mostrar_examen_dado()
 },
@@ -49,9 +80,17 @@ data() {
         examens: [],
         examen_dado:[],
         loading:true,
+        usuario:{}
     }
 },
 methods:{
+    showUser(){
+        var url ="/profile"
+        axios.get(url).then(res =>{
+            this.usuario = res.data
+            this.loading = false;
+        })
+    },
     mostrarExamen(){
         axios.get('exam').then(res =>{
             this.examens = res.data
@@ -63,7 +102,6 @@ methods:{
             this.examen_dado = res.data
         })
     },
-
 }
 }
 </script>

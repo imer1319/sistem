@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card" style="box-shadow: 2px 2px 10px #666;">
-                <div class="text-center mt-3">{{ __('Registrarse') }}</div>
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="text-center mt-3 h3">{{ __('Registrarse') }}</div>
                 <div class="img text-center">
                     <img src="imagenes/logo.png" style="width: 120px; border-radius: 20%; filter: drop-shadow(5px 5px 10px #444);">
                 </div>
@@ -26,22 +26,19 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-10 m-auto">
-                                <input id="apellido_paterno" type="text" class="form-control text-center @error('apellido_paterno') is-invalid @enderror" name="apellido_paterno" value="{{ old('apellido_paterno') }}" autocomplete="apellido_paterno" placeholder="Apellido paterno">
+                            <div class="col-md-5 ml-auto">
+                                <input id="apellido_materno" type="text" class="form-control text-center @error('apellido_materno') is-invalid @enderror" name="apellido_materno" value="{{ old('apellido_materno') }}" autocomplete="name" placeholder="Apellido materno">
 
-                                @error('apellido_paterno')
+                                @error('apellido_materno')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
-                        </div>
+                            <div class="col-md-5 mr-auto">
+                                <input id="apellido_paterno" type="text" class="form-control text-center @error('apellido_paterno') is-invalid @enderror" name="apellido_paterno" value="{{ old('apellido_paterno') }}" autocomplete="apellido_paterno" placeholder="Apellido paterno">
 
-                        <div class="form-group row">
-                            <div class="col-md-10 m-auto">
-                                <input id="apellido_materno" type="text" class="form-control text-center @error('apellido_materno') is-invalid @enderror" name="apellido_materno" value="{{ old('apellido_materno') }}" autocomplete="name" placeholder="Apellido materno">
-
-                                @error('apellido_materno')
+                                @error('apellido_paterno')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -62,7 +59,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-10 m-auto">
+                            <div class="col-md-5 ml-auto">
                                 <input id="password" type="password" class="form-control text-center @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Contraseña">
 
                                 @error('password')
@@ -71,10 +68,8 @@
                                 </span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-10 m-auto">
+                            <div class="col-md-5 mr-auto">
                                 <input id="password-confirm" type="password" class="form-control text-center" name="password_confirmation" required autocomplete="new-password" placeholder="Confirmar Contraseña">
                             </div>
                         </div>

@@ -1,6 +1,39 @@
 <template>
-	<div class="col-12">
-		<div>
+	<div>
+		<spinner v-if="loading"></spinner>
+		<div v-else>
+			<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+				<div class="container">
+					<a class="navbar-brand text-white">Lectura Veloz</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavDropdown">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item px-md-3">
+								<h5 class="mb-0">
+									<a class="nav-link text-warning">{{ usuario.puntos }} Pts.</a>
+								</h5>
+							</li>
+							<li class="nav-item">
+								<img :src="`/imagenes/usuario/${usuario.avatar}`" class="rounded-circle pb-0" height="40" width="40">
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{usuario.name}}
+								</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+									<router-link class="dropdown-item" to="/profile">
+										Mi perfil
+									</router-link>
+									<a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión
+									</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
 			<div class="col-12 container-fluid">
 				<button type="button" class="btn btn-dark text-uppercase" onClick="history.back()">Regresar</button>
 			</div>
@@ -37,7 +70,7 @@
 							<hr>
 							<div class="row text-center" v-for="(punt, index) in misRecords">
 								<div class="col-2">{{ index+1 }}</div>
-								<h5 class="col-6 bg-primary text-white">{{ punt.created_at }}</h5>
+								<h5 class="col-6">{{ obtenerFecha(punt.created_at) }}</h5>
 								<div class="col-4">{{ punt.puntuacion }}</div>
 							</div>
 						</div>
@@ -216,11 +249,10 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="col-8 m-auto text-center">
-							<form v-on:submit.prevent="guardarResultado">
-								<h3 class="text-uppercase">Se acabo el tiempo</h3>
-								<img src="imagenes/relogarena.png" alt="" width="60%">
-								<input type="submit"value="Ver resultados" class="btn btn-primary btn-block btn-lg">
-							</form>
+							<h3 class="text-uppercase">Se acabo el tiempo</h3>
+							<img src="imagenes/relogarena.png" alt="" width="60%">
+							<div v-if="puntuacion > 0" @click.prevent="guardarJuego()" class="btn btn-primary btn-block btn-lg">Se acabó el tiempo</div>
+							<router-link v-else to="/game" class="btn btn-primary btn-block"> Volver al curso</router-link>
 						</div>
 					</div>
 				</div>
@@ -231,10 +263,9 @@
 						<h3 class="text-center">estos son los resultados</h3>
 						<h4>tiempo : 00:00</h4><hr>
 						<h4>Puntuacion: {{ puntuacion }}</h4><hr>
-						<h4>Aumento: <b>+</b> {{ Math.floor(puntuacion/3) }}</h4><hr>
-						<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
-							Ir al Inicio
-						</router-link>
+						<h4>Aumento: <b>+</b> {{ Math.floor(puntuacion/4) }}</h4><hr>
+						<router-link to="/game" class="btn btn-primary btn-block"> Volver a los ejercicios</router-link>
+						<router-link to="/home" class="btn btn-primary btn-block"> Volver al inicio</router-link>
 					</div>
 				</div>
 			</div>
@@ -244,9 +275,9 @@
 <script>
 	export default{
 		created:function() {
+			this.showUser()
 			this.misPuntuaciones()
 			this.maximaPuntuacion()
-			this.obtener_datos_usuario()
 		},
 		data(){
 			return{
@@ -264,20 +295,24 @@
 				tiempo:100,
 				miTiempo:0,
 				puntuacion :0,
-				colores:["#0033CC","#FF6666","#669933","#FFCC33"],
 				miTemporizador:0,
 				contador:3,
 				busca_let:null,
 				misRecords:[],
 				maximoPunto:{},
-				perfil_usuario:{},
+				usuario:{},
+				loading:true
 			}
 		},
 		methods:{
-			obtener_datos_usuario(){
+			obtenerFecha(fecha){
+				return moment(fecha).fromNow()
+			},
+			showUser(){
 				var url ="/profile"
 				axios.get(url).then(res =>{
-					this.perfil_usuario = res.data
+					this.usuario = res.data
+					this.loading = false
 				})
 			},
 			maximaPuntuacion(){
@@ -290,10 +325,10 @@
 					this.misRecords = res.data
 				})
 			},
-			guardarResultado(){
+			guardarJuego(){
 				let formData = new FormData()
 				formData.append('ejercicio_id', 2)
-				formData.append('user_id', this.perfil_usuario.id)
+				formData.append('user_id', this.usuario.id)
 				formData.append('puntuacion', this.puntuacion)
 				axios.post('/game',formData)
 				.then(res=>{
@@ -302,24 +337,25 @@
 				})
 			},
 			actualizarDatosUsuario(){
-				var point = Math.floor(this.puntuacion/3)
+				var point = Math.floor(this.puntuacion/4)
+				this.usuario.puntos += point;
 				let data = new FormData();
-				data.append('puntos', this.perfil_usuario.puntos + point);
-				if (this.fillUsuario.puntos<100) {
+				data.append('puntos', this.usuario.puntos);
+				if (this.usuario.puntos<100) {
 					data.append('rango_id', 1);
-				}else if (this.fillUsuario.puntos >= 100 && this.fillUsuario.puntos < 500) {
+				}else if (this.usuario.puntos >= 100 && this.usuario.puntos < 500) {
 					data.append('rango_id', 2);
-				}else if (this.fillUsuario.puntos >= 500 && this.fillUsuario.puntos < 1000) {
+				}else if (this.usuario.puntos >= 500 && this.usuario.puntos < 1000) {
 					data.append('rango_id', 3);
-				}else if (this.fillUsuario.puntos >= 1000&& this.fillUsuario.puntos < 5000) {
+				}else if (this.usuario.puntos >= 1000&& this.usuario.puntos < 5000) {
 					data.append('rango_id', 4);
-				}else if (this.fillUsuario.puntos >= 5000&& this.fillUsuario.puntos < 10000) {
+				}else if (this.usuario.puntos >= 5000&& this.usuario.puntos < 10000) {
 					data.append('rango_id', 5);
-				}else if (this.fillUsuario.puntos > 10000) {
+				}else if (this.usuario.puntos > 10000) {
 					data.append('rango_id', 6);
 				}
 				data.append('_method','PUT');
-				var url = `/profile/${this.perfil_usuario.id}`
+				var url = `/profile/${this.usuario.id}`
 				axios.post(url, data).then(res=>{
 
 				})
@@ -370,8 +406,6 @@
 				for (var i = 0; i <this.nivel1.length; i++) {
 					var dist = document.getElementById(this.ids1[i])
 					dist.innerHTML=this.nivel1[i]
-					var rand = Math.floor(Math.random()*this.colores.length)
-					dist.style.color = this.colores[rand]
 				}
 				this.miTiempo = setInterval(this.cronometro,1000);
 			},
@@ -380,8 +414,6 @@
 				for (var i = 0; i <this.nivel2.length; i++) {
 					var dist = document.getElementById(this.ids2[i])
 					dist.innerHTML=this.nivel2[i]
-					var rand = Math.floor(Math.random()*this.colores.length)
-					dist.style.color = this.colores[rand]
 				}
 			},
 			mostrar3(){
@@ -389,8 +421,6 @@
 				for (var i = 0; i <this.nivel3.length; i++) {
 					var dist = document.getElementById(this.ids3[i])
 					dist.innerHTML=this.nivel3[i]
-					var rand = Math.floor(Math.random()*this.colores.length)
-					dist.style.color = this.colores[rand]
 				}
 			},
 			mostrar4(){
@@ -398,8 +428,6 @@
 				for (var i = 0; i <this.nivel4.length; i++) {
 					var dist = document.getElementById(this.ids4[i])
 					dist.innerHTML=this.nivel4[i]
-					var rand = Math.floor(Math.random()*this.colores.length)
-					dist.style.color = this.colores[rand]
 				}
 			},
 			error_Encontrado(encontrado){

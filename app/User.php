@@ -5,6 +5,7 @@ use App\Role;
 use App\Insignia;
 use App\Ejercicio;
 use App\Exam;
+use App\Rango;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,32 +13,35 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    public function rangos()
+    {
+        return $this->belongsTo(App\Rango)
+        ->withTimestamps();
+    }
     public function exams()
     {
-         return $this->belongsToMany('App\Exam','exam_user')
-        ->withPivot('ppm','tiempo','comprension','estado','created_at');
-    }
+       return $this->belongsToMany('App\Exam','exam_user')
+       ->withPivot('ppm','tiempo','comprension','estado','created_at');
+   }
 
-    public function ejercicios()
-    {
-        return $this->belongsToMany(Ejercicio::class)
-        ->withTimestamps();
-    }
+   public function ejercicios()
+   {
+    return $this->belongsToMany(Ejercicio::class)
+    ->withTimestamps();
+}
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class)
-        ->withTimestamps();
-    }
-
+public function roles()
+{
+    return $this->belongsToMany(Role::class)
+    ->withTimestamps();
+}
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','apellido_paterno','apellido_materno','curso','avatar','puntos','rango_id'
+        'name', 'email', 'password','apellido_paterno','apellido_materno','avatar','puntos','rango_id','avance_curso','ppm_inicial','comprension_inicial'
     ];
 
     /**

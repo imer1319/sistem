@@ -1,223 +1,251 @@
 <template>
-	<div class="col-12">
-		<spinner v-if="loading"></spinner>
-		<div class="row" v-else>
-			<div class="col-12 container-fluid">
-				<button type="button" class="btn btn-dark text-uppercase" onClick="history.back()">Regresar</button>
+    <div>
+        <spinner v-if="loading"></spinner>
+        <div v-else>
+            <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+                <div class="container">
+                    <a class="navbar-brand text-white">Lectura Veloz</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item px-md-3">
+                                <h5 class="mb-0">
+                                    <a class="nav-link text-warning">{{ usuario.puntos }} Pts.</a>
+                                </h5>
+                            </li>
+                            <li class="nav-item">
+                                <img :src="`/imagenes/usuario/${usuario.avatar}`" class="rounded-circle pb-0" height="40" width="40">
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{usuario.name}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <router-link class="dropdown-item" to="/profile">
+                                        Mi perfil
+                                    </router-link>
+                                    <a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+			<div class="container-fluid">
+				<router-link class="btn btn-dark text-uppercase" to="/home">
+					Regresar
+				</router-link>
 			</div>
-			<div class="col-sm-12 col-md-6 mb-3">
-				<div class="card sombra">
-					<div class="card-widget widget-user">
-						<div class="widget-user-header bg-info">
-							<h3 class="widget-user-username">{{ usuario.name }}</h3>
-							<h5 class="widget-user-desc">Estudiante</h5>
-						</div>
-						<div class="widget-user-image cont">
-							<img class="img-circle elevation-2" :src="`/imagenes/usuario/${usuario.avatar}`">
-							<a @click.prevent="editarAvatar()"><i class="fas fa-camera"></i></a>
-						</div>
-						<form v-on:submit.prevent="updateAvatar(fillUsuario)" enctype="multipart/form-data">
-							<div class="modal fade" id="editAvatar">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Editar Avatar</h5>
-										</div>
-										<div class="modal-body">
-											<div class="form-group">
-												<div class="form-group">
-													<input type="file" @change="obtenerImagenNueva" class="form-control-file" ref="img" accept="image/*" required>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12 col-md-6 mb-3">
+						<div class="card sombra">
+							<div class="card-widget widget-user">
+								<div class="widget-user-header bg-info">
+									<h3 class="widget-user-username">{{ usuario.name }}</h3>
+									<h5 class="widget-user-desc">Estudiante</h5>
+								</div>
+								<div class="widget-user-image cont">
+									<img class="img-circle elevation-2" :src="`/imagenes/usuario/${usuario.avatar}`">
+									<a @click.prevent="editarAvatar()"><i class="fas fa-camera"></i></a>
+								</div>
+								<form v-on:submit.prevent="updateAvatar(fillUsuario)" enctype="multipart/form-data">
+									<div class="modal fade" id="editAvatar">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Editar Avatar</h5>
 												</div>
-												<figure>
-													<img width="200" height="200" :src="imagen" v-show="estado == true" accept="image/*">
-												</figure>
-											</div>
-										</div>
-										<div class="modal-footer">
-											<input type="submit" name="enviar" class="btn btn-primary" value="Guardar Cambios">
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="card-footer profundidad">
-						<div class="row">
-							<div class="col-sm-4 border-right">
-								<div class="description-block">
-									<h5 class="description-header">
-										{{ usuario.apellido_paterno }} {{ usuario.apellido_materno }}
-									</h5>
-									<span class="description-text">APELLIDOS</span>
-								</div>
-							</div>
-							<div class="col-sm-4 border-right">
-								<div class="description-block">
-									<h5 class="description-header">{{ usuario.puntos }}</h5>
-									<span class="description-text">Puntuacion</span>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="description-block">
-									<h5 class="description-header">{{ usuario.curso }}</h5>
-									<span class="description-text">CURSO</span>
-								</div>
-							</div>
-							<div class="col-6">
-								<div class="description-block">
-									<h5 class="description-header">
-										<span v-if="inicializando">
-											{{ inicializando.pivot.ppm }} ppm
-										</span>
-										<span v-else>
-											0
-										</span>
-									</h5>
-									<span class="description-text">VELOCIDAD INICIAL</span>
-								</div>
-							</div>
-							<div class="col-6">
-								<div class="description-block">
-									<h5 class="description-header">
-										<span v-if="inicializando">
-											{{ inicializando.pivot.comprension }} %
-										</span>
-										<span v-else>
-											0
-										</span>
-									</h5>
-									<span class="description-text">COMPRENSION INICIAL</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-12 col-md-6">
-				<div class="card sombra ">
-					<div class="card-header p-2">
-						<ul class="nav nav-pills">
-							<li class="nav-item"><a class="nav-link active" href="#rango" data-toggle="tab">Rangos</a></li>
-							<li class="nav-item"><a class="nav-link" href="#datos" data-toggle="tab"
-								@click="editarUsuario()">Datos</a></li>
-							</ul>
-						</div>
-						<div class="card-body">
-							<div class="tab-content">
-								<div class="tab-pane active " id="rango">
-									<div class="text-center">
-										<div v-for="rango in rangos">
-											<div v-if="usuario.puntos < 100">
-												<div v-if="rango.nombre == 'rango #1'">
-													<div class="text-center">
-														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
-														<h3><b>I</b></h3>
+												<div class="modal-body">
+													<div class="form-group">
+														<div class="form-group">
+															<input type="file" @change="obtenerImagenNueva" class="form-control-file" ref="img" accept="image/*" required>
+														</div>
+														<figure>
+															<img width="200" height="200" :src="imagen" v-show="estado == true" accept="image/*">
+														</figure>
 													</div>
 												</div>
-											</div>
-											<div v-if="usuario.puntos >= 100 && usuario.puntos <500">
-												<div v-if="rango.nombre == 'rango #2'">
-													<div class="text-center">
-														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
-														<h3><b>II</b></h3>
-													</div>
-												</div>
-											</div>
-											<div v-if="usuario.puntos >= 500 && usuario.puntos <1000">
-												<div v-if="rango.nombre == 'rango #3'">
-													<div class="text-center">
-														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
-														<h3><b>III</b></h3>
-													</div>
-												</div>
-											</div>
-											<div v-if="usuario.puntos >= 1000 && usuario.puntos < 5000">
-												<div v-if="rango.nombre == 'rango #4'">
-													<div class="text-center">
-														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
-														<h3><b>IV</b></h3>
-													</div>
-												</div>
-											</div>
-											<div v-if="usuario.puntos >= 5000 && usuario.puntos < 10000">
-												<div v-if="rango.nombre == 'rango #5'">
-													<div class="text-center">
-														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
-														<h3><b>V</b></h3>
-													</div>
-												</div>
-											</div>
-											<div v-if="usuario.puntos >=10000">
-												<div v-if="rango.nombre == 'rango #6'">
-													<div class="text-center">
-														<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
-														<h3><b>VI</b></h3>
-													</div>
+												<div class="modal-footer">
+													<input type="submit" name="enviar" class="btn btn-primary" value="Guardar Cambios">
 												</div>
 											</div>
 										</div>
 									</div>
+								</form>
+							</div>
+							<div class="card-footer profundidad">
+								<div class="row">
+									<div class="col-sm-4 border-right">
+										<div class="description-block">
+											<h5 class="description-header">
+												{{ usuario.apellido_paterno }} {{ usuario.apellido_materno }}
+											</h5>
+											<span class="description-text">APELLIDOS</span>
+										</div>
+									</div>
+									<div class="col-sm-4 border-right">
+										<div class="description-block">
+											<h5 class="description-header font-weight-bold">{{ usuario.puntos }}</h5>
+											<span class="description-text">Puntos</span>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="description-block">
+											<h5 class="description-header">{{ usuario.curso }}</h5>
+											<span class="description-text">CURSO</span>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="description-block">
+											<h5 class="description-header">
+												<span>{{ usuario.ppm_inicial }}</span>
+											</h5>
+											<span class="description-text">VELOCIDAD INICIAL</span>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="description-block">
+											<h5 class="description-header">
+												<span>{{ usuario.comprension_inicial }}</span>
+											</h5>
+											<span class="description-text">COMPRENSION INICIAL</span>
+										</div>
+									</div>
 								</div>
-								<div class="tab-pane" id="datos">
-									<div class="row">
-										<div class="col-sm-12">
-											<form v-on:submit.prevent="updateUsuario(fillUsuario)" enctype="multipart/form-data">
-												<div class="form-group row">
-													<label class="col-form-label col-md-3">Nombre</label>
-													<div class="col-md-8">
-														<input type="text"  class="form-control" v-model="fillUsuario.name" placeholder="Escriba su nombre" required>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-6">
+						<div class="card sombra ">
+							<div class="card-header p-2">
+								<ul class="nav nav-pills">
+									<li class="nav-item"><a class="nav-link active" href="#rango" data-toggle="tab">Rangos</a></li>
+									<li class="nav-item"><a class="nav-link" href="#datos" data-toggle="tab"
+										@click="editarUsuario()">Datos</a></li>
+									</ul>
+								</div>
+								<div class="card-body">
+									<div class="tab-content">
+										<div class="tab-pane active " id="rango">
+											<div class="text-center">
+												<div v-for="rango in rangos">
+													<div v-if="usuario.puntos < 100">
+														<div v-if="rango.nombre == 'Rango #1'">
+															<div class="text-center">
+																<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
+																<h3><b>Bronce</b></h3>
+															</div>
+														</div>
+													</div>
+													<div v-if="usuario.puntos >= 100 && usuario.puntos <500">
+														<div v-if="rango.nombre == 'Rango #2'">
+															<div class="text-center">
+																<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
+																<h3><b>Plata</b></h3>
+															</div>
+														</div>
+													</div>
+													<div v-if="usuario.puntos >= 500 && usuario.puntos <1000">
+														<div v-if="rango.nombre == 'Rango #3'">
+															<div class="text-center">
+																<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
+																<h3><b>Oro</b></h3>
+															</div>
+														</div>
+													</div>
+													<div v-if="usuario.puntos >= 1000 && usuario.puntos < 5000">
+														<div v-if="rango.nombre == 'Rango #4'">
+															<div class="text-center">
+																<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
+																<h3><b>Platino</b></h3>
+															</div>
+														</div>
+													</div>
+													<div v-if="usuario.puntos >= 5000 && usuario.puntos < 10000">
+														<div v-if="rango.nombre == 'Rango #5'">
+															<div class="text-center">
+																<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
+																<h3><b>Diamante</b></h3>
+															</div>
+														</div>
+													</div>
+													<div v-if="usuario.puntos >=10000">
+														<div v-if="rango.nombre == 'Rango #6'">
+															<div class="text-center">
+																<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
+																<h3><b>Campeones</b></h3>
+															</div>
+														</div>
 													</div>
 												</div>
-												<div class="form-group row">
-													<label class="col-form-label col-md-3">Apellido Paterno</label>
-													<div class="col-md-8">
-														<input type="text" class="form-control" v-model="fillUsuario.apellido_paterno" placeholder="Apellido paterno">
-													</div>
+											</div>
+										</div>
+										<div class="tab-pane" id="datos">
+											<div class="row">
+												<div class="col-sm-12">
+													<form v-on:submit.prevent="updateUsuario(fillUsuario)" enctype="multipart/form-data">
+														<div class="form-group row">
+															<label class="col-form-label col-md-3">Nombre</label>
+															<div class="col-md-8">
+																<input type="text"  class="form-control" v-model="fillUsuario.name" placeholder="Escriba su nombre" required>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-form-label col-md-3">Apellido Paterno</label>
+															<div class="col-md-8">
+																<input type="text" class="form-control" v-model="fillUsuario.apellido_paterno" placeholder="Apellido paterno">
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-form-label col-md-3">Apellido Materno</label>
+															<div class="col-md-8">
+																<input type="text"class="form-control" v-model="fillUsuario.apellido_materno" placeholder="Apellido materno">
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-form-label col-md-3">Curso</label>
+															<div class="col-md-4">
+																<select v-model="fillUsuario.curso" class="form-control">
+																	<option disabled value="">Seleccione el curso</option>
+																	<option>1° A</option>
+																	<option>1° B</option>
+																	<option>1° C</option>
+																	<option>1° D</option>
+																	<option>2° A</option>
+																	<option>2° B</option>
+																	<option>2° C</option>
+																	<option>2° D</option>
+																	<option>3° A</option>
+																	<option>3° B</option>
+																	<option>3° C</option>
+																	<option>3° D</option>
+																	<option>4° A</option>
+																	<option>4° B</option>
+																	<option>4° C</option>
+																	<option>4° D</option>
+																	<option>5° A</option>
+																	<option>5° B</option>
+																	<option>5° C</option>
+																	<option>5° D</option>
+																	<option>6° A</option>
+																	<option>6° B</option>
+																	<option>6° C</option>
+																	<option>6° D</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group row">
+															<div class="offset-sm-2 col-sm-10">
+																<button type="submit" class="btn btn-primary text-white">Actualizar</button>
+															</div>
+														</div>
+													</form>
 												</div>
-												<div class="form-group row">
-													<label class="col-form-label col-md-3">Apellido Materno</label>
-													<div class="col-md-8">
-														<input type="text"class="form-control" v-model="fillUsuario.apellido_materno" placeholder="Apellido materno">
-													</div>
-												</div>
-												<div class="form-group row">
-													<label class="col-form-label col-md-3">Curso</label>
-													<div class="col-md-4">
-														<select v-model="fillUsuario.curso" class="form-control">
-															<option disabled value="">Seleccione el curso</option>
-															<option>1° A</option>
-															<option>1° B</option>
-															<option>1° C</option>
-															<option>1° D</option>
-															<option>2° A</option>
-															<option>2° B</option>
-															<option>2° C</option>
-															<option>2° D</option>
-															<option>3° A</option>
-															<option>3° B</option>
-															<option>3° C</option>
-															<option>3° D</option>
-															<option>4° A</option>
-															<option>4° B</option>
-															<option>4° C</option>
-															<option>4° D</option>
-															<option>5° A</option>
-															<option>5° B</option>
-															<option>5° C</option>
-															<option>5° D</option>
-															<option>6° A</option>
-															<option>6° B</option>
-															<option>6° C</option>
-															<option>6° D</option>
-														</select>
-													</div>
-												</div>
-												<div class="form-group row">
-													<div class="offset-sm-2 col-sm-10">
-														<button type="submit" class="btn btn-success">Actualizar</button>
-													</div>
-												</div>
-											</form>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -231,7 +259,6 @@
 	<script>
 		export default{
 			created() {
-				this.puntuaciones_iniciales()
 				this.showUser()
 				this.showRango()
 			},
@@ -247,22 +274,14 @@
 					selected:'',
 					cursos:'',
 					seccion:'',
-					inicializando:{},
 				}
 			},
 			methods:{
-				puntuaciones_iniciales(){
-					var url ="/inicializando"
-					axios.get(url).then(res =>{
-						this.inicializando = res.data
-						this.loading = false;
-					})
-				},
 				showUser(){
 					var url ="/profile"
 					axios.get(url).then(res =>{
 						this.usuario = res.data
-						this.loading = false;
+						this.loading = false
 					})
 				},
 				showRango(){

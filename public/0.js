@@ -179,7 +179,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -234,6 +233,10 @@ __webpack_require__.r(__webpack_exports__);
         _this2.preguntas = res.data;
         _this2.loading = false;
         _this2.contador = _this2.preguntas.length;
+
+        if (_this2.contador >= 10) {
+          document.getElementById("btn_agragar").classList.add('disabled');
+        }
       });
     },
     crearPregunta: function crearPregunta() {
@@ -248,8 +251,26 @@ __webpack_require__.r(__webpack_exports__);
         return true;
       }
     },
-    agregarPregunta: function agregarPregunta() {
+    alerta: function alerta(icono, titulo) {
       var _this3 = this;
+
+      var Toast = this.$swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        onOpen: function onOpen(toast) {
+          toast.addEventListener('mouseenter', _this3.$swal.stopTimer);
+          toast.addEventListener('mouseleave', _this3.$swal.resumeTimer);
+        }
+      });
+      Toast.fire({
+        icon: icono,
+        title: titulo
+      });
+    },
+    agregarPregunta: function agregarPregunta() {
+      var _this4 = this;
 
       if (this.validarEspacios(this.pregunta.enunciado) == false || this.validarEspacios(this.pregunta.respuestaA) == false || this.validarEspacios(this.pregunta.respuestaB) == false || this.validarEspacios(this.pregunta.respuestaC) == false || this.validarEspacios(this.pregunta.respuestaD) == false || this.validarEspacios(this.pregunta.esCorrecto) == false) {
         alert("los campos no pueden estar vacios");
@@ -279,35 +300,18 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         axios.post('/pregunta', formData).then(function (res) {
-          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('add-pregunta', res.data.pregunta);
-          _this3.pregunta.enunciado = "";
-          _this3.pregunta.respuestaA = "";
-          _this3.pregunta.respuestaB = "";
-          _this3.pregunta.respuestaC = "";
-          _this3.pregunta.respuestaD = "";
-          _this3.pregunta.esCorrecto = "";
-
-          _this3.mostrarPregunta();
-
           $('#createPregunta').modal('hide');
-        });
-      }
-    },
-    confirmarDelete: function confirmarDelete() {
-      var resp = confirm("Estas seguro que deseas eliminarlo?");
+          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('add-pregunta', res.data.pregunta);
+          _this4.pregunta.enunciado = "";
+          _this4.pregunta.respuestaA = "";
+          _this4.pregunta.respuestaB = "";
+          _this4.pregunta.respuestaC = "";
+          _this4.pregunta.respuestaD = "";
+          _this4.pregunta.esCorrecto = "";
 
-      if (resp == true) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    eliminarPregunta: function eliminarPregunta(pregunta, index) {
-      var _this4 = this;
+          _this4.mostrarPregunta();
 
-      if (this.confirmarDelete() == true) {
-        axios["delete"]("/pregunta/".concat(pregunta.id)).then(function () {
-          _this4.preguntas.splice(index, 1);
+          _this4.alerta('success', 'Se a agregado correctamente');
         });
       }
     },
@@ -358,6 +362,8 @@ __webpack_require__.r(__webpack_exports__);
         axios.post(url, data).then(function (res) {
           _this5.mostrarPregunta();
 
+          _this5.alerta('warning', 'Se a modificado el registro');
+
           $('#editarPregunta').modal('hide');
         });
       }
@@ -378,6 +384,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _event_bus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../event-bus */ "./resources/js/event-bus.js");
 /* harmony import */ var _examens_preguntaComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../examens/preguntaComponent.vue */ "./resources/js/components/examens/preguntaComponent.vue");
+//
 //
 //
 //
@@ -463,7 +470,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.color-letra, .color-letra:hover{\r\n\tcolor: white;\n}\r\n", ""]);
+exports.push([module.i, "\n.color-letra, .color-letra:hover{\r\n\tcolor: white;\n}\n#btn_agragar, #btn_agragar:hover{\r\n\tcolor: white;\n}\r\n", ""]);
 
 // exports
 
@@ -482,7 +489,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.profile-user-img {\n\theight: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.profile-user-img {\r\n\theight: 100px;\n}\r\n", ""]);
 
 // exports
 
@@ -1112,7 +1119,7 @@ var render = function() {
             "a",
             {
               staticClass: "btn btn-success float-right",
-              attrs: { href: "#" },
+              attrs: { id: "btn_agragar" },
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -1136,9 +1143,7 @@ var render = function() {
                   [
                     _c(
                       "table",
-                      {
-                        staticClass: "table table-bordered table-striped py-5"
-                      },
+                      { staticClass: "table table-bordered table-hover" },
                       [
                         _c("thead", [
                           _c("tr", [
@@ -1189,58 +1194,27 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(pregunta.esCorrecto))]),
                               _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "float-right",
-                                  attrs: { colspan: "3" }
-                                },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass:
-                                        "btn btn-warning color-letra",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.editarPregunta(pregunta)
-                                        }
+                              _c("td", { staticClass: "text-center" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-warning color-letra",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.editarPregunta(pregunta)
                                       }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-pencil-alt"
-                                      }),
-                                      _vm._v(" Editar")
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-danger color-letra",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.eliminarPregunta(
-                                            pregunta,
-                                            index
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "far fa-trash-alt"
-                                      }),
-                                      _vm._v(" Eliminar")
-                                    ]
-                                  )
-                                ]
-                              )
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-pencil-alt"
+                                    }),
+                                    _vm._v(" Editar")
+                                  ]
+                                )
+                              ])
                             ])
                           }),
                           0
@@ -1359,15 +1333,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-12" }, [
-      _c(
-        "div",
-        { staticClass: "card card-primary card-outline" },
-        [
-          _vm.loading
-            ? _c("spinner")
-            : _c("div", { staticClass: "card-body box-profile" }, [
+  return _c(
+    "div",
+    { staticClass: "row" },
+    [
+      _vm.loading
+        ? _c("spinner")
+        : _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "card card-primary card-outline" }, [
+              _c("div", { staticClass: "card-body box-profile" }, [
                 _c("div", { staticClass: "text-center" }, [
                   _c("img", {
                     staticClass:
@@ -1384,13 +1358,13 @@ var render = function() {
                 _vm._v(" "),
                 _c("p", { staticClass: "text-justify", attrs: { id: "test" } })
               ])
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-12" }, [_c("pregunta")], 1)
-  ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [_c("pregunta")], 1)
+          ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

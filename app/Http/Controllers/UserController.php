@@ -58,14 +58,14 @@ class UserController extends Controller
     {
         if($request->ajax())
         {
-           $user = auth()->user()->id;
-           $usuario = User::find($user);
-           return $usuario->exams;
-       }
-       return view('home');
-   }
-   public function examendado(Request $request, $id)
-   {
+         $user = auth()->user()->id;
+         $usuario = User::find($user);
+         return $usuario->exams;
+     }
+     return view('home');
+ }
+ public function examendado(Request $request, $id)
+ {
     if($request->ajax())
     {
         $user = auth()->user()->id;
@@ -184,12 +184,14 @@ public function rankingMundial(Request $request)
 {
     if($request->ajax())
     {
-     $rol = Role::find(2);
-     return $rol->users()
-     ->orderby('puntos','desc')
-     ->get();
- }
- return view('home');
+       $rol = Role::find(2);
+       
+       return $rol->users()
+       ->select('name','puntos','avatar','id')
+       ->orderBy('puntos', 'desc')
+       ->get();
+   }
+   return view('home');
 }
 public function miIdAuth(Request $request)
 {

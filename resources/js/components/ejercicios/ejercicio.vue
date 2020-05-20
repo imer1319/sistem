@@ -63,13 +63,13 @@
 		<!-- listar las ejercicios -->
 		<div class="card">
 			<div class="card-header">
-				<h3 class="card-title">ejercicios</h3>
-				<a href="#" class="btn btn-success float-right" v-on:click="crearEjercicio()"><i class="fas fa-plus"></i> Crear Nuevo</a>
+				<h2 class="card-title">Ejercicios</h2>
+				<a class="btn btn-success float-right text-white" v-on:click="crearEjercicio()"><i class="fas fa-plus"></i> Crear Nuevo</a>
 			</div>
 			<spinner v-if="loading"></spinner>
 			<div class="card-body" v-else>
 				<paginate name="ejercicios" :list="ejercicios" :per="5">
-					<table class="table table-bordered table-striped py-5">
+					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -79,10 +79,10 @@
 						</thead>
 						<tbody>
 							<tr v-for="(ejercicio, index) in paginated('ejercicios')" :key="index" >
-								<td width="10px">{{ index+1}}</td>
+								<td>{{ index+1}}</td>
 								<td>{{ejercicio.name}}</td>
-								<td class="float-right">
-									<a href="#" class="btn btn-warning" @click="editarEjercicio(ejercicio)"><i class="fas fa-pencil-alt"></i> Editar</a>
+								<td class="text-center">
+									<a class="btn btn-warning text-white" @click="editarEjercicio(ejercicio)"><i class="fas fa-pencil-alt"></i> Editar</a>
 								</td>
 							</tr>
 						</tbody>
@@ -124,6 +124,22 @@
 			crearEjercicio(){
 				$('#createEjercicio').modal('show');			
 			},
+			alerta:function(icono,titulo){
+				const Toast = this.$swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 2000,
+					onOpen: (toast) => {
+						toast.addEventListener('mouseenter', this.$swal.stopTimer)
+						toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+					}
+				})
+				Toast.fire({
+					icon: icono,
+					title: titulo
+				})
+			},
 			validarEspacios(parametro){
 				var patron = /^\s+$/;
 				if (patron.test(parametro)) {
@@ -145,6 +161,7 @@
 					data.append('_method','PUT')
 					var url = `/ejercicio/${fillEjercicio.id}`
 					axios.post(url, data).then(res=>{
+						this.alerta('warning','Se a modificado el registro')
 						this.mostrarEjercicio()
 						$('#editarEjercicio').modal('hide')
 					})
@@ -157,6 +174,7 @@
 				.then(res=>{
 					EventBus.$emit('agregado', res.data.ejercicio)
 					this.ejercicio.name = ""
+					this.alerta('success','Se a agregado correctamente')
 					$('#createEjercicio').modal('hide')
 				})
 			},
