@@ -41,8 +41,8 @@
 			</div>
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-5 col-sm-12 mb-3 mt-2">
-						<div v-for="(ran, index) in rankings" 
+					<div class="col-md-5  mb-3 mt-2">
+						<div v-for="(ran, index) in rankings" :key="index"
 						v-if="ran.id == usuario.id" 
 						class="text-center mb-3">
 						<div class="card">
@@ -59,7 +59,7 @@
 											<h5 class="description-header text-warning">
 												<b># {{ index+1 }}</b>
 											</h5>
-											<h5 class="description-text text-muted"><b>Ranking</b></h5>
+											<h5 class="description-text text-muted"><b>Puesto</b></h5>
 										</div>
 									</div>
 									<div class="col-6">
@@ -85,32 +85,32 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>nombre</th>
-										<th>curso</th>
+										<th>Nombre</th>
+										<th>Rango</th>
 										<th>Puntos</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="(ran, index) in rankings" v-if="index < 10">
+									<tr v-for="(ran, index) in rankings" :key="index" v-if="index < 10">
 										<td>{{ index+1 }}</td>
 										<td><img :src="`/imagenes/usuario/${ran.avatar}`" width="50" height="50" class="img-responsive rounded-circle"> {{ ran.name }}</td>
 										<td>
 											<span v-if="ran.puntos <100">
 												<img :src="rangos.rango1" height="50" width="50">
 											</span>
-											<span v-if="usuario.puntos >= 100 && usuario.puntos <500">
+											<span v-else-if="usuario.puntos >= 100 && usuario.puntos <500">
 												<img :src="rangos.rango2" height="50" width="50">
 											</span>
-											<span v-if="usuario.puntos >= 500 && usuario.puntos <1000">
+											<span v-else-if="usuario.puntos >= 500 && usuario.puntos <1000">
 												<img :src="rangos.rango3" height="50" width="50">
 											</span>
-											<span v-if="usuario.puntos >= 1000 && usuario.puntos < 5000">
+											<span v-else-if="usuario.puntos >= 1000 && usuario.puntos < 5000">
 												<img :src="rangos.rango4" height="50" width="50">
 											</span>
-											<span v-if="usuario.puntos >= 5000 && usuario.puntos < 10000">
+											<span v-else-if="usuario.puntos >= 5000 && usuario.puntos < 10000">
 												<img :src="rangos.rango5" height="50" width="50">
 											</span>
-											<span v-if="usuario.puntos >=10000">
+											<span v-else-if="usuario.puntos >=10000">
 												<img :src="rangos.rango6" height="50" width="50">
 											</span>
 										</td>
@@ -138,6 +138,7 @@
 				loading:true,
 				usuario:{},
 				rango_usuario:{},
+				posicion:{},
 				rangos:{
 					rango1: '/imagenes/rangos/1-bronce.png',
 					rango2: '/imagenes/rangos/2-plata.png',

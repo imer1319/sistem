@@ -30,6 +30,8 @@ Route::resource('usuario','UsuarioController')->except(['index']);
 Route::get('numero_usuarios','AdminController@count_users');
 Route::get('numero_examenes','AdminController@count_examen');
 Route::get('numero_ejercicios','AdminController@count_ejercicio');
+Route::get('mayor_velocidad','AdminController@mayor_velocidad');
+Route::get('mayor_puntuacion','AdminController@mayor_puntuacion');
 // rutas para el usuario
 Route::get('/exam','UserController@examen');
 Route::get('examen_dado','UserController@examenes_dados');
@@ -67,4 +69,5 @@ Route::get('parpadeo','UserController@game');
 Route::get('vertical','UserController@game');
 Route::get('horizontal','UserController@game');
 Route::get('aleatorio','UserController@game');
+Route::get('piramide','UserController@game');
 

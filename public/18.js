@@ -354,8 +354,39 @@ __webpack_require__.r(__webpack_exports__);
         _this4.pasos = 6;
       });
     },
+    dibujarEstrellas: function dibujarEstrellas(numero, titulo) {
+      var stars = "";
+
+      for (var i = 0; i < 5; i++) {
+        if (i < numero) {
+          stars += "<span><i class='fas fa-star'></i></span>";
+        } else {
+          stars += "<span><i class='far fa-star'></i></span>";
+        }
+      }
+
+      var astro = document.getElementById("estrellas");
+      astro.innerHTML = stars;
+      astro.innerHTML += titulo;
+    },
     actualizarDatosUsuario: function actualizarDatosUsuario() {
-      var point = Math.floor(this.puntuacion / 4);
+      var stars = 0;
+      var minimo = 23;
+      var titulo = '';
+
+      for (var i = 1; i <= 5; i++) {
+        if (this.puntuacion >= minimo * i) {
+          stars = i;
+          titulo = ' ' + i + ' / ' + 5;
+        } else {
+          stars = i - 1;
+          titulo = ' ' + (i - 1) + ' / ' + 5;
+          break;
+        }
+      }
+
+      this.dibujarEstrellas(stars, titulo);
+      var point = Math.floor(this.puntuacion / 7);
       this.usuario.puntos += point;
       var data = new FormData();
       data.append('puntos', this.usuario.puntos);
@@ -3089,16 +3120,16 @@ var render = function() {
                     _vm._v("estos son los resultados")
                   ]),
                   _vm._v(" "),
-                  _c("h4", [_vm._v("tiempo : 00:00")]),
+                  _vm._m(2),
                   _c("hr"),
                   _vm._v(" "),
                   _c("h4", [_vm._v("Puntuacion: " + _vm._s(_vm.puntuacion))]),
                   _c("hr"),
                   _vm._v(" "),
-                  _c("h4", [
+                  _c("h4", { staticClass: "text-warning" }, [
                     _vm._v("Aumento: "),
                     _c("b", [_vm._v("+")]),
-                    _vm._v(" " + _vm._s(Math.floor(_vm.puntuacion / 4)))
+                    _vm._v(" " + _vm._s(Math.floor(_vm.puntuacion / 7)))
                   ]),
                   _c("hr"),
                   _vm._v(" "),
@@ -3160,6 +3191,15 @@ var staticRenderFns = [
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", [
+      _vm._v("Calificacion : "),
+      _c("span", { attrs: { id: "estrellas" } })
+    ])
   }
 ]
 render._withStripped = true

@@ -42,7 +42,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-sm-12 col-md-6 mb-3">
-						<div class="card sombra">
+						<div class="card shadow">
 							<div class="card-widget widget-user">
 								<div class="widget-user-header bg-info">
 									<h3 class="widget-user-username">{{ usuario.name }}</h3>
@@ -82,27 +82,27 @@
 									<div class="col-sm-4 border-right">
 										<div class="description-block">
 											<h5 class="description-header">
-												{{ usuario.apellido_paterno }} {{ usuario.apellido_materno }}
+												{{ usuario.apellido_paterno }}
 											</h5>
-											<span class="description-text">APELLIDOS</span>
+											<span class="description-text">APELLIDO PATERNO</span>
 										</div>
 									</div>
 									<div class="col-sm-4 border-right">
 										<div class="description-block">
 											<h5 class="description-header font-weight-bold">{{ usuario.puntos }}</h5>
-											<span class="description-text">Puntos</span>
+											<span class="description-text">PUNTOS</span>
 										</div>
 									</div>
-									<div class="col-sm-4">
+									<div class="col-sm-4 border-right">
 										<div class="description-block">
-											<h5 class="description-header">{{ usuario.curso }}</h5>
-											<span class="description-text">CURSO</span>
+											<h5 class="description-header">{{ usuario.apellido_materno }}</h5>
+											<span class="description-text">APELLIDO MATERNO</span>
 										</div>
 									</div>
 									<div class="col-6">
 										<div class="description-block">
 											<h5 class="description-header">
-												<span>{{ usuario.ppm_inicial }}</span>
+												<span>{{ usuario.ppm_inicial }} ppm</span>
 											</h5>
 											<span class="description-text">VELOCIDAD INICIAL</span>
 										</div>
@@ -110,7 +110,7 @@
 									<div class="col-6">
 										<div class="description-block">
 											<h5 class="description-header">
-												<span>{{ usuario.comprension_inicial }}</span>
+												<span>{{ usuario.comprension_inicial }} %</span>
 											</h5>
 											<span class="description-text">COMPRENSION INICIAL</span>
 										</div>
@@ -123,7 +123,7 @@
 						<div class="card sombra ">
 							<div class="card-header p-2">
 								<ul class="nav nav-pills">
-									<li class="nav-item"><a class="nav-link active" href="#rango" data-toggle="tab">Rangos</a></li>
+									<li class="nav-item"><a class="nav-link active" href="#rango" data-toggle="tab">Rango</a></li>
 									<li class="nav-item"><a class="nav-link" href="#datos" data-toggle="tab"
 										@click="editarUsuario()">Datos</a></li>
 									</ul>
@@ -207,38 +207,6 @@
 															</div>
 														</div>
 														<div class="form-group row">
-															<label class="col-form-label col-md-3">Curso</label>
-															<div class="col-md-4">
-																<select v-model="fillUsuario.curso" class="form-control">
-																	<option disabled value="">Seleccione el curso</option>
-																	<option>1° A</option>
-																	<option>1° B</option>
-																	<option>1° C</option>
-																	<option>1° D</option>
-																	<option>2° A</option>
-																	<option>2° B</option>
-																	<option>2° C</option>
-																	<option>2° D</option>
-																	<option>3° A</option>
-																	<option>3° B</option>
-																	<option>3° C</option>
-																	<option>3° D</option>
-																	<option>4° A</option>
-																	<option>4° B</option>
-																	<option>4° C</option>
-																	<option>4° D</option>
-																	<option>5° A</option>
-																	<option>5° B</option>
-																	<option>5° C</option>
-																	<option>5° D</option>
-																	<option>6° A</option>
-																	<option>6° B</option>
-																	<option>6° C</option>
-																	<option>6° D</option>
-																</select>
-															</div>
-														</div>
-														<div class="form-group row">
 															<div class="offset-sm-2 col-sm-10">
 																<button type="submit" class="btn btn-primary text-white">Actualizar</button>
 															</div>
@@ -307,7 +275,6 @@
 					this.fillUsuario.name = this.usuario.name;
 					this.fillUsuario.apellido_paterno = this.usuario.apellido_paterno;
 					this.fillUsuario.apellido_materno = this.usuario.apellido_materno;
-					this.fillUsuario.curso = this.usuario.curso;
 					this.fillUsuario.puntos = this.usuario.puntos;
 					this.fillUsuario.rango_id = this.usuario.rango_id;
 					this.fillUsuario.id = this.usuario.id;
@@ -329,7 +296,6 @@
 					})
 				},
 				updateUsuario:function(fillUsuario){
-					
 					if (this.fillUsuario.apellido_materno == null) {
 						this.fillUsuario.apellido_materno = ""
 					}
@@ -340,7 +306,6 @@
 					data.append('name', this.fillUsuario.name);
 					data.append('apellido_paterno', this.fillUsuario.apellido_paterno);
 					data.append('apellido_materno', this.fillUsuario.apellido_materno);
-					data.append('curso', this.fillUsuario.curso);
 					if (this.fillUsuario.puntos<100) {
 						data.append('rango_id', 1);
 					}else if (this.fillUsuario.puntos >= 100 && this.fillUsuario.puntos < 500) {
@@ -388,9 +353,6 @@
 		}
 	</script>
 	<style>
-	.sombra{
-		box-shadow: 0px 3px 2px #aab2bd;
-	}
 	.cont{
 		position: relative; 
 		height:120px; 

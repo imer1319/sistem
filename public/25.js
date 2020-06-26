@@ -72,6 +72,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showUser();
@@ -135,6 +152,32 @@ __webpack_require__.r(__webpack_exports__);
         url: '/iguales',
         min: 10000,
         max: 10000,
+        background: 'color8'
+      }],
+      ejercicios: [{
+        name: 'Parpadeo',
+        icon: 'schulte-letras.png',
+        url: '/parpadeo',
+        background: 'color8'
+      }, {
+        name: 'vertical',
+        icon: 'schulte-letras.png',
+        url: '/vertical',
+        background: 'color8'
+      }, {
+        name: 'horizontal',
+        icon: 'schulte-letras.png',
+        url: '/horizontal',
+        background: 'color8'
+      }, {
+        name: 'aleatorio',
+        icon: 'schulte-letras.png',
+        url: '/aleatorio',
+        background: 'color8'
+      }, {
+        name: 'piramide',
+        icon: 'schulte-letras.png',
+        url: '/piramide',
         background: 'color8'
       }]
     };
@@ -291,9 +334,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                                    " +
+                                "\n\t\t\t\t\t\t\t\t\t" +
                                   _vm._s(_vm.usuario.name) +
-                                  "\n                                "
+                                  "\n\t\t\t\t\t\t\t\t"
                               )
                             ]
                           ),
@@ -315,7 +358,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                        Mi perfil\n                                    "
+                                    "\n\t\t\t\t\t\t\t\t\t\tMi perfil\n\t\t\t\t\t\t\t\t\t"
                                   )
                                 ]
                               ),
@@ -330,11 +373,7 @@ var render = function() {
                                       "event.preventDefault(); document.getElementById('logout-form').submit();"
                                   }
                                 },
-                                [
-                                  _vm._v(
-                                    "Cerrar Sesión\n                                    "
-                                  )
-                                ]
+                                [_vm._v("Cerrar Sesión\n\t\t\t\t\t\t\t\t\t")]
                               )
                             ],
                             1
@@ -367,52 +406,104 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "row" },
-                _vm._l(_vm.games, function(game, index) {
-                  return _c(
-                    "div",
-                    { key: index, staticClass: "col-6 col-md-4 col-lg-3 my-3" },
-                    [
-                      _c("router-link", { attrs: { to: game.url } }, [
-                        _c("div", { staticClass: "card" }, [
-                          _c("div", { staticClass: "card-body p-0" }, [
-                            _c("img", {
-                              staticClass: "card-img-top img-responsive",
-                              attrs: {
-                                src: "/imagenes/ejercicios/" + game.icon,
-                                width: "100%",
-                                height: "180"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "text-center text-uppercase pb-2"
-                              },
-                              [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass: "font-weight-bold text-center"
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\t" +
-                                        _vm._s(game.name) +
-                                        "\n\t\t\t\t\t\t\t\t\t"
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
+                [
+                  _vm._l(_vm.games, function(game, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass: "col-6 col-md-4 col-lg-3 my-3"
+                      },
+                      [
+                        _c("router-link", { attrs: { to: game.url } }, [
+                          _c("div", { staticClass: "card" }, [
+                            _c("div", { staticClass: "card-body p-0" }, [
+                              _c("img", {
+                                staticClass: "card-img-top img-responsive",
+                                attrs: {
+                                  src: "/imagenes/ejercicios/" + game.icon,
+                                  width: "100%",
+                                  height: "180"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "text-center text-uppercase pb-2"
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "font-weight-bold text-center"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t\t" +
+                                          _vm._s(game.name) +
+                                          "\n\t\t\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
                           ])
                         ])
+                      ],
+                      1
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 text-center" }, [
+                    _c("h3", { staticClass: "text-white" }, [
+                      _c("span", { staticClass: "bg-danger redondear px-3" }, [
+                        _vm._v("Mas ejercicios")
                       ])
-                    ],
-                    1
-                  )
-                }),
-                0
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.ejercicios, function(ejer) {
+                    return _c(
+                      "div",
+                      { staticClass: "col-6 col-md-4 col-lg-3 mt-4" },
+                      [
+                        _c("router-link", { attrs: { to: ejer.url } }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "card card-primary",
+                              class: ejer.background
+                            },
+                            [
+                              _c("div", { staticClass: "card-body" }, [
+                                _c("img", {
+                                  staticClass: "card-img-top img-responsive",
+                                  attrs: {
+                                    src: "/imagenes/ejercicios/" + ejer.icon,
+                                    width: "100%"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "card-block" }, [
+                                  _c(
+                                    "span",
+                                    { staticClass: "text-bold text-center" },
+                                    [_vm._v(_vm._s(ejer.name))]
+                                  )
+                                ])
+                              ])
+                            ]
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  })
+                ],
+                2
               )
             ])
           ])

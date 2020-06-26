@@ -255,13 +255,44 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('user_id', this.usuario.id);
       formData.append('puntuacion', this.puntuacion);
       axios.post('/game', formData).then(function (res) {
-        _this4.actualizar_datos_usuario();
+        _this4.actualizarDatosUsuario();
 
         document.getElementById("tercera-vista").style.display = 'none';
         document.getElementById("cuarta-vista").style.display = 'block';
       });
     },
-    actualizar_datos_usuario: function actualizar_datos_usuario() {
+    dibujarEstrellas: function dibujarEstrellas(numero, titulo) {
+      var stars = "";
+
+      for (var i = 0; i < 5; i++) {
+        if (i < numero) {
+          stars += "<span><i class='fas fa-star'></i></span>";
+        } else {
+          stars += "<span><i class='far fa-star'></i></span>";
+        }
+      }
+
+      var astro = document.getElementById("estrellas");
+      astro.innerHTML = stars;
+      astro.innerHTML += titulo;
+    },
+    actualizarDatosUsuario: function actualizarDatosUsuario() {
+      var stars = 0;
+      var minimo = 8;
+      var titulo = '';
+
+      for (var i = 1; i <= 5; i++) {
+        if (this.puntuacion >= minimo * i) {
+          stars = i;
+          titulo = ' ' + i + ' / ' + 5;
+        } else {
+          stars = i - 1;
+          titulo = ' ' + (i - 1) + ' / ' + 5;
+          break;
+        }
+      }
+
+      this.dibujarEstrellas(stars, titulo);
       var point = Math.floor(this.puntuacion / 3);
       this.usuario.puntos += point;
       var data = new FormData();
@@ -1005,7 +1036,7 @@ var render = function() {
                           _c("div", { staticClass: "card-body" }, [
                             _c("h4", { staticClass: "card-text" }, [
                               _vm._v(
-                                "Concéntrese y busca el numero  que indica que busques, antes de que se termine el tiempo"
+                                "Concéntrese y busca el numero  que indica, antes de que se termine el tiempo"
                               )
                             ]),
                             _vm._v(" "),
@@ -1388,7 +1419,10 @@ var render = function() {
                           _vm._v("estos son los resultados")
                         ]),
                         _vm._v(" "),
-                        _c("h4", [_vm._v("tiempo : 00:00")]),
+                        _c("h4", [
+                          _vm._v("Calificacion : "),
+                          _c("span", { attrs: { id: "estrellas" } })
+                        ]),
                         _c("hr"),
                         _vm._v(" "),
                         _c("h4", [
@@ -1396,7 +1430,7 @@ var render = function() {
                         ]),
                         _c("hr"),
                         _vm._v(" "),
-                        _c("h4", [
+                        _c("h4", { staticClass: "text-warning" }, [
                           _vm._v("Aumento: "),
                           _c("b", [_vm._v("+")]),
                           _vm._v(" " + _vm._s(Math.floor(_vm.puntuacion / 3)))

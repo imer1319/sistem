@@ -188,4 +188,9 @@ export const routes = [
 		path: '/aleatorio',
 		component: () => import('./users/ejercicios/4-aleatorio.vue')
 	},
+	{
+		name: 'piramide',
+		path: '/piramide',
+		component: () => import('./users/ejercicios/5-piramide.vue')
+	},
 	];

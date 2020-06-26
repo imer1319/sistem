@@ -27,18 +27,18 @@
 
                         <div class="form-group row">
                             <div class="col-md-5 ml-auto">
-                                <input id="apellido_materno" type="text" class="form-control text-center @error('apellido_materno') is-invalid @enderror" name="apellido_materno" value="{{ old('apellido_materno') }}" autocomplete="name" placeholder="Apellido materno">
+                                <input id="apellido_paterno" type="text" class="form-control text-center @error('apellido_paterno') is-invalid @enderror" name="apellido_paterno" value="{{ old('apellido_paterno') }}" autocomplete="apellido_paterno" placeholder="Apellido paterno">
 
-                                @error('apellido_materno')
+                                @error('apellido_paterno')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
                             <div class="col-md-5 mr-auto">
-                                <input id="apellido_paterno" type="text" class="form-control text-center @error('apellido_paterno') is-invalid @enderror" name="apellido_paterno" value="{{ old('apellido_paterno') }}" autocomplete="apellido_paterno" placeholder="Apellido paterno">
+                                <input id="apellido_materno" type="text" class="form-control text-center @error('apellido_materno') is-invalid @enderror" name="apellido_materno" value="{{ old('apellido_materno') }}" autocomplete="name" placeholder="Apellido materno">
 
-                                @error('apellido_paterno')
+                                @error('apellido_materno')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -74,42 +74,6 @@
                             </div>
                         </div>
                         
-                        <div class="row mb-3">
-                            <div class="col-md-10 m-auto">
-                                <select id="curso" type="text" class="form-control text-center @error('curso') is-invalid @enderror" name="curso" value="{{ old('curso') }}" required autocomplete="name">
-                                    <option>1° A</option>
-                                    <option>1° B</option>
-                                    <option>1° C</option>
-                                    <option>1° D</option>
-                                    <option>2° A</option>
-                                    <option>2° B</option>
-                                    <option>2° C</option>
-                                    <option>2° D</option>
-                                    <option>3° A</option>
-                                    <option>3° B</option>
-                                    <option>3° C</option>
-                                    <option>3° D</option>
-                                    <option>4° A</option>
-                                    <option>4° B</option>
-                                    <option>4° C</option>
-                                    <option>4° D</option>
-                                    <option>5° A</option>
-                                    <option>5° B</option>
-                                    <option>5° C</option>
-                                    <option>5° D</option>
-                                    <option>6° A</option>
-                                    <option>6° B</option>
-                                    <option>6° C</option>
-                                    <option>6° D</option>
-                                </select>
-                                @error('curso')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-12 offset-md-12">
                                 <button type="submit" class="btn btn-primary btn-block">

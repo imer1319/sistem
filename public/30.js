@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[30],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -107,125 +107,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     var _this = this;
 
-    this.mostrarExamen();
+    this.mostrarEjercicio();
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('agregado', function (data) {
-      _this.examens.push(data);
+      _this.ejercicios.push(data);
     });
   },
   data: function data() {
     return {
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      examens: [],
-      examen: {
-        name: '',
-        content: '',
-        icon: ''
+      ejercicios: [],
+      ejercicio: {
+        name: ''
       },
-      fillExamen: {
-        name: '',
-        content: '',
-        icon: ''
+      fillEjercicio: {
+        name: ''
       },
-      imagenMiniatura: '',
-      respuestas: [],
-      respuesta: {
-        respuesta: '',
-        examen_id: ''
-      },
-      loading: true,
       estado: false,
-      id_examen: '',
-      paginate: ['examens']
+      loading: true,
+      paginate: ['ejercicios']
     };
   },
   methods: {
-    crearExamen: function crearExamen() {
-      $('#creaExamen').modal('show');
-    },
-    mostrarExamen: function mostrarExamen() {
+    mostrarEjercicio: function mostrarEjercicio() {
       var _this2 = this;
 
-      axios.get('examen').then(function (res) {
-        _this2.examens = res.data;
+      axios.get('ejercicio').then(function (res) {
+        _this2.ejercicios = res.data;
         _this2.loading = false;
       });
     },
-    obtenerArchivocrear: function obtenerArchivocrear(e) {
-      var arch = e.target.files[0];
-      this.examen.content = arch;
+    crearEjercicio: function crearEjercicio() {
+      $('#createEjercicio').modal('show');
     },
-    obtenerImagencrear: function obtenerImagencrear(e) {
-      var file = e.target.files[0];
-      this.examen.icon = file;
-      this.cargarImagen(file);
-    },
-    obtenerArchivo: function obtenerArchivo(e) {
-      var arch = e.target.files[0];
-      this.fillExamen.content = arch;
-    },
-    obtenerImagen: function obtenerImagen(e) {
-      this.estado = false;
-      var file = e.target.files[0];
-      this.fillExamen.icon = file;
-      this.cargarImagen(file);
-    },
-    obtenerImagenNueva: function obtenerImagenNueva(e) {
-      var file = e.target.files[0];
-      this.fillExamen.icon = file;
-      this.cargarImagen(file);
-    },
-    cargarImagen: function cargarImagen(file) {
+    alerta: function alerta(icono, titulo) {
       var _this3 = this;
 
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        _this3.imagenMiniatura = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
+      var Toast = this.$swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        onOpen: function onOpen(toast) {
+          toast.addEventListener('mouseenter', _this3.$swal.stopTimer);
+          toast.addEventListener('mouseleave', _this3.$swal.resumeTimer);
+        }
+      });
+      Toast.fire({
+        icon: icono,
+        title: titulo
+      });
     },
     validarEspacios: function validarEspacios(parametro) {
       var patron = /^\s+$/;
@@ -236,92 +170,54 @@ __webpack_require__.r(__webpack_exports__);
         return true;
       }
     },
-    alerta: function alerta(icono, titulo) {
+    editarEjercicio: function editarEjercicio(ejercicio) {
+      this.estado = true;
+      this.fillEjercicio.name = ejercicio.name;
+      this.fillEjercicio.id = ejercicio.id;
+      $('#editarEjercicio').modal('show');
+    },
+    updateEjercicio: function updateEjercicio(fillEjercicio) {
       var _this4 = this;
 
-      var Toast = this.$swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 2000,
-        onOpen: function onOpen(toast) {
-          toast.addEventListener('mouseenter', _this4.$swal.stopTimer);
-          toast.addEventListener('mouseleave', _this4.$swal.resumeTimer);
-        }
-      });
-      Toast.fire({
-        icon: icono,
-        title: titulo
-      });
-    },
-    agregarExamen: function agregarExamen() {
-      var _this5 = this;
-
-      if (this.validarEspacios(this.examen.name) == false || this.validarEspacios(this.examen.content) == false || this.validarEspacios(this.examen.icon) == false) {
-        alert("los campos no pueden estar vacios");
-      } else {
-        var formData = new FormData();
-        formData.append('name', this.examen.name);
-        formData.append('content', this.examen.content);
-        formData.append('icon', this.examen.icon);
-        axios.post('/examen', formData).then(function (res) {
-          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.examen);
-          _this5.examen.name = "";
-          _this5.$refs.txt.value = null;
-          _this5.$refs.img.value = null;
-          _this5.imagenMiniatura = null;
-
-          _this5.alerta('success', 'Se a agregado correctamente');
-
-          $('#creaExamen').modal('hide');
-        });
-      }
-    },
-    editarExamen: function editarExamen(examen) {
-      this.estado = true;
-      this.fillExamen.name = examen.name;
-      this.fillExamen.content = examen.content;
-      this.fillExamen.icon = examen.icon;
-      this.fillExamen.id = examen.id;
-      $('#edit').modal('show');
-    },
-    updateExamen: function updateExamen(fillExamen) {
-      var _this6 = this;
-
-      if (this.validarEspacios(this.fillExamen.name) == false || this.validarEspacios(this.fillExamen.content) == false || this.validarEspacios(this.fillExamen.icon) == false) {
+      if (this.validarEspacios(this.fillEjercicio.name) == false) {
         alert("los campos no pueden estar vacios");
       } else {
         var data = new FormData();
-        data.append('name', this.fillExamen.name);
-        data.append('content', this.fillExamen.content);
-        data.append('icon', this.fillExamen.icon);
+        data.append('name', this.fillEjercicio.name);
         data.append('_method', 'PUT');
-        var url = "/examen/".concat(fillExamen.id);
+        var url = "/ejercicio/".concat(fillEjercicio.id);
         axios.post(url, data).then(function (res) {
-          _this6.$refs.imagenEdit.value = "";
+          _this4.alerta('warning', 'Se a modificado el registro');
 
-          _this6.mostrarExamen();
+          _this4.mostrarEjercicio();
 
-          _this6.alerta('warning', 'Se a modificado el registro');
-
-          $('#edit').modal('hide');
+          $('#editarEjercicio').modal('hide');
         });
       }
-    }
-  },
-  computed: {
-    imagen: function imagen() {
-      return this.imagenMiniatura;
+    },
+    agregarEjercicio: function agregarEjercicio() {
+      var _this5 = this;
+
+      var formData = new FormData();
+      formData.append('name', this.ejercicio.name);
+      axios.post('ejercicio', formData).then(function (res) {
+        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.ejercicio);
+        _this5.ejercicio.name = "";
+
+        _this5.alerta('success', 'Se a agregado correctamente');
+
+        $('#createEjercicio').modal('hide');
+      });
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236& ***!
-  \**************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f& ***!
+  \***********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -341,96 +237,60 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.agregarExamen($event)
+            return _vm.agregarEjercicio($event)
           }
         }
       },
       [
-        _c("div", { staticClass: "modal fade", attrs: { id: "creaExamen" } }, [
-          _c("div", { staticClass: "modal-dialog" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body pb-0" }, [
-                _c("div", { staticClass: "form-group row" }, [
-                  _c("label", { staticClass: "col-form-label col-md-2" }, [
-                    _vm._v("Nombre")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-10" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.examen.name,
-                          expression: "examen.name"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        name: "name",
-                        placeholder: "Nombre de la examen",
-                        required: ""
-                      },
-                      domProps: { value: _vm.examen.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.examen, "name", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
+        _c(
+          "div",
+          { staticClass: "modal fade", attrs: { id: "createEjercicio" } },
+          [
+            _c("div", { staticClass: "modal-dialog" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(0),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "imagen" } }, [
-                      _vm._v("Contenido")
+                _c("div", { staticClass: "modal-body pb-0" }, [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("label", { staticClass: "col-form-label col-md-2" }, [
+                      _vm._v("Nombre")
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      ref: "txt",
-                      staticClass: "form-control-file",
-                      attrs: { type: "file", accept: ".txt", required: "" },
-                      on: { change: _vm.obtenerArchivocrear }
-                    })
+                    _c("div", { staticClass: "col-md-10" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.ejercicio.name,
+                            expression: "ejercicio.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          placeholder: "Nombre de la ejercicio",
+                          required: ""
+                        },
+                        domProps: { value: _vm.ejercicio.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.ejercicio, "name", $event.target.value)
+                          }
+                        }
+                      })
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "imagen" } }),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "img",
-                      staticClass: "form-control-file",
-                      attrs: {
-                        type: "file",
-                        id: "f1",
-                        accept: "image/*",
-                        equired: ""
-                      },
-                      on: { change: _vm.obtenerImagencrear }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("figure", [
-                    _c("img", {
-                      attrs: { width: "200", height: "200", src: _vm.imagen }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(1)
+                _vm._m(1)
+              ])
             ])
-          ])
-        ])
+          ]
+        )
       ]
     ),
     _vm._v(" "),
@@ -441,115 +301,51 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.updateExamen(_vm.fillExamen)
+            return _vm.updateEjercicio(_vm.fillEjercicio)
           }
         }
       },
       [
-        _c("div", { staticClass: "modal fade", attrs: { id: "edit" } }, [
-          _c("div", { staticClass: "modal-dialog" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body pb-0" }, [
-                _c("div", { staticClass: "form-group row" }, [
-                  _c("label", { staticClass: "col-form-label col-md-2" }, [
-                    _vm._v("Nombre")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-10" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.fillExamen.name,
-                          expression: "fillExamen.name"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        name: "name",
-                        placeholder: "Nombre de la examen",
-                        required: ""
-                      },
-                      domProps: { value: _vm.fillExamen.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.fillExamen, "name", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
+        _c(
+          "div",
+          { staticClass: "modal fade", attrs: { id: "editarEjercicio" } },
+          [
+            _c("div", { staticClass: "modal-dialog" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(2),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "imagen" } }, [
-                      _vm._v("Contenido")
+                _c("div", { staticClass: "modal-body pb-0" }, [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("label", { staticClass: "col-form-label col-md-2" }, [
+                      _vm._v("Nombre")
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      ref: "texto",
-                      staticClass: "form-control-file",
-                      attrs: { type: "file", accept: ".txt" },
-                      on: { change: _vm.obtenerArchivo }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm.estado == true
-                      ? _c("input", {
-                          ref: "imagenEdit",
-                          staticClass: "form-control-file",
-                          attrs: {
-                            type: "file",
-                            accept: "image/*",
-                            equired: ""
-                          },
-                          on: { change: _vm.obtenerImagen }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.estado == false
-                      ? _c("input", {
-                          ref: "imagenEdit",
-                          staticClass: "form-control-file",
-                          attrs: {
-                            type: "file",
-                            accept: "image/*",
-                            equired: ""
-                          },
-                          on: { change: _vm.obtenerImagenNueva }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("figure", [
-                      _vm.estado == true
-                        ? _c("img", {
-                            attrs: {
-                              width: "200",
-                              height: "200",
-                              src: "imagenes/examen/" + _vm.fillExamen.icon
+                    _c("div", { staticClass: "col-md-10" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.fillEjercicio.name,
+                            expression: "fillEjercicio.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "name", required: "" },
+                        domProps: { value: _vm.fillEjercicio.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
                             }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.estado == false
-                        ? _c("img", {
-                            attrs: {
-                              width: "200",
-                              height: "200",
-                              src: _vm.imagen
-                            }
-                          })
-                        : _vm._e()
+                            _vm.$set(
+                              _vm.fillEjercicio,
+                              "name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
                     ])
                   ])
                 ]),
@@ -557,8 +353,8 @@ var render = function() {
                 _vm._m(3)
               ])
             ])
-          ])
-        ])
+          ]
+        )
       ]
     ),
     _vm._v(" "),
@@ -567,7 +363,7 @@ var render = function() {
       { staticClass: "card" },
       [
         _c("div", { staticClass: "card-header" }, [
-          _c("h2", { staticClass: "card-title" }, [_vm._v("Examenes")]),
+          _c("h2", { staticClass: "card-title" }, [_vm._v("Ejercicios")]),
           _vm._v(" "),
           _c(
             "a",
@@ -575,7 +371,7 @@ var render = function() {
               staticClass: "btn btn-success float-right text-white",
               on: {
                 click: function($event) {
-                  return _vm.crearExamen()
+                  return _vm.crearEjercicio()
                 }
               }
             },
@@ -591,7 +387,9 @@ var render = function() {
               [
                 _c(
                   "paginate",
-                  { attrs: { name: "examens", list: _vm.examens, per: 4 } },
+                  {
+                    attrs: { name: "ejercicios", list: _vm.ejercicios, per: 5 }
+                  },
                   [
                     _c(
                       "table",
@@ -603,10 +401,6 @@ var render = function() {
                             _vm._v(" "),
                             _c("th", [_vm._v("Nombre")]),
                             _vm._v(" "),
-                            _c("th", [_vm._v("Contenido")]),
-                            _vm._v(" "),
-                            _c("th", [_vm._v("Imagen")]),
-                            _vm._v(" "),
                             _c("th", { staticClass: "text-center" }, [
                               _vm._v("Acciones")
                             ])
@@ -615,85 +409,34 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "tbody",
-                          _vm._l(_vm.paginated("examens"), function(
-                            examen,
+                          _vm._l(_vm.paginated("ejercicios"), function(
+                            ejercicio,
                             index
                           ) {
                             return _c("tr", { key: index }, [
-                              _c("td", { attrs: { width: "10px" } }, [
-                                _vm._v(_vm._s(index + 1))
-                              ]),
+                              _c("td", [_vm._v(_vm._s(index + 1))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(examen.name))]),
+                              _c("td", [_vm._v(_vm._s(ejercicio.name))]),
                               _vm._v(" "),
-                              _c("td", [
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(
-                                      examen.content.substring(
-                                        examen.content.length,
-                                        10
-                                      )
-                                    )
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c("img", {
-                                  staticClass: "img-responsive",
-                                  attrs: {
-                                    src: "/imagenes/examen/" + examen.icon,
-                                    height: "40",
-                                    width: "40"
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "text-center",
-                                  attrs: { colspan: "2" }
-                                },
-                                [
-                                  _c(
-                                    "router-link",
-                                    {
-                                      staticClass: "btn btn-info",
-                                      attrs: {
-                                        to: {
-                                          name: "show",
-                                          params: { id: examen.id }
-                                        }
+                              _c("td", { staticClass: "text-center" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-warning text-white",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editarEjercicio(ejercicio)
                                       }
-                                    },
-                                    [
-                                      _c("i", { staticClass: "fas fa-eye" }),
-                                      _vm._v(" Ver\n\t\t\t\t\t\t\t\t")
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-warning text-white",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.editarExamen(examen)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-pencil-alt"
-                                      }),
-                                      _vm._v(" Editar")
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-pencil-alt"
+                                    }),
+                                    _vm._v(" Editar")
+                                  ]
+                                )
+                              ])
                             ])
                           }),
                           0
@@ -705,7 +448,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("paginate-links", {
                   attrs: {
-                    for: "examens",
+                    for: "ejercicios",
                     classes: {
                       ul: "pagination",
                       li: "page-item",
@@ -780,7 +523,11 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-lg-6" }, [
           _c("input", {
             staticClass: "btn btn-primary pull-right",
-            attrs: { type: "submit", name: "enviar", value: "Editar Registro" }
+            attrs: {
+              type: "submit",
+              name: "enviar",
+              value: "Actualizar Registro"
+            }
           })
         ])
       ])
@@ -793,17 +540,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/examens/examenComponent.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/examens/examenComponent.vue ***!
-  \*************************************************************/
+/***/ "./resources/js/components/ejercicios/ejercicio.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/ejercicios/ejercicio.vue ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./examenComponent.vue?vue&type=template&id=24862236& */ "./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236&");
-/* harmony import */ var _examenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./examenComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ejercicio.vue?vue&type=template&id=6974bf8f& */ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&");
+/* harmony import */ var _ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ejercicio.vue?vue&type=script&lang=js& */ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -813,9 +560,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _examenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -825,38 +572,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/examens/examenComponent.vue"
+component.options.__file = "resources/js/components/ejercicios/ejercicio.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./examenComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ejercicio.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f& ***!
+  \*****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./examenComponent.vue?vue&type=template&id=24862236& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/examens/examenComponent.vue?vue&type=template&id=24862236&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ejercicio.vue?vue&type=template&id=6974bf8f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ejercicios/ejercicio.vue?vue&type=template&id=6974bf8f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_examenComponent_vue_vue_type_template_id_24862236___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ejercicio_vue_vue_type_template_id_6974bf8f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -34,18 +34,19 @@
                     </div>
                 </div>
             </nav>
-            <div class="container-fluid my-2">
+            <div class="container my-2">
                 <div class="consejo">{{ consejo }}</div>
                 <div class="row">
-                    <div class="col-6 col-md-4 col-lg-3"v-for="contenido in content">
+                    <div class="col-6 col-md-4 col-lg-4" v-for="(contenido, index) in content" :key="index">
                         <div class="text-center">
                             <router-link :to="contenido.url">
                                 <div class="my-2">
                                     <div class="card" :class="contenido.background">
-                                        <div class="card-body box-profile">
-                                            <img class="card-img-top img-responsive" :src="`/imagenes/${contenido.icono}`"height="170">
-                                        </div>
-                                        <span class="text-center text-uppercase">{{ contenido.nombre }}</span>
+                                        <div class="card-body box-profile pb-2">
+                                            <img class="card-img-top img-responsive imagen-tamaño" :src="`/imagenes/${contenido.icono}`">
+                                        </div>                                        
+                                        <span class=" pb-3 text-center text-uppercase">{{ contenido.nombre }}</span>
+                                        <span></span>
                                     </div>
                                 </div>
                             </router-link>
@@ -63,15 +64,15 @@
             this.showUser()
         },
         data(){
-            return { 
+            return {
+                starsRelleno:4,
                 content :[
-                {nombre:'Lecciones',icono:'ejercicios.png',url:'/ejercicios',background:'color8'},
-                {nombre:'ejercicio',icono:'ejercicios.png',url:'game',background:'color8'},
-                {nombre:'Perfil',icono:'user.png',url:'/profile',background:'color8'},
+                {nombre:'Perfil',icono:'profile.png',url:'/profile',background:'color8'},
+                {nombre:'Curso',icono:'curso.png',url:'/curso',background:'color8'},
+                {nombre:'ejercicio',icono:'game.png',url:'game',background:'color8'},
                 {nombre:'ranking',icono:'ranking.png',url:'/ranking',background:'color8'},
                 {nombre:'Puntuaciones',icono:'puntuaciones.png',url:'/puntuacionExamen',background:'color8'},
-                {nombre:'Curso',icono:'puntuaciones.png',url:'/curso',background:'color8'},
-                {nombre:'Lecciones',icono:'puntuaciones.png',url:'/lecciones',background:'color8'},
+                {nombre:'Preguntas',icono:'lecciones.png',url:'/lecciones',background:'color8'},
                 ],
                 consejos:['Aprende a usar tus ojos para leer más rápido',
                 'Ponte en forma, para darle más oxígeno a tu cerebro',
@@ -101,3 +102,14 @@
         }
     }
 </script>
+<style>
+.imagen-tamaño{
+    height: 170px;
+}
+@media (max-width: 768px)
+{
+    .imagen-tamaño{
+        height: 110px;
+    }
+}
+</style>

@@ -260,7 +260,7 @@
 					<div class="card animated bounceInRight">
 						<div class="card-body">
 							<h3 class="text-center">Estos son los resultados</h3><hr>
-							<h4>tiempo : 00:00</h4><hr>
+							<h4>Calificacion : <span id="estrellas"></span></h4><hr>
 							<h4>Puntuacion: {{ puntuacion }}</h4><hr>
 							<h4 class="text-warning">Aumento: <b>+</b> {{ Math.floor(puntuacion/13) }}</h4><hr>
 							<router-link to="/game" class="btn btn-primary btn-block"> Volver a los ejercicios</router-link>
@@ -337,7 +337,34 @@
 					this.pasos = 6
 				})
 			},
+			dibujarEstrellas(numero , titulo){
+				var stars = "";
+				for (var i = 0; i < 5; i++) {
+					if (i < numero) {
+						stars += "<span><i class='fas fa-star'></i></span>";
+					}else{
+						stars += "<span><i class='far fa-star'></i></span>";
+					}
+				}
+				var astro = document.getElementById("estrellas");
+				astro.innerHTML=stars;
+				astro.innerHTML+=titulo;
+			},
 			actualizarDatosUsuario(){
+				var stars = 0 
+				var minimo = 30
+				var titulo = ''
+				for(var i = 1; i <= 5; i++){
+					if (this.puntuacion >= (minimo*i)) {
+						stars = i
+						titulo = ' '+i+' / '+5
+					}else{
+						stars = i-1
+						titulo = ' '+(i-1)+' / '+5
+						break;
+					}
+				}
+				this.dibujarEstrellas(stars, titulo)
 				var point = Math.floor(this.puntuacion/13)
 				let data = new FormData();
 				data.append('puntos', this.usuario.puntos + point);

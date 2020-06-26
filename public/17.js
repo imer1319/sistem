@@ -354,7 +354,38 @@ __webpack_require__.r(__webpack_exports__);
         _this4.pasos = 6;
       });
     },
+    dibujarEstrellas: function dibujarEstrellas(numero, titulo) {
+      var stars = "";
+
+      for (var i = 0; i < 5; i++) {
+        if (i < numero) {
+          stars += "<span><i class='fas fa-star'></i></span>";
+        } else {
+          stars += "<span><i class='far fa-star'></i></span>";
+        }
+      }
+
+      var astro = document.getElementById("estrellas");
+      astro.innerHTML = stars;
+      astro.innerHTML += titulo;
+    },
     actualizarDatosUsuario: function actualizarDatosUsuario() {
+      var stars = 0;
+      var minimo = 30;
+      var titulo = '';
+
+      for (var i = 1; i <= 5; i++) {
+        if (this.puntuacion >= minimo * i) {
+          stars = i;
+          titulo = ' ' + i + ' / ' + 5;
+        } else {
+          stars = i - 1;
+          titulo = ' ' + (i - 1) + ' / ' + 5;
+          break;
+        }
+      }
+
+      this.dibujarEstrellas(stars, titulo);
       var point = Math.floor(this.puntuacion / 13);
       var data = new FormData();
       data.append('puntos', this.usuario.puntos + point);
@@ -3030,7 +3061,10 @@ var render = function() {
                         ]),
                         _c("hr"),
                         _vm._v(" "),
-                        _c("h4", [_vm._v("tiempo : 00:00")]),
+                        _c("h4", [
+                          _vm._v("Calificacion : "),
+                          _c("span", { attrs: { id: "estrellas" } })
+                        ]),
                         _c("hr"),
                         _vm._v(" "),
                         _c("h4", [

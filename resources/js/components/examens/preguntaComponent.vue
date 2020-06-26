@@ -180,10 +180,10 @@
 			return{
 				preguntas:[],
 				pregunta:{
-					enunciado:'',examen_id:'',respuestaA:'',respuestaB:'',respuestaC:'',respuestaD:'',esCorrecto:''
+					enunciado:'',respuestaA:'',respuestaB:'',respuestaC:'',respuestaD:'',esCorrecto:''
 				},
 				fillpregunta: {
-					enunciado: '',examen_id:'',respuestaA:'',respuestaB:'',respuestaC:'',respuestaD:'',esCorrecto:''
+					enunciado: '',respuestaA:'',respuestaB:'',respuestaC:'',respuestaD:'',esCorrecto:''
 				},
 				loading:true,
 				paginate:['preguntas'],
@@ -271,7 +271,10 @@
 				this.fillpregunta.respuestaB = pregunta.respuestaB;
 				this.fillpregunta.respuestaC = pregunta.respuestaC;
 				this.fillpregunta.respuestaD = pregunta.respuestaD;
-				this.fillpregunta.esCorrecto = pregunta.esCorrecto;
+				if(pregunta.esCorrecto == pregunta.respuestaA){this.fillpregunta.esCorrecto = "A"}
+				else if(pregunta.esCorrecto == pregunta.respuestaB){this.fillpregunta.esCorrecto = "B"}
+				else if(pregunta.esCorrecto == pregunta.respuestaC){this.fillpregunta.esCorrecto = "C"}
+				else if(pregunta.esCorrecto == pregunta.respuestaD){this.fillpregunta.esCorrecto = "D"}
 				$('#editarPregunta').modal('show');
 			},
 			updatePregunta:function(fillpregunta){
@@ -285,7 +288,6 @@
 					data.append('respuestaB', this.fillpregunta.respuestaB);
 					data.append('respuestaC', this.fillpregunta.respuestaC);
 					data.append('respuestaD', this.fillpregunta.respuestaD);
-					data.append('esCorrecto', this.fillpregunta.esCorrecto);
 					if (this.fillpregunta.esCorrecto == "A") {data.append('esCorrecto', this.fillpregunta.respuestaA);}
 					if (this.fillpregunta.esCorrecto == "B") {data.append('esCorrecto', this.fillpregunta.respuestaB);}
 					if (this.fillpregunta.esCorrecto == "C") {data.append('esCorrecto', this.fillpregunta.respuestaC);}

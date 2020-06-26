@@ -74618,31 +74618,31 @@ var routes = [{
   name: 'usuario',
   path: '/usuario',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ./components/usuario/usuario.vue */ "./resources/js/components/usuario/usuario.vue"));
+    return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ./components/usuario/usuario.vue */ "./resources/js/components/usuario/usuario.vue"));
   }
 }, {
   name: 'shoex',
   path: '/usuario/:id',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ./components/usuario/showUsuario.vue */ "./resources/js/components/usuario/showUsuario.vue"));
+    return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./components/usuario/showUsuario.vue */ "./resources/js/components/usuario/showUsuario.vue"));
   }
 }, {
   name: 'ejercicio',
   path: '/ejercicio',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! ./components/ejercicios/ejercicio.vue */ "./resources/js/components/ejercicios/ejercicio.vue"));
+    return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ./components/ejercicios/ejercicio.vue */ "./resources/js/components/ejercicios/ejercicio.vue"));
   }
 }, {
   name: 'perfil',
   path: '/perfil',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
+    return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ./components/perfil.vue */ "./resources/js/components/perfil.vue"));
   }
 }, {
   name: 'examen',
   path: '/examen',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ./components/examens/examenComponent.vue */ "./resources/js/components/examens/examenComponent.vue"));
+    return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ./components/examens/examenComponent.vue */ "./resources/js/components/examens/examenComponent.vue"));
   }
 }, {
   name: 'show',
@@ -74661,13 +74661,13 @@ var routes = [{
   name: 'home',
   path: '/home',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ./users/home */ "./resources/js/users/home.vue"));
+    return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./users/home */ "./resources/js/users/home.vue"));
   }
 }, {
   name: 'profile',
   path: '/profile',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! ./users/user/perfil.vue */ "./resources/js/users/user/perfil.vue"));
+    return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! ./users/user/perfil.vue */ "./resources/js/users/user/perfil.vue"));
   }
 }, {
   name: 'exam',
@@ -74685,7 +74685,7 @@ var routes = [{
   name: 'ranking',
   path: '/ranking',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ./users/ranking.vue */ "./resources/js/users/ranking.vue"));
+    return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! ./users/ranking.vue */ "./resources/js/users/ranking.vue"));
   }
 }, {
   name: 'puntuacionExamen',
@@ -74709,7 +74709,7 @@ var routes = [{
   name: 'lecciones',
   path: '/lecciones',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./users/lecciones/lecciones.vue */ "./resources/js/users/lecciones/lecciones.vue"));
+    return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ./users/lecciones/lecciones.vue */ "./resources/js/users/lecciones/lecciones.vue"));
   }
 },
 /************** RUTAS PARA EL CURSO*************/
@@ -74835,13 +74835,19 @@ var routes = [{
   name: 'horizontal',
   path: '/horizontal',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./users/ejercicios/3-horizontal.vue */ "./resources/js/users/ejercicios/3-horizontal.vue"));
+    return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ./users/ejercicios/3-horizontal.vue */ "./resources/js/users/ejercicios/3-horizontal.vue"));
   }
 }, {
   name: 'aleatorio',
   path: '/aleatorio',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./users/ejercicios/4-aleatorio.vue */ "./resources/js/users/ejercicios/4-aleatorio.vue"));
+  }
+}, {
+  name: 'piramide',
+  path: '/piramide',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./users/ejercicios/5-piramide.vue */ "./resources/js/users/ejercicios/5-piramide.vue"));
   }
 }];
 

@@ -25,8 +25,6 @@
 									<div class="col-6">
 										<h4>PUNTOS</h4>
 										<h6>{{ usuario.puntos }}</h6>
-										<h4>CURSO</h4>
-										<h6>{{ usuario.curso }}</h6>
 									</div>
 								</div>
 							</div>
@@ -123,39 +121,7 @@
 										<div class="col-md-10">
 											<input type="text"class="form-control" v-model="fillUsuario.apellido_materno">
 										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-form-label col-md-2">Curso</label>
-										<div class="col-md-10">
-											<select v-model="fillUsuario.curso" class="form-control">
-												<option disabled value="">Seleccione el curso</option>
-												<option>1° A</option>
-												<option>1° B</option>
-												<option>1° C</option>
-												<option>1° D</option>
-												<option>2° A</option>
-												<option>2° B</option>
-												<option>2° C</option>
-												<option>2° D</option>
-												<option>3° A</option>
-												<option>3° B</option>
-												<option>3° C</option>
-												<option>3° D</option>
-												<option>4° A</option>
-												<option>4° B</option>
-												<option>4° C</option>
-												<option>4° D</option>
-												<option>5° A</option>
-												<option>5° B</option>
-												<option>5° C</option>
-												<option>5° D</option>
-												<option>6° A</option>
-												<option>6° B</option>
-												<option>6° C</option>
-												<option>6° D</option>
-											</select>
-										</div>
-									</div>
+									</div>								
 									<div class="form-group">
 										<div class="form-group">
 											<input type="file" class="form-control-file" @change="obtenerImagen" v-if="estado == false" accept="image/*" equired>
@@ -168,7 +134,7 @@
 									</div>
 									<div class="form-group row">
 										<div class="offset-sm-2 col-sm-10">
-											<button type="submit" class="btn btn-success">Actualizar</button>
+											<button type="submit" class="btn btn-primary">Actualizar</button>
 										</div>
 									</div>
 								</form>

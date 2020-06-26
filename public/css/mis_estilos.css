@@ -1,3 +1,13 @@
+.fa-star{
+    color: #F2A62A;
+}
+.ocultar, .ocultar:hover{
+    margin: 0;
+    color: white;
+}
+.redondear{
+    border-radius: 15px;
+}
 /**************PROGRESS -BAR --************/
 #skill {
     margin: auto;

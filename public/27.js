@@ -1,14 +1,17 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[27],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/ranking.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/ranking.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -140,22 +143,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showUser();
-    this.mostrarPuntuaciones();
   },
   data: function data() {
     return {
-      rankings: [],
-      loading: true,
       usuario: {},
-      rango_usuario: {},
-      rangos: {
-        rango1: '/imagenes/rangos/1-bronce.png',
-        rango2: '/imagenes/rangos/2-plata.png',
-        rango3: '/imagenes/rangos/3-oro.png',
-        rango4: '/imagenes/rangos/4-platino.png',
-        rango5: '/imagenes/rangos/5-diamante.png',
-        rango6: '/imagenes/rangos/6-final.png'
-      }
+      loading: true,
+      mostrar: true
     };
   },
   methods: {
@@ -168,47 +161,48 @@ __webpack_require__.r(__webpack_exports__);
         _this.loading = false;
       });
     },
-    mostrarPuntuaciones: function mostrarPuntuaciones() {
-      var _this2 = this;
-
-      axios.get("/ranking").then(function (res) {
-        _this2.rankings = res.data;
-        _this2.loading = false;
-      });
+    mostrarSidebar: function mostrarSidebar() {
+      if (this.mostrar == true) {
+        document.getElementById("wrapper").classList.add("toggled");
+        this.mostrar = false;
+      } else {
+        document.getElementById("wrapper").classList.remove('toggled');
+        this.mostrar = true;
+      }
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/ranking.vue?vue&type=style&index=0&lang=css&":
-/*!********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/ranking.vue?vue&type=style&index=0&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n.contenedor{\r\n\tbackground-color: #2B6A88;\r\n\theight: 120px;\r\n\twidth: 100%;\r\n\tz-index: 100;\n}\n.contenedor .imagen{\r\n\tleft: 50%;\n}\n.contenedor .imagen img{\r\n\theight:100px; \r\n\twidth:100px;\r\n\tborder: 3px solid #fff;\n}\r\n", ""]);
+exports.push([module.i, "\n#sidebar-wrapper {\r\n\tmin-height: 100vh;\r\n\tmargin-left: -15rem;\r\n\ttransition: margin .25s ease-out;\n}\n#sidebar-wrapper .sidebar-heading {\r\n\tpadding: 0.875rem 1.25rem;\r\n\tfont-size: 1.2rem;\n}\n#sidebar-wrapper .list-group {\r\n\twidth: 15rem;\n}\n#page-content-wrapper {\r\n\tmin-width: 100vw;\n}\n#wrapper.toggled #sidebar-wrapper {\r\n\tmargin-left: 0;\n}\n@media (min-width: 768px) {\n#sidebar-wrapper {\r\n\t\tmargin-left: 0;\n}\n#page-content-wrapper {\r\n\t\tmin-width: 0;\r\n\t\twidth: 100%;\n}\n#wrapper.toggled #sidebar-wrapper {\r\n\t\tmargin-left: -15rem;\n}\n}\r\n\r\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/ranking.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/ranking.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ranking.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/ranking.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./lecciones.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -222,7 +216,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -230,10 +224,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/ranking.vue?vue&type=template&id=3f938a21&":
-/*!*****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/ranking.vue?vue&type=template&id=3f938a21& ***!
-  \*****************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54& ***!
+  \*****************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -318,9 +312,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n\t\t\t\t\t\t\t\t\t" +
+                                "\n\t\t\t\t\t\t\t\t" +
                                   _vm._s(_vm.usuario.name) +
-                                  "\n\t\t\t\t\t\t\t\t"
+                                  "\n\t\t\t\t\t\t\t"
                               )
                             ]
                           ),
@@ -342,7 +336,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n\t\t\t\t\t\t\t\t\t\tMi perfil\n\t\t\t\t\t\t\t\t\t"
+                                    "\n\t\t\t\t\t\t\t\t\tMi perfil\n\t\t\t\t\t\t\t\t"
                                   )
                                 ]
                               ),
@@ -357,7 +351,7 @@ var render = function() {
                                       "event.preventDefault(); document.getElementById('logout-form').submit();"
                                   }
                                 },
-                                [_vm._v("Cerrar Sesión\n\t\t\t\t\t\t\t\t\t")]
+                                [_vm._v("Cerrar Sesión\n\t\t\t\t\t\t\t\t")]
                               )
                             ],
                             1
@@ -372,7 +366,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col-12 container-fluid" },
+              { staticClass: "container-fluid" },
               [
                 _c(
                   "router-link",
@@ -380,241 +374,361 @@ var render = function() {
                     staticClass: "btn btn-dark text-uppercase",
                     attrs: { to: "/home" }
                   },
-                  [_vm._v("\n\t\t\t\t\tRegresar\n\t\t\t\t")]
+                  [_vm._v("Regresar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "btn btn-warning ocultar",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.mostrarSidebar()
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "far fa-arrow-alt-circle-left" })]
                 )
               ],
               1
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "container-fluid" }, [
-              _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "d-flex", attrs: { id: "wrapper" } }, [
+              _c("div", { attrs: { id: "sidebar-wrapper" } }, [
                 _c(
                   "div",
-                  { staticClass: "col-md-5 col-sm-12 mb-3 mt-2" },
-                  _vm._l(_vm.rankings, function(ran, index) {
-                    return ran.id == _vm.usuario.id
-                      ? _c("div", { staticClass: "text-center mb-3" }, [
-                          _c("div", { staticClass: "card" }, [
-                            _c("div", { staticClass: "card-body contenedor" }, [
-                              _c(
-                                "h2",
-                                { staticClass: "text-center text-white" },
-                                [_vm._v(_vm._s(ran.name))]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "imagen" }, [
-                                _c("img", {
-                                  staticClass: "rounded-circle",
-                                  attrs: {
-                                    src: "/imagenes/usuario/" + ran.avatar
-                                  }
-                                })
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "card-footer pt-5" }, [
-                              _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-6 border-right" },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "description-block" },
-                                      [
-                                        _c(
-                                          "h5",
-                                          {
-                                            staticClass:
-                                              "description-header text-warning"
-                                          },
-                                          [
-                                            _c("b", [
-                                              _vm._v("# " + _vm._s(index + 1))
-                                            ])
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "h5",
-                                          {
-                                            staticClass:
-                                              "description-text text-muted"
-                                          },
-                                          [_c("b", [_vm._v("Ranking")])]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-6" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "description-block" },
-                                    [
-                                      _c(
-                                        "h5",
-                                        {
-                                          staticClass:
-                                            "description-header text-warning"
-                                        },
-                                        [_c("b", [_vm._v(_vm._s(ran.puntos))])]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "h5",
-                                        {
-                                          staticClass:
-                                            "description-text text-muted"
-                                        },
-                                        [_c("b", [_vm._v("Puntos")])]
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ])
-                            ])
-                          ])
-                        ])
-                      : _vm._e()
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-7 col-12 mt-2" }, [
-                  _c("div", { staticClass: "card" }, [
-                    _c("h3", { staticClass: "text-center pt-4 text-danger" }, [
-                      _vm._v("Los mejores 10")
-                    ]),
+                  {
+                    staticClass: "nav flex-column nav-pills list-group",
+                    attrs: {
+                      id: "v-pills-tab",
+                      role: "tablist",
+                      "aria-orientation": "vertical"
+                    }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link active",
+                        attrs: {
+                          id: "v-pills-home-tab",
+                          "data-toggle": "pill",
+                          href: "#v-pills-home",
+                          role: "tab",
+                          "aria-controls": "v-pills-home",
+                          "aria-selected": "true"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n\t\t\t\t\t\t¿Qué es la lectura veloz?\n\t\t\t\t\t"
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "card-body" }, [
-                      _c(
-                        "table",
-                        { staticClass: "table table-hover text-center" },
-                        [
-                          _c("thead", [
-                            _c("tr", [
-                              _c("th", [_vm._v("#")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("nombre")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("curso")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("Puntos")])
-                            ])
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link",
+                        attrs: {
+                          id: "v-pills-profile-tab",
+                          "data-toggle": "pill",
+                          href: "#v-pills-profile",
+                          role: "tab",
+                          "aria-controls": "v-pills-profile",
+                          "aria-selected": "false"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n\t\t\t\t\t\tBeneficios de la lectura\n\t\t\t\t\t"
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link",
+                        attrs: {
+                          id: "v-pills-messages-tab",
+                          "data-toggle": "pill",
+                          href: "#v-pills-messages",
+                          role: "tab",
+                          "aria-controls": "v-pills-messages",
+                          "aria-selected": "false"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n\t\t\t\t\t\t¿Como aumentar la velocidad?\n\t\t\t\t\t"
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link",
+                        attrs: {
+                          id: "v-pills-settings-tab",
+                          "data-toggle": "pill",
+                          href: "#v-pills-settings",
+                          role: "tab",
+                          "aria-controls": "v-pills-settings",
+                          "aria-selected": "false"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n\t\t\t\t\t\tConsejos para el sistema\n\t\t\t\t\t"
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "page-content-wrapper" } }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-content",
+                    attrs: { id: "v-pills-tabContent" }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane fade show active",
+                        attrs: {
+                          id: "v-pills-home",
+                          role: "tabpanel",
+                          "aria-labelledby": "v-pills-home-tab"
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "container" }, [
+                          _c("h3", { staticClass: "text-center" }, [
+                            _vm._v("Que es la Lectura Veloz")
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "tbody",
-                            _vm._l(_vm.rankings, function(ran, index) {
-                              return index < 10
-                                ? _c("tr", [
-                                    _c("td", [_vm._v(_vm._s(index + 1))]),
-                                    _vm._v(" "),
-                                    _c("td", [
-                                      _c("img", {
-                                        staticClass:
-                                          "img-responsive rounded-circle",
-                                        attrs: {
-                                          src:
-                                            "/imagenes/usuario/" + ran.avatar,
-                                          width: "50",
-                                          height: "50"
-                                        }
-                                      }),
-                                      _vm._v(" " + _vm._s(ran.name))
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", [
-                                      ran.puntos < 100
-                                        ? _c("span", [
-                                            _c("img", {
-                                              attrs: {
-                                                src: _vm.rangos.rango1,
-                                                height: "50",
-                                                width: "50"
-                                              }
-                                            })
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.usuario.puntos >= 100 &&
-                                      _vm.usuario.puntos < 500
-                                        ? _c("span", [
-                                            _c("img", {
-                                              attrs: {
-                                                src: _vm.rangos.rango2,
-                                                height: "50",
-                                                width: "50"
-                                              }
-                                            })
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.usuario.puntos >= 500 &&
-                                      _vm.usuario.puntos < 1000
-                                        ? _c("span", [
-                                            _c("img", {
-                                              attrs: {
-                                                src: _vm.rangos.rango3,
-                                                height: "50",
-                                                width: "50"
-                                              }
-                                            })
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.usuario.puntos >= 1000 &&
-                                      _vm.usuario.puntos < 5000
-                                        ? _c("span", [
-                                            _c("img", {
-                                              attrs: {
-                                                src: _vm.rangos.rango4,
-                                                height: "50",
-                                                width: "50"
-                                              }
-                                            })
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.usuario.puntos >= 5000 &&
-                                      _vm.usuario.puntos < 10000
-                                        ? _c("span", [
-                                            _c("img", {
-                                              attrs: {
-                                                src: _vm.rangos.rango5,
-                                                height: "50",
-                                                width: "50"
-                                              }
-                                            })
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.usuario.puntos >= 10000
-                                        ? _c("span", [
-                                            _c("img", {
-                                              attrs: {
-                                                src: _vm.rangos.rango6,
-                                                height: "50",
-                                                width: "50"
-                                              }
-                                            })
-                                          ])
-                                        : _vm._e()
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", [_vm._v(_vm._s(ran.puntos))])
-                                  ])
-                                : _vm._e()
-                            }),
-                            0
+                          _c("p", { staticClass: "lead text-justify" }, [
+                            _vm._v(
+                              "Es una técnica de gimnasia mental que permite comprender más rápidamente los textos y mensajes escritos, y a su vez ayuda a incrementar nuestro campo intelectual.\n\t\t\t\t\t\t\t"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "lead text-justify" }, [
+                            _vm._v(
+                              "Las estrategias de lectura veloz no sólo permiten acelerar el trabajo de lectura, sino que a la vez facilitan el proceso de comprensión e incorporación inmediata de los conocimientos. Por lo tanto, mediante la lectura veloz podemos aprender a leer más rápido pero también comprender mejor lo que estamos leyendo.\n\t\t\t\t\t\t\t"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "lead text-justify" }, [
+                            _vm._v(
+                              "La lectura veloz es una técnica y para alcanzar sus objetivos se requiere de mucha práctica y de un entrenamiento sistemático. Las rutinas de trabajo deben establecerse en base a los objetivos específicos de cada persona. Generalmente los objetivos suelen ser: incrementar la velocidad lectora, incrementar la capacidad de comprensión o aumentar la capacidad de concentración al leer.\t\t\n\t\t\t\t\t\t\t"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "text-center" }, [
+                            _c("img", {
+                              attrs: {
+                                src: "imagenes/lecciones/que es.png",
+                                alt: "imagen",
+                                width: "300"
+                              }
+                            })
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane fade",
+                        attrs: {
+                          id: "v-pills-profile",
+                          role: "tabpanel",
+                          "aria-labelledby": "v-pills-profile-tab"
+                        }
+                      },
+                      [
+                        _c("h3", { staticClass: "text-center" }, [
+                          _vm._v("Beneficios de la Lectura")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "lead" }, [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\tLa lectura ofrece innumerables beneficios, entre ellos:"
+                          ),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("b", [_vm._v("+")]),
+                          _vm._v(" Agudiza la astucia."),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("b", [_vm._v("+")]),
+                          _vm._v(
+                            " Estimula el intercambio de información y conocimiento."
+                          ),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("b", [_vm._v("+")]),
+                          _vm._v(
+                            " La costumbre continuada de leer, retarda la aparición de los síntomas de demencia."
+                          ),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("b", [_vm._v("+")]),
+                          _vm._v(" Estimula la percepción."),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("b", [_vm._v("+")]),
+                          _vm._v(" Estimula la concentración."),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("b", [_vm._v("+")]),
+                          _vm._v(" Estimula la empatía."),
+                          _c("br")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "lead" }, [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\tAdemas eso no es todo... Fíjate la siguiente imagen\n\t\t\t\t\t\t"
                           )
-                        ]
-                      )
-                    ])
-                  ])
-                ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-center" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "imagenes/lecciones/beneficios.png",
+                              alt: "imagen",
+                              width: "80%"
+                            }
+                          })
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane fade",
+                        attrs: {
+                          id: "v-pills-messages",
+                          role: "tabpanel",
+                          "aria-labelledby": "v-pills-messages-tab"
+                        }
+                      },
+                      [
+                        _c("h3", { staticClass: "text-center" }, [
+                          _vm._v("¿Cómo aumentar la velocidad de lectura?")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "lead" }, [
+                          _vm._v("\n\t\t\t\t\t\t\t1. Relájate "),
+                          _c("br"),
+                          _vm._v("\n\t\t\t\t\t\t\t2. Buscar un lugar adecuado"),
+                          _c("br"),
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t3. Necesitas tener buena postura"
+                          ),
+                          _c("br"),
+                          _vm._v("\n\t\t\t\t\t\t\t4. Buena iluminación"),
+                          _c("br"),
+                          _vm._v("\n\t\t\t\t\t\t\t5. Evitar distracciones"),
+                          _c("br"),
+                          _vm._v("\n\t\t\t\t\t\t\t6. No leas en voz alta"),
+                          _c("br"),
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t7. No repitas lo antes leido"
+                          ),
+                          _c("br"),
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t8. Señala con un material para no perderte"
+                          ),
+                          _c("br"),
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t9. Trata de aumentar el campo visual"
+                          ),
+                          _c("br"),
+                          _vm._v("\n\t\t\t\t\t\t\t10. Seguir practicando"),
+                          _c("br")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-center" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "imagenes/lecciones/leer.png",
+                              alt: "imagen",
+                              width: "80%"
+                            }
+                          })
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane fade",
+                        attrs: {
+                          id: "v-pills-settings",
+                          role: "tabpanel",
+                          "aria-labelledby": "v-pills-settings-tab"
+                        }
+                      },
+                      [
+                        _c("h3", { staticClass: "text-center" }, [
+                          _vm._v("Consejos")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("p", { staticClass: "lead col-md-6" }, [
+                            _c("b", [_vm._v("❤")]),
+                            _vm._v(
+                              "El sistema te pedirá una mayor velocidad y comprensión en cada examen."
+                            ),
+                            _c("br"),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("b", [_vm._v("❤")]),
+                            _vm._v("Realiza el primer examen y gana 50 pts. "),
+                            _c("br"),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("b", [_vm._v("❤")]),
+                            _vm._v(
+                              "Si no puedes avanzar, puedes ganar puntos realizando los ejercicios. "
+                            ),
+                            _c("br"),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("b", [_vm._v("❤")]),
+                            _vm._v(
+                              "Sigue practicando y no te olvides de la diversión"
+                            ),
+                            _c("br"),
+                            _c("br")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "text-center col-md-6" }, [
+                            _c("img", {
+                              attrs: {
+                                src: "imagenes/lecciones/fun.png",
+                                alt: "imagen",
+                                width: "80%"
+                              }
+                            })
+                          ])
+                        ])
+                      ]
+                    )
+                  ]
+                )
               ])
             ])
           ])
@@ -629,19 +743,19 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/users/ranking.vue":
-/*!****************************************!*\
-  !*** ./resources/js/users/ranking.vue ***!
-  \****************************************/
+/***/ "./resources/js/users/lecciones/lecciones.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/users/lecciones/lecciones.vue ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ranking_vue_vue_type_template_id_3f938a21___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ranking.vue?vue&type=template&id=3f938a21& */ "./resources/js/users/ranking.vue?vue&type=template&id=3f938a21&");
-/* harmony import */ var _ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ranking.vue?vue&type=script&lang=js& */ "./resources/js/users/ranking.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ranking.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/ranking.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lecciones.vue?vue&type=template&id=17f7ae54& */ "./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54&");
+/* harmony import */ var _lecciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lecciones.vue?vue&type=script&lang=js& */ "./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lecciones.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -651,9 +765,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ranking_vue_vue_type_template_id_3f938a21___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ranking_vue_vue_type_template_id_3f938a21___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _lecciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -663,54 +777,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/users/ranking.vue"
+component.options.__file = "resources/js/users/lecciones/lecciones.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/users/ranking.vue?vue&type=script&lang=js&":
-/*!*****************************************************************!*\
-  !*** ./resources/js/users/ranking.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************/
+/***/ "./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ranking.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/ranking.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./lecciones.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/users/ranking.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/users/ranking.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************/
+/***/ "./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ranking.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/ranking.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./lecciones.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/users/ranking.vue?vue&type=template&id=3f938a21&":
-/*!***********************************************************************!*\
-  !*** ./resources/js/users/ranking.vue?vue&type=template&id=3f938a21& ***!
-  \***********************************************************************/
+/***/ "./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54& ***!
+  \***********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ranking_vue_vue_type_template_id_3f938a21___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ranking.vue?vue&type=template&id=3f938a21& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/ranking.vue?vue&type=template&id=3f938a21&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ranking_vue_vue_type_template_id_3f938a21___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./lecciones.vue?vue&type=template&id=17f7ae54& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ranking_vue_vue_type_template_id_3f938a21___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

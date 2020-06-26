@@ -194,7 +194,6 @@ __webpack_require__.r(__webpack_exports__);
       preguntas: [],
       pregunta: {
         enunciado: '',
-        examen_id: '',
         respuestaA: '',
         respuestaB: '',
         respuestaC: '',
@@ -203,7 +202,6 @@ __webpack_require__.r(__webpack_exports__);
       },
       fillpregunta: {
         enunciado: '',
-        examen_id: '',
         respuestaA: '',
         respuestaB: '',
         respuestaC: '',
@@ -323,7 +321,17 @@ __webpack_require__.r(__webpack_exports__);
       this.fillpregunta.respuestaB = pregunta.respuestaB;
       this.fillpregunta.respuestaC = pregunta.respuestaC;
       this.fillpregunta.respuestaD = pregunta.respuestaD;
-      this.fillpregunta.esCorrecto = pregunta.esCorrecto;
+
+      if (pregunta.esCorrecto == pregunta.respuestaA) {
+        this.fillpregunta.esCorrecto = "A";
+      } else if (pregunta.esCorrecto == pregunta.respuestaB) {
+        this.fillpregunta.esCorrecto = "B";
+      } else if (pregunta.esCorrecto == pregunta.respuestaC) {
+        this.fillpregunta.esCorrecto = "C";
+      } else if (pregunta.esCorrecto == pregunta.respuestaD) {
+        this.fillpregunta.esCorrecto = "D";
+      }
+
       $('#editarPregunta').modal('show');
     },
     updatePregunta: function updatePregunta(fillpregunta) {
@@ -339,7 +347,6 @@ __webpack_require__.r(__webpack_exports__);
         data.append('respuestaB', this.fillpregunta.respuestaB);
         data.append('respuestaC', this.fillpregunta.respuestaC);
         data.append('respuestaD', this.fillpregunta.respuestaD);
-        data.append('esCorrecto', this.fillpregunta.esCorrecto);
 
         if (this.fillpregunta.esCorrecto == "A") {
           data.append('esCorrecto', this.fillpregunta.respuestaA);

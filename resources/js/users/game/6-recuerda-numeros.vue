@@ -143,9 +143,9 @@
 					<div class="card animated bounceInRight">
 						<div class="card-body">
 							<h3 class="text-center">estos son los resultados</h3>
-							<h4>tiempo : 00:00</h4><hr>
+							<h4>Calificacion : <span id="estrellas"></span></h4><hr>
 							<h4>Puntuacion: {{ puntuacion }}</h4><hr>
-							<h4>Aumento: <b>+</b> {{ Math.floor(puntuacion/3) }}</h4><hr>
+							<h4 class="text-warning">Aumento: <b>+</b> {{ Math.floor(puntuacion/3) }}</h4><hr>
 							<router-link to="/game" class="btn btn-primary btn-block"> Volver a los ejercicios</router-link>
 							<router-link to="/home" class="btn btn-primary btn-block"> Volver al inicio</router-link>
 						</div>
@@ -211,12 +211,39 @@
 
 				axios.post('/game',formData)
 				.then(res=>{
-					this.actualizar_datos_usuario()
+					this.actualizarDatosUsuario()
 					document.getElementById("tercera-vista").style.display='none'
 					document.getElementById("cuarta-vista").style.display='block'
 				})
 			},
-			actualizar_datos_usuario(){
+			dibujarEstrellas(numero , titulo){
+				var stars = "";
+				for (var i = 0; i < 5; i++) {
+					if (i < numero) {
+						stars += "<span><i class='fas fa-star'></i></span>";
+					}else{
+						stars += "<span><i class='far fa-star'></i></span>";
+					}
+				}
+				var astro = document.getElementById("estrellas");
+				astro.innerHTML=stars;
+				astro.innerHTML+=titulo;
+			},
+			actualizarDatosUsuario(){
+				var stars = 0 
+				var minimo = 12
+				var titulo = ''
+				for(var i = 1; i <= 5; i++){
+					if (this.puntuacion >= (minimo*i)) {
+						stars = i
+						titulo = ' '+i+' / '+5
+					}else{
+						stars = i-1
+						titulo = ' '+(i-1)+' / '+5
+						break;
+					}
+				}
+				this.dibujarEstrellas(stars, titulo)
 				var point = Math.floor(this.puntuacion/3)
 				this.usuario.puntos += point;
 				let data = new FormData();
