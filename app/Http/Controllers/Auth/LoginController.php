@@ -34,6 +34,14 @@ class LoginController extends Controller
         }
     }
     /**
+    * Check either username or email.
+    * @return string
+    */
+    public function username()
+    {
+        return 'name';
+    }
+    /**
      * Create a new controller instance.
      *
      * @return void
