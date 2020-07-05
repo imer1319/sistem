@@ -8,7 +8,7 @@
 					<div class="m-auto card-header">Numero de usuarios</div>
 					<div class="card-body row text-center">
 						<div class="col-6"><h1>{{ numero_usuarios }}</h1></div>
-						<div class="col-6"><h1><i class="fas fa-user"></i></h1></div>
+						<div class="col-6"><h1><i class="fas fa-user text-primary"></i></h1></div>
 					</div>
 				</div>
 			</div>
@@ -17,7 +17,7 @@
 					<div class="m-auto card-header">Numero de examenes</div>
 					<div class="card-body row text-center">
 						<div class="col-6"> <h1>{{ numero_examenes }}</h1></div>
-						<div class="col-6"><h1><i class="fas fa-file-contract"></i></h1></div>
+						<div class="col-6"><h1><i class="fas fa-file-contract text-success"></i></h1></div>
 					</div>
 				</div>
 			</div>
@@ -26,7 +26,7 @@
 					<div class="m-auto card-header">Numero de ejercicios</div>
 					<div class="card-body row text-center">
 						<div class="col-6"> <h1>{{ numero_ejercicios }}</h1></div>
-						<div class="col-6"><h1><i class="fas fa-gamepad"></i></h1></div>
+						<div class="col-6"><h1><i class="fas fa-gamepad text-danger"></i></h1></div>
 					</div>
 				</div>
 			</div>

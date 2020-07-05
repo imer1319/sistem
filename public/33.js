@@ -179,7 +179,9 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-6" }, [
-                    _c("h1", [_c("i", { staticClass: "fas fa-user" })])
+                    _c("h1", [
+                      _c("i", { staticClass: "fas fa-user text-primary" })
+                    ])
                   ])
                 ])
               ])
@@ -197,7 +199,11 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-6" }, [
-                    _c("h1", [_c("i", { staticClass: "fas fa-file-contract" })])
+                    _c("h1", [
+                      _c("i", {
+                        staticClass: "fas fa-file-contract text-success"
+                      })
+                    ])
                   ])
                 ])
               ])
@@ -215,7 +221,9 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-6" }, [
-                    _c("h1", [_c("i", { staticClass: "fas fa-gamepad" })])
+                    _c("h1", [
+                      _c("i", { staticClass: "fas fa-gamepad text-danger" })
+                    ])
                   ])
                 ])
               ])
