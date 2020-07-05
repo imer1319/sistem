@@ -438,27 +438,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url).then(function (res) {
         _this.examen = res.data;
         _this.loading = false;
-
-        _this.loadDoc();
       });
-    },
-    loadDoc: function loadDoc() {
-      var url = "/examenes/" + this.examen.content;
-      ;
-      var xhttp = new XMLHttpRequest();
-
-      xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          document.getElementById("test").innerHTML = this.responseText;
-        }
-      };
-
-      xhttp.open("GET", url, true);
-      xhttp.send();
-    },
-    contarPalabras: function contarPalabras() {
-      var textArea = document.getElementById("test").value;
-      this.palabras = textArea.match(/[^\s]+/g).length;
     }
   }
 });
@@ -1363,7 +1343,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("hr"),
                 _vm._v(" "),
-                _c("p", { staticClass: "text-justify", attrs: { id: "test" } })
+                _c("p", { staticClass: "text-justify" }, [
+                  _vm._v(_vm._s(_vm.examen.content))
+                ])
               ])
             ]),
             _vm._v(" "),

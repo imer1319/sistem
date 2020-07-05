@@ -234,7 +234,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('es');
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -494,23 +493,7 @@ moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('es');
       var url = this.$route.params.id;
       axios.get(url).then(function (res) {
         _this6.examen = res.data;
-
-        _this6.leerDocumento();
       });
-    },
-    leerDocumento: function leerDocumento() {
-      var url = "/examenes/" + this.examen.content;
-      var xhttp = new XMLHttpRequest();
-
-      xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          document.getElementById("test").innerHTML = this.responseText;
-          document.getElementById("area").innerHTML = this.responseText;
-        }
-      };
-
-      xhttp.open("GET", url, true);
-      xhttp.send();
     },
     mostrarPreguntas: function mostrarPreguntas() {
       this.muestra_exam = 2;
@@ -538,7 +521,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*************----RADIO BUTON----***********/\n.radioContainer{\r\n\tdisplay: inline-block;\r\n\tposition: relative;\r\n\tcursor: pointer;\r\n\tfont-family: sans-serif;\r\n\tfont-size: 22px;\r\n\tpadding-left: 30px;\n}\n.radioContainer input{\r\n\tdisplay: none;\n}\n.radioContainer .circle{\r\n\tdisplay: inline-block;\r\n\twidth: 25px;\r\n\theight: 25px;\r\n\tbackground-color: #eee;\r\n\tposition: absolute;\r\n\tleft: 0; top: 0;\r\n\tborder-radius: 50%;\n}\n.radioContainer:hover .circle{\r\n\tbackground-color: #ccc;\n}\n.radioContainer input:checked + .circle{\r\n\tbackground-color: #2196fc;\n}\n.radioContainer input:checked + .circle:after{\r\n\tcontent: \"\";\r\n\theight: 10px;\r\n\twidth: 10px;\r\n\tbackground-color: white;\r\n\tposition: absolute;\r\n\tborder-radius: 50%;\r\n\tleft: 50%;\r\n\ttop: 50%;\r\n\ttransform: translate(-50%, -50%);\n}\r\n/***********-- PROGRESS- BAR --**************/\n#progressbar {\r\n\tmargin-bottom: 30px;\r\n\toverflow: hidden;\r\n\t/*CSS counters to number the steps*/\r\n\tcounter-reset: step;\n}\n#progressbar li {\r\n\tlist-style-type: none;\r\n\tcolor: black;\r\n\ttext-transform: uppercase;\r\n\tfont-size: 18px;\r\n\twidth: 33.33%;\r\n\tfloat: left;\r\n\tposition: relative;\r\n\ttext-align: center;\n}\n#progressbar li:before {\r\n\tcontent: counter(step);\r\n\tcounter-increment: step;\r\n\twidth: 40px;\r\n\tline-height: 40px;\r\n\tdisplay: block;\r\n\tfont-size: 18px;\r\n\tcolor: #333;\r\n\tbackground: white;\r\n\tborder-radius: 3px;\r\n\tmargin: 0 auto 5px auto;\r\n\ttext-align: center;\n}\r\n/*progressbar connectors*/\n#progressbar li:after {\r\n\tcontent: '';\r\n\twidth: 100%;\r\n\theight: 2px;\r\n\tbackground: white;\r\n\tposition: absolute;\r\n\tleft: -50%;\r\n\ttop: 20px;\r\n\tz-index: -1; /*put it behind the numbers*/\n}\n#progressbar li:first-child:after {\r\n\t/*connector not needed before the first step*/\r\n\tcontent: none;\n}\r\n/*marking active/completed steps green*/\r\n/*The number of the step and the connector before it = green*/\n#progressbar li.active:before,  #progressbar li.active:after{\r\n\tbackground: #15799e;\r\n\tcolor: white;\n}\r\n/* para el radio button*/\r\n\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*************----RADIO BUTON----***********/\n.radioContainer{\r\n\tdisplay: inline-block;\r\n\tposition: relative;\r\n\tcursor: pointer;\r\n\tfont-family: sans-serif;\r\n\tfont-size: 22px;\r\n\tpadding-left: 30px;\n}\n.radioContainer input{\r\n\tdisplay: none;\n}\n.radioContainer .circle{\r\n\tdisplay: inline-block;\r\n\twidth: 25px;\r\n\theight: 25px;\r\n\tbackground-color: #eee;\r\n\tposition: absolute;\r\n\tleft: 0; top: 0;\r\n\tborder-radius: 50%;\n}\n.radioContainer:hover .circle{\r\n\tbackground-color: #ccc;\n}\n.radioContainer input:checked + .circle{\r\n\tbackground-color: #2196fc;\n}\n.radioContainer input:checked + .circle:after{\r\n\tcontent: \"\";\r\n\theight: 10px;\r\n\twidth: 10px;\r\n\tbackground-color: white;\r\n\tposition: absolute;\r\n\tborder-radius: 50%;\r\n\tleft: 50%;\r\n\ttop: 50%;\r\n\ttransform: translate(-50%, -50%);\n}\r\n/***********-- PROGRESS- BAR --**************/\n#progressbar {\r\n\tmargin-bottom: 30px;\r\n\toverflow: hidden;\r\n\t/*CSS counters to number the steps*/\r\n\tcounter-reset: step;\n}\n#progressbar li {\r\n\tlist-style-type: none;\r\n\tcolor: black;\r\n\ttext-transform: uppercase;\r\n\tfont-size: 18px;\r\n\twidth: 33.33%;\r\n\tfloat: left;\r\n\tposition: relative;\r\n\ttext-align: center;\n}\n#progressbar li:before {\r\n\tcontent: counter(step);\r\n\tcounter-increment: step;\r\n\twidth: 40px;\r\n\tline-height: 40px;\r\n\tdisplay: block;\r\n\tfont-size: 18px;\r\n\tcolor: #333;\r\n\tbackground: white;\r\n\tborder-radius: 3px;\r\n\tmargin: 0 auto 5px auto;\r\n\ttext-align: center;\n}\r\n/*progressbar connectors*/\n#progressbar li:after {\r\n\tcontent: '';\r\n\twidth: 100%;\r\n\theight: 2px;\r\n\tbackground: white;\r\n\tposition: absolute;\r\n\tleft: -50%;\r\n\ttop: 20px;\r\n\tz-index: -1; /*put it behind the numbers*/\n}\n#progressbar li:first-child:after {\r\n\t/*connector not needed before the first step*/\r\n\tcontent: none;\n}\r\n/*marking active/completed steps green*/\r\n/*The number of the step and the connector before it = green*/\n#progressbar li.active:before,  #progressbar li.active:after{\r\n\tbackground: #15799e;\r\n\tcolor: white;\n}\r\n/* para el radio button*/\r\n\r\n", ""]);
 
 // exports
 
@@ -1085,15 +1068,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("hr"),
                       _vm._v(" "),
-                      _c("p", {
-                        staticClass: "text-justify",
-                        attrs: { id: "test" }
-                      }),
-                      _vm._v(" "),
-                      _c("textarea", {
-                        staticStyle: { display: "none" },
-                        attrs: { id: "area", COLS: "40", ROWS: "10" }
-                      })
+                      _c("p", { staticClass: "text-justify" }, [
+                        _vm._v(_vm._s(_vm.examen.content) + " }")
+                      ])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "row my-3" }, [

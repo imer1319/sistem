@@ -74691,7 +74691,7 @@ var routes = [{
   name: 'puntuacionExamen',
   path: '/puntuacionExamen',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ./users/puntuacionExam.vue */ "./resources/js/users/puntuacionExam.vue"));
+    return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./users/puntuacionExam.vue */ "./resources/js/users/puntuacionExam.vue"));
   }
 }, {
   name: 'ejercicios',
@@ -74847,7 +74847,7 @@ var routes = [{
   name: 'piramide',
   path: '/piramide',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./users/ejercicios/5-piramide.vue */ "./resources/js/users/ejercicios/5-piramide.vue"));
+    return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ./users/ejercicios/5-piramide.vue */ "./resources/js/users/ejercicios/5-piramide.vue"));
   }
 }];
 
@@ -74871,8 +74871,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\zzproject\sistem\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\zzproject\sistem\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\IMER\sistem\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\IMER\sistem\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

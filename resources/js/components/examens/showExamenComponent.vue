@@ -10,7 +10,7 @@
 					</div>
 					<h3 class="profile-username text-center">{{ examen.name }}</h3>
 					<hr>
-					<p id="test" class="text-justify"></p>
+					<p class="text-justify">{{ examen.content }}</p>
 				</div>
 			</div>
 
@@ -44,24 +44,8 @@
 				axios.get(url).then(res =>{
 					this.examen = res.data
 					this.loading = false;
-					this.loadDoc();
 				})
 			},
-			loadDoc() {
-				var url ="/examenes/"+this.examen.content;;
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("test").innerHTML = this.responseText;
-					}
-				};
-				xhttp.open("GET", url, true);
-				xhttp.send();
-			},
-			contarPalabras(){
-				var textArea = document.getElementById("test").value;
-				this.palabras = textArea.match(/[^\s]+/g).length;
-			}
 		}
 	}
 </script>

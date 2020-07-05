@@ -138,12 +138,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -191,10 +185,6 @@ __webpack_require__.r(__webpack_exports__);
         _this2.examens = res.data;
         _this2.loading = false;
       });
-    },
-    obtenerArchivocrear: function obtenerArchivocrear(e) {
-      var arch = e.target.files[0];
-      this.examen.content = arch;
     },
     obtenerImagencrear: function obtenerImagencrear(e) {
       var file = e.target.files[0];
@@ -267,7 +257,6 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('/examen', formData).then(function (res) {
           _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.examen);
           _this5.examen.name = "";
-          _this5.$refs.txt.value = null;
           _this5.$refs.img.value = null;
           _this5.imagenMiniatura = null;
 
@@ -389,21 +378,6 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "imagen" } }, [
-                      _vm._v("Contenido")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "txt",
-                      staticClass: "form-control-file",
-                      attrs: { type: "file", accept: ".txt", required: "" },
-                      on: { change: _vm.obtenerArchivocrear }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "imagen" } }),
                     _vm._v(" "),
                     _c("input", {
@@ -421,9 +395,35 @@ var render = function() {
                   _vm._v(" "),
                   _c("figure", [
                     _c("img", {
-                      attrs: { width: "200", height: "200", src: _vm.imagen }
+                      attrs: { width: "120", height: "120", src: _vm.imagen }
                     })
                   ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Contenido")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.examen.content,
+                        expression: "examen.content"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "5" },
+                    domProps: { value: _vm.examen.content },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.examen, "content", $event.target.value)
+                      }
+                    }
+                  })
                 ])
               ]),
               _vm._v(" "),
@@ -488,18 +488,29 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "imagen" } }, [
-                      _vm._v("Contenido")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "texto",
-                      staticClass: "form-control-file",
-                      attrs: { type: "file", accept: ".txt" },
-                      on: { change: _vm.obtenerArchivo }
-                    })
-                  ])
+                  _c("label", [_vm._v("Contenido")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.fillExamen.content,
+                        expression: "fillExamen.content"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "5" },
+                    domProps: { value: _vm.fillExamen.content },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.fillExamen, "content", $event.target.value)
+                      }
+                    }
+                  })
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
@@ -603,9 +614,9 @@ var render = function() {
                             _vm._v(" "),
                             _c("th", [_vm._v("Nombre")]),
                             _vm._v(" "),
-                            _c("th", [_vm._v("Contenido")]),
-                            _vm._v(" "),
-                            _c("th", [_vm._v("Imagen")]),
+                            _c("th", { staticClass: "text-center" }, [
+                              _vm._v("Imagen")
+                            ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-center" }, [
                               _vm._v("Acciones")
@@ -626,20 +637,7 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(examen.name))]),
                               _vm._v(" "),
-                              _c("td", [
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(
-                                      examen.content.substring(
-                                        examen.content.length,
-                                        10
-                                      )
-                                    )
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
+                              _c("td", { staticClass: "text-center" }, [
                                 _c("img", {
                                   staticClass: "img-responsive",
                                   attrs: {

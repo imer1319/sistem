@@ -124,8 +124,7 @@
 					<div class="card-body">
 						<h3 class="text-center"><b>{{ examen.name }}</b></h3>
 						<hr>
-						<p id="test" class="text-justify"></p>
-						<textarea id="area" COLS=40 ROWS=10 style="display: none;"></textarea>
+						<p class="text-justify">{{ examen.content }} }</p>
 					</div>
 					<div class="row my-3">
 						<div class="btn btn-primary m-auto" @click.prevent="mostrarPreguntas()">Terminar</div>	
@@ -443,20 +442,7 @@
 				var url = this.$route.params.id;
 				axios.get(url).then(res =>{
 					this.examen = res.data
-					this.leerDocumento();
 				})
-			},
-			leerDocumento() {
-				var url = "/examenes/"+this.examen.content;
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("test").innerHTML = this.responseText;
-						document.getElementById("area").innerHTML = this.responseText;
-					}
-				};
-				xhttp.open("GET", url, true);
-				xhttp.send();
 			},
 			mostrarPreguntas(){
 				this.muestra_exam=2;

@@ -58,20 +58,8 @@
 				</div>
 				<div class="col-12 text-center">
 					<h3 class="text-white">
-						<span class="bg-danger redondear px-3">Mas ejercicios</span>
+						<span class="bg-danger redondear px-3">Mas ejercicios Proximamente</span>
 					</h3>
-				</div>
-				<div class="col-6 col-md-4 col-lg-3 mt-4" v-for="ejer in ejercicios">
-					<router-link :to="ejer.url">
-						<div class="card card-primary" :class="ejer.background">
-							<div class="card-body">
-								<img class="card-img-top img-responsive" :src="`/imagenes/ejercicios/${ejer.icon}`" width="100%">
-								<div class="card-block">
-									<span class="text-bold text-center">{{ ejer.name }}</span>
-								</div>
-							</div>
-						</div>
-					</router-link>
 				</div>
 			</div>
 		</div>
@@ -96,13 +84,6 @@
 				{name:'recordar numeros',icon:'recordar-numero.png',url:'/encuentra-numeros',min:10000,max:10000,background:'color8'},
 				{name:'Par o Impar',icon:'par - impar.png',url:'/par-impar',min:10000,max:10000,background:'color8'},
 				{name:'Iguales',icon:'campo-visual.png',url:'/iguales',min:10000,max:10000,background:'color8'},
-				],
-				ejercicios: [
-				{name:'Parpadeo',icon:'schulte-letras.png',url:'/parpadeo',background:'color8'},
-				{name:'vertical',icon:'schulte-letras.png',url:'/vertical',background:'color8'},
-				{name:'horizontal',icon:'schulte-letras.png',url:'/horizontal',background:'color8'},
-				{name:'aleatorio',icon:'schulte-letras.png',url:'/aleatorio',background:'color8'},
-				{name:'piramide',icon:'schulte-letras.png',url:'/piramide',background:'color8'},
 				],
 			}
 		},

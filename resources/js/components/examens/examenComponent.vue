@@ -20,18 +20,16 @@
 							</div>
 							<div class="form-group">
 								<div class="form-group">
-									<label for="imagen">Contenido</label>
-									<input type="file" @change="obtenerArchivocrear" class="form-control-file" ref="txt" accept=".txt" required/>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="form-group">
 									<label for="imagen"></label>
 									<input type="file" @change="obtenerImagencrear" id="f1" class="form-control-file" ref="img" accept="image/*" equired>
 								</div>
 								<figure>
-									<img width="200" height="200" :src="imagen">
+									<img width="120" height="120" :src="imagen">
 								</figure>
+							</div>
+							<div class="form-group">
+								<label>Contenido</label>
+								<textarea class="form-control" rows="5" v-model="examen.content"></textarea>
 							</div>
 						</div>
 						<div class="modal-footer pb-0">
@@ -64,10 +62,8 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="form-group">
-									<label for="imagen">Contenido</label>
-									<input type="file" @change="obtenerArchivo" class="form-control-file"  ref="texto" accept=".txt">
-								</div>
+								<label>Contenido</label>
+								<textarea class="form-control" rows="5" v-model="fillExamen.content"></textarea>
 							</div>
 							<div class="form-group">
 								<div class="form-group">
@@ -106,8 +102,7 @@
 							<tr>
 								<th>ID</th>
 								<th>Nombre</th>
-								<th>Contenido</th>
-								<th>Imagen</th>
+								<th class="text-center">Imagen</th>
 								<th class="text-center">Acciones</th>
 							</tr>
 						</thead>
@@ -115,8 +110,7 @@
 							<tr v-for="(examen, index) in paginated('examens')" :key="index" >
 								<td width="10px">{{ index+1}}</td>
 								<td>{{examen.name}}</td>
-								<td><span v-text="examen.content.substring(examen.content.length,10)"></span></td>
-								<td><img :src="`/imagenes/examen/${examen.icon}`" class="img-responsive" height="40" width="40"></td>
+								<td class="text-center"><img :src="`/imagenes/examen/${examen.icon}`" class="img-responsive" height="40" width="40"></td>
 								<td class="text-center" colspan="2">
 									<router-link :to="{name : 'show',params:{id:examen.id}}" class="btn btn-info"><i class="fas fa-eye"></i> Ver
 									</router-link>
@@ -166,10 +160,6 @@
 					this.examens = res.data
 					this.loading = false;
 				})
-			},
-			obtenerArchivocrear(e){
-				let arch = e.target.files[0];
-				this.examen.content = arch;
 			},
 			obtenerImagencrear(e){
 				let file = e.target.files[0];
@@ -232,7 +222,6 @@
 					.then(res=>{
 						EventBus.$emit('agregado', res.data.examen)
 						this.examen.name = ""
-						this.$refs.txt.value=null
 						this.$refs.img.value = null
 						this.imagenMiniatura = null
 						this.alerta('success','Se a agregado correctamente')

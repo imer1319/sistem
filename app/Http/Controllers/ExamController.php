@@ -27,14 +27,9 @@ class ExamController extends Controller
             $url = time().$file->getClientOriginalName();
             $file->move(public_path().'/imagenes/examen',$url);
         }
-        if ($request->hasFile('content')) {
-            $file = $request->file('content');
-            $content = time().$file->getClientOriginalName();
-            $file->move(public_path().'/examenes',$content);
-        }
         $examen = new Exam();
         $examen->name = $request->name;
-        $examen->content = $content;
+        $examen->content = $request->content;
         $examen->icon = $url;
         $examen->save();
         return response()->json([
@@ -55,7 +50,7 @@ class ExamController extends Controller
     public function update(Request $request, $id)
     {
         $examen = Exam::find($id);
-        $examen->fill($request->only('name'));
+        $examen->fill($request->only('name','content'));
         if ($file = $request->hasFile('icon')) {
             $file = $request->file('icon');
             $url = time().$file->getClientOriginalName();
@@ -63,14 +58,6 @@ class ExamController extends Controller
             $file_path = public_path().'/imagenes/examen/'.$examen->icon;
             if(is_file($file_path)){unlink($file_path);}
             $examen->icon = $url;
-        }
-        if ($archivo = $request->hasFile('content')) {
-            $archivo = $request->file('content');
-            $linki = time().$archivo->getClientOriginalName();
-            $archivo->move(public_path().'/examenes',$linki);
-            $file_buscar = public_path().'/examenes/'.$examen->content;
-            if(is_file($file_buscar)){unlink($file_buscar);}
-            $examen->content = $linki;
         }
         $examen->save();
         return response()->json([
