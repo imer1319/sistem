@@ -282,17 +282,17 @@
 				let data = new FormData()
 				data.append('puntos', this.usuario.puntos + point)
 				if (this.usuario.puntos<100) {
-					data.append('rango_id', 1)
-				}else if (this.usuario.puntos >= 100 && this.usuario.puntos < 500) {
-					data.append('rango_id', 2)
-				}else if (this.usuario.puntos >= 500 && this.usuario.puntos < 1000) {
-					data.append('rango_id', 3)
-				}else if (this.usuario.puntos >= 1000&& this.usuario.puntos < 5000) {
-					data.append('rango_id', 4)
-				}else if (this.usuario.puntos >= 5000&& this.usuario.puntos < 10000) {
-					data.append('rango_id', 5)
-				}else if (this.usuario.puntos > 10000) {
-					data.append('rango_id', 6)
+					data.append('rango_id', 1);
+				}else if (this.usuario.puntos >= 100 && this.usuario.puntos < 300) {
+					data.append('rango_id', 2);
+				}else if (this.usuario.puntos >= 300 && this.usuario.puntos < 700) {
+					data.append('rango_id', 3);
+				}else if (this.usuario.puntos >= 700&& this.usuario.puntos < 1000) {
+					data.append('rango_id', 4);
+				}else if (this.usuario.puntos >= 1000&& this.usuario.puntos < 2000) {
+					data.append('rango_id', 5);
+				}else if (this.usuario.puntos >= 2000) {
+					data.append('rango_id', 6);
 				}
 				data.append('_method','PUT')
 				var url = `/profile/${this.usuario.id}`

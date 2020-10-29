@@ -147,10 +147,25 @@
 				<div id="cuarta-vista"class="col-md-8 m-auto">
 					<div class="card animated bounceInRight">
 						<div class="card-body">
-							<h3 class="text-center">estos son los resultados</h3>
-							<h4>tiempo : 00:00</h4><hr>
+							<h3 class="text-center">Estos son los resultados</h3><hr>
+							<div v-if="this.puntuacion >= requierePuntuacion">
+								<h3 class="text-center text-success">
+									<span>Felicidades Aprobaste la lección</span>
+								</h3>
+							</div>
+							<div v-else>
+								<h3 class="text-center text-danger">
+									<span>No aprobaste la lección</span>
+								</h3>
+							</div>
+							<h4>Calificacion: {{ calificacion }} de 3</h4><hr>
 							<h4>Puntuacion: {{ puntuacion }}</h4><hr>
-							<h4>Aumento: <b>+</b> {{ Math.floor(puntuacion/3) }}</h4><hr>
+							<h3 class="text-warning text-center">
+								<b>{{ aumento_puntos }}</b>
+							</h3>
+							<router-link to="/curso" class="btn btn-primary m-auto btn-block">
+								Ir al Curso
+							</router-link>
 							<router-link :to="{name:'home'}" class="btn btn-primary m-auto btn-block">
 								Ir al Inicio
 							</router-link>
@@ -186,6 +201,11 @@
 				abajo:{x:3,y:4},
 				izquierda:{x:2,y:3},
 				loading:true,
+				aumento_avance:0,
+				aumento_curso:0,
+				calificacion:0,
+				requierePuntuacion:0,
+				aumento_puntos:'',
 			}
 		},
 		methods:{
@@ -220,27 +240,37 @@
 				})
 			},
 			actualizar_datos_usuario(){
-				var point = Math.floor(this.puntuacion/3)
-				let data = new FormData()
-				data.append('puntos', this.usuario.puntos + point)
-				if (this.usuario.puntos<100) {
-					data.append('rango_id', 1)
-				}else if (this.usuario.puntos >= 100 && this.usuario.puntos < 500) {
-					data.append('rango_id', 2)
-				}else if (this.usuario.puntos >= 500 && this.usuario.puntos < 1000) {
-					data.append('rango_id', 3)
-				}else if (this.usuario.puntos >= 1000&& this.usuario.puntos < 5000) {
-					data.append('rango_id', 4)
-				}else if (this.usuario.puntos >= 5000&& this.usuario.puntos < 10000) {
-					data.append('rango_id', 5)
-				}else if (this.usuario.puntos > 10000) {
-					data.append('rango_id', 6)
+				if (this.puntuacion <= (this.requierePuntuacion / 2)) {
+					this.calificacion = 1
 				}
-				data.append('_method','PUT')
-				var url = `/profile/${this.usuario.id}`
-				axios.post(url, data).then(res=>{
+				if (this.puntuacion > (this.requierePuntuacion / 2) && this.puntuacion < this.requierePuntuacion) {
+					this.calificacion = 2
+				}
+				if (this.puntuacion >= this.requierePuntuacion) {
+					this.calificacion = 3
+				}
+				if (this.puntuacion >= this.requierePuntuacion){
+					if ((this.usuario.avance_curso == 26 || this.usuario.avance_curso == 27)){
+						if (this.usuario.avance_curso == 26) {
+							this.usuario.puntos += 150
+							this.aumento_puntos = '+150 Pts'
+						}else if (this.usuario.avance_curso == 27) {
+							this.usuario.puntos += 200
+							this.aumento_puntos = '+200 Pts'
+						}
+						this.aumento_avance = this.usuario.avance_curso+1
+						let data = new FormData();
+						data.append('avance_curso',this.aumento_avance);
+						data.append('puntos',this.usuario.puntos);
+						data.append('_method','PUT');
+						var url = `/profile/${this.usuario.id}`
+						axios.post(url, data).then(res=>{
 
-				})
+						})
+					}
+				}
+				document.getElementById("tercera-vista").style.display='none'
+				document.getElementById("cuarta-vista").style.display='block'
 			},
 			pantalla_3_segundos(){
 				this.contador--
@@ -280,6 +310,12 @@
 				this.tres_segundos = setInterval(this.pantalla_3_segundos,1000)
 			},
 			empezarJuego(){
+				if (this.usuario.avance_curso == 26) {
+					this.requierePuntuacion = 75
+				}
+				if (this.usuario.avance_curso == 27)  {
+					this.requierePuntuacion = 100
+				}
 				let tabla="<table class='tabb m-auto'>"
 				var letra_posicion = Math.floor(Math.random()*this.letras.length)
 				var rand_cartesiano = Math.floor(Math.random()*4)

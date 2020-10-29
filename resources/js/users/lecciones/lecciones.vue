@@ -113,7 +113,13 @@
 							<h3 class="text-center">Consejos</h3>
 							<div class="row">
 								<p class="lead col-md-6">
-									<b>&#x2764;</b>El sistema te pedirá una mayor velocidad y comprensión en cada examen.<br><br>
+									<b>&#x2764;</b><span class="text-warning">El sistema tiene las siguientes peticiones de los examenes</span>.<br><br>
+									*** primer examen : Comprensión :<b>50%</b> ppm : <b>150</b><br><br>
+									*** segundo examen : Comprensión :<b>60%</b> ppm : <b>300</b><br><br>
+									*** tercer examen : Comprensión :<b>70%</b> ppm : <b>500</b><br><br>
+									*** cuarto examen : Comprensión :<b>85%</b> ppm : <b>700</b><br><br>
+									*** quinto examen : Comprensión :<b>90%</b> ppm : <b>1000</b><br><br>
+									*** quinto examen : Comprensión :<b>100%</b> ppm : <b>1300</b><br><br>
 									<b>&#x2764;</b>Realiza el primer examen y gana 50 pts. <br><br>
 									<b>&#x2764;</b>Si no puedes avanzar, puedes ganar puntos realizando los ejercicios. <br><br>
 									<b>&#x2764;</b>Sigue practicando y no te olvides de la diversión<br><br>

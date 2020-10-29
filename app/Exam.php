@@ -1,13 +1,11 @@
 <?php
 
 namespace App;
-use App\User;
-use App\Pregunta;
 use Illuminate\Database\Eloquent\Model;
 
 class Exam extends Model
 {
-	protected $fillable = ['name','content','icon'];
+	protected $fillable = ['name','content'];
 
 	public function pregunta()
 	{
@@ -15,7 +13,7 @@ class Exam extends Model
 	}
 	public function users()
 	{
-		 return $this->belongsToMany('App\User','exam_user')
+		 return $this->belongsToMany(User::class,'exam_user')
 		->withPivot('ppm','tiempo','comprension','estado','created_at');
 	}
 }

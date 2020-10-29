@@ -4,16 +4,11 @@
 		<div class="col-12" v-else>
 			<div class="card card-primary card-outline">
 				<div class="card-body box-profile">
-					<div class="text-center">
-						<img class="profile-user-img img-fluid img-circle img-responsive"
-						:src="`/imagenes/examen/${examen.icon}`">
-					</div>
 					<h3 class="profile-username text-center">{{ examen.name }}</h3>
 					<hr>
 					<p class="text-justify">{{ examen.content }}</p>
 				</div>
 			</div>
-
 			<div class="col-12">
 				<pregunta/>
 			</div>

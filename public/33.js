@@ -246,13 +246,13 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("p", [
-                      _vm._v("Ppm: " + _vm._s(_vm.mayor_puntuacion.ppm_inicial))
+                      _vm._v("Ppm: " + _vm._s(_vm.mayor_puntuacion.pivot.ppm))
                     ]),
                     _vm._v(" "),
                     _c("p", [
                       _vm._v(
                         "Comprensión: " +
-                          _vm._s(_vm.mayor_puntuacion.comprension_inicial) +
+                          _vm._s(_vm.mayor_puntuacion.pivot.comprension) +
                           "%"
                       )
                     ])
@@ -303,7 +303,7 @@ var render = function() {
                     _c("p", [
                       _vm._v(
                         "Comprensión: " +
-                          _vm._s(_vm.mayor_velocidad.comprension_inicial) +
+                          _vm._s(_vm.mayor_velocidad.pivot.comprension) +
                           "%"
                       )
                     ])
@@ -321,9 +321,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("b", [
                       _c("h4", [
-                        _vm._v(
-                          "Ppm: " + _vm._s(_vm.mayor_velocidad.ppm_inicial)
-                        )
+                        _vm._v("Ppm: " + _vm._s(_vm.mayor_velocidad.pivot.ppm))
                       ])
                     ])
                   ])

@@ -124,7 +124,8 @@
 					<div class="card-body">
 						<h3 class="text-center"><b>{{ examen.name }}</b></h3>
 						<hr>
-						<p class="text-justify">{{ examen.content }} }</p>
+						<p class="text-justify">{{ examen.content }} </p>
+						<textarea class="d-none" id="area">{{ examen.content }} </textarea>
 					</div>
 					<div class="row my-3">
 						<div class="btn btn-primary m-auto" @click.prevent="mostrarPreguntas()">Terminar</div>	
@@ -190,19 +191,20 @@
 						<hr>
 						<div class="card border-primary">
 							<div class="card-body">
-								<h4 class="text-center" :class="[(comprension * 10) >= requiere_comprension ? 'text-primary':'text-danger']">
+								<h4 class="text-center" :class="[(comprension * 10 >= requiere_comprension) && (palabras_x_minuto >= requiere_velocidad) ? 'text-primary':'text-danger']">
 									{{ mensaje_comprension }} <br>
 								</h4>
 							</div>
 						</div>
-						<h5 class="text-center" v-if="(comprension * 10) < requiere_comprension">
+						<h5 class="text-center" v-if="((comprension * 10 < requiere_comprension) || (palabras_x_minuto < requiere_velocidad))">
 							<span >
 								<i>Se requiere una comprension mayor o igual a : </i>
-								<b>{{ requiere_comprension }} %</b>
+								<b>{{ requiere_comprension }} %</b><br>
+								<i>Se requiere una velocidad mayor o igual a : </i>
+								<b>{{ requiere_velocidad }} ppm</b>
 							</span>
 						</h5>
-						<h4>Correctas : {{ comprension }}</h4>
-						<h4>Incorrectas : {{ 10-comprension }}</h4>
+						<h4>Comprensión : {{ comprension*10 }} %</h4>
 						<h4>Numero de palabras : {{ palabras }}</h4>
 						<h4>Palabras por minuto : {{ palabras_x_minuto }}</h4>
 						<h4>Tiempo : {{ result }}</h4>
@@ -282,24 +284,6 @@
 				axios.get(url).then(res =>{
 					this.usuario = res.data
 					this.loading = false;
-					if (this.usuario.avance_curso == 12 || this.usuario.avance_curso == 25 || this.usuario.avance_curso == 28) {
-						this.examen_anterior();
-					}
-				})
-			},
-			examen_anterior(){
-				if (this.usuario.avance_curso == 12) {
-					this.url_examen = 1
-				}
-				if (this.usuario.avance_curso == 25) {
-					this.url_examen = 12
-				}
-				if (this.usuario.avance_curso == 28) {
-					this.url_examen = 25
-				}
-				var url = '/examendado/'+this.url_examen;
-				axios.get(url).then(res =>{
-					this.examen_preview = res.data
 				})
 			},
 			examen_dado_resp(){
@@ -336,36 +320,45 @@
 
 				if (this.usuario.avance_curso == 1) {
 					this.aumento_puntos = 50
-					this.requiere_comprension = 30
-					this.disminucion_puntos = 10
-					this.requiere_velocidad = 0
-				}
-				if (this.usuario.avance_curso == 12) {
-					this.aumento_puntos = 200
 					this.requiere_comprension = 50
-					this.disminucion_puntos = 80
-					this.requiere_velocidad = this.examen_preview.ppm
+					this.disminucion_puntos = 10
+					this.requiere_velocidad = 150
 				}
-				if (this.usuario.avance_curso == 25) {
-					this.aumento_puntos = 400
+				if (this.usuario.avance_curso == 6) {
+					this.aumento_puntos = 50
+					this.requiere_comprension = 60
+					this.disminucion_puntos = 50
+					this.requiere_velocidad = 300
+				}
+				if (this.usuario.avance_curso == 11) {
+					this.aumento_puntos = 100
 					this.requiere_comprension = 70
-					this.requiere_velocidad = this.examen_preview.ppm
+					this.disminucion_puntos = 50
+					this.requiere_velocidad = 500
+				}
+				if (this.usuario.avance_curso == 18) {
+					this.aumento_puntos = 150
+					this.requiere_comprension = 85
+					this.disminucion_puntos = 50
+					this.requiere_velocidad = 700
+				}
+				if (this.usuario.avance_curso == 23) {
+					this.aumento_puntos = 200
+					this.requiere_comprension = 90
+					this.disminucion_puntos = 200
+					this.requiere_velocidad = 1000
 				}
 				if (this.usuario.avance_curso == 28) {
-					this.aumento_puntos = 700
-					this.requiere_comprension = 85
-					this.disminucion_puntos = 400
-					this.requiere_velocidad = this.examen_preview.ppm
+					this.aumento_puntos = 250
+					this.requiere_comprension = 100
+					this.disminucion_puntos = 300
+					this.requiere_velocidad = 1300
 				}
 				this.velocidad = this.palabras/(this.cronometro/60);
-				if ((this.comprension * 10) >= this.requiere_comprension && this.velocidad >= this.requiere_velocidad) {
+				if ((this.comprension*10 >= this.requiere_comprension) && (this.velocidad >= this.requiere_velocidad)) {
 					this.usuario.puntos += this.aumento_puntos
 					this.usuario.avance_curso += 1
 					let data = new FormData();
-					if (this.$route.params.id == 1) {
-						data.append('ppm_inicial',this.saveExam.ppm)
-						data.append('comprension_inicial',this.saveExam.comprension)
-					}
 					data.append('avance_curso', this.usuario.avance_curso)
 					data.append('puntos', this.usuario.puntos)
 					data.append('_method','PUT');
@@ -385,7 +378,7 @@
 				}
 			},
 			guardarExam(){
-				if (this.saveExam.comprension >= this.requiere_comprension && this.velocidad >= this.requiere_velocidad) {
+				if ((this.saveExam.comprension >= this.requiere_comprension) && (this.velocidad >= this.requiere_velocidad)) {
 					let formData = new FormData();
 					formData.append('exam_id', this.saveExam.exam_id);
 					formData.append('user_id', this.saveExam.user_id);

@@ -234,6 +234,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('es');
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -308,40 +310,16 @@ moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('es');
       axios.get(url).then(function (res) {
         _this.usuario = res.data;
         _this.loading = false;
-
-        if (_this.usuario.avance_curso == 12 || _this.usuario.avance_curso == 25 || _this.usuario.avance_curso == 28) {
-          _this.examen_anterior();
-        }
-      });
-    },
-    examen_anterior: function examen_anterior() {
-      var _this2 = this;
-
-      if (this.usuario.avance_curso == 12) {
-        this.url_examen = 1;
-      }
-
-      if (this.usuario.avance_curso == 25) {
-        this.url_examen = 12;
-      }
-
-      if (this.usuario.avance_curso == 28) {
-        this.url_examen = 25;
-      }
-
-      var url = '/examendado/' + this.url_examen;
-      axios.get(url).then(function (res) {
-        _this2.examen_preview = res.data;
       });
     },
     examen_dado_resp: function examen_dado_resp() {
-      var _this3 = this;
+      var _this2 = this;
 
       var url = '/examendado/' + this.$route.params.id;
       axios.get(url).then(function (res) {
-        _this3.examen_dado = res.data;
-        _this3.loading = false;
-        _this3.vista = _this3.examen_dado.estado;
+        _this2.examen_dado = res.data;
+        _this2.loading = false;
+        _this2.vista = _this2.examen_dado.estado;
       });
     },
     myTimer: function myTimer() {
@@ -370,29 +348,44 @@ moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('es');
 
       if (this.usuario.avance_curso == 1) {
         this.aumento_puntos = 50;
-        this.requiere_comprension = 30;
-        this.disminucion_puntos = 10;
-        this.requiere_velocidad = 0;
-      }
-
-      if (this.usuario.avance_curso == 12) {
-        this.aumento_puntos = 200;
         this.requiere_comprension = 50;
-        this.disminucion_puntos = 80;
-        this.requiere_velocidad = this.examen_preview.ppm;
+        this.disminucion_puntos = 10;
+        this.requiere_velocidad = 150;
       }
 
-      if (this.usuario.avance_curso == 25) {
-        this.aumento_puntos = 400;
+      if (this.usuario.avance_curso == 6) {
+        this.aumento_puntos = 50;
+        this.requiere_comprension = 60;
+        this.disminucion_puntos = 50;
+        this.requiere_velocidad = 300;
+      }
+
+      if (this.usuario.avance_curso == 11) {
+        this.aumento_puntos = 100;
         this.requiere_comprension = 70;
-        this.requiere_velocidad = this.examen_preview.ppm;
+        this.disminucion_puntos = 50;
+        this.requiere_velocidad = 500;
+      }
+
+      if (this.usuario.avance_curso == 18) {
+        this.aumento_puntos = 150;
+        this.requiere_comprension = 85;
+        this.disminucion_puntos = 50;
+        this.requiere_velocidad = 700;
+      }
+
+      if (this.usuario.avance_curso == 23) {
+        this.aumento_puntos = 200;
+        this.requiere_comprension = 90;
+        this.disminucion_puntos = 200;
+        this.requiere_velocidad = 1000;
       }
 
       if (this.usuario.avance_curso == 28) {
-        this.aumento_puntos = 700;
-        this.requiere_comprension = 85;
-        this.disminucion_puntos = 400;
-        this.requiere_velocidad = this.examen_preview.ppm;
+        this.aumento_puntos = 250;
+        this.requiere_comprension = 100;
+        this.disminucion_puntos = 300;
+        this.requiere_velocidad = 1300;
       }
 
       this.velocidad = this.palabras / (this.cronometro / 60);
@@ -401,12 +394,6 @@ moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('es');
         this.usuario.puntos += this.aumento_puntos;
         this.usuario.avance_curso += 1;
         var data = new FormData();
-
-        if (this.$route.params.id == 1) {
-          data.append('ppm_inicial', this.saveExam.ppm);
-          data.append('comprension_inicial', this.saveExam.comprension);
-        }
-
         data.append('avance_curso', this.usuario.avance_curso);
         data.append('puntos', this.usuario.puntos);
         data.append('_method', 'PUT');
@@ -426,7 +413,7 @@ moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('es');
       }
     },
     guardarExam: function guardarExam() {
-      var _this4 = this;
+      var _this3 = this;
 
       if (this.saveExam.comprension >= this.requiere_comprension && this.velocidad >= this.requiere_velocidad) {
         var formData = new FormData();
@@ -437,9 +424,9 @@ moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('es');
         formData.append('tiempo', this.saveExam.tiempo);
         formData.append('estado', this.saveExam.estado);
         axios.post('/exam', formData).then(function (res) {
-          _this4.muestra_exam = 4;
-          _this4.mensaje_comprension = 'Aprobaste el examen';
-          _this4.mensaje_puntos = '+ ' + _this4.aumento_puntos;
+          _this3.muestra_exam = 4;
+          _this3.mensaje_comprension = 'Aprobaste el examen';
+          _this3.mensaje_puntos = '+ ' + _this3.aumento_puntos;
         });
       } else {
         this.muestra_exam = 4;
@@ -479,20 +466,20 @@ moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('es');
       }
     },
     mostrarPregunta: function mostrarPregunta() {
-      var _this5 = this;
+      var _this4 = this;
 
       var url = '/pregunta/' + this.$route.params.id;
       axios.get(url).then(function (res) {
-        _this5.preguntas = res.data;
-        _this5.loading = false;
+        _this4.preguntas = res.data;
+        _this4.loading = false;
       });
     },
     showExamen: function showExamen() {
-      var _this6 = this;
+      var _this5 = this;
 
       var url = this.$route.params.id;
       axios.get(url).then(function (res) {
-        _this6.examen = res.data;
+        _this5.examen = res.data;
       });
     },
     mostrarPreguntas: function mostrarPreguntas() {
@@ -521,7 +508,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*************----RADIO BUTON----***********/\n.radioContainer{\r\n\tdisplay: inline-block;\r\n\tposition: relative;\r\n\tcursor: pointer;\r\n\tfont-family: sans-serif;\r\n\tfont-size: 22px;\r\n\tpadding-left: 30px;\n}\n.radioContainer input{\r\n\tdisplay: none;\n}\n.radioContainer .circle{\r\n\tdisplay: inline-block;\r\n\twidth: 25px;\r\n\theight: 25px;\r\n\tbackground-color: #eee;\r\n\tposition: absolute;\r\n\tleft: 0; top: 0;\r\n\tborder-radius: 50%;\n}\n.radioContainer:hover .circle{\r\n\tbackground-color: #ccc;\n}\n.radioContainer input:checked + .circle{\r\n\tbackground-color: #2196fc;\n}\n.radioContainer input:checked + .circle:after{\r\n\tcontent: \"\";\r\n\theight: 10px;\r\n\twidth: 10px;\r\n\tbackground-color: white;\r\n\tposition: absolute;\r\n\tborder-radius: 50%;\r\n\tleft: 50%;\r\n\ttop: 50%;\r\n\ttransform: translate(-50%, -50%);\n}\r\n/***********-- PROGRESS- BAR --**************/\n#progressbar {\r\n\tmargin-bottom: 30px;\r\n\toverflow: hidden;\r\n\t/*CSS counters to number the steps*/\r\n\tcounter-reset: step;\n}\n#progressbar li {\r\n\tlist-style-type: none;\r\n\tcolor: black;\r\n\ttext-transform: uppercase;\r\n\tfont-size: 18px;\r\n\twidth: 33.33%;\r\n\tfloat: left;\r\n\tposition: relative;\r\n\ttext-align: center;\n}\n#progressbar li:before {\r\n\tcontent: counter(step);\r\n\tcounter-increment: step;\r\n\twidth: 40px;\r\n\tline-height: 40px;\r\n\tdisplay: block;\r\n\tfont-size: 18px;\r\n\tcolor: #333;\r\n\tbackground: white;\r\n\tborder-radius: 3px;\r\n\tmargin: 0 auto 5px auto;\r\n\ttext-align: center;\n}\r\n/*progressbar connectors*/\n#progressbar li:after {\r\n\tcontent: '';\r\n\twidth: 100%;\r\n\theight: 2px;\r\n\tbackground: white;\r\n\tposition: absolute;\r\n\tleft: -50%;\r\n\ttop: 20px;\r\n\tz-index: -1; /*put it behind the numbers*/\n}\n#progressbar li:first-child:after {\r\n\t/*connector not needed before the first step*/\r\n\tcontent: none;\n}\r\n/*marking active/completed steps green*/\r\n/*The number of the step and the connector before it = green*/\n#progressbar li.active:before,  #progressbar li.active:after{\r\n\tbackground: #15799e;\r\n\tcolor: white;\n}\r\n/* para el radio button*/\r\n\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*************----RADIO BUTON----***********/\n.radioContainer{\r\n\tdisplay: inline-block;\r\n\tposition: relative;\r\n\tcursor: pointer;\r\n\tfont-family: sans-serif;\r\n\tfont-size: 22px;\r\n\tpadding-left: 30px;\n}\n.radioContainer input{\r\n\tdisplay: none;\n}\n.radioContainer .circle{\r\n\tdisplay: inline-block;\r\n\twidth: 25px;\r\n\theight: 25px;\r\n\tbackground-color: #eee;\r\n\tposition: absolute;\r\n\tleft: 0; top: 0;\r\n\tborder-radius: 50%;\n}\n.radioContainer:hover .circle{\r\n\tbackground-color: #ccc;\n}\n.radioContainer input:checked + .circle{\r\n\tbackground-color: #2196fc;\n}\n.radioContainer input:checked + .circle:after{\r\n\tcontent: \"\";\r\n\theight: 10px;\r\n\twidth: 10px;\r\n\tbackground-color: white;\r\n\tposition: absolute;\r\n\tborder-radius: 50%;\r\n\tleft: 50%;\r\n\ttop: 50%;\r\n\ttransform: translate(-50%, -50%);\n}\r\n/***********-- PROGRESS- BAR --**************/\n#progressbar {\r\n\tmargin-bottom: 30px;\r\n\toverflow: hidden;\r\n\t/*CSS counters to number the steps*/\r\n\tcounter-reset: step;\n}\n#progressbar li {\r\n\tlist-style-type: none;\r\n\tcolor: black;\r\n\ttext-transform: uppercase;\r\n\tfont-size: 18px;\r\n\twidth: 33.33%;\r\n\tfloat: left;\r\n\tposition: relative;\r\n\ttext-align: center;\n}\n#progressbar li:before {\r\n\tcontent: counter(step);\r\n\tcounter-increment: step;\r\n\twidth: 40px;\r\n\tline-height: 40px;\r\n\tdisplay: block;\r\n\tfont-size: 18px;\r\n\tcolor: #333;\r\n\tbackground: white;\r\n\tborder-radius: 3px;\r\n\tmargin: 0 auto 5px auto;\r\n\ttext-align: center;\n}\r\n/*progressbar connectors*/\n#progressbar li:after {\r\n\tcontent: '';\r\n\twidth: 100%;\r\n\theight: 2px;\r\n\tbackground: white;\r\n\tposition: absolute;\r\n\tleft: -50%;\r\n\ttop: 20px;\r\n\tz-index: -1; /*put it behind the numbers*/\n}\n#progressbar li:first-child:after {\r\n\t/*connector not needed before the first step*/\r\n\tcontent: none;\n}\r\n/*marking active/completed steps green*/\r\n/*The number of the step and the connector before it = green*/\n#progressbar li.active:before,  #progressbar li.active:after{\r\n\tbackground: #15799e;\r\n\tcolor: white;\n}\r\n/* para el radio button*/\r\n\r\n", ""]);
 
 // exports
 
@@ -1069,8 +1056,14 @@ var render = function() {
                       _c("hr"),
                       _vm._v(" "),
                       _c("p", { staticClass: "text-justify" }, [
-                        _vm._v(_vm._s(_vm.examen.content) + " }")
-                      ])
+                        _vm._v(_vm._s(_vm.examen.content) + " ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "textarea",
+                        { staticClass: "d-none", attrs: { id: "area" } },
+                        [_vm._v(_vm._s(_vm.examen.content) + " ")]
+                      )
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "row my-3" }, [
@@ -1427,7 +1420,9 @@ var render = function() {
                                 staticClass: "text-center",
                                 class: [
                                   _vm.comprension * 10 >=
-                                  _vm.requiere_comprension
+                                    _vm.requiere_comprension &&
+                                  _vm.palabras_x_minuto >=
+                                    _vm.requiere_velocidad
                                     ? "text-primary"
                                     : "text-danger"
                                 ]
@@ -1444,7 +1439,8 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm.comprension * 10 < _vm.requiere_comprension
+                        _vm.comprension * 10 < _vm.requiere_comprension ||
+                        _vm.palabras_x_minuto < _vm.requiere_velocidad
                           ? _c("h5", { staticClass: "text-center" }, [
                               _c("span", [
                                 _c("i", [
@@ -1457,18 +1453,29 @@ var render = function() {
                                   _vm._v(
                                     _vm._s(_vm.requiere_comprension) + " %"
                                   )
+                                ]),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("i", [
+                                  _vm._v(
+                                    "Se requiere una velocidad mayor o igual a : "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("b", [
+                                  _vm._v(
+                                    _vm._s(_vm.requiere_velocidad) + " ppm"
+                                  )
                                 ])
                               ])
                             ])
                           : _vm._e(),
                         _vm._v(" "),
                         _c("h4", [
-                          _vm._v("Correctas : " + _vm._s(_vm.comprension))
-                        ]),
-                        _vm._v(" "),
-                        _c("h4", [
                           _vm._v(
-                            "Incorrectas : " + _vm._s(10 - _vm.comprension)
+                            "Comprensión : " +
+                              _vm._s(_vm.comprension * 10) +
+                              " %"
                           )
                         ]),
                         _vm._v(" "),

@@ -551,7 +551,7 @@ var render = function() {
                                             })
                                           ])
                                         : _vm.usuario.puntos >= 100 &&
-                                          _vm.usuario.puntos < 500
+                                          _vm.usuario.puntos < 300
                                         ? _c("span", [
                                             _c("img", {
                                               attrs: {
@@ -561,8 +561,8 @@ var render = function() {
                                               }
                                             })
                                           ])
-                                        : _vm.usuario.puntos >= 500 &&
-                                          _vm.usuario.puntos < 1000
+                                        : _vm.usuario.puntos >= 300 &&
+                                          _vm.usuario.puntos < 700
                                         ? _c("span", [
                                             _c("img", {
                                               attrs: {
@@ -572,8 +572,8 @@ var render = function() {
                                               }
                                             })
                                           ])
-                                        : _vm.usuario.puntos >= 1000 &&
-                                          _vm.usuario.puntos < 5000
+                                        : _vm.usuario.puntos >= 700 &&
+                                          _vm.usuario.puntos < 1000
                                         ? _c("span", [
                                             _c("img", {
                                               attrs: {
@@ -583,8 +583,8 @@ var render = function() {
                                               }
                                             })
                                           ])
-                                        : _vm.usuario.puntos >= 5000 &&
-                                          _vm.usuario.puntos < 10000
+                                        : _vm.usuario.puntos >= 1000 &&
+                                          _vm.usuario.puntos < 2000
                                         ? _c("span", [
                                             _c("img", {
                                               attrs: {
@@ -594,7 +594,7 @@ var render = function() {
                                               }
                                             })
                                           ])
-                                        : _vm.usuario.puntos >= 10000
+                                        : _vm.usuario.puntos >= 2000
                                         ? _c("span", [
                                             _c("img", {
                                               attrs: {

@@ -172,6 +172,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showUser();
@@ -207,7 +222,12 @@ __webpack_require__.r(__webpack_exports__);
         x: 2,
         y: 3
       },
-      loading: true
+      loading: true,
+      aumento_avance: 0,
+      aumento_curso: 0,
+      calificacion: 0,
+      requierePuntuacion: 0,
+      aumento_puntos: ''
     };
   },
   methods: {
@@ -249,27 +269,40 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     actualizar_datos_usuario: function actualizar_datos_usuario() {
-      var point = Math.floor(this.puntuacion / 3);
-      var data = new FormData();
-      data.append('puntos', this.usuario.puntos + point);
-
-      if (this.usuario.puntos < 100) {
-        data.append('rango_id', 1);
-      } else if (this.usuario.puntos >= 100 && this.usuario.puntos < 500) {
-        data.append('rango_id', 2);
-      } else if (this.usuario.puntos >= 500 && this.usuario.puntos < 1000) {
-        data.append('rango_id', 3);
-      } else if (this.usuario.puntos >= 1000 && this.usuario.puntos < 5000) {
-        data.append('rango_id', 4);
-      } else if (this.usuario.puntos >= 5000 && this.usuario.puntos < 10000) {
-        data.append('rango_id', 5);
-      } else if (this.usuario.puntos > 10000) {
-        data.append('rango_id', 6);
+      if (this.puntuacion <= this.requierePuntuacion / 2) {
+        this.calificacion = 1;
       }
 
-      data.append('_method', 'PUT');
-      var url = "/profile/".concat(this.usuario.id);
-      axios.post(url, data).then(function (res) {});
+      if (this.puntuacion > this.requierePuntuacion / 2 && this.puntuacion < this.requierePuntuacion) {
+        this.calificacion = 2;
+      }
+
+      if (this.puntuacion >= this.requierePuntuacion) {
+        this.calificacion = 3;
+      }
+
+      if (this.puntuacion >= this.requierePuntuacion) {
+        if (this.usuario.avance_curso == 26 || this.usuario.avance_curso == 27) {
+          if (this.usuario.avance_curso == 26) {
+            this.usuario.puntos += 150;
+            this.aumento_puntos = '+150 Pts';
+          } else if (this.usuario.avance_curso == 27) {
+            this.usuario.puntos += 200;
+            this.aumento_puntos = '+200 Pts';
+          }
+
+          this.aumento_avance = this.usuario.avance_curso + 1;
+          var data = new FormData();
+          data.append('avance_curso', this.aumento_avance);
+          data.append('puntos', this.usuario.puntos);
+          data.append('_method', 'PUT');
+          var url = "/profile/".concat(this.usuario.id);
+          axios.post(url, data).then(function (res) {});
+        }
+      }
+
+      document.getElementById("tercera-vista").style.display = 'none';
+      document.getElementById("cuarta-vista").style.display = 'block';
     },
     pantalla_3_segundos: function pantalla_3_segundos() {
       this.contador--;
@@ -312,6 +345,14 @@ __webpack_require__.r(__webpack_exports__);
       this.tres_segundos = setInterval(this.pantalla_3_segundos, 1000);
     },
     empezarJuego: function empezarJuego() {
+      if (this.usuario.avance_curso == 26) {
+        this.requierePuntuacion = 75;
+      }
+
+      if (this.usuario.avance_curso == 27) {
+        this.requierePuntuacion = 100;
+      }
+
       var tabla = "<table class='tabb m-auto'>";
       var letra_posicion = Math.floor(Math.random() * this.letras.length);
       var rand_cartesiano = Math.floor(Math.random() * 4);
@@ -902,10 +943,41 @@ var render = function() {
                       { staticClass: "card-body" },
                       [
                         _c("h3", { staticClass: "text-center" }, [
-                          _vm._v("estos son los resultados")
+                          _vm._v("Estos son los resultados")
                         ]),
+                        _c("hr"),
                         _vm._v(" "),
-                        _c("h4", [_vm._v("tiempo : 00:00")]),
+                        this.puntuacion >= _vm.requierePuntuacion
+                          ? _c("div", [
+                              _c(
+                                "h3",
+                                { staticClass: "text-center text-success" },
+                                [
+                                  _c("span", [
+                                    _vm._v("Felicidades Aprobaste la lección")
+                                  ])
+                                ]
+                              )
+                            ])
+                          : _c("div", [
+                              _c(
+                                "h3",
+                                { staticClass: "text-center text-danger" },
+                                [
+                                  _c("span", [
+                                    _vm._v("No aprobaste la lección")
+                                  ])
+                                ]
+                              )
+                            ]),
+                        _vm._v(" "),
+                        _c("h4", [
+                          _vm._v(
+                            "Calificacion: " +
+                              _vm._s(_vm.calificacion) +
+                              " de 3"
+                          )
+                        ]),
                         _c("hr"),
                         _vm._v(" "),
                         _c("h4", [
@@ -913,12 +985,22 @@ var render = function() {
                         ]),
                         _c("hr"),
                         _vm._v(" "),
-                        _c("h4", [
-                          _vm._v("Aumento: "),
-                          _c("b", [_vm._v("+")]),
-                          _vm._v(" " + _vm._s(Math.floor(_vm.puntuacion / 3)))
+                        _c("h3", { staticClass: "text-warning text-center" }, [
+                          _c("b", [_vm._v(_vm._s(_vm.aumento_puntos))])
                         ]),
-                        _c("hr"),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn btn-primary m-auto btn-block",
+                            attrs: { to: "/curso" }
+                          },
+                          [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\tIr al Curso\n\t\t\t\t\t\t\t"
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
                         _c(
                           "router-link",

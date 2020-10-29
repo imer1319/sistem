@@ -239,6 +239,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.showUser();
     this.showRango();
+    this.getExamsDoesntHave();
   },
   data: function data() {
     return {
@@ -258,25 +259,34 @@ __webpack_require__.r(__webpack_exports__);
       imagenMiniatura: '',
       selected: '',
       cursos: '',
-      seccion: ''
+      seccion: '',
+      exams: null
     };
   },
   methods: {
-    showUser: function showUser() {
+    getExamsDoesntHave: function getExamsDoesntHave() {
       var _this = this;
+
+      var url = "/examDado";
+      axios.get(url).then(function (res) {
+        _this.exams = res.data;
+      });
+    },
+    showUser: function showUser() {
+      var _this2 = this;
 
       var url = "/profile";
       axios.get(url).then(function (res) {
-        _this.usuario = res.data;
-        _this.loading = false;
+        _this2.usuario = res.data;
+        _this2.loading = false;
       });
     },
     showRango: function showRango() {
-      var _this2 = this;
+      var _this3 = this;
 
       var url = "/rank";
       axios.get(url).then(function (res) {
-        _this2.rangos = res.data;
+        _this3.rangos = res.data;
       });
     },
     obtenerImagenNueva: function obtenerImagenNueva(e) {
@@ -286,12 +296,12 @@ __webpack_require__.r(__webpack_exports__);
       this.cargarImagen(file);
     },
     cargarImagen: function cargarImagen(file) {
-      var _this3 = this;
+      var _this4 = this;
 
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        _this3.imagenMiniatura = e.target.result;
+        _this4.imagenMiniatura = e.target.result;
       };
 
       reader.readAsDataURL(file);
@@ -305,7 +315,7 @@ __webpack_require__.r(__webpack_exports__);
       this.fillUsuario.id = this.usuario.id;
     },
     alerta: function alerta() {
-      var _this4 = this;
+      var _this5 = this;
 
       var Toast = this.$swal.mixin({
         toast: true,
@@ -313,8 +323,8 @@ __webpack_require__.r(__webpack_exports__);
         showConfirmButton: false,
         timer: 2000,
         onOpen: function onOpen(toast) {
-          toast.addEventListener('mouseenter', _this4.$swal.stopTimer);
-          toast.addEventListener('mouseleave', _this4.$swal.resumeTimer);
+          toast.addEventListener('mouseenter', _this5.$swal.stopTimer);
+          toast.addEventListener('mouseleave', _this5.$swal.resumeTimer);
         }
       });
       Toast.fire({
@@ -323,7 +333,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateUsuario: function updateUsuario(fillUsuario) {
-      var _this5 = this;
+      var _this6 = this;
 
       if (this.fillUsuario.apellido_materno == null) {
         this.fillUsuario.apellido_materno = "";
@@ -340,24 +350,24 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.fillUsuario.puntos < 100) {
         data.append('rango_id', 1);
-      } else if (this.fillUsuario.puntos >= 100 && this.fillUsuario.puntos < 500) {
+      } else if (this.fillUsuario.puntos >= 100 && this.fillUsuario.puntos < 300) {
         data.append('rango_id', 2);
-      } else if (this.fillUsuario.puntos >= 500 && this.fillUsuario.puntos < 1000) {
+      } else if (this.fillUsuario.puntos >= 300 && this.fillUsuario.puntos < 700) {
         data.append('rango_id', 3);
-      } else if (this.fillUsuario.puntos >= 1000 && this.fillUsuario.puntos < 5000) {
+      } else if (this.fillUsuario.puntos >= 700 && this.fillUsuario.puntos < 1000) {
         data.append('rango_id', 4);
-      } else if (this.fillUsuario.puntos >= 5000 && this.fillUsuario.puntos < 10000) {
+      } else if (this.fillUsuario.puntos >= 1000 && this.fillUsuario.puntos < 2000) {
         data.append('rango_id', 5);
-      } else if (this.fillUsuario.puntos > 10000) {
+      } else if (this.fillUsuario.puntos >= 2000) {
         data.append('rango_id', 6);
       }
 
       data.append('_method', 'PUT');
       var url = "/profile/".concat(fillUsuario.id);
       axios.post(url, data).then(function (res) {
-        _this5.showUser();
+        _this6.showUser();
 
-        _this5.alerta();
+        _this6.alerta();
       });
     },
     editarAvatar: function editarAvatar() {
@@ -368,16 +378,16 @@ __webpack_require__.r(__webpack_exports__);
       $('#editAvatar').modal('show');
     },
     updateAvatar: function updateAvatar(fillUsuario) {
-      var _this6 = this;
+      var _this7 = this;
 
       var data = new FormData();
       data.append('avatar', this.fillUsuario.avatar);
       data.append('_method', 'PUT');
       var url = "/profile/".concat(fillUsuario.id);
       axios.post(url, data).then(function (res) {
-        _this6.showUser();
+        _this7.showUser();
 
-        _this6.alerta();
+        _this7.alerta();
 
         $('#editAvatar').modal('hide');
       });
@@ -775,7 +785,7 @@ var render = function() {
                           _c("div", { staticClass: "description-block" }, [
                             _c("h5", { staticClass: "description-header" }, [
                               _c("span", [
-                                _vm._v(_vm._s(_vm.usuario.ppm_inicial) + " ppm")
+                                _vm._v(_vm._s(_vm.exams.ppm) + " ppm")
                               ])
                             ]),
                             _vm._v(" "),
@@ -789,9 +799,7 @@ var render = function() {
                           _c("div", { staticClass: "description-block" }, [
                             _c("h5", { staticClass: "description-header" }, [
                               _c("span", [
-                                _vm._v(
-                                  _vm._s(_vm.usuario.comprension_inicial) + " %"
-                                )
+                                _vm._v(_vm._s(_vm.exams.comprension) + " %")
                               ])
                             ]),
                             _vm._v(" "),
@@ -882,7 +890,7 @@ var render = function() {
                                     : _vm._e(),
                                   _vm._v(" "),
                                   _vm.usuario.puntos >= 100 &&
-                                  _vm.usuario.puntos < 500
+                                  _vm.usuario.puntos < 300
                                     ? _c("div", [
                                         rango.nombre == "Rango #2"
                                           ? _c("div", [
@@ -911,8 +919,8 @@ var render = function() {
                                       ])
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  _vm.usuario.puntos >= 500 &&
-                                  _vm.usuario.puntos < 1000
+                                  _vm.usuario.puntos >= 300 &&
+                                  _vm.usuario.puntos < 700
                                     ? _c("div", [
                                         rango.nombre == "Rango #3"
                                           ? _c("div", [
@@ -941,8 +949,8 @@ var render = function() {
                                       ])
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  _vm.usuario.puntos >= 1000 &&
-                                  _vm.usuario.puntos < 5000
+                                  _vm.usuario.puntos >= 700 &&
+                                  _vm.usuario.puntos < 1000
                                     ? _c("div", [
                                         rango.nombre == "Rango #4"
                                           ? _c("div", [
@@ -971,8 +979,8 @@ var render = function() {
                                       ])
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  _vm.usuario.puntos >= 5000 &&
-                                  _vm.usuario.puntos < 10000
+                                  _vm.usuario.puntos >= 1000 &&
+                                  _vm.usuario.puntos < 2000
                                     ? _c("div", [
                                         rango.nombre == "Rango #5"
                                           ? _c("div", [
@@ -1003,7 +1011,7 @@ var render = function() {
                                       ])
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  _vm.usuario.puntos >= 10000
+                                  _vm.usuario.puntos >= 2000
                                     ? _c("div", [
                                         rango.nombre == "Rango #6"
                                           ? _c("div", [

@@ -37,8 +37,8 @@
 						<div class="col-6">
 							<div class="text-center"><b>Datos</b></div>
 							<p>Nombre: {{ mayor_puntuacion.name }}</p>
-							<p>Ppm: {{ mayor_puntuacion.ppm_inicial }}</p>
-							<p>Comprensión: {{ mayor_puntuacion.comprension_inicial }}%</p>
+							<p>Ppm: {{ mayor_puntuacion.pivot.ppm }}</p>
+							<p>Comprensión: {{ mayor_puntuacion.pivot.comprension }}%</p>
 						</div>
 						<div class="col-6 text-center">
 							<img class="profile-user-img rounded"
@@ -56,12 +56,12 @@
 							<div class="text-center"><b>Datos</b></div>
 							<p>Nombre: {{ mayor_velocidad.name }}</p>
 							<p>Puntos: {{ mayor_velocidad.puntos }}</p>
-							<p>Comprensión: {{ mayor_velocidad.comprension_inicial }}%</p>
+							<p>Comprensión: {{ mayor_velocidad.pivot.comprension }}%</p>
 						</div>
 						<div class="col-6 text-center">
 							<img class="profile-user-img rounded"
 							:src="`imagenes/usuario/${mayor_velocidad.avatar}`" height="120" width="100%">
-							<b><h4>Ppm: {{ mayor_velocidad.ppm_inicial }}</h4></b>
+							<b><h4>Ppm: {{ mayor_velocidad.pivot.ppm }}</h4></b>
 						</div>
 					</div>
 				</div>

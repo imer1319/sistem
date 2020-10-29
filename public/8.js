@@ -217,10 +217,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.puntuacion >= this.requierePuntuacion) {
-        if (this.usuario.avance_curso == 26) {
+        if (this.usuario.avance_curso == 25) {
+          this.usuario.puntos += 150;
+          this.aumento_puntos = '+150 Pts';
           this.aumento_avance = this.usuario.avance_curso + 1;
-          this.usuario.puntos += 500;
-          this.aumento_puntos = '+500 Pts';
           var data = new FormData();
           data.append('avance_curso', this.aumento_avance);
           data.append('puntos', this.usuario.puntos);

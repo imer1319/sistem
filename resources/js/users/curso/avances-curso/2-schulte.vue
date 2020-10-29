@@ -220,6 +220,9 @@
 								</div>
 								<h4>Calificación: {{ calificacion }} de 3</h4><hr>
 								<h4>Puntuación: {{ puntuacion }}</h4><hr>
+								<h3 class="text-warning text-center">
+									<b>{{ aumento_puntos }}</b>
+								</h3>
 								<router-link to="/curso" class="btn btn-primary m-auto btn-block">
 									Ir al Curso
 								</router-link>
@@ -264,7 +267,8 @@
 				loading:true,
 				calificacion:0,
 				requierePuntuacion:0,
-				aumento_avance:0
+				aumento_avance:0,
+				aumento_puntos:'',
 			}
 		},
 		methods:{
@@ -286,7 +290,17 @@
 					this.calificacion = 3
 				}
 				if (this.puntuacion >= this.requierePuntuacion){
-					if ((this.usuario.avance_curso < 4) || (this.usuario.avance_curso > 12 && this.usuario.avance_curso < 15)){
+					if ((this.usuario.avance_curso > 1 && this.usuario.avance_curso < 4) || (this.usuario.avance_curso > 15 && this.usuario.avance_curso < 18)){
+						if (this.usuario.avance_curso == 2) {
+							this.usuario.puntos += 10
+							this.aumento_puntos = '+10 Pts'
+						}else if (this.usuario.avance_curso == 3) {
+							this.usuario.puntos += 15
+							this.aumento_puntos = '+15 Pts'
+						}else if (this.usuario.avance_curso == 16 || this.usuario.avance_curso == 17) {
+							this.usuario.puntos += 90
+							this.aumento_puntos = '+90 Pts'
+						}
 						this.aumento_avance = this.usuario.avance_curso+1
 						let data = new FormData();
 						data.append('avance_curso',this.aumento_avance);

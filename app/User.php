@@ -18,9 +18,9 @@ class User extends Authenticatable
         return $this->belongsTo(App\Rango)
         ->withTimestamps();
     }
-    public function exams()
+    public function examenes()
     {
-       return $this->belongsToMany('App\Exam','exam_user')
+       return $this->belongsToMany(Exam::class,'exam_user')
        ->withPivot('ppm','tiempo','comprension','estado','created_at');
    }
 

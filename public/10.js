@@ -107,179 +107,1202 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  beforeCreate: function beforeCreate() {},
   created: function created() {
     this.showUser();
+    this.getExamsDoesntHave();
   },
   mounted: function mounted() {
-    this.bajar_posicion();
+    this.bajarScroll();
   },
   data: function data() {
     return {
       usuario: {},
-      loading: true,
-      cursos: [{
-        numero: 1,
-        nombre: 'Examen',
-        url: 'exam/1',
-        aumento: '+50',
-        requiere: 10
-      }, {
-        numero: 2,
-        nombre: 'Schulte',
-        url: '/shulte-curso',
-        requiere: 20
-      }, {
-        numero: 3,
-        nombre: 'Schulte',
-        url: '/shulte-curso',
-        requiere: 20
-      }, {
-        numero: 4,
-        nombre: 'Schulte letra',
-        url: '/shultele-curso',
-        requiere: 20
-      }, {
-        numero: 5,
-        nombre: 'Schulte letra',
-        url: '/shultele-curso',
-        requiere: 20
-      }, {
-        numero: 6,
-        nombre: 'Buscar numeros',
-        url: '/search-course-numbers',
-        aumento: '+125',
-        requiere: 500
-      }, {
-        numero: 7,
-        nombre: 'Buscar numeros',
-        url: '/search-course-numbers',
-        aumento: '+125',
-        requiere: 500
-      }, {
-        numero: 8,
-        nombre: 'Buscar palabras',
-        url: '/search-words-course',
-        aumento: '+135',
-        requiere: 500
-      }, {
-        numero: 9,
-        nombre: 'Buscar palabras',
-        url: '/search-words-course',
-        aumento: '+135',
-        requiere: 500
-      }, {
-        numero: 10,
-        nombre: 'Recordar numero',
-        url: '/remember-numbers',
-        aumento: '+100',
-        requiere: 500
-      }, {
-        numero: 11,
-        nombre: 'Recordar palabra',
-        url: '/remember-words',
-        aumento: '+150',
-        requiere: 500
-      }, {
-        numero: 12,
-        nombre: 'Examen',
-        url: 'exam/2',
-        aumento: '+200',
-        requiere: 2000
-      }, {
-        numero: 13,
-        nombre: 'Schulte',
-        url: '/shulte-curso',
-        requiere: 2000
-      }, {
-        numero: 14,
-        nombre: 'Schulte',
-        url: '/shulte-curso',
-        requiere: 2000
-      }, {
-        numero: 15,
-        nombre: 'Schulte letra',
-        url: '/shultele-curso',
-        requiere: 3000
-      }, {
-        numero: 16,
-        nombre: 'Schulte letra',
-        url: '/shultele-curso',
-        requiere: 3000
-      }, {
-        numero: 17,
-        nombre: 'Buscar numeros',
-        url: '/search-course-numbers',
-        aumento: '+125',
-        requiere: 3000
-      }, {
-        numero: 18,
-        nombre: 'Buscar numeros',
-        url: '/search-course-numbers',
-        aumento: '+125',
-        requiere: 3000
-      }, {
-        numero: 19,
-        nombre: 'Buscar palabras',
-        url: '/search-words-course',
-        aumento: '+135',
-        requiere: 3000
-      }, {
-        numero: 20,
-        nombre: 'Buscar palabras',
-        url: '/search-words-course',
-        aumento: '+135',
-        requiere: 3000
-      }, {
-        numero: 21,
-        nombre: 'Recordar numero',
-        url: '/remember-numbers',
-        aumento: '+100',
-        requiere: 3000
-      }, {
-        numero: 22,
-        nombre: 'Recordar numero',
-        url: '/remember-numbers',
-        aumento: '+100',
-        requiere: 3000
-      }, {
-        numero: 23,
-        nombre: 'Recordar palabra',
-        url: '/remember-words',
-        aumento: '+150',
-        requiere: 3000
-      }, {
-        numero: 24,
-        nombre: 'Recordar palabra',
-        url: '/remember-words',
-        aumento: '+150',
-        requiere: 3000
-      }, {
-        numero: 25,
-        nombre: 'Examen',
-        url: 'exam/3',
-        aumento: '+400',
-        requiere: 3000
-      }, {
-        numero: 26,
-        nombre: 'Par impar',
-        url: '/odd-even',
-        aumento: '+500',
-        requiere: 4500
-      }, {
-        numero: 27,
-        nombre: 'Campo visual',
-        url: '/visual-field',
-        aumento: '+550',
-        requiere: 5800
-      }, {
-        numero: 28,
-        nombre: 'Examen Final',
-        url: 'exam/4',
-        aumento: '+700',
-        requiere: 6500
-      }],
-      mensaje_boton: ''
+      exams: 1,
+      loading: true
     };
   },
   methods: {
@@ -292,13 +1315,26 @@ __webpack_require__.r(__webpack_exports__);
         _this.loading = false;
       });
     },
-    bajar_posicion: function bajar_posicion() {
+    getExamsDoesntHave: function getExamsDoesntHave() {
+      var _this2 = this;
+
+      var url = "/dadosExams";
+      axios.get(url).then(function (res) {
+        _this2.exams = res.data.id;
+      });
+    },
+    bajarScroll: function bajarScroll() {
       var contador = 0;
       setTimeout(function () {
         $('html,body').animate({
           scrollTop: $("#div1").offset().top
         }, 1500);
       }, 1000);
+    }
+  },
+  computed: {
+    numero: function numero() {
+      return "exam/" + this.exams;
     }
   }
 });
@@ -317,7 +1353,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.actividad{\r\n\tcursor: hand;\n}\n#progreso_1, #progreso_2{\r\n\twidth: 0%;\n}\n#circulo{\r\n\tbackground: #FFBC5B;\r\n\theight: 40px;\r\n\twidth: 40px;\r\n\tborder-radius: 50%;\r\n\tline-height: 40px;\r\n\ttext-align: center;\n}\r\n", ""]);
+exports.push([module.i, "\n.actividad{\n\tcursor: hand;\n}\n#progreso_1, #progreso_2{\n\twidth: 0%;\n}\n#circulo{\n\tbackground: #FFBC5B;\n\theight: 40px;\n\twidth: 40px;\n\tborder-radius: 50%;\n\tline-height: 40px;\n\ttext-align: center;\n}\n", ""]);
 
 // exports
 
@@ -508,7 +1544,7 @@ var render = function() {
                     staticClass: "btn btn-dark text-uppercase",
                     attrs: { to: "/home" }
                   },
-                  [_vm._v("\n\t\t\t\t\tRegresar\n\t\t\t\t")]
+                  [_vm._v("Regresar")]
                 )
               ],
               1
@@ -517,144 +1553,2191 @@ var render = function() {
             _c("h3", { staticClass: "text-center" }, [_vm._v("Curso")]),
             _vm._v(" "),
             _c("div", { staticClass: "container-fluid" }, [
-              _c(
-                "div",
-                { staticClass: "row" },
-                _vm._l(_vm.cursos, function(curso, index) {
-                  return _c(
-                    "div",
-                    { key: index, staticClass: "col-md-6 col-lg-4 mb-3" },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "card",
-                          attrs: {
-                            id: [
-                              curso.numero == _vm.usuario.avance_curso
-                                ? "div1"
-                                : ""
-                            ]
-                          }
-                        },
-                        [
-                          _c("div", { staticClass: "card-body" }, [
-                            _c("div", { staticClass: "row" }, [
-                              _c("div", { staticClass: "col-4 text-center" }, [
-                                _c("div", { attrs: { id: "circulo" } }, [
-                                  _c("b", { staticClass: "text-white" }, [
-                                    _vm._v(_vm._s(curso.numero))
-                                  ])
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-8" }, [
-                                _c("div", { staticClass: "text-right" }, [
-                                  _c("h5", { staticClass: "text-danger" }, [
-                                    _c("b", [_vm._v(_vm._s(curso.nombre))])
-                                  ])
-                                ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "card border-primary" }, [
-                              _c("div", { staticClass: "card-body pb-0" }, [
-                                _c("div", { staticClass: "row" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "col-6 text-center" },
-                                    [
-                                      _c(
-                                        "h4",
-                                        {
-                                          staticClass: "text-center text-danger"
-                                        },
-                                        [
-                                          _c("b", [
-                                            _vm._v(
-                                              _vm._s(curso.requiere) + " pts"
-                                            )
-                                          ])
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("p", [_vm._v("Requiere")])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  curso.aumento
-                                    ? _c(
-                                        "div",
-                                        { staticClass: "col-6 text-center" },
-                                        [
-                                          _c(
-                                            "h4",
-                                            { staticClass: "text-warning" },
-                                            [
-                                              _vm.usuario.avance_curso <=
-                                              curso.numero
-                                                ? _c("b", [
-                                                    _vm._v(
-                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
-                                                        _vm._s(curso.aumento) +
-                                                        "\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                                    )
-                                                  ])
-                                                : _c("b", [_vm._v("Obtenido")])
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("p", [_vm._v("Aumento")])
-                                        ]
-                                      )
-                                    : _vm._e()
-                                ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "p-0" }, [
-                              _c(
-                                "span",
-                                [
-                                  _c(
-                                    "router-link",
-                                    {
-                                      staticClass:
-                                        "btn btn-block btn-primary text-white",
-                                      class: [
-                                        curso.numero <=
-                                          _vm.usuario.avance_curso &&
-                                        curso.requiere <= _vm.usuario.puntos
-                                          ? "actividad"
-                                          : "disabled"
-                                      ],
-                                      attrs: { to: curso.url }
-                                    },
-                                    [
-                                      curso.numero < _vm.usuario.avance_curso
-                                        ? _c("span", [_vm._v("Completado")])
-                                        : curso.numero ==
-                                          _vm.usuario.avance_curso
-                                        ? _c("span", [_vm._v("Empezar")])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      curso.numero > _vm.usuario.avance_curso
-                                        ? _c("span", [_vm._v("Bloqueado")])
-                                        : _vm._e()
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("1")
                             ])
                           ])
-                        ]
-                      )
-                    ]
-                  )
-                }),
-                0
-              )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Examen")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("50 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 1
+                                  ? _c("b", [_vm._v(" + 50")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso == 1 &&
+                                  _vm.usuario.puntos >= 50
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "exam/" + _vm.exams }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 1
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 1
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 1
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("2")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Schulte")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("50 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 2
+                                  ? _c("b", [_vm._v("+ 10")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 2 &&
+                                  _vm.usuario.puntos >= 50
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/shulte-curso" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 2
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 2
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 2
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("3")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Schulte")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("50 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 3
+                                  ? _c("b", [_vm._v("+ 15")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 3 &&
+                                  _vm.usuario.puntos >= 50
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/shulte-curso" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 3
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 3
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 3
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("4")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Schulte Letra")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("50 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 4
+                                  ? _c("b", [_vm._v("+ 20")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 4 &&
+                                  _vm.usuario.puntos >= 50
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/shultele-curso" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 4
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 4
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 4
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("5")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Schulte Letra")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("50 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 5
+                                  ? _c("b", [_vm._v("+ 20")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 5 &&
+                                  _vm.usuario.puntos >= 50
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/shultele-curso" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 5
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 5
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 5
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("6")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Examen")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("250 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 6
+                                  ? _c("b", [_vm._v("+ 50")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso == 6 &&
+                                  _vm.usuario.puntos >= 250
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "exam/" + _vm.exams }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 6
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 6
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 6
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("7")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Buscar numeros")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("300 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 7
+                                  ? _c("b", [_vm._v("+ 10")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 7 &&
+                                  _vm.usuario.puntos >= 300
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/search-course-numbers" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 7
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 7
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 7
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("8")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Buscar numeros")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("300 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 8
+                                  ? _c("b", [_vm._v("+ 15")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 8 &&
+                                  _vm.usuario.puntos >= 350
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/search-course-numbers" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 8
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 8
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 8
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("9")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Buscar palabras")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("300 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 9
+                                  ? _c("b", [_vm._v("+ 20")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 9 &&
+                                  _vm.usuario.puntos >= 300
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/search-words-course" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 9
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 9
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 9
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("10")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Buscar palabras")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("350 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 10
+                                  ? _c("b", [_vm._v("+ 25")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 10 &&
+                                  _vm.usuario.puntos >= 350
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/search-words-course" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 10
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 10
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 10
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("11")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Examen")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("500 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 11
+                                  ? _c("b", [_vm._v("+ 100")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso == 11 &&
+                                  _vm.usuario.puntos >= 500
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "exam/" + _vm.exams }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 11
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 11
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 11
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("12")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Recordar numeros")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("500 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 12
+                                  ? _c("b", [_vm._v("+ 55")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 12 &&
+                                  _vm.usuario.puntos >= 500
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/remember-numbers" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 12
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 12
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 12
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("13")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Recordar numeros")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("500 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 13
+                                  ? _c("b", [_vm._v("+ 70")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 13 &&
+                                  _vm.usuario.puntos >= 500
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/remember-numbers" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 13
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 13
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 13
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("14")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Recordar palabras")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("600 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 14
+                                  ? _c("b", [_vm._v("+ 75")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 14 &&
+                                  _vm.usuario.puntos >= 600
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/remember-words" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 14
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 14
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 14
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("15")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Recordar palabras")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("650 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 15
+                                  ? _c("b", [_vm._v("+ 80")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 15 &&
+                                  _vm.usuario.puntos >= 650
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/remember-words" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 15
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 15
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 15
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("16")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Schulte")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("650 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 16
+                                  ? _c("b", [_vm._v("+ 90")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 16 &&
+                                  _vm.usuario.puntos >= 650
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/shulte-curso" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 16
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 16
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 16
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("17")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Schulte")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("650 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 17
+                                  ? _c("b", [_vm._v("+ 90")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 17 &&
+                                  _vm.usuario.puntos >= 650
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/shulte-curso" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 17
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 17
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 17
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("18")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Examen")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("800 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 18
+                                  ? _c("b", [_vm._v("+ 200")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso == 18 &&
+                                  _vm.usuario.puntos >= 800
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "exam/" + _vm.exams }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 18
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 18
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 18
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("19")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Schulte Letra")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("850 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 19
+                                  ? _c("b", [_vm._v("+ 80")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 19 &&
+                                  _vm.usuario.puntos >= 850
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/shultele-curso" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 19
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 19
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 19
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("20")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Schulte Letra")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("850 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 20
+                                  ? _c("b", [_vm._v("+ 80")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 20 &&
+                                  _vm.usuario.puntos >= 850
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/shultele-curso" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 20
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 20
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 20
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("21")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Buscar numeros")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("850 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 21
+                                  ? _c("b", [_vm._v("+ 100")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 21 &&
+                                  _vm.usuario.puntos >= 850
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/search-course-numbers" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 21
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 21
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 21
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("22")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Buscar numeros")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("900 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 22
+                                  ? _c("b", [_vm._v("+ 100")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 22 &&
+                                  _vm.usuario.puntos >= 900
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/search-course-numbers" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 22
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 22
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 22
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("23")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Examen")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("1100 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 23
+                                  ? _c("b", [_vm._v("+ 250")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso == 23 &&
+                                  _vm.usuario.puntos >= 1100
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "exam/" + _vm.exams }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 23
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 23
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 23
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("24")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Buscar palabras")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("1100 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 24
+                                  ? _c("b", [_vm._v("+ 150")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 24 &&
+                                  _vm.usuario.puntos >= 1100
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/search-words-course" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 24
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 24
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 24
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("25")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Par impar")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("1200 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 25
+                                  ? _c("b", [_vm._v("+ 150")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 25 &&
+                                  _vm.usuario.puntos >= 1200
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/odd-even" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 25
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 25
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 25
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("26")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Campo visual")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("1200 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 26
+                                  ? _c("b", [_vm._v("+ 150")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 26 &&
+                                  _vm.usuario.puntos >= 1200
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/visual-field" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 26
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 26
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 26
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("27")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Campo visual")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("1500 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 27
+                                  ? _c("b", [_vm._v("+ 200")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso >= 27 &&
+                                  _vm.usuario.puntos >= 1500
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "/visual-field" }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 27
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 27
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 27
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6 col-lg-4 mb-3" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
+                          _c("div", { attrs: { id: "circulo" } }, [
+                            _c("b", { staticClass: "text-white" }, [
+                              _vm._v("28")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-8" }, [
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("h5", { staticClass: "text-danger" }, [
+                              _c("b", [_vm._v("Examen")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card border-primary" }, [
+                        _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c(
+                                "h4",
+                                { staticClass: "text-center text-danger" },
+                                [_c("b", [_vm._v("2000 pts")])]
+                              ),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Requiere")])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-6 text-center" }, [
+                              _c("h4", { staticClass: "text-warning" }, [
+                                _vm.usuario.avance_curso <= 28
+                                  ? _c("b", [_vm._v("+ 300")])
+                                  : _c("b", [_vm._v("Obtenido")])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Aumento")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "px-0" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-primary text-white",
+                                class: [
+                                  _vm.usuario.avance_curso == 28 &&
+                                  _vm.usuario.puntos >= 2000
+                                    ? "actividad"
+                                    : "disabled"
+                                ],
+                                attrs: { href: "exam/" + _vm.exams }
+                              },
+                              [
+                                _vm.usuario.avance_curso > 28
+                                  ? _c("span", [_vm._v("Completado")])
+                                  : _vm.usuario.avance_curso == 28
+                                  ? _c("span", [_vm._v("Empezar")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.usuario.avance_curso < 28
+                                  ? _c("span", [_vm._v("Bloqueado")])
+                                  : _vm._e()
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
             ])
           ])
     ],

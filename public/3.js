@@ -246,6 +246,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showUser();
@@ -275,7 +278,8 @@ __webpack_require__.r(__webpack_exports__);
       usuario: {},
       loading: true,
       requierePuntuacion: 0,
-      calificacion: 0
+      calificacion: 0,
+      aumento_puntos: ''
     };
   },
   methods: {
@@ -302,7 +306,18 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.puntuacion >= this.requierePuntuacion) {
-        if (this.usuario.avance_curso < 6 || this.usuario.avance_curso > 14 && this.usuario.avance_curso < 17) {
+        if (this.usuario.avance_curso > 3 && this.usuario.avance_curso < 6 || this.usuario.avance_curso > 18 && this.usuario.avance_curso < 21) {
+          if (this.usuario.avance_curso == 4) {
+            this.usuario.puntos += 20;
+            this.aumento_puntos = '+20 Pts';
+          } else if (this.usuario.avance_curso == 5) {
+            this.usuario.puntos += 25;
+            this.aumento_puntos = '+25 Pts';
+          } else if (this.usuario.avance_curso == 19 || this.usuario.avance_curso == 20) {
+            this.usuario.puntos += 80;
+            this.aumento_puntos = '+80 Pts';
+          }
+
           this.aumento_avance = this.usuario.avance_curso + 1;
           var data = new FormData();
           data.append('avance_curso', this.aumento_avance);
@@ -2970,6 +2985,12 @@ var render = function() {
                                 _vm._v("Puntuación: " + _vm._s(_vm.puntuacion))
                               ]),
                               _c("hr"),
+                              _vm._v(" "),
+                              _c(
+                                "h3",
+                                { staticClass: "text-warning text-center" },
+                                [_c("b", [_vm._v(_vm._s(_vm.aumento_puntos))])]
+                              ),
                               _vm._v(" "),
                               _c(
                                 "router-link",

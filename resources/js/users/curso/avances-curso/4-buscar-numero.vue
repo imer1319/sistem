@@ -198,10 +198,18 @@
 					this.calificacion = 3
 				}
 				if (this.puntuacion >= this.requierePuntuacion){
-					if ((this.usuario.avance_curso < 8) || (this.usuario.avance_curso > 16 && this.usuario.avance_curso < 19)){
+					if ((this.usuario.avance_curso > 6 && this.usuario.avance_curso < 9) || (this.usuario.avance_curso > 20 && this.usuario.avance_curso < 23)){
+						if (this.usuario.avance_curso == 7) {
+							this.usuario.puntos += 10
+							this.aumento_puntos = '+10 Pts'
+						}else if (this.usuario.avance_curso == 8) {
+							this.usuario.puntos += 15
+							this.aumento_puntos = '+15 Pts'
+						}else if (this.usuario.avance_curso == 21 || this.usuario.avance_curso == 22) {
+							this.usuario.puntos += 100
+							this.aumento_puntos = '+100 Pts'
+						}
 						this.aumento_avance = this.usuario.avance_curso+1
-						this.usuario.puntos += 125
-						this.aumento_puntos = '+125 Pts'
 						let data = new FormData();
 						data.append('avance_curso',this.aumento_avance);
 						data.append('puntos',this.usuario.puntos);

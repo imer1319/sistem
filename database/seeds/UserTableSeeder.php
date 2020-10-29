@@ -29,13 +29,10 @@ class UserTableSeeder extends Seeder
         $user->save();
         $user->roles()->attach($role_admin);
 
-        for ($i=1; $i < 20; $i++) {
-            $user = new User();
-            $user->name = "User{$i}";
-            $user->email = "user{$i}@user.com";
-            $user->password = bcrypt('secret');
+        for ($i=1; $i < 9; $i++) {
+            $user = new App\Ejercicio();
+            $user->name = "Ejercicio #".$i;
             $user->save();
-            $user->roles()->attach($role_user);
         }
     }
 }

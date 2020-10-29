@@ -102,7 +102,7 @@
 									<div class="col-6">
 										<div class="description-block">
 											<h5 class="description-header">
-												<span>{{ usuario.ppm_inicial }} ppm</span>
+												<span>{{ exams.ppm }} ppm</span>
 											</h5>
 											<span class="description-text">VELOCIDAD INICIAL</span>
 										</div>
@@ -110,7 +110,7 @@
 									<div class="col-6">
 										<div class="description-block">
 											<h5 class="description-header">
-												<span>{{ usuario.comprension_inicial }} %</span>
+												<span>{{ exams.comprension }} %</span>
 											</h5>
 											<span class="description-text">COMPRENSION INICIAL</span>
 										</div>
@@ -141,7 +141,7 @@
 															</div>
 														</div>
 													</div>
-													<div v-if="usuario.puntos >= 100 && usuario.puntos <500">
+													<div v-if="usuario.puntos >= 100 && usuario.puntos <300">
 														<div v-if="rango.nombre == 'Rango #2'">
 															<div class="text-center">
 																<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
@@ -149,7 +149,7 @@
 															</div>
 														</div>
 													</div>
-													<div v-if="usuario.puntos >= 500 && usuario.puntos <1000">
+													<div v-if="usuario.puntos >= 300 && usuario.puntos <700">
 														<div v-if="rango.nombre == 'Rango #3'">
 															<div class="text-center">
 																<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
@@ -157,7 +157,7 @@
 															</div>
 														</div>
 													</div>
-													<div v-if="usuario.puntos >= 1000 && usuario.puntos < 5000">
+													<div v-if="usuario.puntos >= 700 && usuario.puntos < 1000">
 														<div v-if="rango.nombre == 'Rango #4'">
 															<div class="text-center">
 																<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
@@ -165,7 +165,7 @@
 															</div>
 														</div>
 													</div>
-													<div v-if="usuario.puntos >= 5000 && usuario.puntos < 10000">
+													<div v-if="usuario.puntos >= 1000 && usuario.puntos < 2000">
 														<div v-if="rango.nombre == 'Rango #5'">
 															<div class="text-center">
 																<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
@@ -173,7 +173,7 @@
 															</div>
 														</div>
 													</div>
-													<div v-if="usuario.puntos >=10000">
+													<div v-if="usuario.puntos >=2000">
 														<div v-if="rango.nombre == 'Rango #6'">
 															<div class="text-center">
 																<img :src="`imagenes/rangos/${rango.avatar}`" class="img-responsive" width="50%">
@@ -229,6 +229,7 @@
 			created() {
 				this.showUser()
 				this.showRango()
+				this.getExamsDoesntHave()
 			},
 			data(){
 				return{
@@ -242,9 +243,16 @@
 					selected:'',
 					cursos:'',
 					seccion:'',
+					exams: null,
 				}
 			},
 			methods:{
+				getExamsDoesntHave(){
+					var url ="/examDado"
+					axios.get(url).then(res =>{
+						this.exams = res.data
+					})
+				},
 				showUser(){
 					var url ="/profile"
 					axios.get(url).then(res =>{
@@ -308,15 +316,15 @@
 					data.append('apellido_materno', this.fillUsuario.apellido_materno);
 					if (this.fillUsuario.puntos<100) {
 						data.append('rango_id', 1);
-					}else if (this.fillUsuario.puntos >= 100 && this.fillUsuario.puntos < 500) {
+					}else if (this.fillUsuario.puntos >= 100 && this.fillUsuario.puntos < 300) {
 						data.append('rango_id', 2);
-					}else if (this.fillUsuario.puntos >= 500 && this.fillUsuario.puntos < 1000) {
+					}else if (this.fillUsuario.puntos >= 300 && this.fillUsuario.puntos < 700) {
 						data.append('rango_id', 3);
-					}else if (this.fillUsuario.puntos >= 1000&& this.fillUsuario.puntos < 5000) {
+					}else if (this.fillUsuario.puntos >= 700&& this.fillUsuario.puntos < 1000) {
 						data.append('rango_id', 4);
-					}else if (this.fillUsuario.puntos >= 5000&& this.fillUsuario.puntos < 10000) {
+					}else if (this.fillUsuario.puntos >= 1000&& this.fillUsuario.puntos < 2000) {
 						data.append('rango_id', 5);
-					}else if (this.fillUsuario.puntos > 10000) {
+					}else if (this.fillUsuario.puntos >= 2000) {
 						data.append('rango_id', 6);
 					}
 					data.append('_method','PUT');

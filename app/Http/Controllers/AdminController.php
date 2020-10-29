@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Role;
 use App\User;
+use App\Exam;
+use App\SaveExam;
 
 class AdminController extends Controller
 {
@@ -46,18 +48,26 @@ class AdminController extends Controller
 	public function mayor_velocidad(Request $request)
 	{
 		if($request->ajax()){
-			$ejercicio = User::select('name','puntos','avatar','ppm_inicial','comprension_inicial')
-			->orderBy('puntos', 'desc')->first();
-			return $ejercicio;
+			$user = DB::table('exam_user')->orderBy('ppm','desc')
+			->first();
+			$usuario = Exam::find($user->exam_id);
+            return $usuario->users()
+            ->orderBy('ppm','desc')
+            ->select('name','puntos','avatar')
+			->first();
 		}
 		return view('layouts.administrador');
 	}
 	public function mayor_puntuacion(Request $request)
 	{
 		if($request->ajax()){
-			$ejercicio = User::select('name','puntos','avatar','ppm_inicial','comprension_inicial')
-			->orderBy('ppm_inicial', 'desc')->first();
-			return $ejercicio;
+			$user = DB::table('exam_user')->orderBy('ppm','desc')
+			->first();
+			$usuario = Exam::find($user->exam_id);
+            return $usuario->users()
+            ->orderBy('puntos','desc')
+            ->select('name','puntos','avatar')
+			->first();
 		}
 		return view('layouts.administrador');
 	}

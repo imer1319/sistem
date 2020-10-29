@@ -98,19 +98,19 @@
 											<span v-if="ran.puntos <100">
 												<img :src="rangos.rango1" height="50" width="50">
 											</span>
-											<span v-else-if="usuario.puntos >= 100 && usuario.puntos <500">
+											<span v-else-if="usuario.puntos >= 100 && usuario.puntos <300">
 												<img :src="rangos.rango2" height="50" width="50">
 											</span>
-											<span v-else-if="usuario.puntos >= 500 && usuario.puntos <1000">
+											<span v-else-if="usuario.puntos >= 300 && usuario.puntos <700">
 												<img :src="rangos.rango3" height="50" width="50">
 											</span>
-											<span v-else-if="usuario.puntos >= 1000 && usuario.puntos < 5000">
+											<span v-else-if="usuario.puntos >= 700 && usuario.puntos < 1000">
 												<img :src="rangos.rango4" height="50" width="50">
 											</span>
-											<span v-else-if="usuario.puntos >= 5000 && usuario.puntos < 10000">
+											<span v-else-if="usuario.puntos >= 1000 && usuario.puntos < 2000">
 												<img :src="rangos.rango5" height="50" width="50">
 											</span>
-											<span v-else-if="usuario.puntos >=10000">
+											<span v-else-if="usuario.puntos >=2000">
 												<img :src="rangos.rango6" height="50" width="50">
 											</span>
 										</td>

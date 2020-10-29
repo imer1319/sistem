@@ -183,10 +183,16 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.puntuacion >= this.requierePuntuacion) {
-        if (this.usuario.avance_curso < 12 || this.usuario.avance_curso > 22 && this.usuario.avance_curso < 25) {
+        if (this.usuario.avance_curso == 14 || this.usuario.avance_curso == 15) {
+          if (this.usuario.avance_curso == 14) {
+            this.usuario.puntos += 75;
+            this.aumento_puntos = '+75 Pts';
+          } else if (this.usuario.avance_curso == 15) {
+            this.usuario.puntos += 80;
+            this.aumento_puntos = '+80 Pts';
+          }
+
           this.aumento_avance = this.usuario.avance_curso + 1;
-          this.usuario.puntos += 150;
-          this.aumento_puntos = '+150 Pts';
           var data = new FormData();
           data.append('avance_curso', this.aumento_avance);
           data.append('puntos', this.usuario.puntos);

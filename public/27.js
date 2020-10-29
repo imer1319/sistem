@@ -140,6 +140,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showUser();
@@ -689,9 +695,60 @@ var render = function() {
                         _c("div", { staticClass: "row" }, [
                           _c("p", { staticClass: "lead col-md-6" }, [
                             _c("b", [_vm._v("❤")]),
+                            _c("span", { staticClass: "text-warning" }, [
+                              _vm._v(
+                                "El sistema tiene las siguientes peticiones de los examenes"
+                              )
+                            ]),
+                            _vm._v("."),
+                            _c("br"),
+                            _c("br"),
                             _vm._v(
-                              "El sistema te pedirá una mayor velocidad y comprensión en cada examen."
+                              "\n\t\t\t\t\t\t\t\t*** primer examen : Comprensión :"
                             ),
+                            _c("b", [_vm._v("50%")]),
+                            _vm._v(" ppm : "),
+                            _c("b", [_vm._v("150")]),
+                            _c("br"),
+                            _c("br"),
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t*** segundo examen : Comprensión :"
+                            ),
+                            _c("b", [_vm._v("60%")]),
+                            _vm._v(" ppm : "),
+                            _c("b", [_vm._v("300")]),
+                            _c("br"),
+                            _c("br"),
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t*** tercer examen : Comprensión :"
+                            ),
+                            _c("b", [_vm._v("70%")]),
+                            _vm._v(" ppm : "),
+                            _c("b", [_vm._v("500")]),
+                            _c("br"),
+                            _c("br"),
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t*** cuarto examen : Comprensión :"
+                            ),
+                            _c("b", [_vm._v("85%")]),
+                            _vm._v(" ppm : "),
+                            _c("b", [_vm._v("700")]),
+                            _c("br"),
+                            _c("br"),
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t*** quinto examen : Comprensión :"
+                            ),
+                            _c("b", [_vm._v("90%")]),
+                            _vm._v(" ppm : "),
+                            _c("b", [_vm._v("1000")]),
+                            _c("br"),
+                            _c("br"),
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t*** quinto examen : Comprensión :"
+                            ),
+                            _c("b", [_vm._v("100%")]),
+                            _vm._v(" ppm : "),
+                            _c("b", [_vm._v("1300")]),
                             _c("br"),
                             _c("br"),
                             _vm._v(" "),

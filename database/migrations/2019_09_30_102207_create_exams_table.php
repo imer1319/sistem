@@ -17,7 +17,6 @@ class CreateExamsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->text('content');
-            $table->string('icon');
             $table->timestamps();
         });
     }

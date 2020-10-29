@@ -27,6 +27,16 @@ class UserController extends Controller
         }
         return view('home');
     }
+    public function firstExam(Request $request)
+    {
+        if($request->ajax()){
+            $consulta = SaveExam::orderBy('created_at','asc')
+                ->where('user_id',auth()->user()->id)
+                ->first();
+            return $consulta;
+        }
+        return view('home');
+    }
     public function examen(Request $request)
     {
         if($request->ajax()){
@@ -63,6 +73,19 @@ class UserController extends Controller
          return $usuario->exams;
      }
      return view('home');
+ }
+ public function getExamsDoesntHave(Request $request)
+ {
+    if($request->ajax())
+    {
+        $user = auth()->user()->id;
+        $consulta = Exam::whereDoesntHave('users', function($q)
+            use($user){
+                $q->where('user_id',$user);
+            })->select('id')->inRandomOrder()->first();
+        return $consulta;
+    }
+    return view('home');
  }
  public function examendado(Request $request, $id)
  {

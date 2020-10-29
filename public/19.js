@@ -302,15 +302,15 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.usuario.puntos < 100) {
         data.append('rango_id', 1);
-      } else if (this.usuario.puntos >= 100 && this.usuario.puntos < 500) {
+      } else if (this.usuario.puntos >= 100 && this.usuario.puntos < 300) {
         data.append('rango_id', 2);
-      } else if (this.usuario.puntos >= 500 && this.usuario.puntos < 1000) {
+      } else if (this.usuario.puntos >= 300 && this.usuario.puntos < 700) {
         data.append('rango_id', 3);
-      } else if (this.usuario.puntos >= 1000 && this.usuario.puntos < 5000) {
+      } else if (this.usuario.puntos >= 700 && this.usuario.puntos < 1000) {
         data.append('rango_id', 4);
-      } else if (this.usuario.puntos >= 5000 && this.usuario.puntos < 10000) {
+      } else if (this.usuario.puntos >= 1000 && this.usuario.puntos < 2000) {
         data.append('rango_id', 5);
-      } else if (this.usuario.puntos > 10000) {
+      } else if (this.usuario.puntos >= 2000) {
         data.append('rango_id', 6);
       }
 

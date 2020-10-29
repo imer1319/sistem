@@ -409,11 +409,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1329,14 +1324,6 @@ var render = function() {
         : _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card card-primary card-outline" }, [
               _c("div", { staticClass: "card-body box-profile" }, [
-                _c("div", { staticClass: "text-center" }, [
-                  _c("img", {
-                    staticClass:
-                      "profile-user-img img-fluid img-circle img-responsive",
-                    attrs: { src: "/imagenes/examen/" + _vm.examen.icon }
-                  })
-                ]),
-                _vm._v(" "),
                 _c("h3", { staticClass: "profile-username text-center" }, [
                   _vm._v(_vm._s(_vm.examen.name))
                 ]),

@@ -19,15 +19,6 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="form-group">
-									<label for="imagen"></label>
-									<input type="file" @change="obtenerImagencrear" id="f1" class="form-control-file" ref="img" accept="image/*" equired>
-								</div>
-								<figure>
-									<img width="120" height="120" :src="imagen">
-								</figure>
-							</div>
-							<div class="form-group">
 								<label>Contenido</label>
 								<textarea class="form-control" rows="5" v-model="examen.content"></textarea>
 							</div>
@@ -65,17 +56,6 @@
 								<label>Contenido</label>
 								<textarea class="form-control" rows="5" v-model="fillExamen.content"></textarea>
 							</div>
-							<div class="form-group">
-								<div class="form-group">
-									<input type="file" class="form-control-file" @change="obtenerImagen" accept="image/*" ref="imagenEdit" v-if="estado == true" equired>
-									<input type="file" class="form-control-file" @change="obtenerImagenNueva" accept="image/*" ref="imagenEdit" v-if="estado == false" equired>
-									
-									<figure>
-										<img v-if="estado == true" width="200" height="200" :src="`imagenes/examen/${fillExamen.icon}`">
-										<img v-if="estado == false" width="200" height="200" :src="imagen">
-									</figure>
-								</div>
-							</div>
 							<div class="modal-footer pb-0">
 								<div class="form-group row">
 									<div class="col-lg-6">
@@ -102,7 +82,6 @@
 							<tr>
 								<th>ID</th>
 								<th>Nombre</th>
-								<th class="text-center">Imagen</th>
 								<th class="text-center">Acciones</th>
 							</tr>
 						</thead>
@@ -110,7 +89,6 @@
 							<tr v-for="(examen, index) in paginated('examens')" :key="index" >
 								<td width="10px">{{ index+1}}</td>
 								<td>{{examen.name}}</td>
-								<td class="text-center"><img :src="`/imagenes/examen/${examen.icon}`" class="img-responsive" height="40" width="40"></td>
 								<td class="text-center" colspan="2">
 									<router-link :to="{name : 'show',params:{id:examen.id}}" class="btn btn-info"><i class="fas fa-eye"></i> Ver
 									</router-link>
@@ -139,9 +117,8 @@
 			return { 
 				csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 				examens: [],
-				examen: {name: '',content:'', icon:''},
-				fillExamen: {name: '',content:'', icon:''},
-				imagenMiniatura:'',
+				examen: {name: '',content:''},
+				fillExamen: {name: '',content:''},
 				respuestas: [],
 				respuesta: {respuesta:'', examen_id:''},
 				loading:true,
@@ -160,33 +137,6 @@
 					this.examens = res.data
 					this.loading = false;
 				})
-			},
-			obtenerImagencrear(e){
-				let file = e.target.files[0];
-				this.examen.icon = file;
-				this.cargarImagen(file);
-			},
-			obtenerArchivo(e){
-				let arch = e.target.files[0];
-				this.fillExamen.content = arch;
-			},
-			obtenerImagen(e){
-				this.estado = false
-				let file = e.target.files[0];
-				this.fillExamen.icon = file;
-				this.cargarImagen(file);
-			},
-			obtenerImagenNueva(e){
-				let file = e.target.files[0];
-				this.fillExamen.icon = file;
-				this.cargarImagen(file);
-			},
-			cargarImagen(file){
-				let reader = new FileReader();
-				reader.onload = (e) => {
-					this.imagenMiniatura = e.target.result;
-				}
-				reader.readAsDataURL(file);
 			},
 			validarEspacios(parametro){
 				var patron = /^\s+$/;
@@ -211,19 +161,17 @@
 				})
 			},
 			agregarExamen(){
-				if (this.validarEspacios(this.examen.name)==false||this.validarEspacios(this.examen.content)==false||this.validarEspacios(this.examen.icon)==false) {
+				if (this.validarEspacios(this.examen.name)==false||this.validarEspacios(this.examen.content)==false) {
 					alert("los campos no pueden estar vacios")
 				}else{
 					let formData = new FormData()
 					formData.append('name', this.examen.name)
 					formData.append('content', this.examen.content)
-					formData.append('icon', this.examen.icon)
 					axios.post('/examen',formData)
 					.then(res=>{
 						EventBus.$emit('agregado', res.data.examen)
 						this.examen.name = ""
-						this.$refs.img.value = null
-						this.imagenMiniatura = null
+						this.examen.content = ""
 						this.alerta('success','Se a agregado correctamente')
 						$('#creaExamen').modal('hide')
 					})
@@ -233,33 +181,25 @@
 				this.estado = true;
 				this.fillExamen.name = examen.name;
 				this.fillExamen.content = examen.content;
-				this.fillExamen.icon = examen.icon;
 				this.fillExamen.id = examen.id;
 				$('#edit').modal('show');
 			},
 			updateExamen:function(fillExamen){
-				if (this.validarEspacios(this.fillExamen.name)==false||this.validarEspacios(this.fillExamen.content)==false||this.validarEspacios(this.fillExamen.icon)==false) {
+				if (this.validarEspacios(this.fillExamen.name)==false||this.validarEspacios(this.fillExamen.content)==false) {
 					alert("los campos no pueden estar vacios")
 				}else{
 					let data = new FormData();
 					data.append('name', this.fillExamen.name);
 					data.append('content', this.fillExamen.content);
-					data.append('icon', this.fillExamen.icon);
 					data.append('_method','PUT');
 					var url = `/examen/${fillExamen.id}`;
 					axios.post(url, data).then(res=>{
-						this.$refs.imagenEdit.value = "";
 						this.mostrarExamen();
 						this.alerta('warning','Se a modificado el registro')
 						$('#edit').modal('hide');
 					})
 				}
 			},
-		},
-		computed:{
-			imagen(){
-				return this.imagenMiniatura;
-			} 
 		}
 	}
 </script>

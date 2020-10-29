@@ -116,28 +116,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -154,15 +132,12 @@ __webpack_require__.r(__webpack_exports__);
       examens: [],
       examen: {
         name: '',
-        content: '',
-        icon: ''
+        content: ''
       },
       fillExamen: {
         name: '',
-        content: '',
-        icon: ''
+        content: ''
       },
-      imagenMiniatura: '',
       respuestas: [],
       respuesta: {
         respuesta: '',
@@ -186,37 +161,6 @@ __webpack_require__.r(__webpack_exports__);
         _this2.loading = false;
       });
     },
-    obtenerImagencrear: function obtenerImagencrear(e) {
-      var file = e.target.files[0];
-      this.examen.icon = file;
-      this.cargarImagen(file);
-    },
-    obtenerArchivo: function obtenerArchivo(e) {
-      var arch = e.target.files[0];
-      this.fillExamen.content = arch;
-    },
-    obtenerImagen: function obtenerImagen(e) {
-      this.estado = false;
-      var file = e.target.files[0];
-      this.fillExamen.icon = file;
-      this.cargarImagen(file);
-    },
-    obtenerImagenNueva: function obtenerImagenNueva(e) {
-      var file = e.target.files[0];
-      this.fillExamen.icon = file;
-      this.cargarImagen(file);
-    },
-    cargarImagen: function cargarImagen(file) {
-      var _this3 = this;
-
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        _this3.imagenMiniatura = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
-    },
     validarEspacios: function validarEspacios(parametro) {
       var patron = /^\s+$/;
 
@@ -227,7 +171,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     alerta: function alerta(icono, titulo) {
-      var _this4 = this;
+      var _this3 = this;
 
       var Toast = this.$swal.mixin({
         toast: true,
@@ -235,8 +179,8 @@ __webpack_require__.r(__webpack_exports__);
         showConfirmButton: false,
         timer: 2000,
         onOpen: function onOpen(toast) {
-          toast.addEventListener('mouseenter', _this4.$swal.stopTimer);
-          toast.addEventListener('mouseleave', _this4.$swal.resumeTimer);
+          toast.addEventListener('mouseenter', _this3.$swal.stopTimer);
+          toast.addEventListener('mouseleave', _this3.$swal.resumeTimer);
         }
       });
       Toast.fire({
@@ -245,22 +189,20 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     agregarExamen: function agregarExamen() {
-      var _this5 = this;
+      var _this4 = this;
 
-      if (this.validarEspacios(this.examen.name) == false || this.validarEspacios(this.examen.content) == false || this.validarEspacios(this.examen.icon) == false) {
+      if (this.validarEspacios(this.examen.name) == false || this.validarEspacios(this.examen.content) == false) {
         alert("los campos no pueden estar vacios");
       } else {
         var formData = new FormData();
         formData.append('name', this.examen.name);
         formData.append('content', this.examen.content);
-        formData.append('icon', this.examen.icon);
         axios.post('/examen', formData).then(function (res) {
           _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.examen);
-          _this5.examen.name = "";
-          _this5.$refs.img.value = null;
-          _this5.imagenMiniatura = null;
+          _this4.examen.name = "";
+          _this4.examen.content = "";
 
-          _this5.alerta('success', 'Se a agregado correctamente');
+          _this4.alerta('success', 'Se a agregado correctamente');
 
           $('#creaExamen').modal('hide');
         });
@@ -270,37 +212,28 @@ __webpack_require__.r(__webpack_exports__);
       this.estado = true;
       this.fillExamen.name = examen.name;
       this.fillExamen.content = examen.content;
-      this.fillExamen.icon = examen.icon;
       this.fillExamen.id = examen.id;
       $('#edit').modal('show');
     },
     updateExamen: function updateExamen(fillExamen) {
-      var _this6 = this;
+      var _this5 = this;
 
-      if (this.validarEspacios(this.fillExamen.name) == false || this.validarEspacios(this.fillExamen.content) == false || this.validarEspacios(this.fillExamen.icon) == false) {
+      if (this.validarEspacios(this.fillExamen.name) == false || this.validarEspacios(this.fillExamen.content) == false) {
         alert("los campos no pueden estar vacios");
       } else {
         var data = new FormData();
         data.append('name', this.fillExamen.name);
         data.append('content', this.fillExamen.content);
-        data.append('icon', this.fillExamen.icon);
         data.append('_method', 'PUT');
         var url = "/examen/".concat(fillExamen.id);
         axios.post(url, data).then(function (res) {
-          _this6.$refs.imagenEdit.value = "";
+          _this5.mostrarExamen();
 
-          _this6.mostrarExamen();
-
-          _this6.alerta('warning', 'Se a modificado el registro');
+          _this5.alerta('warning', 'Se a modificado el registro');
 
           $('#edit').modal('hide');
         });
       }
-    }
-  },
-  computed: {
-    imagen: function imagen() {
-      return this.imagenMiniatura;
     }
   }
 });
@@ -372,30 +305,6 @@ var render = function() {
                           _vm.$set(_vm.examen, "name", $event.target.value)
                         }
                       }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "imagen" } }),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "img",
-                      staticClass: "form-control-file",
-                      attrs: {
-                        type: "file",
-                        id: "f1",
-                        accept: "image/*",
-                        equired: ""
-                      },
-                      on: { change: _vm.obtenerImagencrear }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("figure", [
-                    _c("img", {
-                      attrs: { width: "120", height: "120", src: _vm.imagen }
                     })
                   ])
                 ]),
@@ -513,58 +422,6 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm.estado == true
-                      ? _c("input", {
-                          ref: "imagenEdit",
-                          staticClass: "form-control-file",
-                          attrs: {
-                            type: "file",
-                            accept: "image/*",
-                            equired: ""
-                          },
-                          on: { change: _vm.obtenerImagen }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.estado == false
-                      ? _c("input", {
-                          ref: "imagenEdit",
-                          staticClass: "form-control-file",
-                          attrs: {
-                            type: "file",
-                            accept: "image/*",
-                            equired: ""
-                          },
-                          on: { change: _vm.obtenerImagenNueva }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("figure", [
-                      _vm.estado == true
-                        ? _c("img", {
-                            attrs: {
-                              width: "200",
-                              height: "200",
-                              src: "imagenes/examen/" + _vm.fillExamen.icon
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.estado == false
-                        ? _c("img", {
-                            attrs: {
-                              width: "200",
-                              height: "200",
-                              src: _vm.imagen
-                            }
-                          })
-                        : _vm._e()
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
                 _vm._m(3)
               ])
             ])
@@ -615,10 +472,6 @@ var render = function() {
                             _c("th", [_vm._v("Nombre")]),
                             _vm._v(" "),
                             _c("th", { staticClass: "text-center" }, [
-                              _vm._v("Imagen")
-                            ]),
-                            _vm._v(" "),
-                            _c("th", { staticClass: "text-center" }, [
                               _vm._v("Acciones")
                             ])
                           ])
@@ -636,17 +489,6 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(examen.name))]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "text-center" }, [
-                                _c("img", {
-                                  staticClass: "img-responsive",
-                                  attrs: {
-                                    src: "/imagenes/examen/" + examen.icon,
-                                    height: "40",
-                                    width: "40"
-                                  }
-                                })
-                              ]),
                               _vm._v(" "),
                               _c(
                                 "td",

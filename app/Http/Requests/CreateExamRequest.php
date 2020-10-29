@@ -26,7 +26,6 @@ class CreateExamRequest extends FormRequest
         return [
             'name' => 'required',
             'content' => 'required',
-            'icon' => 'required|image',
 
         ];
     }

@@ -33,6 +33,8 @@ Route::get('numero_ejercicios','AdminController@count_ejercicio');
 Route::get('mayor_velocidad','AdminController@mayor_velocidad');
 Route::get('mayor_puntuacion','AdminController@mayor_puntuacion');
 // rutas para el usuario
+Route::get('/dadosExams','UserController@getExamsDoesntHave');
+Route::get('/examDado','UserController@firstExam');
 Route::get('/exam','UserController@examen');
 Route::get('examen_dado','UserController@examenes_dados');
 Route::get('/exam/{id}','UserController@darExamen');
@@ -64,10 +66,4 @@ Route::get('encuentra-palabra','UserController@game');
 Route::get('encuentra-numeros','UserController@game');
 Route::get('iguales','UserController@game');
 
-//ruta ejercicios
-Route::get('parpadeo','UserController@game');
-Route::get('vertical','UserController@game');
-Route::get('horizontal','UserController@game');
-Route::get('aleatorio','UserController@game');
-Route::get('piramide','UserController@game');
 

@@ -22,15 +22,9 @@ class ExamController extends Controller
 
     public function store(CreateExamRequest $request)
     {
-        if ($request->hasFile('icon')) {
-            $file = $request->file('icon');
-            $url = time().$file->getClientOriginalName();
-            $file->move(public_path().'/imagenes/examen',$url);
-        }
         $examen = new Exam();
         $examen->name = $request->name;
         $examen->content = $request->content;
-        $examen->icon = $url;
         $examen->save();
         return response()->json([
             "message" => "Creado correctamente",
@@ -51,14 +45,6 @@ class ExamController extends Controller
     {
         $examen = Exam::find($id);
         $examen->fill($request->only('name','content'));
-        if ($file = $request->hasFile('icon')) {
-            $file = $request->file('icon');
-            $url = time().$file->getClientOriginalName();
-            $file->move(public_path().'/imagenes/examen',$url);
-            $file_path = public_path().'/imagenes/examen/'.$examen->icon;
-            if(is_file($file_path)){unlink($file_path);}
-            $examen->icon = $url;
-        }
         $examen->save();
         return response()->json([
             "message" => "Actualizado correctamente",
@@ -70,10 +56,6 @@ class ExamController extends Controller
     public function destroy($id)
     {
      $examen = Exam::find($id);
-     $file_path = public_path().'/imagenes/examen/'.$examen->icon;
-     if(is_file($file_path)){unlink($file_path);}
-     $file_content = public_path().'/examenes/'.$examen->content;
-     if(is_file($file_content)){unlink($file_content);}
      $examen->delete();
      return response()->json([
         "message" => "Eliminado correctamente",

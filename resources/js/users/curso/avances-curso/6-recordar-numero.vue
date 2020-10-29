@@ -171,10 +171,15 @@
 					this.calificacion = 3
 				}
 				if (this.puntuacion >= this.requierePuntuacion){
-					if ((this.usuario.avance_curso < 11) || (this.usuario.avance_curso > 20 && this.usuario.avance_curso < 23)){
+					if ((this.usuario.avance_curso ==12 || this.usuario.avance_curso == 13)){
+						if (this.usuario.avance_curso == 12) {
+							this.usuario.puntos += 55
+							this.aumento_puntos = '+55 Pts'
+						}else if (this.usuario.avance_curso == 13) {
+							this.usuario.puntos += 70
+							this.aumento_puntos = '+70 Pts'
+						}
 						this.aumento_avance = this.usuario.avance_curso+1
-						this.usuario.puntos += 100
-						this.aumento_puntos = '+100 Pts'
 						let data = new FormData();
 						data.append('avance_curso',this.aumento_avance);
 						data.append('puntos',this.usuario.puntos);
