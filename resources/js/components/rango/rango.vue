@@ -15,7 +15,8 @@
 							<div class="form-group row">
 								<label class="col-form-label col-md-2">Nombre</label>
 								<div class="col-md-10">
-									<input type="text"  name="name" class="form-control" v-model="rango.nombre" placeholder="Nombre de la rango" required>
+									<input type="text" class="form-control" v-model="rango.nombre" placeholder="Nombre de la rango" required>
+									<span v-if="errors.nombre" class="text-danger">{{ errors.nombre[0] }}</span>
 								</div>
 							</div>
 							<div class="form-group">
@@ -26,6 +27,7 @@
 								<figure>
 									<img width="200" height="200" :src="imagen">
 								</figure>
+								<span v-if="errors.avatar" class="text-danger">{{ errors.avatar[0] }}</span>
 							</div>
 						</div>
 						<div class="modal-footer pb-0">
@@ -54,7 +56,8 @@
 							<div class="form-group row">
 								<label class="col-form-label col-md-2">Nombre</label>
 								<div class="col-md-10">
-									<input type="text"  name="name" class="form-control" v-model="fillRango.nombre" required>
+									<input type="text" class="form-control" v-model="fillRango.nombre" required>
+									<span v-if="errors.nombre" class="text-danger">{{ errors.nombre[0] }}</span>
 								</div>
 							</div>
 							<div class="form-group">
@@ -66,6 +69,7 @@
 										<img v-if="estado == true" width="200" height="200" :src="`imagenes/rangos/${fillRango.avatar}`">
 										<img v-if="estado == false" width="200" height="200" :src="imagen">
 									</figure>
+									<span v-if="errors.avatar" class="text-danger">{{ errors.avatar[0] }}</span>
 								</div>
 							</div>
 						</div>
@@ -88,7 +92,7 @@
 			</div>
 			<spinner v-if="loading"></spinner>
 			<div class="card-body" v-else>
-				<paginate name="rangos" :list="rangos" :per="5">
+				<paginate name="rangos" :list="rangos" :per="6">
 					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
@@ -134,8 +138,8 @@
 				imagenMiniatura:'',
 				loading:true,
 				paginate:['rangos'],
-
 				estado:true,
+				errors: [],
 			}
 		},
 		methods:{
@@ -207,9 +211,13 @@
 						this.rango.nombre = "";
 						this.$refs.img.value = "";
 						this.imagenMiniatura = "";
+						this.errors = [];
 						this.alerta('success','Se a agregado correctamente')
 						$('#createRango').modal('hide')
-					})
+					}).catch(error => {
+		          		this.errors = error.response.data.errors;
+		          		console.log(this.errors)
+			        })
 				}
 			},
 			editarRango:function (rango){
@@ -229,11 +237,15 @@
 					data.append('_method','PUT');
 					var url = `/rango/${fillRango.id}`;
 					axios.post(url, data).then(res=>{
-						this.$refs.imagenEdit.value = "";
+						this.errors = []
+						this.$refs.imagenEdit.value = null;
 						this.mostrarRango();
 						this.alerta('warning','Se a modificado el registro')
 						$('#editRango').modal('hide');
-					})
+					}).catch(error => {
+		          		this.errors = error.response.data.errors;
+		          		console.log(this.errors)
+			        })
 				}
 			}
 		},

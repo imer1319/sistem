@@ -1,8 +1,48 @@
 <template>
 	<div class="container-fluid">
+		<div class="modal fade" id="createdUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  		<div class="modal-dialog" role="document">
+				<form v-on:submit.prevent="addUser">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4>Crear</h4>
+								<button type="button" class="close" data-dismiss="modal">
+									<span>&times;</span>
+								</button>
+							</div>
+							<div class="modal-body pb-0">
+								<div class="form-group row">
+									<label class="col-form-label col-md-2">Nombre</label>
+									<div class="col-md-10">
+										<input type="text"  name="name" class="form-control" v-model="usuario.name" placeholder="Nombre del usuario" required>
+										<span v-if="errors.name" class="text-danger">{{ errors.name[0] }}</span>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-form-label col-md-2">Nombre</label>
+									<div class="col-md-8">
+										<input type="text"  name="password" class="form-control" v-model="password" placeholder="Contraseña del usuario" required>
+									</div>
+									<div class="col-md-2 btn btn-primary btn-sm" @click.prevent="createPasswordRandom()">Generar</div>
+								</div>
+							</div>
+							<div class="modal-footer pb-0">
+								<div class="form-group row">
+									<div class="col-lg-6">
+										<input type="submit" name="enviar" value="Crear Registro" class="btn btn-primary pull-right">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 		<div class="card">
 			<div class="card-header">
 				<h2 class="card-title">Usuarios</h2>
+				<a class="btn btn-success float-right text-white" v-on:click="crearUser()"><i class="fas fa-plus"></i> Crear Usuario</a>
 			</div>
 			<spinner v-if="loading"></spinner>
 			<div class="card-body" v-else>
@@ -67,15 +107,52 @@
 			return {
 				name:'',
 				usuarios: [],
-				usuario: {name: '',apellido_paterno:'', avatar:''},
-				fillUsuario: {name: '',apellido_paterno:'', avatar:''},
+				usuario: {name: '',password:''},
+				fillUsuario: {name: '',apellido_paterno:'', avatar:'',hash_password:''},
 				imagenMiniatura:'',
 				loading:true,
 				estado:false,
 				paginate:['usuarios'],
+				abecedario : ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9",".","-","_","$","&","#","@"],
+				password:[],
+				random:null,
+				errors: [],
 			}
 		},
 		methods:{
+			addUser(){	
+				if (this.validarEspacios(this.usuario.name)==false||this.validarEspacios(this.password)==false) {
+					alert("los campos no pueden estar vacios")
+				}else{
+					let formData = new FormData();
+					formData.append('name', this.usuario.name);
+					formData.append('password', this.password);
+					formData.append('hash_password', this.password);
+					axios.post('/createUser',formData)
+					.then(response=>{
+						this.usuario.name = "";
+						this.password = "";
+						this.errors = [];
+						this.alerta('success','Se a agregado correctamente')
+						this.mostrarUsuario()
+						$('#createdUser').modal('hide')
+					}).catch(error => {
+		          		this.errors = error.response.data.errors;
+		          		console.log(this.errors)
+			        })
+				}
+			},
+			createPasswordRandom(){
+				for (var i = 1; i < 9; i++) {
+					this.random = Math.floor(Math.random()*this.abecedario.length)
+					if (this.abecedario[this.random] != null) {
+						this.password += this.abecedario[this.random]	
+					}
+				}
+			},
+			crearUser(){
+				$('#createdUser').modal('show')
+			},
 			mostrarUsuario:function(){
 				axios.get('usuario').then(res =>{
 					this.usuarios = res.data
@@ -100,6 +177,28 @@
 					this.imagenMiniatura = e.target.result;
 				}
 				reader.readAsDataURL(file);
+			},
+			alerta:function(icono,titulo){
+				const Toast = this.$swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 2000,
+					onOpen: (toast) => {
+						toast.addEventListener('mouseenter', this.$swal.stopTimer)
+						toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+					}
+				})
+				Toast.fire({
+					icon: icono,
+					title: titulo
+				})
+			},
+			validarEspacios(parametro){
+				var patron = /^\s+$/;
+				if (patron.test(parametro)) {
+					return false
+				}else{return true}
 			},
 			editarUsuario:function (usuario){
 				this.estado = true;

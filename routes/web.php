@@ -14,9 +14,18 @@ Route::view('/remember-words', 'home');
 Route::view('/odd-even', 'home');
 Route::view('/visual-field', 'home');
 
-Auth::routes();
+Auth::routes(['register' => false]);
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('createUser', 'UsuarioController@register');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('perfil','AdminController@index')->name('admin');
+Route::get('usuario/user/{id}','UsuarioController@getDataExamUser');
+Route::get('usuario/games/{id}/{ejercicio_id}','UsuarioController@getDataGameMax');
+Route::get('usuario/game/{id}/{ejercicio_id}','UsuarioController@getDataGameRecord');
 Route::get('examen','ExamController@index')->name('examen');
 Route::get('ejercicio','EjercicioController@index')->name('ejercicio');
 Route::get('rango','RangoController@index')->name('rango');

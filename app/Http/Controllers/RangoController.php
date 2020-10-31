@@ -21,6 +21,10 @@ class RangoController extends Controller
     }
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'nombre' => 'required',
+            'avatar' => 'required|mimes:jpeg,jpg,png,gif|required|max:10000',
+        ]);
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $url = time().$file->getClientOriginalName();

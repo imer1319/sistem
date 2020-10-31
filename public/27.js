@@ -744,7 +744,7 @@ var render = function() {
                             _c("br"),
                             _c("br"),
                             _vm._v(
-                              "\n\t\t\t\t\t\t\t\t*** quinto examen : Comprensión :"
+                              "\n\t\t\t\t\t\t\t\t*** sexto examen : Comprensión :"
                             ),
                             _c("b", [_vm._v("100%")]),
                             _vm._v(" ppm : "),

@@ -66,6 +66,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -82,27 +122,69 @@ __webpack_require__.r(__webpack_exports__);
       usuarios: [],
       usuario: {
         name: '',
-        apellido_paterno: '',
-        avatar: ''
+        password: ''
       },
       fillUsuario: {
         name: '',
         apellido_paterno: '',
-        avatar: ''
+        avatar: '',
+        hash_password: ''
       },
       imagenMiniatura: '',
       loading: true,
       estado: false,
-      paginate: ['usuarios']
+      paginate: ['usuarios'],
+      abecedario: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-", "_", "$", "&", "#", "@"],
+      password: [],
+      random: null,
+      errors: []
     };
   },
   methods: {
-    mostrarUsuario: function mostrarUsuario() {
+    addUser: function addUser() {
       var _this2 = this;
 
+      if (this.validarEspacios(this.usuario.name) == false || this.validarEspacios(this.password) == false) {
+        alert("los campos no pueden estar vacios");
+      } else {
+        var formData = new FormData();
+        formData.append('name', this.usuario.name);
+        formData.append('password', this.password);
+        formData.append('hash_password', this.password);
+        axios.post('/createUser', formData).then(function (response) {
+          _this2.usuario.name = "";
+          _this2.password = "";
+          _this2.errors = [];
+
+          _this2.alerta('success', 'Se a agregado correctamente');
+
+          _this2.mostrarUsuario();
+
+          $('#createdUser').modal('hide');
+        })["catch"](function (error) {
+          _this2.errors = error.response.data.errors;
+          console.log(_this2.errors);
+        });
+      }
+    },
+    createPasswordRandom: function createPasswordRandom() {
+      for (var i = 1; i < 9; i++) {
+        this.random = Math.floor(Math.random() * this.abecedario.length);
+
+        if (this.abecedario[this.random] != null) {
+          this.password += this.abecedario[this.random];
+        }
+      }
+    },
+    crearUser: function crearUser() {
+      $('#createdUser').modal('show');
+    },
+    mostrarUsuario: function mostrarUsuario() {
+      var _this3 = this;
+
       axios.get('usuario').then(function (res) {
-        _this2.usuarios = res.data;
-        _this2.loading = false;
+        _this3.usuarios = res.data;
+        _this3.loading = false;
       });
     },
     obtenerImagen: function obtenerImagen(e) {
@@ -118,15 +200,42 @@ __webpack_require__.r(__webpack_exports__);
       this.cargarImagen(file);
     },
     cargarImagen: function cargarImagen(file) {
-      var _this3 = this;
+      var _this4 = this;
 
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        _this3.imagenMiniatura = e.target.result;
+        _this4.imagenMiniatura = e.target.result;
       };
 
       reader.readAsDataURL(file);
+    },
+    alerta: function alerta(icono, titulo) {
+      var _this5 = this;
+
+      var Toast = this.$swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        onOpen: function onOpen(toast) {
+          toast.addEventListener('mouseenter', _this5.$swal.stopTimer);
+          toast.addEventListener('mouseleave', _this5.$swal.resumeTimer);
+        }
+      });
+      Toast.fire({
+        icon: icono,
+        title: titulo
+      });
+    },
+    validarEspacios: function validarEspacios(parametro) {
+      var patron = /^\s+$/;
+
+      if (patron.test(parametro)) {
+        return false;
+      } else {
+        return true;
+      }
     },
     editarUsuario: function editarUsuario(usuario) {
       this.estado = true;
@@ -137,7 +246,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#editUsuarios').modal('show');
     },
     updateUsuario: function updateUsuario(fillUsuario) {
-      var _this4 = this;
+      var _this6 = this;
 
       var data = new FormData();
       data.append('name', this.fillUsuario.name);
@@ -146,7 +255,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('_method', 'PUT');
       var url = "/usuario/".concat(fillUsuario.id);
       axios.post(url, data).then(function (res) {
-        _this4.mostrarUsuario();
+        _this6.mostrarUsuario();
 
         $('#editUsuarios').modal('hide');
       });
@@ -158,10 +267,10 @@ __webpack_require__.r(__webpack_exports__);
       return this.imagenMiniatura;
     },
     searchUser: function searchUser() {
-      var _this5 = this;
+      var _this7 = this;
 
       return this.usuarios.filter(function (item) {
-        return item.name.includes(_this5.name);
+        return item.name.includes(_this7.name);
       });
     }
   }
@@ -187,9 +296,166 @@ var render = function() {
   return _c("div", { staticClass: "container-fluid" }, [
     _c(
       "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "createdUser",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addUser($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "modal-dialog" }, [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body pb-0" }, [
+                      _c("div", { staticClass: "form-group row" }, [
+                        _c(
+                          "label",
+                          { staticClass: "col-form-label col-md-2" },
+                          [_vm._v("Nombre")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-10" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.usuario.name,
+                                expression: "usuario.name"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "name",
+                              placeholder: "Nombre del usuario",
+                              required: ""
+                            },
+                            domProps: { value: _vm.usuario.name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.usuario,
+                                  "name",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.name
+                            ? _c("span", { staticClass: "text-danger" }, [
+                                _vm._v(_vm._s(_vm.errors.name[0]))
+                              ])
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group row" }, [
+                        _c(
+                          "label",
+                          { staticClass: "col-form-label col-md-2" },
+                          [_vm._v("Nombre")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.password,
+                                expression: "password"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "password",
+                              placeholder: "Contraseña del usuario",
+                              required: ""
+                            },
+                            domProps: { value: _vm.password },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.password = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "col-md-2 btn btn-primary btn-sm",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.createPasswordRandom()
+                              }
+                            }
+                          },
+                          [_vm._v("Generar")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
       { staticClass: "card" },
       [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h2", { staticClass: "card-title" }, [_vm._v("Usuarios")]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-success float-right text-white",
+              on: {
+                click: function($event) {
+                  return _vm.crearUser()
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Crear Usuario")]
+          )
+        ]),
         _vm._v(" "),
         _vm.loading
           ? _c("spinner")
@@ -421,8 +687,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h2", { staticClass: "card-title" }, [_vm._v("Usuarios")])
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h4", [_vm._v("Crear")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("span", [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer pb-0" }, [
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-lg-6" }, [
+          _c("input", {
+            staticClass: "btn btn-primary pull-right",
+            attrs: { type: "submit", name: "enviar", value: "Crear Registro" }
+          })
+        ])
+      ])
     ])
   }
 ]

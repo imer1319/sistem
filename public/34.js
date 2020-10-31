@@ -157,6 +157,96 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showRango();
@@ -171,31 +261,209 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         apellido_paterno: null,
         avatar: null,
-        email: '',
         apellido_materno: null,
         rango_id: '',
         curso: '',
         puntos: ''
       },
       estado: false,
-      imagenMiniatura: ''
+      imagenMiniatura: '',
+      errors: [],
+      examenes: [],
+      games1: null,
+      games2: null,
+      games3: null,
+      games4: null,
+      games5: null,
+      games6: null,
+      games7: null,
+      games8: null,
+      record1: {},
+      record2: {},
+      record3: {},
+      record4: {},
+      record5: {},
+      record6: {},
+      record7: {},
+      record8: {}
     };
   },
   methods: {
-    showRango: function showRango() {
+    getDataGame1Sum: function getDataGame1Sum(usuario) {
       var _this = this;
 
+      var url = 'games/' + usuario + '/' + 1;
+      axios.get(url).then(function (res) {
+        _this.games1 = res.data;
+
+        _this.getDataGame2Sum(usuario);
+
+        _this.getDataGame3Sum(usuario);
+
+        _this.getDataGame4Sum(usuario);
+
+        _this.getDataGame5Sum(usuario);
+
+        _this.getDataGame6Sum(usuario);
+
+        _this.getDataGame7Sum(usuario);
+
+        _this.getDataGame8Sum(usuario);
+
+        _this.getDataGameRecord1(usuario);
+
+        _this.getDataGameRecord2(usuario);
+
+        _this.getDataGameRecord3(usuario);
+
+        _this.getDataGameRecord4(usuario);
+
+        _this.getDataGameRecord5(usuario);
+
+        _this.getDataGameRecord6(usuario);
+
+        _this.getDataGameRecord7(usuario);
+
+        _this.getDataGameRecord8(usuario);
+      });
+    },
+    getDataGame2Sum: function getDataGame2Sum(usuario) {
+      var _this2 = this;
+
+      var url = 'games/' + usuario + '/' + 2;
+      axios.get(url).then(function (res) {
+        _this2.games2 = res.data;
+      });
+    },
+    getDataGame3Sum: function getDataGame3Sum(usuario) {
+      var _this3 = this;
+
+      var url = 'games/' + usuario + '/' + 3;
+      axios.get(url).then(function (res) {
+        _this3.games3 = res.data;
+      });
+    },
+    getDataGame4Sum: function getDataGame4Sum(usuario) {
+      var _this4 = this;
+
+      var url = 'games/' + usuario + '/' + 4;
+      axios.get(url).then(function (res) {
+        _this4.games4 = res.data;
+      });
+    },
+    getDataGame5Sum: function getDataGame5Sum(usuario) {
+      var _this5 = this;
+
+      var url = 'games/' + usuario + '/' + 5;
+      axios.get(url).then(function (res) {
+        _this5.games5 = res.data;
+      });
+    },
+    getDataGame6Sum: function getDataGame6Sum(usuario) {
+      var _this6 = this;
+
+      var url = 'games/' + usuario + '/' + 6;
+      axios.get(url).then(function (res) {
+        _this6.games6 = res.data;
+      });
+    },
+    getDataGame7Sum: function getDataGame7Sum(usuario) {
+      var _this7 = this;
+
+      var url = 'games/' + usuario + '/' + 7;
+      axios.get(url).then(function (res) {
+        _this7.games7 = res.data;
+      });
+    },
+    getDataGame8Sum: function getDataGame8Sum(usuario) {
+      var _this8 = this;
+
+      var url = 'games/' + usuario + '/' + 8;
+      axios.get(url).then(function (res) {
+        _this8.games8 = res.data;
+      });
+    },
+    getDataGameRecord1: function getDataGameRecord1(usuario) {
+      var _this9 = this;
+
+      var url = 'game/' + usuario + '/' + 1;
+      axios.get(url).then(function (res) {
+        _this9.record1 = res.data;
+      });
+    },
+    getDataGameRecord2: function getDataGameRecord2(usuario) {
+      var _this10 = this;
+
+      var url = 'game/' + usuario + '/' + 2;
+      axios.get(url).then(function (res) {
+        _this10.record2 = res.data;
+      });
+    },
+    getDataGameRecord3: function getDataGameRecord3(usuario) {
+      var _this11 = this;
+
+      var url = 'game/' + usuario + '/' + 3;
+      axios.get(url).then(function (res) {
+        _this11.record3 = res.data;
+      });
+    },
+    getDataGameRecord4: function getDataGameRecord4(usuario) {
+      var _this12 = this;
+
+      var url = 'game/' + usuario + '/' + 4;
+      axios.get(url).then(function (res) {
+        _this12.record4 = res.data;
+      });
+    },
+    getDataGameRecord5: function getDataGameRecord5(usuario) {
+      var _this13 = this;
+
+      var url = 'game/' + usuario + '/' + 5;
+      axios.get(url).then(function (res) {
+        _this13.record5 = res.data;
+      });
+    },
+    getDataGameRecord6: function getDataGameRecord6(usuario) {
+      var _this14 = this;
+
+      var url = 'game/' + usuario + '/' + 6;
+      axios.get(url).then(function (res) {
+        _this14.record6 = res.data;
+      });
+    },
+    getDataGameRecord7: function getDataGameRecord7(usuario) {
+      var _this15 = this;
+
+      var url = 'game/' + usuario + '/' + 7;
+      axios.get(url).then(function (res) {
+        _this15.record7 = res.data;
+      });
+    },
+    getDataGameRecord8: function getDataGameRecord8(usuario) {
+      var _this16 = this;
+
+      var url = 'game/' + usuario + '/' + 8;
+      axios.get(url).then(function (res) {
+        _this16.record8 = res.data;
+      });
+    },
+    obtenerFecha: function obtenerFecha(fecha) {
+      return moment(fecha).fromNow();
+    },
+    showRango: function showRango() {
+      var _this17 = this;
+
       axios.get("/rango").then(function (res) {
-        _this.rangos = res.data;
+        _this17.rangos = res.data;
       });
     },
     showUser: function showUser() {
-      var _this2 = this;
+      var _this18 = this;
 
       var url = this.$route.params.id;
       axios.get(url).then(function (res) {
-        _this2.usuario = res.data;
-        _this2.loading = false;
+        _this18.usuario = res.data;
+        _this18.loading = false;
       });
     },
     obtenerImagen: function obtenerImagen(e) {
@@ -211,18 +479,18 @@ __webpack_require__.r(__webpack_exports__);
       this.cargarImagen(file);
     },
     cargarImagen: function cargarImagen(file) {
-      var _this3 = this;
+      var _this19 = this;
 
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        _this3.imagenMiniatura = e.target.result;
+        _this19.imagenMiniatura = e.target.result;
       };
 
       reader.readAsDataURL(file);
     },
     alerta: function alerta() {
-      var _this4 = this;
+      var _this20 = this;
 
       var Toast = this.$swal.mixin({
         toast: true,
@@ -230,8 +498,8 @@ __webpack_require__.r(__webpack_exports__);
         showConfirmButton: false,
         timer: 2000,
         onOpen: function onOpen(toast) {
-          toast.addEventListener('mouseenter', _this4.$swal.stopTimer);
-          toast.addEventListener('mouseleave', _this4.$swal.resumeTimer);
+          toast.addEventListener('mouseenter', _this20.$swal.stopTimer);
+          toast.addEventListener('mouseleave', _this20.$swal.resumeTimer);
         }
       });
       Toast.fire({
@@ -244,7 +512,6 @@ __webpack_require__.r(__webpack_exports__);
       this.fillUsuario.name = this.usuario.name;
       this.fillUsuario.apellido_paterno = this.usuario.apellido_paterno;
       this.fillUsuario.apellido_materno = this.usuario.apellido_materno;
-      this.fillUsuario.email = this.usuario.email;
       this.fillUsuario.avatar = this.usuario.avatar;
       this.fillUsuario.curso = this.usuario.curso;
       this.fillUsuario.rango_id = this.usuario.rango_id;
@@ -252,7 +519,7 @@ __webpack_require__.r(__webpack_exports__);
       this.fillUsuario.id = this.usuario.id;
     },
     updateUsuario: function updateUsuario(fillUsuario) {
-      var _this5 = this;
+      var _this21 = this;
 
       if (this.fillUsuario.apellido_materno == null) {
         this.fillUsuario.apellido_materno = "";
@@ -266,7 +533,6 @@ __webpack_require__.r(__webpack_exports__);
       data.append('name', this.fillUsuario.name);
       data.append('apellido_paterno', this.fillUsuario.apellido_paterno);
       data.append('apellido_materno', this.fillUsuario.apellido_materno);
-      data.append('email', this.fillUsuario.email);
       data.append('avatar', this.fillUsuario.avatar);
       data.append('curso', this.fillUsuario.curso);
 
@@ -287,9 +553,22 @@ __webpack_require__.r(__webpack_exports__);
       data.append('_method', 'PUT');
       var url = "/usuario/".concat(fillUsuario.id);
       axios.post(url, data).then(function (res) {
-        _this5.showUser();
+        _this21.errors = [];
 
-        _this5.alerta();
+        _this21.showUser();
+
+        _this21.alerta();
+      })["catch"](function (error) {
+        _this21.errors = error.response.data.errors;
+        console.log(_this21.errors);
+      });
+    },
+    getDataExamUser: function getDataExamUser(usuario) {
+      var _this22 = this;
+
+      var url = 'user/' + usuario;
+      axios.get(url).then(function (res) {
+        _this22.examenes = res.data;
       });
     }
   },
@@ -332,7 +611,7 @@ var render = function() {
                     _c("div", { staticClass: "col-4" }, [
                       _c("div", { staticClass: "text-center" }, [
                         _c("img", {
-                          staticClass: "profile-user-img img-circle",
+                          staticClass: "img-responsive",
                           attrs: {
                             src: "/imagenes/usuario/" + _vm.usuario.avatar,
                             height: "120",
@@ -342,7 +621,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c(
-                        "h3",
+                        "h2",
                         { staticClass: "profile-username text-center" },
                         [_vm._v(_vm._s(_vm.usuario.name))]
                       )
@@ -355,7 +634,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-6" }, [
-                          _c("h4", [_vm._v("APELLIDOS")]),
+                          _c("h5", [_vm._v("APELLIDOS")]),
                           _vm._v(" "),
                           _c("h6", [
                             _vm._v(
@@ -363,17 +642,19 @@ var render = function() {
                                 " " +
                                 _vm._s(_vm.usuario.apellido_materno)
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c("h4", [_vm._v("EMAIL")]),
-                          _vm._v(" "),
-                          _c("h6", [_vm._v(_vm._s(_vm.usuario.email))])
+                          ])
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-6" }, [
-                          _c("h4", [_vm._v("PUNTOS")]),
+                          _c("h5", [_vm._v("PUNTOS")]),
                           _vm._v(" "),
                           _c("h6", [_vm._v(_vm._s(_vm.usuario.puntos))])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-6" }, [
+                          _c("h5", [_vm._v("Contraseña")]),
+                          _vm._v(" "),
+                          _c("h6", [_vm._v(_vm._s(_vm.usuario.hash_password))])
                         ])
                       ])
                     ])
@@ -411,6 +692,40 @@ var render = function() {
                           }
                         },
                         [_vm._v("Editar Perfil")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { href: "#avanceE", "data-toggle": "tab" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.getDataExamUser(_vm.usuario.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Avances Examen")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { href: "#avanceG", "data-toggle": "tab" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.getDataGame1Sum(_vm.usuario.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Avances Ejercicios")]
                       )
                     ])
                   ])
@@ -656,46 +971,13 @@ var render = function() {
                                       )
                                     }
                                   }
-                                })
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "form-group row" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "col-sm-2 col-form-label",
-                                  attrs: { for: "inputEmail" }
-                                },
-                                [_vm._v("Email")]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-sm-10" }, [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.fillUsuario.email,
-                                      expression: "fillUsuario.email"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: { type: "email", required: "" },
-                                  domProps: { value: _vm.fillUsuario.email },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.fillUsuario,
-                                        "email",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
+                                }),
+                                _vm._v(" "),
+                                _vm.errors.name
+                                  ? _c("span", { staticClass: "text-danger" }, [
+                                      _vm._v(_vm._s(_vm.errors.name[0]))
+                                    ])
+                                  : _vm._e()
                               ])
                             ]),
                             _vm._v(" "),
@@ -838,6 +1120,326 @@ var render = function() {
                                   )
                                 ]
                               )
+                            ])
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "tab-pane", attrs: { id: "avanceE" } },
+                      [
+                        _c("h4", { staticClass: "text-center" }, [
+                          _vm._v("Avance de Examenes")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "row" },
+                          _vm._l(_vm.examenes, function(examen, index) {
+                            return _c(
+                              "div",
+                              { staticClass: "col-12 col-md-6 mb-2 shadow" },
+                              [
+                                _c("div", { staticClass: "card" }, [
+                                  _c("div", { staticClass: "card-body" }, [
+                                    _c(
+                                      "span",
+                                      { staticClass: "float-rigth badge" },
+                                      [_vm._v(_vm._s(index + 1))]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "h4",
+                                      {
+                                        staticClass: "text-center text-danger"
+                                      },
+                                      [_vm._v(_vm._s(examen.name))]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "row" }, [
+                                      _c(
+                                        "h5",
+                                        {
+                                          staticClass:
+                                            "col-8 col-md-6 text-success"
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "fab fa-accessible-icon"
+                                          }),
+                                          _vm._v(" PPM")
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "h5",
+                                        { staticClass: "col-4 col-md-6" },
+                                        [_vm._v(_vm._s(examen.pivot.ppm))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("hr"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "h5",
+                                        {
+                                          staticClass:
+                                            "col-8 col-md-6 text-info"
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fas fa-brain"
+                                          }),
+                                          _vm._v(" Comprension")
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "h5",
+                                        { staticClass: "col-4 col-md-6" },
+                                        [
+                                          _vm._v(
+                                            _vm._s(examen.pivot.comprension)
+                                          ),
+                                          _c("b", { staticClass: "h5" }, [
+                                            _vm._v(" %")
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("hr"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "h5",
+                                        {
+                                          staticClass:
+                                            "col-8 col-md-6 text-warning"
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "far fa-clock"
+                                          }),
+                                          _vm._v(" Tiempo")
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "h5",
+                                        { staticClass: "col-4 col-md-6" },
+                                        [
+                                          _vm._v(_vm._s(examen.pivot.tiempo)),
+                                          _c("b", { staticClass: "h5" }, [
+                                            _vm._v(" s")
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("hr"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "h5",
+                                        {
+                                          staticClass:
+                                            "col-8 col-md-6 text-gray-dark"
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "far fa-sun"
+                                          }),
+                                          _vm._v(" Fecha")
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "h5",
+                                        { staticClass: "col-4 col-md-6" },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.obtenerFecha(
+                                                examen.pivot.created_at
+                                              )
+                                            )
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "tab-pane", attrs: { id: "avanceG" } },
+                      [
+                        _c(
+                          "table",
+                          { staticClass: "table table-bordered table-hover" },
+                          [
+                            _c("thead", [
+                              _c("tr", [
+                                _c("th", [_vm._v("#")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Nombre")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Maximo punto")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Record")])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("tbody", [
+                              _c("tr", [
+                                _c("td", { attrs: { width: "8px" } }, [
+                                  _vm._v("1")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v("Ejercicio #1")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.games1))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.record1.name) +
+                                      " : " +
+                                      _vm._s(_vm.record1.puntuacion)
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", { attrs: { width: "8px" } }, [
+                                  _vm._v("2")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v("Ejercicio #2")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.games2))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.record2.name) +
+                                      " : " +
+                                      _vm._s(_vm.record2.puntuacion)
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", { attrs: { width: "8px" } }, [
+                                  _vm._v("3")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v("Ejercicio #3")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.games3))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.record3.name) +
+                                      " : " +
+                                      _vm._s(_vm.record3.puntuacion)
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", { attrs: { width: "8px" } }, [
+                                  _vm._v("4")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v("Ejercicio #4")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.games4))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.record4.name) +
+                                      " : " +
+                                      _vm._s(_vm.record4.puntuacion)
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", { attrs: { width: "8px" } }, [
+                                  _vm._v("5")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v("Ejercicio #5")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.games5))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.record5.name) +
+                                      " : " +
+                                      _vm._s(_vm.record5.puntuacion)
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", { attrs: { width: "8px" } }, [
+                                  _vm._v("6")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v("Ejercicio #6")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.games6))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.record6.name) +
+                                      " : " +
+                                      _vm._s(_vm.record6.puntuacion)
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", { attrs: { width: "8px" } }, [
+                                  _vm._v("7")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v("Ejercicio #7")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.games7))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.record7.name) +
+                                      " : " +
+                                      _vm._s(_vm.record7.puntuacion)
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", { attrs: { width: "8px" } }, [
+                                  _vm._v("8")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v("Ejercicio #8")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.games8))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.record8.name) +
+                                      " : " +
+                                      _vm._s(_vm.record8.puntuacion)
+                                  )
+                                ])
+                              ])
                             ])
                           ]
                         )

@@ -67,6 +67,7 @@
 														<figure>
 															<img width="200" height="200" :src="imagen" v-show="estado == true" accept="image/*">
 														</figure>
+														<span v-if="errors.avatar" class="text-danger">{{ errors.avatar[0] }}</span>
 													</div>
 												</div>
 												<div class="modal-footer">
@@ -192,6 +193,7 @@
 															<label class="col-form-label col-md-3">Nombre</label>
 															<div class="col-md-8">
 																<input type="text"  class="form-control" v-model="fillUsuario.name" placeholder="Escriba su nombre" required>
+																<span v-if="errors.name" class="text-danger">{{ errors.name[0] }}</span>
 															</div>
 														</div>
 														<div class="form-group row">
@@ -236,7 +238,7 @@
 					usuario :{},
 					rangos:[],
 					loading:true,
-					fillUsuario: {name: '',apellido_paterno:'', avatar:'',email:'',
+					fillUsuario: {name: '',apellido_paterno:'', avatar:'',
 					apellido_materno:'',rango_id:'',curso:''},
 					estado:false,
 					imagenMiniatura:'',
@@ -244,6 +246,7 @@
 					cursos:'',
 					seccion:'',
 					exams: null,
+					errors:[],
 				}
 			},
 			methods:{
@@ -332,7 +335,10 @@
 					axios.post(url, data).then(res=>{
 						this.showUser()
 						this.alerta() 
-					})
+					}).catch(error => {
+		          		this.errors = error.response.data.errors;
+		          		console.log(this.errors)
+			        })
 				},
 				editarAvatar:function(){
 					this.fillUsuario.avatar = this.usuario.avatar;

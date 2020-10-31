@@ -119,7 +119,7 @@
 									*** tercer examen : Comprensión :<b>70%</b> ppm : <b>500</b><br><br>
 									*** cuarto examen : Comprensión :<b>85%</b> ppm : <b>700</b><br><br>
 									*** quinto examen : Comprensión :<b>90%</b> ppm : <b>1000</b><br><br>
-									*** quinto examen : Comprensión :<b>100%</b> ppm : <b>1300</b><br><br>
+									*** sexto examen : Comprensión :<b>100%</b> ppm : <b>1300</b><br><br>
 									<b>&#x2764;</b>Realiza el primer examen y gana 50 pts. <br><br>
 									<b>&#x2764;</b>Si no puedes avanzar, puedes ganar puntos realizando los ejercicios. <br><br>
 									<b>&#x2764;</b>Sigue practicando y no te olvides de la diversión<br><br>

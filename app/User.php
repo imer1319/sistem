@@ -21,13 +21,13 @@ class User extends Authenticatable
     public function examenes()
     {
        return $this->belongsToMany(Exam::class,'exam_user')
-       ->withPivot('ppm','tiempo','comprension','estado','created_at');
+       ->withPivot('ppm','tiempo','comprension','hash_password','estado','created_at');
    }
 
    public function ejercicios()
    {
     return $this->belongsToMany(Ejercicio::class)
-    ->withTimestamps();
+    ->withPivot('puntuacion')->withTimestamps();
 }
 
 public function roles()

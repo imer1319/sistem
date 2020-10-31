@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use App\User;
 use App\Role;
+use App\SaveExam;
+use App\Ejercicio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
@@ -28,8 +31,30 @@ class UsuarioController extends Controller
         }
         return view('layouts.administrador');
     }
+    public function register(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|unique:users|max:20',
+            'password' => 'required|max:8',
+            'hash_password' => 'required|max:8',
+        ]);
+        $usuario = new User();
+        $usuario->name = $request->name;
+        $usuario->hash_password = $request->hash_password;
+        $usuario->password = bcrypt($request->password);
+        $usuario->save();
+        $usuario->roles()->attach(2);
+        return response()->json([
+            "message" => "Creado correctamente",
+            "usuario" => $usuario
+        ],200);
+        return $usuario;
+    }
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|unique:users|max:20',
+        ]);
         $usuario = User::find($id);
         $usuario->fill($request->except('avatar'));
         if ($file = $request->hasFile('avatar')) {
@@ -58,5 +83,37 @@ class UsuarioController extends Controller
             "message" => "Eliminado correctamente",
             "usuario" => $usuario
         ],200);
+    }
+
+    public function getDataExamUser($id)
+    {
+        $usuario = User::find($id);
+        return $usuario->examenes()
+        ->orderBy('created_at','desc')->get();
+    }
+
+    public function getDataGameMax($id, $ejercicio_id)
+    {
+        $user = DB::table('ejercicio_user')
+        ->where('ejercicio_id','=',$ejercicio_id)
+        ->where('user_id','=',$id)
+        ->max('puntuacion');
+        if ($user == null) {
+            return 0;
+        }else{
+            return $user;
+        }
+    }
+    public function getDataGameRecord($id, $ejercicio_id)
+    {
+        $max = DB::table('ejercicio_user')
+        ->where('ejercicio_id','=',$ejercicio_id)
+        ->max('puntuacion');
+
+        $ejercicio = Ejercicio::find($ejercicio_id);
+        return $ejercicio->usuarios()
+        ->select('name','puntuacion')
+        ->where('puntuacion','=',$max)
+        ->first();
     }
 }

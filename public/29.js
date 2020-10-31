@@ -235,6 +235,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showUser();
@@ -250,7 +252,6 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         apellido_paterno: '',
         avatar: '',
-        email: '',
         apellido_materno: '',
         rango_id: '',
         curso: ''
@@ -260,7 +261,8 @@ __webpack_require__.r(__webpack_exports__);
       selected: '',
       cursos: '',
       seccion: '',
-      exams: null
+      exams: null,
+      errors: []
     };
   },
   methods: {
@@ -368,6 +370,9 @@ __webpack_require__.r(__webpack_exports__);
         _this6.showUser();
 
         _this6.alerta();
+      })["catch"](function (error) {
+        _this6.errors = error.response.data.errors;
+        console.log(_this6.errors);
       });
     },
     editarAvatar: function editarAvatar() {
@@ -712,7 +717,19 @@ var render = function() {
                                             accept: "image/*"
                                           }
                                         })
-                                      ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _vm.errors.avatar
+                                        ? _c(
+                                            "span",
+                                            { staticClass: "text-danger" },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.errors.avatar[0])
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
                                     ])
                                   ]),
                                   _vm._v(" "),
@@ -1112,7 +1129,19 @@ var render = function() {
                                                 )
                                               }
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _vm.errors.name
+                                            ? _c(
+                                                "span",
+                                                { staticClass: "text-danger" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(_vm.errors.name[0])
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
                                         ])
                                       ]
                                     ),

@@ -136,6 +136,10 @@ public function perfil(Request $request)
 }
 public function updatePerfil(Request $request, $id)
 {
+    $validatedData = $request->validate([
+        'name' => 'required|unique:users|max:20',
+        
+    ]);
     $usuario = User::find($id);
     $usuario->fill($request->except('avatar'));
     if ($file = $request->hasFile('avatar'))

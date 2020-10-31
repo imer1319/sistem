@@ -8,23 +8,25 @@
 						<div class="row">
 							<div class="col-4">
 								<div class="text-center">
-									<img class="profile-user-img img-circle"
+									<img class="img-responsive"
 									:src="`/imagenes/usuario/${usuario.avatar}`" height="120" width="120">
 								</div>
-								<h3 class="profile-username text-center">{{usuario.name}}</h3>
+								<h2 class="profile-username text-center">{{usuario.name}}</h2>
 							</div>
 							<div class="col-8">
 								<h6 class="text-center">DATOS DEL USUARIO</h6>
 								<div class="row">
 									<div class="col-6">
-										<h4>APELLIDOS</h4>
+										<h5>APELLIDOS</h5>
 										<h6>{{ usuario.apellido_paterno }} {{ usuario.apellido_materno }}</h6>
-										<h4>EMAIL</h4>
-										<h6>{{ usuario.email }}</h6>
 									</div>
 									<div class="col-6">
-										<h4>PUNTOS</h4>
+										<h5>PUNTOS</h5>
 										<h6>{{ usuario.puntos }}</h6>
+									</div>
+									<div class="col-6">
+										<h5>Contraseña</h5>
+										<h6>{{ usuario.hash_password }}</h6>
 									</div>
 								</div>
 							</div>
@@ -38,6 +40,10 @@
 						<ul class="nav nav-pills">
 							<li class="nav-item"><a class="nav-link active" href="#rango" data-toggle="tab">Rango</a></li>
 							<li class="nav-item"><a class="nav-link" href="#perfil" data-toggle="tab" @click.prevent="editarUsuario()">Editar Perfil</a></li>
+							<li class="nav-item"><a class="nav-link" href="#avanceE" data-toggle="tab" @click.prevent="
+							getDataExamUser(usuario.id)">Avances Examen</a></li>
+							<li class="nav-item"><a class="nav-link" href="#avanceG" data-toggle="tab"@click.prevent="
+							getDataGame1Sum(usuario.id)">Avances Ejercicios</a></li>
 						</ul>
 					</div>
 					<div class="card-body">
@@ -102,12 +108,7 @@
 										<label class="col-form-label col-md-2">Nombre</label>
 										<div class="col-md-10">
 											<input type="text"  class="form-control" v-model="fillUsuario.name" required>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-										<div class="col-sm-10">
-											<input type="email" class="form-control" v-model="fillUsuario.email" required>
+											<span v-if="errors.name" class="text-danger">{{ errors.name[0] }}</span>
 										</div>
 									</div>
 									<div class="form-group row">
@@ -139,6 +140,95 @@
 									</div>
 								</form>
 							</div>
+							<div class="tab-pane" id="avanceE">
+								<h4 class="text-center">Avance de Examenes</h4>
+								<div class="row">
+									<div v-for="(examen,index) in examenes" class="col-12 col-md-6 mb-2 shadow">
+										<div class="card">
+											<div class="card-body">
+												<span class="float-rigth badge">{{ index+1 }}</span>
+												<h4 class="text-center text-danger">{{ examen.name }}</h4>
+												<div class="row">
+													<h5 class="col-8 col-md-6 text-success"><i class="fab fa-accessible-icon"></i> PPM</h5>
+													<h5 class="col-4 col-md-6">{{ examen.pivot.ppm }}</h5>
+													<hr>
+													<h5 class="col-8 col-md-6 text-info"><i class="fas fa-brain"></i> Comprension</h5>
+													<h5 class="col-4 col-md-6">{{ examen.pivot.comprension }}<b class="h5"> %</b></h5>
+													<hr>
+													<h5 class="col-8 col-md-6 text-warning"><i class="far fa-clock"></i> Tiempo</h5>
+													<h5 class="col-4 col-md-6">{{ examen.pivot.tiempo }}<b class="h5"> s</b></h5>
+													<hr>
+													<h5 class="col-8 col-md-6 text-gray-dark"><i class="far fa-sun"></i> Fecha</h5>
+													<h5 class="col-4 col-md-6">{{ obtenerFecha(examen.pivot.created_at) }}</h5>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane" id="avanceG">
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Nombre</th>
+											<th>Maximo punto</th>
+											<th>Record</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td width="8px">1</td>
+											<td>Ejercicio #1</td>
+											<td>{{ games1 }}</td>
+											<td>{{ record1.name }} : {{ record1.puntuacion }}</td>
+											
+										</tr>
+										<tr>
+											<td width="8px">2</td>
+											<td>Ejercicio #2</td>
+											<td>{{ games2 }}</td>
+											<td>{{ record2.name }} : {{ record2.puntuacion }}</td>
+										</tr>
+										<tr>
+											<td width="8px">3</td>
+											<td>Ejercicio #3</td>
+											<td>{{ games3 }}</td>
+											<td>{{ record3.name }} : {{ record3.puntuacion }}</td>
+										</tr>
+										<tr>
+											<td width="8px">4</td>
+											<td>Ejercicio #4</td>
+											<td>{{ games4 }}</td>
+											<td>{{ record4.name }} : {{ record4.puntuacion }}</td>
+										</tr>
+										<tr>
+											<td width="8px">5</td>
+											<td>Ejercicio #5</td>
+											<td>{{ games5 }}</td>
+											<td>{{ record5.name }} : {{ record5.puntuacion }}</td>
+										</tr>
+										<tr>
+											<td width="8px">6</td>
+											<td>Ejercicio #6</td>
+											<td>{{ games6 }}</td>
+											<td>{{ record6.name }} : {{ record6.puntuacion }}</td>
+										</tr>
+										<tr>
+											<td width="8px">7</td>
+											<td>Ejercicio #7</td>
+											<td>{{ games7 }}</td>
+											<td>{{ record7.name }} : {{ record7.puntuacion }}</td>
+										</tr>
+										<tr>
+											<td width="8px">8</td>
+											<td>Ejercicio #8</td>
+											<td>{{ games8 }}</td>
+											<td>{{ record8.name }} : {{ record8.puntuacion }}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -157,13 +247,145 @@
 				usuario :{},
 				rangos:[],
 				loading:true,
-				fillUsuario: {name: '',apellido_paterno:null, avatar:null,email:'',
+				fillUsuario: {name: '',apellido_paterno:null, avatar:null,
 				apellido_materno:null,rango_id:'',curso:'',puntos:''},
 				estado:false,
 				imagenMiniatura:'',
+				errors:[],
+				examenes:[],
+				games1:null,
+				games2:null,
+				games3:null,
+				games4:null,
+				games5:null,
+				games6:null,
+				games7:null,
+				games8:null,
+				record1:{},
+				record2:{},
+				record3:{},
+				record4:{},
+				record5:{},
+				record6:{},
+				record7:{},
+				record8:{},
 			}
 		},
 		methods:{
+			getDataGame1Sum(usuario){
+				var url = 'games/'+usuario+'/'+1
+				axios.get(url).then(res =>{
+					this.games1 = res.data
+					this.getDataGame2Sum(usuario)
+					this.getDataGame3Sum(usuario)
+					this.getDataGame4Sum(usuario)
+					this.getDataGame5Sum(usuario)
+					this.getDataGame6Sum(usuario)
+					this.getDataGame7Sum(usuario)
+					this.getDataGame8Sum(usuario)
+					this.getDataGameRecord1(usuario)
+					this.getDataGameRecord2(usuario)
+					this.getDataGameRecord3(usuario)
+					this.getDataGameRecord4(usuario)
+					this.getDataGameRecord5(usuario)
+					this.getDataGameRecord6(usuario)
+					this.getDataGameRecord7(usuario)
+					this.getDataGameRecord8(usuario)
+				})
+			},
+			getDataGame2Sum(usuario){
+				var url = 'games/'+usuario+'/'+2
+				axios.get(url).then(res =>{
+					this.games2 = res.data
+				})
+			},
+			getDataGame3Sum(usuario){
+				var url = 'games/'+usuario+'/'+3
+				axios.get(url).then(res =>{
+					this.games3 = res.data
+				})
+			},
+			getDataGame4Sum(usuario){
+				var url = 'games/'+usuario+'/'+4
+				axios.get(url).then(res =>{
+					this.games4 = res.data
+				})
+			},
+			getDataGame5Sum(usuario){
+				var url = 'games/'+usuario+'/'+5
+				axios.get(url).then(res =>{
+					this.games5 = res.data
+				})
+			},
+			getDataGame6Sum(usuario){
+				var url = 'games/'+usuario+'/'+6
+				axios.get(url).then(res =>{
+					this.games6 = res.data
+				})
+			},
+			getDataGame7Sum(usuario){
+				var url = 'games/'+usuario+'/'+7
+				axios.get(url).then(res =>{
+					this.games7 = res.data
+				})
+			},
+			getDataGame8Sum(usuario){
+				var url = 'games/'+usuario+'/'+8
+				axios.get(url).then(res =>{
+					this.games8 = res.data
+				})
+			},
+			getDataGameRecord1(usuario){
+				var url = 'game/'+usuario+'/'+1
+				axios.get(url).then(res =>{
+					this.record1 = res.data
+				})
+			},
+			getDataGameRecord2(usuario){
+				var url = 'game/'+usuario+'/'+2
+				axios.get(url).then(res =>{
+					this.record2 = res.data
+				})
+			},
+			getDataGameRecord3(usuario){
+				var url = 'game/'+usuario+'/'+3
+				axios.get(url).then(res =>{
+					this.record3 = res.data
+				})
+			},
+			getDataGameRecord4(usuario){
+				var url = 'game/'+usuario+'/'+4
+				axios.get(url).then(res =>{
+					this.record4 = res.data
+				})
+			},
+			getDataGameRecord5(usuario){
+				var url = 'game/'+usuario+'/'+5
+				axios.get(url).then(res =>{
+					this.record5 = res.data
+				})
+			},
+			getDataGameRecord6(usuario){
+				var url = 'game/'+usuario+'/'+6
+				axios.get(url).then(res =>{
+					this.record6 = res.data
+				})
+			},
+			getDataGameRecord7(usuario){
+				var url = 'game/'+usuario+'/'+7
+				axios.get(url).then(res =>{
+					this.record7 = res.data
+				})
+			},
+			getDataGameRecord8(usuario){
+				var url = 'game/'+usuario+'/'+8
+				axios.get(url).then(res =>{
+					this.record8 = res.data
+				})
+			},
+			obtenerFecha(fecha){
+				return moment(fecha).fromNow()
+			},
 			showRango(){
 				axios.get("/rango").then(res =>{
 					this.rangos = res.data
@@ -216,7 +438,6 @@
 				this.fillUsuario.name = this.usuario.name;
 				this.fillUsuario.apellido_paterno = this.usuario.apellido_paterno;
 				this.fillUsuario.apellido_materno = this.usuario.apellido_materno;
-				this.fillUsuario.email = this.usuario.email;
 				this.fillUsuario.avatar = this.usuario.avatar;
 				this.fillUsuario.curso = this.usuario.curso;
 				this.fillUsuario.rango_id = this.usuario.rango_id;
@@ -234,7 +455,6 @@
 				data.append('name', this.fillUsuario.name);
 				data.append('apellido_paterno', this.fillUsuario.apellido_paterno);
 				data.append('apellido_materno', this.fillUsuario.apellido_materno);
-				data.append('email', this.fillUsuario.email);
 				data.append('avatar', this.fillUsuario.avatar);
 				data.append('curso', this.fillUsuario.curso);
 				if (this.fillUsuario.puntos<100) {
@@ -253,8 +473,18 @@
 				data.append('_method','PUT');
 				var url = `/usuario/${fillUsuario.id}`;
 				axios.post(url, data).then(res=>{
+					this.errors = []
 					this.showUser()
 					this.alerta()
+				}).catch(error => {
+		          		this.errors = error.response.data.errors;
+		          		console.log(this.errors)
+			        })
+			},
+			getDataExamUser(usuario){
+				var url = 'user/'+usuario;
+				axios.get(url).then(res =>{
+					this.examenes = res.data
 				})
 			},
 		},

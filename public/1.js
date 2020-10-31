@@ -129,6 +129,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -153,7 +157,8 @@ __webpack_require__.r(__webpack_exports__);
       imagenMiniatura: '',
       loading: true,
       paginate: ['rangos'],
-      estado: true
+      estado: true,
+      errors: []
     };
   },
   methods: {
@@ -236,10 +241,14 @@ __webpack_require__.r(__webpack_exports__);
           _this5.rango.nombre = "";
           _this5.$refs.img.value = "";
           _this5.imagenMiniatura = "";
+          _this5.errors = [];
 
           _this5.alerta('success', 'Se a agregado correctamente');
 
           $('#createRango').modal('hide');
+        })["catch"](function (error) {
+          _this5.errors = error.response.data.errors;
+          console.log(_this5.errors);
         });
       }
     },
@@ -262,13 +271,17 @@ __webpack_require__.r(__webpack_exports__);
         data.append('_method', 'PUT');
         var url = "/rango/".concat(fillRango.id);
         axios.post(url, data).then(function (res) {
-          _this6.$refs.imagenEdit.value = "";
+          _this6.errors = [];
+          _this6.$refs.imagenEdit.value = null;
 
           _this6.mostrarRango();
 
           _this6.alerta('warning', 'Se a modificado el registro');
 
           $('#editRango').modal('hide');
+        })["catch"](function (error) {
+          _this6.errors = error.response.data.errors;
+          console.log(_this6.errors);
         });
       }
     }
@@ -383,7 +396,6 @@ var render = function() {
                       staticClass: "form-control",
                       attrs: {
                         type: "text",
-                        name: "name",
                         placeholder: "Nombre de la rango",
                         required: ""
                       },
@@ -396,7 +408,13 @@ var render = function() {
                           _vm.$set(_vm.rango, "nombre", $event.target.value)
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.nombre
+                      ? _c("span", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.nombre[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -416,7 +434,13 @@ var render = function() {
                     _c("img", {
                       attrs: { width: "200", height: "200", src: _vm.imagen }
                     })
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.errors.avatar
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.avatar[0]))
+                      ])
+                    : _vm._e()
                 ])
               ]),
               _vm._v(" "),
@@ -461,7 +485,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", name: "name", required: "" },
+                      attrs: { type: "text", required: "" },
                       domProps: { value: _vm.fillRango.nombre },
                       on: {
                         input: function($event) {
@@ -471,7 +495,13 @@ var render = function() {
                           _vm.$set(_vm.fillRango, "nombre", $event.target.value)
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.nombre
+                      ? _c("span", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.nombre[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -523,7 +553,13 @@ var render = function() {
                             }
                           })
                         : _vm._e()
-                    ])
+                    ]),
+                    _vm._v(" "),
+                    _vm.errors.avatar
+                      ? _c("span", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.avatar[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ])
               ]),
@@ -564,7 +600,7 @@ var render = function() {
               [
                 _c(
                   "paginate",
-                  { attrs: { name: "rangos", list: _vm.rangos, per: 5 } },
+                  { attrs: { name: "rangos", list: _vm.rangos, per: 6 } },
                   [
                     _c(
                       "table",
