@@ -7,6 +7,7 @@ use App\SaveExam;
 use App\Ejercicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\UserUpdateRequest;
 
 class UsuarioController extends Controller
 {
@@ -50,11 +51,8 @@ class UsuarioController extends Controller
         ],200);
         return $usuario;
     }
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:users|max:20',
-        ]);
         $usuario = User::find($id);
         $usuario->fill($request->except('avatar'));
         if ($file = $request->hasFile('avatar')) {

@@ -12,7 +12,7 @@ use App\Role;
 use App\SaveExam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Http\Requests\UsuarioUpdateRequest;
 class UserController extends Controller
 {
     public function __construct()
@@ -134,12 +134,8 @@ public function perfil(Request $request)
     }
     return view('home');
 }
-public function updatePerfil(Request $request, $id)
+public function updatePerfil(UsuarioUpdateRequest $request, $id)
 {
-    $validatedData = $request->validate([
-        'name' => 'required|unique:users|max:20',
-        
-    ]);
     $usuario = User::find($id);
     $usuario->fill($request->except('avatar'));
     if ($file = $request->hasFile('avatar'))
