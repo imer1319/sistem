@@ -72,11 +72,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showUser();
@@ -368,66 +363,52 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "row" },
-                [
-                  _vm._l(_vm.games, function(game, index) {
-                    return _c(
-                      "div",
-                      {
-                        key: index,
-                        staticClass: "col-6 col-md-4 col-lg-3 my-3"
-                      },
-                      [
-                        _c("router-link", { attrs: { to: game.url } }, [
-                          _c("div", { staticClass: "card" }, [
-                            _c("div", { staticClass: "card-body p-0" }, [
-                              _c("img", {
-                                staticClass: "card-img-top img-responsive",
-                                attrs: {
-                                  src: "/imagenes/ejercicios/" + game.icon,
-                                  width: "100%",
-                                  height: "180"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "text-center text-uppercase pb-2"
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "font-weight-bold text-center"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\t\t\t" +
-                                          _vm._s(game.name) +
-                                          "\n\t\t\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            ])
+                _vm._l(_vm.games, function(game, index) {
+                  return _c(
+                    "div",
+                    { key: index, staticClass: "col-6 col-md-4 col-lg-3 my-3" },
+                    [
+                      _c("router-link", { attrs: { to: game.url } }, [
+                        _c("div", { staticClass: "card" }, [
+                          _c("div", { staticClass: "card-body p-0" }, [
+                            _c("img", {
+                              staticClass: "card-img-top img-responsive",
+                              attrs: {
+                                src: "/imagenes/ejercicios/" + game.icon,
+                                width: "100%",
+                                height: "180"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "text-center text-uppercase pb-2"
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "font-weight-bold text-center"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t\t\t\t" +
+                                        _vm._s(game.name) +
+                                        "\n\t\t\t\t\t\t\t\t\t"
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
                           ])
                         ])
-                      ],
-                      1
-                    )
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-12 text-center" }, [
-                    _c("h3", { staticClass: "text-white" }, [
-                      _c("span", { staticClass: "bg-danger redondear px-3" }, [
-                        _vm._v("Mas ejercicios Proximamente")
                       ])
-                    ])
-                  ])
-                ],
-                2
+                    ],
+                    1
+                  )
+                }),
+                0
               )
             ])
           ])

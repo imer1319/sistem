@@ -59,7 +59,7 @@
 												</div>
 											</div>
 										</div>
-										<div v-if="usuario.puntos >= 100 && usuario.puntos <500">
+										<div v-if="usuario.puntos >= 100 && usuario.puntos <300">
 											<div v-if="rango.nombre == 'Rango #2'">
 												<div class="text-center">
 													<img :src="`../imagenes/rangos/${rango.avatar}`" class="img-responsive" width="30%">
@@ -67,7 +67,7 @@
 												</div>
 											</div>
 										</div>
-										<div v-if="usuario.puntos >= 500 && usuario.puntos <1000">
+										<div v-if="usuario.puntos >= 300 && usuario.puntos <700">
 											<div v-if="rango.nombre == 'Rango #3'">
 												<div class="text-center">
 													<img :src="`../imagenes/rangos/${rango.avatar}`" class="img-responsive" width="30%">
@@ -75,7 +75,7 @@
 												</div>
 											</div>
 										</div>
-										<div v-if="usuario.puntos >= 1000 && usuario.puntos < 5000">
+										<div v-if="usuario.puntos >= 700 && usuario.puntos < 1000">
 											<div v-if="rango.nombre == 'Rango #4'">
 												<div class="text-center">
 													<img :src="`../imagenes/rangos/${rango.avatar}`" class="img-responsive" width="30%">
@@ -83,7 +83,7 @@
 												</div>
 											</div>
 										</div>
-										<div v-if="usuario.puntos >= 5000 && usuario.puntos < 10000">
+										<div v-if="usuario.puntos >= 1000 && usuario.puntos < 2000">
 											<div v-if="rango.nombre == 'Rango #5'">
 												<div class="text-center">
 													<img :src="`../imagenes/rangos/${rango.avatar}`" class="img-responsive" width="30%">
@@ -91,7 +91,7 @@
 												</div>
 											</div>
 										</div>
-										<div v-if="usuario.puntos >=10000">
+										<div v-if="usuario.puntos >=2000">
 											<div v-if="rango.nombre == 'Rango #6'">
 												<div class="text-center">
 													<img :src="`../imagenes/rangos/${rango.avatar}`" class="img-responsive" width="30%">

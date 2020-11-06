@@ -320,6 +320,7 @@ __webpack_require__.r(__webpack_exports__);
 
           this.aumento_avance = this.usuario.avance_curso + 1;
           var data = new FormData();
+          data.append('puntos', this.usuario.puntos);
           data.append('avance_curso', this.aumento_avance);
           data.append('_method', 'PUT');
           var url = "/profile/".concat(this.usuario.id);

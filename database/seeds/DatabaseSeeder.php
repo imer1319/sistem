@@ -28,5 +28,8 @@ class DatabaseSeeder extends Seeder
                 $pregunta->save();
             }
         }
+
+        factory(App\SaveExam::class,60)->create();
+        factory(App\SaveGame::class,100)->create();
     }
 }

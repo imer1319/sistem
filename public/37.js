@@ -283,7 +283,7 @@ var render = function() {
                 _vm._v("Puntuaciones de examen")
               ]),
               _vm._v(" "),
-              _vm._l(_vm.puntuaciones, function(examen_dado, index) {
+              _vm._l(_vm.puntuaciones, function(examen, index) {
                 return _c("div", [
                   _c(
                     "div",
@@ -291,7 +291,7 @@ var render = function() {
                     [
                       _c("div", { staticClass: "card-body" }, [
                         _c("h4", { staticClass: "text-center text-danger" }, [
-                          _vm._v(_vm._s(examen_dado.name))
+                          _vm._v(_vm._s(examen.name))
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
@@ -307,7 +307,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("h5", { staticClass: "col-4 col-md-6" }, [
-                            _vm._v(_vm._s(examen_dado.pivot.ppm))
+                            _vm._v(_vm._s(examen.pivot.ppm))
                           ]),
                           _vm._v(" "),
                           _c("hr"),
@@ -322,7 +322,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("h5", { staticClass: "col-4 col-md-6" }, [
-                            _vm._v(_vm._s(examen_dado.pivot.comprension)),
+                            _vm._v(_vm._s(examen.pivot.comprension)),
                             _c("b", { staticClass: "h5" }, [_vm._v(" %")])
                           ]),
                           _vm._v(" "),
@@ -338,7 +338,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("h5", { staticClass: "col-4 col-md-6" }, [
-                            _vm._v(_vm._s(examen_dado.pivot.tiempo)),
+                            _vm._v(_vm._s(examen.pivot.tiempo)),
                             _c("b", { staticClass: "h5" }, [_vm._v(" s")])
                           ]),
                           _vm._v(" "),
@@ -355,9 +355,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("h5", { staticClass: "col-4 col-md-6" }, [
                             _vm._v(
-                              _vm._s(
-                                _vm.obtenerFecha(examen_dado.pivot.created_at)
-                              )
+                              _vm._s(_vm.obtenerFecha(examen.pivot.created_at))
                             )
                           ])
                         ])

@@ -32,5 +32,16 @@ class UserTableSeeder extends Seeder
             $user->name = "Ejercicio #".$i;
             $user->save();
         }
+        for ($i=1; $i < 21; $i++) { 
+            $user = new User();
+            $user->name = 'User'.$i;
+            $user->password = bcrypt('secret');
+            $user->hash_password = 'secret';
+            $user->puntos = rand(80,400);
+            $user->avance_curso = rand(3,15);
+            $user->save();
+            $user->roles()->attach($role_user);
+        }
+
     }
 }

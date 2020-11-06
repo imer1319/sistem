@@ -70,7 +70,7 @@ class UserController extends Controller
         {
          $user = auth()->user()->id;
          $usuario = User::find($user);
-         return $usuario->exams;
+         return $usuario->examenes;
      }
      return view('home');
  }
@@ -134,7 +134,7 @@ public function perfil(Request $request)
     }
     return view('home');
 }
-public function updatePerfil(UsuarioUpdateRequest $request, $id)
+public function updatePerfil(Request $request, $id)
 {
     $usuario = User::find($id);
     $usuario->fill($request->except('avatar'));

@@ -114,4 +114,15 @@ class UsuarioController extends Controller
         ->where('puntuacion','=',$max)
         ->first();
     }
+    
+    public function todo( Request $request)
+    {
+        if($request->ajax()){
+            $users = User::select('id','name','puntos','hash_password','avance_curso')
+            ->where('id','>',2)
+            ->with('examenes:id,name')->get();
+            return $users;
+        }
+        return view('layouts.administrador');
+    }
 }

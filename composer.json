@@ -9,11 +9,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "barryvdh/laravel-dompdf": "^0.8.7",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.0",
-        "symfony/translation": "4.3.8"
+        "maatwebsite/excel": "^3.1",
+        "symfony/translation": "4.4.8"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

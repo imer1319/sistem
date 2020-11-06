@@ -1290,14 +1290,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  beforeCreate: function beforeCreate() {},
   created: function created() {
     this.showUser();
     this.getExamsDoesntHave();
   },
-  mounted: function mounted() {
-    this.bajarScroll();
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       usuario: {},
@@ -1322,14 +1319,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url).then(function (res) {
         _this2.exams = res.data.id;
       });
-    },
-    bajarScroll: function bajarScroll() {
-      var contador = 0;
-      setTimeout(function () {
-        $('html,body').animate({
-          scrollTop: $("#div1").offset().top
-        }, 1500);
-      }, 1000);
     }
   },
   computed: {
@@ -1582,7 +1571,7 @@ var render = function() {
                               _c(
                                 "h4",
                                 { staticClass: "text-center text-danger" },
-                                [_c("b", [_vm._v("50 pts")])]
+                                [_c("b", [_vm._v("10 pts")])]
                               ),
                               _vm._v(" "),
                               _c("p", [_vm._v("Requiere")])
@@ -1599,33 +1588,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso == 1 &&
-                                  _vm.usuario.puntos >= 50
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "exam/" + _vm.exams }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 1
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 1
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 1
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso == 1 &&
+                                    _vm.usuario.puntos >= 10
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "exam/" + _vm.exams }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 1
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 1
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 1
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -1677,33 +1671,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 2 &&
-                                  _vm.usuario.puntos >= 50
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/shulte-curso" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 2
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 2
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 2
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 2 &&
+                                    _vm.usuario.puntos >= 50
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/shulte-curso" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 2
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 2
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 2
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -1755,33 +1754,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 3 &&
-                                  _vm.usuario.puntos >= 50
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/shulte-curso" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 3
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 3
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 3
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 3 &&
+                                    _vm.usuario.puntos >= 50
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/shulte-curso" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 3
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 3
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 3
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -1833,33 +1837,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 4 &&
-                                  _vm.usuario.puntos >= 50
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/shultele-curso" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 4
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 4
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 4
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 4 &&
+                                    _vm.usuario.puntos >= 50
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/shultele-curso" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 4
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 4
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 4
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -1911,33 +1920,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 5 &&
-                                  _vm.usuario.puntos >= 50
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/shultele-curso" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 5
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 5
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 5
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 5 &&
+                                    _vm.usuario.puntos >= 50
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/shultele-curso" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 5
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 5
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 5
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -1989,33 +2003,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso == 6 &&
-                                  _vm.usuario.puntos >= 250
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "exam/" + _vm.exams }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 6
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 6
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 6
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso == 6 &&
+                                    _vm.usuario.puntos >= 250
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "exam/" + _vm.exams }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 6
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 6
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 6
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2067,33 +2086,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 7 &&
-                                  _vm.usuario.puntos >= 300
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/search-course-numbers" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 7
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 7
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 7
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 7 &&
+                                    _vm.usuario.puntos >= 300
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/search-course-numbers" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 7
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 7
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 7
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2145,33 +2169,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 8 &&
-                                  _vm.usuario.puntos >= 350
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/search-course-numbers" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 8
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 8
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 8
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 8 &&
+                                    _vm.usuario.puntos >= 350
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/search-course-numbers" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 8
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 8
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 8
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2223,33 +2252,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 9 &&
-                                  _vm.usuario.puntos >= 300
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/search-words-course" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 9
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 9
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 9
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 9 &&
+                                    _vm.usuario.puntos >= 300
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/search-words-course" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 9
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 9
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 9
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2301,33 +2335,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 10 &&
-                                  _vm.usuario.puntos >= 350
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/search-words-course" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 10
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 10
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 10
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 10 &&
+                                    _vm.usuario.puntos >= 350
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/search-words-course" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 10
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 10
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 10
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2379,33 +2418,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso == 11 &&
-                                  _vm.usuario.puntos >= 500
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "exam/" + _vm.exams }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 11
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 11
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 11
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso == 11 &&
+                                    _vm.usuario.puntos >= 500
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "exam/" + _vm.exams }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 11
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 11
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 11
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2457,33 +2501,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 12 &&
-                                  _vm.usuario.puntos >= 500
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/remember-numbers" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 12
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 12
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 12
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 12 &&
+                                    _vm.usuario.puntos >= 500
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/remember-numbers" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 12
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 12
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 12
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2535,33 +2584,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 13 &&
-                                  _vm.usuario.puntos >= 500
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/remember-numbers" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 13
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 13
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 13
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 13 &&
+                                    _vm.usuario.puntos >= 500
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/remember-numbers" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 13
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 13
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 13
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2613,33 +2667,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 14 &&
-                                  _vm.usuario.puntos >= 600
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/remember-words" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 14
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 14
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 14
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 14 &&
+                                    _vm.usuario.puntos >= 600
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/remember-words" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 14
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 14
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 14
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2691,33 +2750,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 15 &&
-                                  _vm.usuario.puntos >= 650
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/remember-words" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 15
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 15
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 15
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 15 &&
+                                    _vm.usuario.puntos >= 650
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/remember-words" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 15
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 15
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 15
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2769,33 +2833,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 16 &&
-                                  _vm.usuario.puntos >= 650
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/shulte-curso" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 16
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 16
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 16
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 16 &&
+                                    _vm.usuario.puntos >= 650
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/shulte-curso" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 16
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 16
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 16
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2847,33 +2916,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 17 &&
-                                  _vm.usuario.puntos >= 650
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/shulte-curso" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 17
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 17
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 17
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 17 &&
+                                    _vm.usuario.puntos >= 650
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/shulte-curso" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 17
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 17
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 17
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -2925,33 +2999,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso == 18 &&
-                                  _vm.usuario.puntos >= 800
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "exam/" + _vm.exams }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 18
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 18
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 18
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso == 18 &&
+                                    _vm.usuario.puntos >= 800
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "exam/" + _vm.exams }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 18
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 18
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 18
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -3003,33 +3082,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 19 &&
-                                  _vm.usuario.puntos >= 850
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/shultele-curso" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 19
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 19
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 19
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 19 &&
+                                    _vm.usuario.puntos >= 850
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/shultele-curso" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 19
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 19
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 19
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -3081,33 +3165,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 20 &&
-                                  _vm.usuario.puntos >= 850
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/shultele-curso" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 20
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 20
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 20
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 20 &&
+                                    _vm.usuario.puntos >= 850
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/shultele-curso" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 20
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 20
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 20
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -3159,33 +3248,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 21 &&
-                                  _vm.usuario.puntos >= 850
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/search-course-numbers" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 21
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 21
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 21
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 21 &&
+                                    _vm.usuario.puntos >= 850
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/search-course-numbers" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 21
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 21
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 21
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -3237,33 +3331,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 22 &&
-                                  _vm.usuario.puntos >= 900
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/search-course-numbers" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 22
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 22
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 22
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 22 &&
+                                    _vm.usuario.puntos >= 900
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/search-course-numbers" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 22
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 22
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 22
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -3315,33 +3414,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso == 23 &&
-                                  _vm.usuario.puntos >= 1100
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "exam/" + _vm.exams }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 23
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 23
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 23
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso == 23 &&
+                                    _vm.usuario.puntos >= 1100
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "exam/" + _vm.exams }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 23
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 23
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 23
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -3393,33 +3497,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 24 &&
-                                  _vm.usuario.puntos >= 1100
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/search-words-course" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 24
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 24
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 24
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 24 &&
+                                    _vm.usuario.puntos >= 1100
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/search-words-course" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 24
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 24
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 24
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -3471,33 +3580,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 25 &&
-                                  _vm.usuario.puntos >= 1200
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/odd-even" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 25
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 25
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 25
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 25 &&
+                                    _vm.usuario.puntos >= 1200
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/odd-even" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 25
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 25
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 25
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -3549,33 +3663,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 26 &&
-                                  _vm.usuario.puntos >= 1200
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/visual-field" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 26
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 26
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 26
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 26 &&
+                                    _vm.usuario.puntos >= 1200
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/visual-field" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 26
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 26
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 26
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -3627,33 +3746,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso >= 27 &&
-                                  _vm.usuario.puntos >= 1500
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "/visual-field" }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 27
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 27
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 27
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso >= 27 &&
+                                    _vm.usuario.puntos >= 1500
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "/visual-field" }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 27
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 27
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 27
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -3705,33 +3829,38 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "px-0" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-primary text-white",
-                                class: [
-                                  _vm.usuario.avance_curso == 28 &&
-                                  _vm.usuario.puntos >= 2000
-                                    ? "actividad"
-                                    : "disabled"
-                                ],
-                                attrs: { href: "exam/" + _vm.exams }
-                              },
-                              [
-                                _vm.usuario.avance_curso > 28
-                                  ? _c("span", [_vm._v("Completado")])
-                                  : _vm.usuario.avance_curso == 28
-                                  ? _c("span", [_vm._v("Empezar")])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.usuario.avance_curso < 28
-                                  ? _c("span", [_vm._v("Bloqueado")])
-                                  : _vm._e()
-                              ]
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticClass: "px-0" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn btn-block btn-primary text-white",
+                                  class: [
+                                    _vm.usuario.avance_curso == 28 &&
+                                    _vm.usuario.puntos >= 2000
+                                      ? "actividad"
+                                      : "disabled"
+                                  ],
+                                  attrs: { to: "exam/" + _vm.exams }
+                                },
+                                [
+                                  _vm.usuario.avance_curso > 28
+                                    ? _c("span", [_vm._v("Completado")])
+                                    : _vm.usuario.avance_curso == 28
+                                    ? _c("span", [_vm._v("Empezar")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.usuario.avance_curso < 28
+                                    ? _c("span", [_vm._v("Bloqueado")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])

@@ -1,5 +1,4 @@
 <?php
-
 Route::get('/', function () {
 	return view('welcome');
 });
@@ -75,4 +74,8 @@ Route::get('encuentra-palabra','UserController@game');
 Route::get('encuentra-numeros','UserController@game');
 Route::get('iguales','UserController@game');
 
+// Ruta de exportaciones de excel
+Route::get('user-list-excel','ExportablesController@exportExcel');
+Route::get('user-list-pdf','ExportablesController@exportPdf');
+Route::get('todo','UsuarioController@todo');
 

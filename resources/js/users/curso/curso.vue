@@ -60,7 +60,7 @@
                                             <div class="row">
                                                 <div class="col-6 text-center">
                                                     <h4 class="text-center text-danger">
-                                                        <b>50 pts</b>
+                                                        <b>10 pts</b>
                                                     </h4>
                                                     <p>Requiere</p>
                                                 </div>
@@ -73,11 +73,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a :href="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 1) && (usuario.puntos >= 50) ? 'actividad':'disabled']">
+                                            <router-link :to="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 1) && (usuario.puntos >= 10) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 1">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 1">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 1">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -117,11 +117,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/shulte-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 2) && (usuario.puntos >= 50) ? 'actividad':'disabled']">
+                                            <router-link to="/shulte-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 2) && (usuario.puntos >= 50) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 2">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 2">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 2">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -161,11 +161,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/shulte-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 3) && (usuario.puntos >= 50) ? 'actividad':'disabled']">
+                                            <router-link to="/shulte-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 3) && (usuario.puntos >= 50) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 3">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 3">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 3">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -205,11 +205,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/shultele-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 4) && (usuario.puntos >= 50) ? 'actividad':'disabled']">
+                                            <router-link to="/shultele-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 4) && (usuario.puntos >= 50) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 4">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 4">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 4">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -249,11 +249,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/shultele-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 5) && (usuario.puntos >= 50) ? 'actividad':'disabled']">
+                                            <router-link to="/shultele-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 5) && (usuario.puntos >= 50) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 5">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 5">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 5">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -293,11 +293,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a :href="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 6) && (usuario.puntos >= 250) ? 'actividad':'disabled']">
+                                            <router-link :to="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 6) && (usuario.puntos >= 250) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 6">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 6">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 6">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -337,11 +337,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/search-course-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 7) && (usuario.puntos >= 300) ? 'actividad':'disabled']">
+                                            <router-link to="/search-course-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 7) && (usuario.puntos >= 300) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 7">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 7">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 7">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -381,11 +381,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/search-course-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 8) && (usuario.puntos >= 350) ? 'actividad':'disabled']">
+                                            <router-link to="/search-course-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 8) && (usuario.puntos >= 350) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 8">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 8">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 8">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -425,11 +425,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/search-words-course" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 9) && (usuario.puntos >= 300) ? 'actividad':'disabled']">
+                                            <router-link to="/search-words-course" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 9) && (usuario.puntos >= 300) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 9">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 9">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 9">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -469,11 +469,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/search-words-course" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 10) && (usuario.puntos >= 350) ? 'actividad':'disabled']">
+                                            <router-link to="/search-words-course" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 10) && (usuario.puntos >= 350) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 10">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 10">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 10">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -513,11 +513,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a :href="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 11) && (usuario.puntos >= 500) ? 'actividad':'disabled']">
+                                            <router-link :to="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 11) && (usuario.puntos >= 500) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 11">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 11">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 11">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -557,11 +557,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/remember-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 12) && (usuario.puntos >= 500) ? 'actividad':'disabled']">
+                                            <router-link to="/remember-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 12) && (usuario.puntos >= 500) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 12">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 12">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 12">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -601,11 +601,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/remember-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 13) && (usuario.puntos >= 500) ? 'actividad':'disabled']">
+                                            <router-link to="/remember-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 13) && (usuario.puntos >= 500) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 13">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 13">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 13">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -645,11 +645,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/remember-words" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 14) && (usuario.puntos >= 600) ? 'actividad':'disabled']">
+                                            <router-link to="/remember-words" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 14) && (usuario.puntos >= 600) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 14">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 14">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 14">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -689,11 +689,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/remember-words" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 15) && (usuario.puntos >= 650) ? 'actividad':'disabled']">
+                                            <router-link to="/remember-words" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 15) && (usuario.puntos >= 650) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 15">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 15">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 15">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -733,11 +733,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/shulte-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 16) && (usuario.puntos >= 650) ? 'actividad':'disabled']">
+                                            <router-link to="/shulte-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 16) && (usuario.puntos >= 650) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 16">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 16">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 16">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -777,11 +777,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/shulte-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 17) && (usuario.puntos >= 650) ? 'actividad':'disabled']">
+                                            <router-link to="/shulte-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 17) && (usuario.puntos >= 650) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 17">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 17">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 17">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -821,11 +821,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a :href="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 18) && (usuario.puntos >= 800) ? 'actividad':'disabled']">
+                                            <router-link :to="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 18) && (usuario.puntos >= 800) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 18">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 18">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 18">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -865,11 +865,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/shultele-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 19) && (usuario.puntos >= 850) ? 'actividad':'disabled']">
+                                            <router-link to="/shultele-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 19) && (usuario.puntos >= 850) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 19">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 19">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 19">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -909,11 +909,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/shultele-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 20) && (usuario.puntos >= 850) ? 'actividad':'disabled']">
+                                            <router-link to="/shultele-curso" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 20) && (usuario.puntos >= 850) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 20">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 20">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 20">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -953,11 +953,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/search-course-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 21) && (usuario.puntos >= 850) ? 'actividad':'disabled']">
+                                            <router-link to="/search-course-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 21) && (usuario.puntos >= 850) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 21">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 21">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 21">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -997,11 +997,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/search-course-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 22) && (usuario.puntos >= 900) ? 'actividad':'disabled']">
+                                            <router-link to="/search-course-numbers" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 22) && (usuario.puntos >= 900) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 22">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 22">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 22">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -1041,11 +1041,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a :href="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 23) && (usuario.puntos >= 1100) ? 'actividad':'disabled']">
+                                            <router-link :to="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 23) && (usuario.puntos >= 1100) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 23">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 23">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 23">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -1085,11 +1085,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/search-words-course" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 24) && (usuario.puntos >= 1100) ? 'actividad':'disabled']">
+                                            <router-link to="/search-words-course" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 24) && (usuario.puntos >= 1100) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 24">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 24">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 24">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -1129,11 +1129,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/odd-even" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 25) && (usuario.puntos >= 1200) ? 'actividad':'disabled']">
+                                            <router-link to="/odd-even" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 25) && (usuario.puntos >= 1200) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 25">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 25">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 25">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -1173,11 +1173,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/visual-field" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 26) && (usuario.puntos >= 1200) ? 'actividad':'disabled']">
+                                            <router-link to="/visual-field" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 26) && (usuario.puntos >= 1200) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 26">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 26">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 26">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -1217,11 +1217,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a href="/visual-field" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 27) && (usuario.puntos >= 1500) ? 'actividad':'disabled']">
+                                            <router-link to="/visual-field" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso >= 27) && (usuario.puntos >= 1500) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 27">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 27">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 27">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -1261,11 +1261,11 @@
                                                 </div>
                                             </div>
                                             <span class="px-0">
-                                            <a :href="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 28) && (usuario.puntos >= 2000) ? 'actividad':'disabled']">
+                                            <router-link :to="'exam/'+exams" class="btn btn-block btn-primary text-white" :class="[(usuario.avance_curso == 28) && (usuario.puntos >= 2000) ? 'actividad':'disabled']">
                                                 <span v-if="usuario.avance_curso > 28">Completado</span>
                                                 <span v-else-if="usuario.avance_curso == 28">Empezar</span>
                                                 <span v-if="usuario.avance_curso < 28">Bloqueado</span>
-                                            </a>
+                                            </router-link>
                                         </span>
                                         </div>
                                     </div>
@@ -1280,14 +1280,12 @@
     </template>
     <script>
     	export default{
-            beforeCreate: function(){
-            },
     		created(){
     			this.showUser()
                 this.getExamsDoesntHave()
     		},
     		mounted(){
-    			this.bajarScroll()
+                
     		},
     		data(){
     			return{
@@ -1310,14 +1308,6 @@
     					this.exams = res.data.id
     				})
     			},
-    			bajarScroll(){
-    				var contador = 0
-    				setTimeout(function(){
-    					$('html,body').animate({
-    						scrollTop: $("#div1").offset().top
-    					}, 1500);
-    				},1000);
-    			}
     		},
             computed:{
                 numero(){

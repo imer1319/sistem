@@ -106,6 +106,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -134,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
       loading: true,
       estado: false,
       paginate: ['usuarios'],
-      abecedario: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-", "_", "$", "&", "#", "@"],
+      abecedario: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-", "_", "$", "&", "#", "@"],
       password: [],
       random: null,
       errors: []
@@ -168,6 +174,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     createPasswordRandom: function createPasswordRandom() {
+      this.password = "";
+
       for (var i = 1; i < 9; i++) {
         this.random = Math.floor(Math.random() * this.abecedario.length);
 
@@ -441,7 +449,11 @@ var render = function() {
       { staticClass: "card" },
       [
         _c("div", { staticClass: "card-header" }, [
-          _c("h2", { staticClass: "card-title" }, [_vm._v("Usuarios")]),
+          _c("h2", { staticClass: "card-title mt-2" }, [_vm._v("Usuarios")]),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3),
           _vm._v(" "),
           _c(
             "a",
@@ -714,6 +726,40 @@ var staticRenderFns = [
         ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "float-rigth btn btn-success mx-3",
+        attrs: { href: "/user-list-excel" }
+      },
+      [
+        _c("i", { staticClass: "fas fa-download" }),
+        _vm._v(" "),
+        _c("img", { attrs: { src: "imagenes/excel.png", height: "20" } })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "float-rigth btn btn-danger mx-3",
+        attrs: { href: "/user-list-pdf" }
+      },
+      [
+        _c("i", { staticClass: "fas fa-download" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-file-pdf px-2" })
+      ]
+    )
   }
 ]
 render._withStripped = true

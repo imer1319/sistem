@@ -774,7 +774,7 @@ var render = function() {
                                 : _vm._e(),
                               _vm._v(" "),
                               _vm.usuario.puntos >= 100 &&
-                              _vm.usuario.puntos < 500
+                              _vm.usuario.puntos < 300
                                 ? _c("div", [
                                     rango.nombre == "Rango #2"
                                       ? _c("div", [
@@ -802,8 +802,8 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.usuario.puntos >= 500 &&
-                              _vm.usuario.puntos < 1000
+                              _vm.usuario.puntos >= 300 &&
+                              _vm.usuario.puntos < 700
                                 ? _c("div", [
                                     rango.nombre == "Rango #3"
                                       ? _c("div", [
@@ -831,8 +831,8 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.usuario.puntos >= 1000 &&
-                              _vm.usuario.puntos < 5000
+                              _vm.usuario.puntos >= 700 &&
+                              _vm.usuario.puntos < 1000
                                 ? _c("div", [
                                     rango.nombre == "Rango #4"
                                       ? _c("div", [
@@ -860,8 +860,8 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.usuario.puntos >= 5000 &&
-                              _vm.usuario.puntos < 10000
+                              _vm.usuario.puntos >= 1000 &&
+                              _vm.usuario.puntos < 2000
                                 ? _c("div", [
                                     rango.nombre == "Rango #5"
                                       ? _c("div", [
@@ -889,7 +889,7 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.usuario.puntos >= 10000
+                              _vm.usuario.puntos >= 2000
                                 ? _c("div", [
                                     rango.nombre == "Rango #6"
                                       ? _c("div", [

@@ -56,11 +56,6 @@
 						</div>
 					</router-link>
 				</div>
-				<div class="col-12 text-center">
-					<h3 class="text-white">
-						<span class="bg-danger redondear px-3">Mas ejercicios Proximamente</span>
-					</h3>
-				</div>
 			</div>
 		</div>
 	</div>

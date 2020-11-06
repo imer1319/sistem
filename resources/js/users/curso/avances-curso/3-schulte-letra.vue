@@ -304,6 +304,7 @@
 						}
 						this.aumento_avance = this.usuario.avance_curso+1
 						let data = new FormData();
+						data.append('puntos',this.usuario.puntos);
 						data.append('avance_curso',this.aumento_avance);
 						data.append('_method','PUT');
 						var url = `/profile/${this.usuario.id}`

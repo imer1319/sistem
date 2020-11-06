@@ -41,7 +41,13 @@
 		</div>
 		<div class="card">
 			<div class="card-header">
-				<h2 class="card-title">Usuarios</h2>
+				<h2 class="card-title mt-2">Usuarios</h2>
+				<a href="/user-list-excel" class="float-rigth btn btn-success mx-3"><i class="fas fa-download"></i>
+					<img src="imagenes/excel.png" height="20">
+				</a>
+				<a href="/user-list-pdf" class="float-rigth btn btn-danger mx-3"><i class="fas fa-download"></i>
+					<i class="fas fa-file-pdf px-2"></i>
+				</a>
 				<a class="btn btn-success float-right text-white" v-on:click="crearUser()"><i class="fas fa-plus"></i> Crear Usuario</a>
 			</div>
 			<spinner v-if="loading"></spinner>
@@ -113,7 +119,7 @@
 				loading:true,
 				estado:false,
 				paginate:['usuarios'],
-				abecedario : ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9",".","-","_","$","&","#","@"],
+				abecedario : ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9",".","-","_","$","&","#","@",],
 				password:[],
 				random:null,
 				errors: [],
@@ -143,6 +149,7 @@
 				}
 			},
 			createPasswordRandom(){
+				this.password = ""
 				for (var i = 1; i < 9; i++) {
 					this.random = Math.floor(Math.random()*this.abecedario.length)
 					if (this.abecedario[this.random] != null) {
