@@ -193,7 +193,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#sidebar-wrapper {\r\n\tmin-height: 100vh;\r\n\tmargin-left: -15rem;\r\n\ttransition: margin .25s ease-out;\n}\n#sidebar-wrapper .sidebar-heading {\r\n\tpadding: 0.875rem 1.25rem;\r\n\tfont-size: 1.2rem;\n}\n#sidebar-wrapper .list-group {\r\n\twidth: 15rem;\n}\n#page-content-wrapper {\r\n\tmin-width: 100vw;\n}\n#wrapper.toggled #sidebar-wrapper {\r\n\tmargin-left: 0;\n}\n@media (min-width: 768px) {\n#sidebar-wrapper {\r\n\t\tmargin-left: 0;\n}\n#page-content-wrapper {\r\n\t\tmin-width: 0;\r\n\t\twidth: 100%;\n}\n#wrapper.toggled #sidebar-wrapper {\r\n\t\tmargin-left: -15rem;\n}\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n#sidebar-wrapper {\n\tmin-height: 100vh;\n\tmargin-left: -15rem;\n\ttransition: margin .25s ease-out;\n}\n#sidebar-wrapper .sidebar-heading {\n\tpadding: 0.875rem 1.25rem;\n\tfont-size: 1.2rem;\n}\n#sidebar-wrapper .list-group {\n\twidth: 15rem;\n}\n#page-content-wrapper {\n\tmin-width: 100vw;\n}\n#wrapper.toggled #sidebar-wrapper {\n\tmargin-left: 0;\n}\n@media (min-width: 768px) {\n#sidebar-wrapper {\n\t\tmargin-left: 0;\n}\n#page-content-wrapper {\n\t\tmin-width: 0;\n\t\twidth: 100%;\n}\n#wrapper.toggled #sidebar-wrapper {\n\t\tmargin-left: -15rem;\n}\n}\n\n", ""]);
 
 // exports
 

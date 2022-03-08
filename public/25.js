@@ -166,7 +166,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.color7{\r\n\tbackground: #0078A7;\r\n\tcolor: white;\r\n\ttext-transform: uppercase;\r\n\tfont-weight: 800;\r\n\tfont-size: 12px;\r\n\ttext-align: center;\n}\r\n", ""]);
+exports.push([module.i, "\n.color7{\n\tbackground: #0078A7;\n\tcolor: white;\n\ttext-transform: uppercase;\n\tfont-weight: 800;\n\tfont-size: 12px;\n\ttext-align: center;\n}\n", ""]);
 
 // exports
 

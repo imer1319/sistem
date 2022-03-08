@@ -5,7 +5,6 @@ use App\Role;
 use App\Ejercicio;
 use App\Exam;
 use App\Rango;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -14,7 +13,7 @@ class User extends Authenticatable
     use Notifiable;
     public function rangos()
     {
-        return $this->belongsTo(App\Rango)
+        return $this->belongsTo(Rango::class)
         ->withTimestamps();
     }
     public function examenes()
@@ -40,7 +39,7 @@ public function roles()
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','apellido_paterno','apellido_materno','avatar','puntos','rango_id','avance_curso','ppm_inicial','comprension_inicial'
+        'name','apellido_paterno','apellido_materno','avatar','puntos','rango_id','avance_curso','ppm_inicial','comprension_inicial'
     ];
 
     /**

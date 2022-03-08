@@ -451,7 +451,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.color{\r\n\tbackground: #2d2d2d;\r\n\tcolor: white;\r\n\tborder-radius: 50%;\r\n\twidth: 100%;height: 100%;\r\n\tpadding-top: 8px;\n}\n.tabb{\r\n\ttable-layout: fixed;\r\n\twidth: 280px;\n}\n.tdd {\r\n\twidth: 40px;\r\n\theight: 40px;\r\n\tword-wrap: break-word;\r\n\ttext-align: center;\n}\n#primera-vista{\r\n\tdisplay: flex;\n}\n#segunda-vista,#tercera-vista,#cuarta-vista{\r\n\tdisplay: none;\n}\n#pantalla_3_seg{\r\n\tdisplay: none;\r\n\tmin-height: 100vh;\r\n\tposition: relative;\n}\n#numero_3_seg{\r\n\tdisplay: none;\r\n\ttop: 40%;\r\n\tleft: 50%;\r\n\tposition: absolute;\r\n\tfont-size:45px;\n}\r\n", ""]);
+exports.push([module.i, "\n.color{\n\tbackground: #2d2d2d;\n\tcolor: white;\n\tborder-radius: 50%;\n\twidth: 100%;height: 100%;\n\tpadding-top: 8px;\n}\n.tabb{\n\ttable-layout: fixed;\n\twidth: 280px;\n}\n.tdd {\n\twidth: 40px;\n\theight: 40px;\n\tword-wrap: break-word;\n\ttext-align: center;\n}\n#primera-vista{\n\tdisplay: flex;\n}\n#segunda-vista,#tercera-vista,#cuarta-vista{\n\tdisplay: none;\n}\n#pantalla_3_seg{\n\tdisplay: none;\n\tmin-height: 100vh;\n\tposition: relative;\n}\n#numero_3_seg{\n\tdisplay: none;\n\ttop: 40%;\n\tleft: 50%;\n\tposition: absolute;\n\tfont-size:45px;\n}\n", ""]);
 
 // exports
 

@@ -81,6 +81,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.obtener_numero_usuarios();
@@ -104,6 +127,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/numero_usuarios").then(function (res) {
+        if (res.data === null) {
+          _this.numero_usuarios = 0;
+        }
+
         _this.numero_usuarios = res.data;
       });
     },
@@ -270,9 +297,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("b", [
                       _c("h4", [
-                        _vm._v(
-                          " Puntos: " + _vm._s(_vm.mayor_puntuacion.puntos)
-                        )
+                        _vm._v("Puntos: " + _vm._s(_vm.mayor_puntuacion.puntos))
                       ])
                     ])
                   ])

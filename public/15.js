@@ -135,7 +135,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nrouter-link{\r\n    color: #fff;\n}\r\n", ""]);
+exports.push([module.i, "\nrouter-link{\n    color: #fff;\n}\n", ""]);
 
 // exports
 

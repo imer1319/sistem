@@ -408,7 +408,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n#primera-vista{\r\n\tdisplay: flex;\n}\n#segunda-vista,#tercera-vista,#cuarta-vista{\r\n\tdisplay: none;\n}\n#pantalla_3_seg{\r\n\tdisplay: block;\r\n\tmin-height: 100vh;\r\n\tposition: relative;\n}\n#numero_3_seg{\r\n\tdisplay: block;\r\n\ttop: 40%;\r\n\tleft: 50%;\r\n\tposition: absolute;\r\n\tfont-size:45px;\n}\n.contenedor-card{\r\n\tcursor: pointer;\r\n\tborder: 1px solid rgba(0, 0, 0, 0.125);\r\n\tborder-radius: 0.25rem;\r\n\tpadding: 1.25rem;\n}\n.solucion{\r\n\tbackground: #36edc8;\n}\r\n", ""]);
+exports.push([module.i, "\n#primera-vista{\n\tdisplay: flex;\n}\n#segunda-vista,#tercera-vista,#cuarta-vista{\n\tdisplay: none;\n}\n#pantalla_3_seg{\n\tdisplay: block;\n\tmin-height: 100vh;\n\tposition: relative;\n}\n#numero_3_seg{\n\tdisplay: block;\n\ttop: 40%;\n\tleft: 50%;\n\tposition: absolute;\n\tfont-size:45px;\n}\n.contenedor-card{\n\tcursor: pointer;\n\tborder: 1px solid rgba(0, 0, 0, 0.125);\n\tborder-radius: 0.25rem;\n\tpadding: 1.25rem;\n}\n.solucion{\n\tbackground: #36edc8;\n}\n", ""]);
 
 // exports
 

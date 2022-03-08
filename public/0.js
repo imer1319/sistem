@@ -452,7 +452,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.color-letra, .color-letra:hover{\r\n\tcolor: white;\n}\n#btn_agragar, #btn_agragar:hover{\r\n\tcolor: white;\n}\r\n", ""]);
+exports.push([module.i, "\n.color-letra, .color-letra:hover{\n\tcolor: white;\n}\n#btn_agragar, #btn_agragar:hover{\n\tcolor: white;\n}\n", ""]);
 
 // exports
 
@@ -471,7 +471,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.profile-user-img {\r\n\theight: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\n.profile-user-img {\n\theight: 100px;\n}\n", ""]);
 
 // exports
 

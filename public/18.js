@@ -1767,7 +1767,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.border-right{\r\n\tborder-right: 1px solid #dee2e6 !important;\n}\n#empezando , #empezando2 , #busca-letra{\r\n\tdisplay: none;\n}\n#vista-primera{\r\n\tdisplay: flex;\n}\n#tabla1{\r\n\tdisplay: none;\n}\n.fixed-table{\r\n\ttable-layout: fixed;\n}\n.th ,.td {\r\n\tword-wrap: break-word;\r\n\ttext-align: center;\r\n\theight: 65px;\r\n\tfont-size: 20px;\r\n\tfont-weight: bold;\r\n\tcursor: pointer;\n}\n.table-bordered {\r\n\tborder: 1px solid #666666;\n}\n.table-bordered th, .table-bordered td {\r\n\tborder: 1px solid #666666;\n}\r\n", ""]);
+exports.push([module.i, "\n.border-right{\n\tborder-right: 1px solid #dee2e6 !important;\n}\n#empezando , #empezando2 , #busca-letra{\n\tdisplay: none;\n}\n#vista-primera{\n\tdisplay: flex;\n}\n#tabla1{\n\tdisplay: none;\n}\n.fixed-table{\n\ttable-layout: fixed;\n}\n.th ,.td {\n\tword-wrap: break-word;\n\ttext-align: center;\n\theight: 65px;\n\tfont-size: 20px;\n\tfont-weight: bold;\n\tcursor: pointer;\n}\n.table-bordered {\n\tborder: 1px solid #666666;\n}\n.table-bordered th, .table-bordered td {\n\tborder: 1px solid #666666;\n}\n", ""]);
 
 // exports
 

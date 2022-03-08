@@ -305,7 +305,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#segunda-vista{\r\n\tdisplay: none;\n}\r\n", ""]);
+exports.push([module.i, "\n#segunda-vista{\n\tdisplay: none;\n}\n", ""]);
 
 // exports
 

@@ -42,7 +42,7 @@
 							<li class="nav-item"><a class="nav-link" href="#perfil" data-toggle="tab" @click.prevent="editarUsuario()">Editar Perfil</a></li>
 							<li class="nav-item"><a class="nav-link" href="#avanceE" data-toggle="tab" @click.prevent="
 							getDataExamUser(usuario.id)">Avances Examen</a></li>
-							<li class="nav-item"><a class="nav-link" href="#avanceG" data-toggle="tab"@click.prevent="
+							<li class="nav-item"><a class="nav-link" href="#avanceG" data-toggle="tab" @click.prevent="
 							getDataGame1Sum(usuario.id)">Avances Ejercicios</a></li>
 						</ul>
 					</div>
@@ -50,7 +50,7 @@
 						<div class="tab-content">
 							<div class="active tab-pane" id="rango">
 								<div class="text-center">
-									<div v-for="rango in rangos">
+									<div v-for="(rango, index) in rangos" :key="index">
 										<div v-if="usuario.puntos < 100">
 											<div v-if="rango.nombre == 'Rango #1'">
 												<div class="text-center">
@@ -120,9 +120,9 @@
 									<div class="form-group row">
 										<label class="col-form-label col-md-2">Apellido Materno</label>
 										<div class="col-md-10">
-											<input type="text"class="form-control" v-model="fillUsuario.apellido_materno">
+											<input type="text" class="form-control" v-model="fillUsuario.apellido_materno">
 										</div>
-									</div>								
+									</div>
 									<div class="form-group">
 										<div class="form-group">
 											<input type="file" class="form-control-file" @change="obtenerImagen" v-if="estado == false" accept="image/*" equired>
@@ -130,7 +130,7 @@
 										</div>
 										<figure>
 											<img width="200" height="200" :src="imagen" v-if="estado == false" accept="image/*" equired>
-											<img width="200" height="200" :src="`/imagenes/usuario/${fillUsuario.avatar}`"v-else accept="image/*" equired>
+											<img width="200" height="200" :src="`/imagenes/usuario/${fillUsuario.avatar}`" v-else accept="image/*" equired>
 										</figure>
 									</div>
 									<div class="form-group row">
@@ -143,7 +143,7 @@
 							<div class="tab-pane" id="avanceE">
 								<h4 class="text-center">Avance de Examenes</h4>
 								<div class="row">
-									<div v-for="(examen,index) in examenes" class="col-12 col-md-6 mb-2 shadow">
+									<div v-for="(examen,index) in examenes" :key="index" class="col-12 col-md-6 mb-2 shadow">
 										<div class="card">
 											<div class="card-body">
 												<span class="float-rigth badge">{{ index+1 }}</span>
@@ -182,7 +182,7 @@
 											<td>Ejercicio #1</td>
 											<td>{{ games1 }}</td>
 											<td>{{ record1.name }} : {{ record1.puntuacion }}</td>
-											
+
 										</tr>
 										<tr>
 											<td width="8px">2</td>
@@ -492,7 +492,7 @@
 			imagen(){
 				this.estado = false;
 				return this.imagenMiniatura;
-			} 
+			}
 		}
 	}
 </script>

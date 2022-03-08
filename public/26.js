@@ -144,7 +144,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.imagen-tamaño{\r\n    height: 170px;\n}\n@media (max-width: 768px)\r\n{\n.imagen-tamaño{\r\n        height: 110px;\n}\n}\r\n", ""]);
+exports.push([module.i, "\n.imagen-tamaño{\n    height: 170px;\n}\n@media (max-width: 768px)\n{\n.imagen-tamaño{\n        height: 110px;\n}\n}\n", ""]);
 
 // exports
 

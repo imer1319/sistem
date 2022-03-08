@@ -54,7 +54,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#content {\r\n\twidth: 320px;\r\n\theight: 320px;\r\n\tposition: relative;\r\n\tborder: 2px solid #000;\r\n\tmargin: auto;\n}\n#animate {\r\n\tposition: absolute;\r\n\tbackground: red;\r\n\theight: 30px;\r\n\twidth: 30px;\r\n\tborder-radius: 50%;\n}\r\n", ""]);
+exports.push([module.i, "\n#content {\n\twidth: 320px;\n\theight: 320px;\n\tposition: relative;\n\tborder: 2px solid #000;\n\tmargin: auto;\n}\n#animate {\n\tposition: absolute;\n\tbackground: red;\n\theight: 30px;\n\twidth: 30px;\n\tborder-radius: 50%;\n}\n", ""]);
 
 // exports
 

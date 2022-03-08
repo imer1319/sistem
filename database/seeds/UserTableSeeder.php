@@ -14,29 +14,28 @@ class UserTableSeeder extends Seeder
     {
         $role_user = Role::where('name', 'user')->first();
         $role_admin = Role::where('name', 'admin')->first();
-        
+
         $user = new User();
         $user->name = 'User';
-        $user->password = bcrypt('secret');
+        $user->password = bcrypt('123123');
         $user->save();
         $user->roles()->attach($role_user);
 
         $user = new User();
         $user->name = 'Admin';
-        $user->password = bcrypt('secret');
+        $user->password = bcrypt('123123');
         $user->save();
         $user->roles()->attach($role_admin);
 
         for ($i=1; $i < 9; $i++) {
-            $user = new App\Ejercicio();
-            $user->name = "Ejercicio #".$i;
-            $user->save();
+            $ejercicio = new App\Ejercicio();
+            $ejercicio->name = "Ejercicio #".$i;
+            $ejercicio->save();
         }
-        for ($i=1; $i < 21; $i++) { 
+        for ($i=1; $i < 21; $i++) {
             $user = new User();
             $user->name = 'User'.$i;
-            $user->password = bcrypt('secret');
-            $user->hash_password = 'secret';
+            $user->password = bcrypt('123123');
             $user->puntos = rand(80,400);
             $user->avance_curso = rand(3,15);
             $user->save();

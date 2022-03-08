@@ -307,7 +307,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\na{\r\n\tcolor: #fff;\n}\r\n", ""]);
+exports.push([module.i, "\na{\n\tcolor: #fff;\n}\n", ""]);
 
 // exports
 

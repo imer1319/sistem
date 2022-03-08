@@ -194,7 +194,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.contenedor{\r\n\tbackground-color: #2B6A88;\r\n\theight: 120px;\r\n\twidth: 100%;\r\n\tz-index: 100;\n}\n.contenedor .imagen{\r\n\tleft: 50%;\n}\n.contenedor .imagen img{\r\n\theight:100px; \r\n\twidth:100px;\r\n\tborder: 3px solid #fff;\n}\r\n", ""]);
+exports.push([module.i, "\n.contenedor{\n\tbackground-color: #2B6A88;\n\theight: 120px;\n\twidth: 100%;\n\tz-index: 100;\n}\n.contenedor .imagen{\n\tleft: 50%;\n}\n.contenedor .imagen img{\n\theight:100px; \n\twidth:100px;\n\tborder: 3px solid #fff;\n}\n", ""]);
 
 // exports
 
