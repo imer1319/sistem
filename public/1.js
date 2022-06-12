@@ -133,13 +133,95 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
+  mounted: function mounted() {
     var _this = this;
 
-    this.mostrarRango();
-    _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('agregado', function (data) {
+    this.getRango();
+    _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on("agregado", function (data) {
       _this.rangos.push(data);
     });
   },
@@ -147,31 +229,31 @@ __webpack_require__.r(__webpack_exports__);
     return {
       rangos: [],
       rango: {
-        nombre: '',
-        avatar: ''
+        nombre: "",
+        avatar: ""
       },
       fillRango: {
-        nombre: '',
-        avatar: ''
+        nombre: "",
+        avatar: ""
       },
-      imagenMiniatura: '',
+      imagenMiniatura: "",
       loading: true,
-      paginate: ['rangos'],
+      paginate: ["rangos"],
       estado: true,
       errors: []
     };
   },
   methods: {
-    mostrarRango: function mostrarRango() {
+    getRango: function getRango() {
       var _this2 = this;
 
-      axios.get('rango').then(function (res) {
+      axios.get("/rango").then(function (res) {
         _this2.rangos = res.data;
         _this2.loading = false;
       });
     },
     crearRango: function crearRango() {
-      $('#createRango').modal('show');
+      $("#createRango").modal("show");
     },
     obtenerImagencrear: function obtenerImagencrear(e) {
       var file = e.target.files[0];
@@ -214,12 +296,12 @@ __webpack_require__.r(__webpack_exports__);
 
       var Toast = this.$swal.mixin({
         toast: true,
-        position: 'top-end',
+        position: "top-end",
         showConfirmButton: false,
         timer: 2000,
         onOpen: function onOpen(toast) {
-          toast.addEventListener('mouseenter', _this4.$swal.stopTimer);
-          toast.addEventListener('mouseleave', _this4.$swal.resumeTimer);
+          toast.addEventListener("mouseenter", _this4.$swal.stopTimer);
+          toast.addEventListener("mouseleave", _this4.$swal.resumeTimer);
         }
       });
       Toast.fire({
@@ -234,18 +316,18 @@ __webpack_require__.r(__webpack_exports__);
         alert("los campos no pueden estar vacios");
       } else {
         var formData = new FormData();
-        formData.append('nombre', this.rango.nombre);
-        formData.append('avatar', this.rango.avatar);
-        axios.post('/rango', formData).then(function (res) {
-          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('agregado', res.data.rango);
+        formData.append("nombre", this.rango.nombre);
+        formData.append("avatar", this.rango.avatar);
+        axios.post("/rango", formData).then(function (res) {
+          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit("agregado", res.data.rango);
           _this5.rango.nombre = "";
           _this5.$refs.img.value = "";
           _this5.imagenMiniatura = "";
           _this5.errors = [];
 
-          _this5.alerta('success', 'Se a agregado correctamente');
+          _this5.alerta("success", "Se a agregado correctamente");
 
-          $('#createRango').modal('hide');
+          $("#createRango").modal("hide");
         })["catch"](function (error) {
           _this5.errors = error.response.data.errors;
           console.log(_this5.errors);
@@ -257,7 +339,7 @@ __webpack_require__.r(__webpack_exports__);
       this.fillRango.nombre = rango.nombre;
       this.fillRango.avatar = rango.avatar;
       this.fillRango.id = rango.id;
-      $('#editRango').modal('show');
+      $("#editRango").modal("show");
     },
     updateRango: function updateRango(fillRango) {
       var _this6 = this;
@@ -266,19 +348,19 @@ __webpack_require__.r(__webpack_exports__);
         alert("los campos no pueden estar vacios");
       } else {
         var data = new FormData();
-        data.append('nombre', this.fillRango.nombre);
-        data.append('avatar', this.fillRango.avatar);
-        data.append('_method', 'PUT');
+        data.append("nombre", this.fillRango.nombre);
+        data.append("avatar", this.fillRango.avatar);
+        data.append("_method", "PUT");
         var url = "/rango/".concat(fillRango.id);
         axios.post(url, data).then(function (res) {
           _this6.errors = [];
           _this6.$refs.imagenEdit.value = null;
 
-          _this6.mostrarRango();
+          _this6.getRango();
 
-          _this6.alerta('warning', 'Se a modificado el registro');
+          _this6.alerta("warning", "Se a modificado el registro");
 
-          $('#editRango').modal('hide');
+          $("#editRango").modal("hide");
         })["catch"](function (error) {
           _this6.errors = error.response.data.errors;
           console.log(_this6.errors);
@@ -307,7 +389,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\na{\n\tcolor: #fff;\n}\n", ""]);
+exports.push([module.i, "\na {\n  color: #fff;\n}\n", ""]);
 
 // exports
 
@@ -639,7 +721,7 @@ var render = function() {
                                 _c("img", {
                                   staticClass: "img-responsive",
                                   attrs: {
-                                    src: "imagenes/rangos/" + rango.avatar,
+                                    src: "/imagenes/rangos/" + rango.avatar,
                                     height: "60",
                                     width: "70"
                                   }

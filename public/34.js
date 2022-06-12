@@ -743,8 +743,8 @@ var render = function() {
                         _c(
                           "div",
                           { staticClass: "text-center" },
-                          _vm._l(_vm.rangos, function(rango) {
-                            return _c("div", [
+                          _vm._l(_vm.rangos, function(rango, index) {
+                            return _c("div", { key: index }, [
                               _vm.usuario.puntos < 100
                                 ? _c("div", [
                                     rango.nombre == "Rango #1"
@@ -1140,7 +1140,10 @@ var render = function() {
                           _vm._l(_vm.examenes, function(examen, index) {
                             return _c(
                               "div",
-                              { staticClass: "col-12 col-md-6 mb-2 shadow" },
+                              {
+                                key: index,
+                                staticClass: "col-12 col-md-6 mb-2 shadow"
+                              },
                               [
                                 _c("div", { staticClass: "card" }, [
                                   _c("div", { staticClass: "card-body" }, [

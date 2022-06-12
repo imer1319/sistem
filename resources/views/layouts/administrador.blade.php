@@ -24,7 +24,7 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-      </ul> 
+      </ul>
       <ul class="navbar-nav ml-auto" style="background-color: #EBEBEC; border-radius: 30px;">
         <li class="nav-item">
           <a class="dropdown-item" style="border-radius: 15px;" href="{{ route('logout') }}"
@@ -106,7 +106,7 @@
   <div class="content" id="app">
     <div class="container-fluid">
       <div class="row">
-        <App/>
+        <router-view></router-view>
       </div>
     </div>
   </div>

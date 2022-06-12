@@ -1,20 +1,16 @@
 <?php
 
 namespace App;
-use App\Role;
-use App\Ejercicio;
-use App\Exam;
-use App\Rango;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    public function rangos()
+
+    public function rango()
     {
-        return $this->belongsTo(Rango::class)
-        ->withTimestamps();
+        return $this->belongsTo(Rango::class);
     }
     public function examenes()
     {

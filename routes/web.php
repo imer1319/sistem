@@ -1,4 +1,5 @@
 <?php
+
 Route::get('/', function () {
 	return view('welcome');
 });
@@ -52,7 +53,7 @@ Route::post('exam','UserController@saveExam');
 Route::get('rank','UserController@rango');
 Route::get('profile','UserController@perfil');
 Route::get('ranking','UserController@rankingMundial');
-Route::put('profile/{id}','UserController@updatePerfil');
+Route::put('profile','UserController@updatePerfil');
 Route::get('maxGame/{id}','UserController@maxGame');
 Route::get('miID','UserController@miIdAuth');
 Route::get('inicializando','UserController@iniciales');

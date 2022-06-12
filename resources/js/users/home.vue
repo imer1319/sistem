@@ -2,38 +2,6 @@
     <div>
         <spinner v-if="loading"></spinner>
         <div v-else>
-            <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-                <div class="container">
-                    <a class="navbar-brand text-white">Lectura Veloz</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item px-md-3">
-                                <h5 class="mb-0">
-                                    <a class="nav-link text-warning">{{ usuario.puntos }} Pts.</a>
-                                </h5>
-                            </li>
-                            <li class="nav-item">
-                                <img :src="`/imagenes/usuario/${usuario.avatar}`" class="rounded-circle pb-0" height="40" width="40">
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{usuario.name}}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <router-link class="dropdown-item" to="/profile">
-                                        Mi perfil
-                                    </router-link>
-                                    <a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
             <div class="container my-2">
                 <div class="consejo">{{ consejo }}</div>
                 <div class="row">
@@ -44,7 +12,7 @@
                                     <div class="card" :class="contenido.background">
                                         <div class="card-body box-profile pb-2">
                                             <img class="card-img-top img-responsive imagen-tamaño" :src="`/imagenes/${contenido.icono}`">
-                                        </div>                                        
+                                        </div>
                                         <span class=" pb-3 text-center text-uppercase">{{ contenido.nombre }}</span>
                                         <span></span>
                                     </div>
@@ -61,7 +29,6 @@
     export default{
         created(){
             this.obtener_consejo()
-            this.showUser()
         },
         data(){
             return {
@@ -83,7 +50,6 @@
                 'Si lees lo que te gusta no te aburriras',
                 'La practica hace al maestro'],
                 consejo:null,
-                usuario:{},
                 loading:true,
             }
         },
@@ -91,13 +57,7 @@
             obtener_consejo(){
                 var ram = Math.floor(Math.random()*this.consejos.length)
                 this.consejo = this.consejos[ram]
-            },
-            showUser(){
-                var url ="/profile"
-                axios.get(url).then(res =>{
-                    this.usuario = res.data
-                    this.loading = false
-                })
+                this.loading = false
             },
         }
     }

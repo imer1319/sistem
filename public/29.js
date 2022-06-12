@@ -237,30 +237,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
-    this.showUser();
-    this.showRango();
     this.getExamsDoesntHave();
   },
   data: function data() {
     return {
-      usuario: {},
-      rangos: [],
       loading: true,
       fillUsuario: {
-        name: '',
-        apellido_paterno: '',
-        avatar: '',
-        apellido_materno: '',
-        rango_id: '',
-        curso: ''
+        name: "",
+        apellido_paterno: "",
+        avatar: "",
+        apellido_materno: "",
+        rango_id: "",
+        curso: ""
       },
       estado: false,
-      imagenMiniatura: '',
-      selected: '',
-      cursos: '',
-      seccion: '',
+      imagenMiniatura: "",
+      selected: "",
+      cursos: "",
+      seccion: "",
       exams: null,
       errors: []
     };
@@ -272,23 +273,7 @@ __webpack_require__.r(__webpack_exports__);
       var url = "/examDado";
       axios.get(url).then(function (res) {
         _this.exams = res.data;
-      });
-    },
-    showUser: function showUser() {
-      var _this2 = this;
-
-      var url = "/profile";
-      axios.get(url).then(function (res) {
-        _this2.usuario = res.data;
-        _this2.loading = false;
-      });
-    },
-    showRango: function showRango() {
-      var _this3 = this;
-
-      var url = "/rank";
-      axios.get(url).then(function (res) {
-        _this3.rangos = res.data;
+        _this.loading = false;
       });
     },
     obtenerImagenNueva: function obtenerImagenNueva(e) {
@@ -298,44 +283,44 @@ __webpack_require__.r(__webpack_exports__);
       this.cargarImagen(file);
     },
     cargarImagen: function cargarImagen(file) {
-      var _this4 = this;
+      var _this2 = this;
 
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        _this4.imagenMiniatura = e.target.result;
+        _this2.imagenMiniatura = e.target.result;
       };
 
       reader.readAsDataURL(file);
     },
     editarUsuario: function editarUsuario() {
-      this.fillUsuario.name = this.usuario.name;
-      this.fillUsuario.apellido_paterno = this.usuario.apellido_paterno;
-      this.fillUsuario.apellido_materno = this.usuario.apellido_materno;
-      this.fillUsuario.puntos = this.usuario.puntos;
-      this.fillUsuario.rango_id = this.usuario.rango_id;
-      this.fillUsuario.id = this.usuario.id;
+      this.fillUsuario.name = this.currentUser.name;
+      this.fillUsuario.apellido_paterno = this.currentUser.apellido_paterno;
+      this.fillUsuario.apellido_materno = this.currentUser.apellido_materno;
+      this.fillUsuario.puntos = this.currentUser.puntos;
+      this.fillUsuario.rango_id = this.currentUser.rango_id;
+      this.fillUsuario.id = this.currentUser.id;
     },
     alerta: function alerta() {
-      var _this5 = this;
+      var _this3 = this;
 
       var Toast = this.$swal.mixin({
         toast: true,
-        position: 'top-end',
+        position: "top-end",
         showConfirmButton: false,
         timer: 2000,
         onOpen: function onOpen(toast) {
-          toast.addEventListener('mouseenter', _this5.$swal.stopTimer);
-          toast.addEventListener('mouseleave', _this5.$swal.resumeTimer);
+          toast.addEventListener("mouseenter", _this3.$swal.stopTimer);
+          toast.addEventListener("mouseleave", _this3.$swal.resumeTimer);
         }
       });
       Toast.fire({
-        icon: 'success',
-        title: 'Actualizado Correctamente'
+        icon: "success",
+        title: "Actualizado Correctamente"
       });
     },
     updateUsuario: function updateUsuario(fillUsuario) {
-      var _this6 = this;
+      var _this4 = this;
 
       if (this.fillUsuario.apellido_materno == null) {
         this.fillUsuario.apellido_materno = "";
@@ -346,55 +331,33 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       var data = new FormData();
-      data.append('name', this.fillUsuario.name);
-      data.append('apellido_paterno', this.fillUsuario.apellido_paterno);
-      data.append('apellido_materno', this.fillUsuario.apellido_materno);
-
-      if (this.fillUsuario.puntos < 100) {
-        data.append('rango_id', 1);
-      } else if (this.fillUsuario.puntos >= 100 && this.fillUsuario.puntos < 300) {
-        data.append('rango_id', 2);
-      } else if (this.fillUsuario.puntos >= 300 && this.fillUsuario.puntos < 700) {
-        data.append('rango_id', 3);
-      } else if (this.fillUsuario.puntos >= 700 && this.fillUsuario.puntos < 1000) {
-        data.append('rango_id', 4);
-      } else if (this.fillUsuario.puntos >= 1000 && this.fillUsuario.puntos < 2000) {
-        data.append('rango_id', 5);
-      } else if (this.fillUsuario.puntos >= 2000) {
-        data.append('rango_id', 6);
-      }
-
-      data.append('_method', 'PUT');
-      var url = "/profile/".concat(fillUsuario.id);
-      axios.post(url, data).then(function (res) {
-        _this6.showUser();
-
-        _this6.alerta();
+      data.append("name", this.fillUsuario.name);
+      data.append("apellido_paterno", this.fillUsuario.apellido_paterno);
+      data.append("apellido_materno", this.fillUsuario.apellido_materno);
+      data.append("_method", "PUT");
+      axios.post('`/profile`', data).then(function () {
+        _this4.alerta();
       })["catch"](function (error) {
-        _this6.errors = error.response.data.errors;
-        console.log(_this6.errors);
+        _this4.errors = error.response.data.errors;
+        console.log(_this4.errors);
       });
     },
     editarAvatar: function editarAvatar() {
-      this.fillUsuario.avatar = this.usuario.avatar;
-      this.fillUsuario.id = this.usuario.id;
       this.estado = false;
       this.$refs.img.value = null;
-      $('#editAvatar').modal('show');
+      $("#editAvatar").modal("show");
     },
     updateAvatar: function updateAvatar(fillUsuario) {
-      var _this7 = this;
+      var _this5 = this;
 
       var data = new FormData();
-      data.append('avatar', this.fillUsuario.avatar);
-      data.append('_method', 'PUT');
+      data.append("avatar", this.fillUsuario.avatar);
+      data.append("_method", "PUT");
       var url = "/profile/".concat(fillUsuario.id);
-      axios.post(url, data).then(function (res) {
-        _this7.showUser();
+      axios.post(url, data).then(function () {
+        _this5.alerta();
 
-        _this7.alerta();
-
-        $('#editAvatar').modal('hide');
+        $("#editAvatar").modal("hide");
       });
     }
   },
@@ -419,7 +382,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.cont{\n\tposition: relative; \n\theight:120px; \n\twidth:120px;\n}\n.cont img{\n\theight:100%; \n\twidth:100%;\n}\n.cont a{\n\tposition: absolute;\n\tbottom: 15px;\n\tleft: 70px;\n\ttext-shadow: 0 0 10px #000;\n}\na i{\n\tcursor: pointer; \n\tfont-size: 25px;\n\tcolor: #fff;\n}\n.border-right {\n\tborder-right: 1px solid #dee2e6!important;\n}\n.description-block {\n\tdisplay: block;\n\tmargin: 10px 0;\n\ttext-align: center;\n}\n.widget-user .widget-user-image {\n\tleft: 50%;\n\tmargin-left: -45px;\n\tposition: absolute;\n\ttop: 80px;\n}\n.widget-user .widget-user-header {\n\tborder-top-left-radius: .25rem;\n\tborder-top-right-radius: .25rem;\n\theight: 135px;\n\tpadding: 1rem;\n\ttext-align: center;\n}\n.widget-user .widget-user-image>img {\n\tborder: 3px solid #fff;\n\theight: 100px;\n\twidth: 100px;\n}\n.elevation-2 {\n\tbox-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)!important;\n}\n.img-circle {\n\tborder-radius: 50%;\n}\nimg {\n\tvertical-align: middle;\n\tborder-style: none;\n}\n.profundidad{\n\tpadding-top: 50px;\n}\n.bg-info {\n\tbackground-color: #2A6988 !important;\n\tcolor: #fff;\n}\nh1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {\n\tmargin-bottom: 0.5rem;\n\tfont-weight: 500;\n\tline-height: 1.2;\n}\n\n/***********TOOLTIPS***********/\n.tooltipP{\n\tcursor: pointer;\n\tposition: relative;\n\ttext-align: center;\n}\n.tooltipP:hover .ttip{\n\tdisplay: block;\n}\n.ttip:before{\n\tborder-left: 6px solid transparent;\n\tborder-right: 6px solid transparent;\n\tborder-top: 6px solid #777777;\n\tbottom: -6px;\n\tcontent: \"\";\n\theight: 0;\n\tleft: 50%;\n\tmargin-left: -6px;\n\tposition: absolute;\n\twidth: 0;\n}\n.ttip{\n\tbackground: #777777;\n\tcolor: #fff;\n\tdisplay: none;\n\tleft: 30%;\n\tpadding: 10px 10px;\n\tposition: absolute;\n\twidth: 200px;\n\ttop: -70px;\n\tz-index: 1000;\n}\n.rank{\n\tbackground: #477DD9;\n}\n", ""]);
+exports.push([module.i, "\n.cont {\n  position: relative;\n  height: 120px;\n  width: 120px;\n}\n.cont img {\n  height: 100%;\n  width: 100%;\n}\n.cont a {\n  position: absolute;\n  bottom: 15px;\n  left: 70px;\n  text-shadow: 0 0 10px #000;\n}\na i {\n  cursor: pointer;\n  font-size: 25px;\n  color: #fff;\n}\n.border-right {\n  border-right: 1px solid #dee2e6 !important;\n}\n.description-block {\n  display: block;\n  margin: 10px 0;\n  text-align: center;\n}\n.widget-user .widget-user-image {\n  left: 50%;\n  margin-left: -45px;\n  position: absolute;\n  top: 80px;\n}\n.widget-user .widget-user-header {\n  border-top-left-radius: 0.25rem;\n  border-top-right-radius: 0.25rem;\n  height: 135px;\n  padding: 1rem;\n  text-align: center;\n}\n.widget-user .widget-user-image > img {\n  border: 3px solid #fff;\n  height: 100px;\n  width: 100px;\n}\n.elevation-2 {\n  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;\n}\n.img-circle {\n  border-radius: 50%;\n}\nimg {\n  vertical-align: middle;\n  border-style: none;\n}\n.profundidad {\n  padding-top: 50px;\n}\n.bg-info {\n  background-color: #2a6988 !important;\n  color: #fff;\n}\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\n.h1,\n.h2,\n.h3,\n.h4,\n.h5,\n.h6 {\n  margin-bottom: 0.5rem;\n  font-weight: 500;\n  line-height: 1.2;\n}\n\n/***********TOOLTIPS***********/\n.tooltipP {\n  cursor: pointer;\n  position: relative;\n  text-align: center;\n}\n.tooltipP:hover .ttip {\n  display: block;\n}\n.ttip:before {\n  border-left: 6px solid transparent;\n  border-right: 6px solid transparent;\n  border-top: 6px solid #777777;\n  bottom: -6px;\n  content: \"\";\n  height: 0;\n  left: 50%;\n  margin-left: -6px;\n  position: absolute;\n  width: 0;\n}\n.ttip {\n  background: #777777;\n  color: #fff;\n  display: none;\n  left: 30%;\n  padding: 10px 10px;\n  position: absolute;\n  width: 200px;\n  top: -70px;\n  z-index: 1000;\n}\n.rank {\n  background: #477dd9;\n}\n", ""]);
 
 // exports
 
@@ -478,129 +441,6 @@ var render = function() {
         ? _c("spinner")
         : _c("div", [
             _c(
-              "nav",
-              { staticClass: "navbar navbar-expand-md navbar-dark bg-primary" },
-              [
-                _c("div", { staticClass: "container" }, [
-                  _c("a", { staticClass: "navbar-brand text-white" }, [
-                    _vm._v("Lectura Veloz")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "navbar-toggler",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "collapse",
-                        "data-target": "#navbarNavDropdown",
-                        "aria-controls": "navbarNavDropdown",
-                        "aria-expanded": "false",
-                        "aria-label": "Toggle navigation"
-                      }
-                    },
-                    [_c("span", { staticClass: "navbar-toggler-icon" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "collapse navbar-collapse",
-                      attrs: { id: "navbarNavDropdown" }
-                    },
-                    [
-                      _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                        _c("li", { staticClass: "nav-item px-md-3" }, [
-                          _c("h5", { staticClass: "mb-0" }, [
-                            _c("a", { staticClass: "nav-link text-warning" }, [
-                              _vm._v(_vm._s(_vm.usuario.puntos) + " Pts.")
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "nav-item" }, [
-                          _c("img", {
-                            staticClass: "rounded-circle pb-0",
-                            attrs: {
-                              src: "/imagenes/usuario/" + _vm.usuario.avatar,
-                              height: "40",
-                              width: "40"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "nav-item dropdown" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "nav-link dropdown-toggle",
-                              attrs: {
-                                href: "#",
-                                id: "navbarDropdownMenuLink",
-                                "data-toggle": "dropdown",
-                                "aria-haspopup": "true",
-                                "aria-expanded": "false"
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(_vm.usuario.name) +
-                                  "\n                                "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "dropdown-menu dropdown-menu-right",
-                              attrs: {
-                                "aria-labelledby": "navbarDropdownMenuLink"
-                              }
-                            },
-                            [
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass: "dropdown-item",
-                                  attrs: { to: "/profile" }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        Mi perfil\n                                    "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  attrs: {
-                                    href: "/logout",
-                                    onclick:
-                                      "event.preventDefault(); document.getElementById('logout-form').submit();"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "Cerrar Sesión\n                                    "
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      ])
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
               "div",
               { staticClass: "container-fluid" },
               [
@@ -610,7 +450,7 @@ var render = function() {
                     staticClass: "btn btn-dark text-uppercase",
                     attrs: { to: "/home" }
                   },
-                  [_vm._v("\n\t\t\t\t\tRegresar\n\t\t\t\t")]
+                  [_vm._v("\n        Regresar\n      ")]
                 )
               ],
               1
@@ -623,7 +463,7 @@ var render = function() {
                     _c("div", { staticClass: "card-widget widget-user" }, [
                       _c("div", { staticClass: "widget-user-header bg-info" }, [
                         _c("h3", { staticClass: "widget-user-username" }, [
-                          _vm._v(_vm._s(_vm.usuario.name))
+                          _vm._v(_vm._s(_vm.currentUser.name))
                         ]),
                         _vm._v(" "),
                         _c("h5", { staticClass: "widget-user-desc" }, [
@@ -635,7 +475,7 @@ var render = function() {
                         _c("img", {
                           staticClass: "img-circle elevation-2",
                           attrs: {
-                            src: "/imagenes/usuario/" + _vm.usuario.avatar
+                            src: "/imagenes/usuario/" + _vm.currentUser.avatar
                           }
                         }),
                         _vm._v(" "),
@@ -681,7 +521,11 @@ var render = function() {
                                         staticClass: "modal-title",
                                         attrs: { id: "exampleModalLabel" }
                                       },
-                                      [_vm._v("Editar Avatar")]
+                                      [
+                                        _vm._v(
+                                          "\n                          Editar Avatar\n                        "
+                                        )
+                                      ]
                                     )
                                   ]),
                                   _vm._v(" "),
@@ -757,9 +601,9 @@ var render = function() {
                           _c("div", { staticClass: "description-block" }, [
                             _c("h5", { staticClass: "description-header" }, [
                               _vm._v(
-                                "\n\t\t\t\t\t\t\t\t\t\t\t\t" +
-                                  _vm._s(_vm.usuario.apellido_paterno) +
-                                  "\n\t\t\t\t\t\t\t\t\t\t\t"
+                                "\n                      " +
+                                  _vm._s(_vm.currentUser.apellido_paterno) +
+                                  "\n                    "
                               )
                             ]),
                             _vm._v(" "),
@@ -777,7 +621,13 @@ var render = function() {
                                 staticClass:
                                   "description-header font-weight-bold"
                               },
-                              [_vm._v(_vm._s(_vm.usuario.puntos))]
+                              [
+                                _vm._v(
+                                  "\n                      " +
+                                    _vm._s(_vm.currentUser.puntos) +
+                                    "\n                    "
+                                )
+                              ]
                             ),
                             _vm._v(" "),
                             _c("span", { staticClass: "description-text" }, [
@@ -789,7 +639,11 @@ var render = function() {
                         _c("div", { staticClass: "col-sm-4 border-right" }, [
                           _c("div", { staticClass: "description-block" }, [
                             _c("h5", { staticClass: "description-header" }, [
-                              _vm._v(_vm._s(_vm.usuario.apellido_materno))
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(_vm.currentUser.apellido_materno) +
+                                  "\n                    "
+                              )
                             ]),
                             _vm._v(" "),
                             _c("span", { staticClass: "description-text" }, [
@@ -831,7 +685,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-12 col-md-6" }, [
-                  _c("div", { staticClass: "card sombra " }, [
+                  _c("div", { staticClass: "card sombra" }, [
                     _c("div", { staticClass: "card-header p-2" }, [
                       _c("ul", { staticClass: "nav nav-pills" }, [
                         _c("li", { staticClass: "nav-item" }, [
@@ -868,200 +722,29 @@ var render = function() {
                         _c(
                           "div",
                           {
-                            staticClass: "tab-pane active ",
+                            staticClass: "tab-pane active",
                             attrs: { id: "rango" }
                           },
                           [
-                            _c(
-                              "div",
-                              { staticClass: "text-center" },
-                              _vm._l(_vm.rangos, function(rango) {
-                                return _c("div", [
-                                  _vm.usuario.puntos < 100
-                                    ? _c("div", [
-                                        rango.nombre == "Rango #1"
-                                          ? _c("div", [
-                                              _c(
-                                                "div",
-                                                { staticClass: "text-center" },
-                                                [
-                                                  _c("img", {
-                                                    staticClass:
-                                                      "img-responsive",
-                                                    attrs: {
-                                                      src:
-                                                        "imagenes/rangos/" +
-                                                        rango.avatar,
-                                                      width: "50%"
-                                                    }
-                                                  }),
-                                                  _vm._v(" "),
-                                                  _c("h3", [
-                                                    _c("b", [_vm._v("Bronce")])
-                                                  ])
-                                                ]
-                                              )
-                                            ])
-                                          : _vm._e()
-                                      ])
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.usuario.puntos >= 100 &&
-                                  _vm.usuario.puntos < 300
-                                    ? _c("div", [
-                                        rango.nombre == "Rango #2"
-                                          ? _c("div", [
-                                              _c(
-                                                "div",
-                                                { staticClass: "text-center" },
-                                                [
-                                                  _c("img", {
-                                                    staticClass:
-                                                      "img-responsive",
-                                                    attrs: {
-                                                      src:
-                                                        "imagenes/rangos/" +
-                                                        rango.avatar,
-                                                      width: "50%"
-                                                    }
-                                                  }),
-                                                  _vm._v(" "),
-                                                  _c("h3", [
-                                                    _c("b", [_vm._v("Plata")])
-                                                  ])
-                                                ]
-                                              )
-                                            ])
-                                          : _vm._e()
-                                      ])
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.usuario.puntos >= 300 &&
-                                  _vm.usuario.puntos < 700
-                                    ? _c("div", [
-                                        rango.nombre == "Rango #3"
-                                          ? _c("div", [
-                                              _c(
-                                                "div",
-                                                { staticClass: "text-center" },
-                                                [
-                                                  _c("img", {
-                                                    staticClass:
-                                                      "img-responsive",
-                                                    attrs: {
-                                                      src:
-                                                        "imagenes/rangos/" +
-                                                        rango.avatar,
-                                                      width: "50%"
-                                                    }
-                                                  }),
-                                                  _vm._v(" "),
-                                                  _c("h3", [
-                                                    _c("b", [_vm._v("Oro")])
-                                                  ])
-                                                ]
-                                              )
-                                            ])
-                                          : _vm._e()
-                                      ])
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.usuario.puntos >= 700 &&
-                                  _vm.usuario.puntos < 1000
-                                    ? _c("div", [
-                                        rango.nombre == "Rango #4"
-                                          ? _c("div", [
-                                              _c(
-                                                "div",
-                                                { staticClass: "text-center" },
-                                                [
-                                                  _c("img", {
-                                                    staticClass:
-                                                      "img-responsive",
-                                                    attrs: {
-                                                      src:
-                                                        "imagenes/rangos/" +
-                                                        rango.avatar,
-                                                      width: "50%"
-                                                    }
-                                                  }),
-                                                  _vm._v(" "),
-                                                  _c("h3", [
-                                                    _c("b", [_vm._v("Platino")])
-                                                  ])
-                                                ]
-                                              )
-                                            ])
-                                          : _vm._e()
-                                      ])
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.usuario.puntos >= 1000 &&
-                                  _vm.usuario.puntos < 2000
-                                    ? _c("div", [
-                                        rango.nombre == "Rango #5"
-                                          ? _c("div", [
-                                              _c(
-                                                "div",
-                                                { staticClass: "text-center" },
-                                                [
-                                                  _c("img", {
-                                                    staticClass:
-                                                      "img-responsive",
-                                                    attrs: {
-                                                      src:
-                                                        "imagenes/rangos/" +
-                                                        rango.avatar,
-                                                      width: "50%"
-                                                    }
-                                                  }),
-                                                  _vm._v(" "),
-                                                  _c("h3", [
-                                                    _c("b", [
-                                                      _vm._v("Diamante")
-                                                    ])
-                                                  ])
-                                                ]
-                                              )
-                                            ])
-                                          : _vm._e()
-                                      ])
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.usuario.puntos >= 2000
-                                    ? _c("div", [
-                                        rango.nombre == "Rango #6"
-                                          ? _c("div", [
-                                              _c(
-                                                "div",
-                                                { staticClass: "text-center" },
-                                                [
-                                                  _c("img", {
-                                                    staticClass:
-                                                      "img-responsive",
-                                                    attrs: {
-                                                      src:
-                                                        "imagenes/rangos/" +
-                                                        rango.avatar,
-                                                      width: "50%"
-                                                    }
-                                                  }),
-                                                  _vm._v(" "),
-                                                  _c("h3", [
-                                                    _c("b", [
-                                                      _vm._v("Campeones")
-                                                    ])
-                                                  ])
-                                                ]
-                                              )
-                                            ])
-                                          : _vm._e()
-                                      ])
-                                    : _vm._e()
+                            _c("div", { staticClass: "text-center" }, [
+                              _c("div", { staticClass: "text-center" }, [
+                                _c("img", {
+                                  staticClass: "img-responsive",
+                                  attrs: {
+                                    src:
+                                      "imagenes/rangos/" +
+                                      _vm.currentUser.rango.avatar,
+                                    width: "50%"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("h3", [
+                                  _c("b", [
+                                    _vm._v(_vm._s(_vm.currentUser.rango.nombre))
+                                  ])
                                 ])
-                              }),
-                              0
-                            )
+                              ])
+                            ])
                           ]
                         ),
                         _vm._v(" "),
@@ -1267,7 +950,11 @@ var render = function() {
                                                   "btn btn-primary text-white",
                                                 attrs: { type: "submit" }
                                               },
-                                              [_vm._v("Actualizar")]
+                                              [
+                                                _vm._v(
+                                                  "\n                              Actualizar\n                            "
+                                                )
+                                              ]
                                             )
                                           ]
                                         )

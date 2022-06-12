@@ -1289,6 +1289,255 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.showUser();
@@ -1342,7 +1591,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.actividad{\n\tcursor: hand;\n}\n#progreso_1, #progreso_2{\n\twidth: 0%;\n}\n#circulo{\n\tbackground: #FFBC5B;\n\theight: 40px;\n\twidth: 40px;\n\tborder-radius: 50%;\n\tline-height: 40px;\n\ttext-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.actividad {\n  cursor: hand;\n}\n#progreso_1,\n#progreso_2 {\n  width: 0%;\n}\n#circulo {\n  background: #ffbc5b;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  line-height: 40px;\n  text-align: center;\n}\n", ""]);
 
 // exports
 
@@ -1400,129 +1649,6 @@ var render = function() {
       _vm.loading
         ? _c("spinner")
         : _c("div", [
-            _c(
-              "nav",
-              { staticClass: "navbar navbar-expand-md navbar-dark bg-primary" },
-              [
-                _c("div", { staticClass: "container" }, [
-                  _c("a", { staticClass: "navbar-brand text-white" }, [
-                    _vm._v("Lectura Veloz")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "navbar-toggler",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "collapse",
-                        "data-target": "#navbarNavDropdown",
-                        "aria-controls": "navbarNavDropdown",
-                        "aria-expanded": "false",
-                        "aria-label": "Toggle navigation"
-                      }
-                    },
-                    [_c("span", { staticClass: "navbar-toggler-icon" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "collapse navbar-collapse",
-                      attrs: { id: "navbarNavDropdown" }
-                    },
-                    [
-                      _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                        _c("li", { staticClass: "nav-item px-md-3" }, [
-                          _c("h5", { staticClass: "mb-0" }, [
-                            _c("a", { staticClass: "nav-link text-warning" }, [
-                              _vm._v(_vm._s(_vm.usuario.puntos) + " Pts.")
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "nav-item" }, [
-                          _c("img", {
-                            staticClass: "rounded-circle pb-0",
-                            attrs: {
-                              src: "/imagenes/usuario/" + _vm.usuario.avatar,
-                              height: "40",
-                              width: "40"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "nav-item dropdown" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "nav-link dropdown-toggle",
-                              attrs: {
-                                href: "#",
-                                id: "navbarDropdownMenuLink",
-                                "data-toggle": "dropdown",
-                                "aria-haspopup": "true",
-                                "aria-expanded": "false"
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(_vm.usuario.name) +
-                                  "\n                                "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "dropdown-menu dropdown-menu-right",
-                              attrs: {
-                                "aria-labelledby": "navbarDropdownMenuLink"
-                              }
-                            },
-                            [
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass: "dropdown-item",
-                                  attrs: { to: "/profile" }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        Mi perfil\n                                    "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  attrs: {
-                                    href: "/logout",
-                                    onclick:
-                                      "event.preventDefault(); document.getElementById('logout-form').submit();"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "Cerrar Sesión\n                                    "
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      ])
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
             _c(
               "div",
               { staticClass: "container-fluid" },

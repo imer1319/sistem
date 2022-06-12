@@ -204,38 +204,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('es');
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -508,7 +476,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*************----RADIO BUTON----***********/\n.radioContainer{\n\tdisplay: inline-block;\n\tposition: relative;\n\tcursor: pointer;\n\tfont-family: sans-serif;\n\tfont-size: 22px;\n\tpadding-left: 30px;\n}\n.radioContainer input{\n\tdisplay: none;\n}\n.radioContainer .circle{\n\tdisplay: inline-block;\n\twidth: 25px;\n\theight: 25px;\n\tbackground-color: #eee;\n\tposition: absolute;\n\tleft: 0; top: 0;\n\tborder-radius: 50%;\n}\n.radioContainer:hover .circle{\n\tbackground-color: #ccc;\n}\n.radioContainer input:checked + .circle{\n\tbackground-color: #2196fc;\n}\n.radioContainer input:checked + .circle:after{\n\tcontent: \"\";\n\theight: 10px;\n\twidth: 10px;\n\tbackground-color: white;\n\tposition: absolute;\n\tborder-radius: 50%;\n\tleft: 50%;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n}\n/***********-- PROGRESS- BAR --**************/\n#progressbar {\n\tmargin-bottom: 30px;\n\toverflow: hidden;\n\t/*CSS counters to number the steps*/\n\tcounter-reset: step;\n}\n#progressbar li {\n\tlist-style-type: none;\n\tcolor: black;\n\ttext-transform: uppercase;\n\tfont-size: 18px;\n\twidth: 33.33%;\n\tfloat: left;\n\tposition: relative;\n\ttext-align: center;\n}\n#progressbar li:before {\n\tcontent: counter(step);\n\tcounter-increment: step;\n\twidth: 40px;\n\tline-height: 40px;\n\tdisplay: block;\n\tfont-size: 18px;\n\tcolor: #333;\n\tbackground: white;\n\tborder-radius: 3px;\n\tmargin: 0 auto 5px auto;\n\ttext-align: center;\n}\n/*progressbar connectors*/\n#progressbar li:after {\n\tcontent: '';\n\twidth: 100%;\n\theight: 2px;\n\tbackground: white;\n\tposition: absolute;\n\tleft: -50%;\n\ttop: 20px;\n\tz-index: -1; /*put it behind the numbers*/\n}\n#progressbar li:first-child:after {\n\t/*connector not needed before the first step*/\n\tcontent: none;\n}\n/*marking active/completed steps green*/\n/*The number of the step and the connector before it = green*/\n#progressbar li.active:before,  #progressbar li.active:after{\n\tbackground: #15799e;\n\tcolor: white;\n}\n/* para el radio button*/\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*************----RADIO BUTON----***********/\n.radioContainer{\n\tdisplay: inline-block;\n\tposition: relative;\n\tcursor: pointer;\n\tfont-family: sans-serif;\n\tfont-size: 22px;\n\tpadding-left: 30px;\n}\n.radioContainer input{\n\tdisplay: none;\n}\n.radioContainer .circle{\n\tdisplay: inline-block;\n\twidth: 25px;\n\theight: 25px;\n\tbackground-color: #eee;\n\tposition: absolute;\n\tleft: 0; top: 0;\n\tborder-radius: 50%;\n}\n.radioContainer:hover .circle{\n\tbackground-color: #ccc;\n}\n.radioContainer input:checked + .circle{\n\tbackground-color: #2196fc;\n}\n.radioContainer input:checked + .circle:after{\n\tcontent: \"\";\n\theight: 10px;\n\twidth: 10px;\n\tbackground-color: white;\n\tposition: absolute;\n\tborder-radius: 50%;\n\tleft: 50%;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n}\n/***********-- PROGRESS- BAR --**************/\n#progressbar {\n\tmargin-bottom: 30px;\n\toverflow: hidden;\n\t/*CSS counters to number the steps*/\n\tcounter-reset: step;\n}\n#progressbar li {\n\tlist-style-type: none;\n\tcolor: black;\n\ttext-transform: uppercase;\n\tfont-size: 18px;\n\twidth: 33.33%;\n\tfloat: left;\n\tposition: relative;\n\ttext-align: center;\n}\n#progressbar li:before {\n\tcontent: counter(step);\n\tcounter-increment: step;\n\twidth: 40px;\n\tline-height: 40px;\n\tdisplay: block;\n\tfont-size: 18px;\n\tcolor: #333;\n\tbackground: white;\n\tborder-radius: 3px;\n\tmargin: 0 auto 5px auto;\n\ttext-align: center;\n}\n/*progressbar connectors*/\n#progressbar li:after {\n\tcontent: '';\n\twidth: 100%;\n\theight: 2px;\n\tbackground: white;\n\tposition: absolute;\n\tleft: -50%;\n\ttop: 20px;\n\tz-index: -1; /*put it behind the numbers*/\n}\n#progressbar li:first-child:after {\n\t/*connector not needed before the first step*/\n\tcontent: none;\n}\n/*marking active/completed steps green*/\n/*The number of the step and the connector before it = green*/\n#progressbar li.active:before,  #progressbar li.active:after{\n\tbackground: #15799e;\n\tcolor: white;\n}\n/* para el radio button*/\n\n", ""]);
 
 // exports
 
@@ -566,129 +534,6 @@ var render = function() {
       _vm.loading
         ? _c("spinner")
         : _c("div", [
-            _c(
-              "nav",
-              { staticClass: "navbar navbar-expand-md navbar-dark bg-primary" },
-              [
-                _c("div", { staticClass: "container" }, [
-                  _c("a", { staticClass: "navbar-brand text-white" }, [
-                    _vm._v("Lectura Veloz")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "navbar-toggler",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "collapse",
-                        "data-target": "#navbarNavDropdown",
-                        "aria-controls": "navbarNavDropdown",
-                        "aria-expanded": "false",
-                        "aria-label": "Toggle navigation"
-                      }
-                    },
-                    [_c("span", { staticClass: "navbar-toggler-icon" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "collapse navbar-collapse",
-                      attrs: { id: "navbarNavDropdown" }
-                    },
-                    [
-                      _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                        _c("li", { staticClass: "nav-item px-md-3" }, [
-                          _c("h5", { staticClass: "mb-0" }, [
-                            _c("a", { staticClass: "nav-link text-warning" }, [
-                              _vm._v(_vm._s(_vm.usuario.puntos) + " Pts.")
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "nav-item" }, [
-                          _c("img", {
-                            staticClass: "rounded-circle pb-0",
-                            attrs: {
-                              src: "/imagenes/usuario/" + _vm.usuario.avatar,
-                              height: "40",
-                              width: "40"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "nav-item dropdown" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "nav-link dropdown-toggle",
-                              attrs: {
-                                href: "#",
-                                id: "navbarDropdownMenuLink",
-                                "data-toggle": "dropdown",
-                                "aria-haspopup": "true",
-                                "aria-expanded": "false"
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(_vm.usuario.name) +
-                                  "\n                                "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "dropdown-menu dropdown-menu-right",
-                              attrs: {
-                                "aria-labelledby": "navbarDropdownMenuLink"
-                              }
-                            },
-                            [
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass: "dropdown-item",
-                                  attrs: { to: "/profile" }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        Mi perfil\n                                    "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  attrs: {
-                                    href: "/logout",
-                                    onclick:
-                                      "event.preventDefault(); document.getElementById('logout-form').submit();"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "Cerrar Sesión\n                                    "
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      ])
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
             _vm.vista == 1
               ? _c("div", [
                   _c(

@@ -129,31 +129,28 @@ public function perfil(Request $request)
 {
     if($request->ajax())
     {
-        $user = auth()->user();
-        return $user;
+        return  auth()->user();
     }
     return view('home');
 }
-public function updatePerfil(Request $request, $id)
+public function updatePerfil(Request $request)
 {
-    $usuario = User::find($id);
-    $usuario->fill($request->except('avatar'));
     if ($file = $request->hasFile('avatar'))
     {
         $file = $request->file('avatar');
         $url = time().$file->getClientOriginalName();
         $file->move(public_path().'/imagenes/usuario',$url);
-        $file_path = public_path().'/imagenes/usuario/'.$usuario->avatar;
+        $file_path = public_path().'/imagenes/usuario/'.auth()->user()->avatar;
         if($file_path !=public_path().'/imagenes/usuario/default.png'){unlink($file_path);}
-        $usuario->avatar = $url;
+        auth()->user()->avatar = $url;
     }
-    $usuario->save();
+    auth()->user()->save();
     return response()
     ->json([
         "message" => "Actualizado correctamente",
-        "usuario" => $usuario
+        "usuario" => auth()->user()
     ],200);
-    return $usuario;
+    return auth()->user();
 }
 public function game(Request $request)
 {
@@ -208,7 +205,7 @@ public function rankingMundial(Request $request)
     if($request->ajax())
     {
        $rol = Role::find(2);
-       
+
        return $rol->users()
        ->select('name','puntos','avatar','id')
        ->orderBy('puntos', 'desc')
