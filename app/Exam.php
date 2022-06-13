@@ -7,7 +7,7 @@ class Exam extends Model
 {
 	protected $fillable = ['name','content'];
 
-	public function pregunta()
+	public function preguntas()
 	{
 		return $this->hasMany(Pregunta::class);
 	}

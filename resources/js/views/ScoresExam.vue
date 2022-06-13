@@ -1,14 +1,14 @@
 <template>
-    <div>
-        <spinner v-if="loading"></spinner>
-        <div v-else>
+	<div>
+		<spinner v-if="loading"></spinner>
+		<div v-else>
 			<div class="container-fluid">
 				<router-link class="btn btn-dark text-uppercase" to="/home">
 					Regresar
 				</router-link>
 			</div>
 			<h5 class="text-center">Puntuaciones de examen</h5>
-			<div v-for="(examen,index) in puntuaciones">
+			<div v-for="(examen,index) in examenes">
 				<div class="card col-12 col-md-8 mx-auto mb-2 shadow">
 					<div class="card-body">
 						<h4 class="text-center text-danger">{{ examen.name }}</h4>
@@ -32,35 +32,24 @@
 	</div>
 </template>
 <script>
-	export default{
-		created:function() {
-			this.showUser()
-			this.puntuacionExamen()
-		},
-		data(){
-			return{
-				puntuaciones:[],
-				loading:true,
-				usuario:{},
-			}
-		},
-		methods:{
-			obtenerFecha(fecha){
-				return moment(fecha).fromNow()
-			},
-			puntuacionExamen(){
-				var url = '/puntuacionExamen';
-				axios.get(url).then(res =>{
-					this.puntuaciones = res.data
-				})
-			},
-			showUser(){
-				var url ="/profile"
-				axios.get(url).then(res =>{
-					this.usuario = res.data
-					this.loading = false
-				})
-			},
-		},
-	}
+export default{
+	mounted() {
+		axios.get('/puntuacionExamen')
+		.then(res =>{
+			this.examenes = res.data
+			this.loading = false
+		})
+	},
+	data(){
+		return{
+			examenes:[],
+			loading:true,
+		}
+	},
+	methods:{
+		obtenerFecha(fecha){
+			return moment(fecha).fromNow()
+		}
+	},
+}
 </script>

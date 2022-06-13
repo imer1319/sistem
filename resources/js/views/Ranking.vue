@@ -10,14 +10,12 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-5  mb-3 mt-2">
-						<div v-for="(ran, index) in rankings" :key="index"
-						v-if="ran.id == usuario.id" 
-						class="text-center mb-3">
+						<div class="text-center mb-3">
 						<div class="card">
 							<div class="card-body contenedor">
-								<h2 class="text-center text-white">{{ ran.name }}</h2>
+								<h2 class="text-center text-white">{{ user.name }}</h2>
 								<div class="imagen">
-									<img class="rounded-circle" :src="`/imagenes/usuario/${ran.avatar}`">
+									<img class="rounded-circle" :src="`/imagenes/usuario/${user.user_avatar}`">
 								</div>
 							</div>
 							<div class="card-footer pt-5">
@@ -25,7 +23,7 @@
 									<div class="col-6 border-right">
 										<div class="description-block">
 											<h5 class="description-header text-warning">
-												<b># {{ index+1 }}</b>
+												<b># {{ user.position }}</b>
 											</h5>
 											<h5 class="description-text text-muted"><b>Puesto</b></h5>
 										</div>
@@ -33,7 +31,7 @@
 									<div class="col-6">
 										<div class="description-block">
 											<h5 class="description-header text-warning">
-												<b>{{ ran.puntos }}</b>
+												<b>{{ user.puntos }}</b>
 											</h5>
 											<h5 class="description-text text-muted">
 												<b>Puntos</b>
@@ -59,30 +57,15 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="(ran, index) in rankings" :key="index" v-if="index < 10">
-										<td>{{ index+1 }}</td>
-										<td><img :src="`/imagenes/usuario/${ran.avatar}`" width="50" height="50" class="img-responsive rounded-circle"> {{ ran.name }}</td>
+									<tr v-for="index in 10" :key="index">
+										<td>{{ index }}</td>
+										<td><img :src="`/imagenes/usuario/${users[index-1].user_avatar}`" width="50" height="50" class="img-responsive rounded-circle"> {{ users[index-1].name }}</td>
 										<td>
-											<span v-if="ran.puntos <100">
-												<img :src="rangos.rango1" height="50" width="50">
-											</span>
-											<span v-else-if="usuario.puntos >= 100 && usuario.puntos <300">
-												<img :src="rangos.rango2" height="50" width="50">
-											</span>
-											<span v-else-if="usuario.puntos >= 300 && usuario.puntos <700">
-												<img :src="rangos.rango3" height="50" width="50">
-											</span>
-											<span v-else-if="usuario.puntos >= 700 && usuario.puntos < 1000">
-												<img :src="rangos.rango4" height="50" width="50">
-											</span>
-											<span v-else-if="usuario.puntos >= 1000 && usuario.puntos < 2000">
-												<img :src="rangos.rango5" height="50" width="50">
-											</span>
-											<span v-else-if="usuario.puntos >=2000">
-												<img :src="rangos.rango6" height="50" width="50">
+											<span>
+												<img :src="`/imagenes/rangos/${users[index-1].avatar}`" height="50" width="50">
 											</span>
 										</td>
-										<td>{{ ran.puntos }}</td>
+										<td>{{ users[index-1].puntos }}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -97,41 +80,26 @@
 <script>
 	export default{
 		created(){
-			this.showUser()
 			this.mostrarPuntuaciones()
 		},
 		data() {
 			return {
-				rankings:[],
+				users:[],
 				loading:true,
-				usuario:{},
-				rango_usuario:{},
-				posicion:{},
-				rangos:{
-					rango1: '/imagenes/rangos/1-bronce.png',
-					rango2: '/imagenes/rangos/2-plata.png',
-					rango3: '/imagenes/rangos/3-oro.png',
-					rango4: '/imagenes/rangos/4-platino.png',
-					rango5: '/imagenes/rangos/5-diamante.png',
-					rango6: '/imagenes/rangos/6-final.png',
-				}
+				user:{},
 			}
 		},
 		methods:{
-			showUser(){
-				var url ="/profile"
-				axios.get(url).then(res =>{
-					this.usuario = res.data
-					this.loading = false
-				})
-			},
 			mostrarPuntuaciones(){
 				axios.get("/ranking").then(res =>{
-					this.rankings = res.data
+					this.users = res.data
 					this.loading = false
+					this.user = this.users.find((user, index) => 
+						user.id == this.currentUser.id ? user.position = index+1 : ''
+						)
 				})
 			},
-		}
+		},
 	}
 </script>
 <style>

@@ -13,15 +13,13 @@
 								<div class="row">
 									<div class="col-5">
 										<h4 class="text-center">Busca la palabra</h4>
-										<input type="button" value="Iniciar" class="btn btn-primary btn-block pb-0" @click="tres_segundos_pantalla()">
+										<input type="button" value="Iniciar" class="btn btn-primary btn-block" @click="tres_segundos_pantalla()">
 									</div>
 									<div class="col-7">
 										<div class="text-center"><h5>Record</h5></div>
-										<div v-for="(max, index) in maximoPunto">
-											<div class="card-footer row text-left">
-												<h5 class="col-md-6">{{ max.name }}</h5>
-												<h5 class="col-md-6">{{ max.pivot.puntuacion }}</h5>
-											</div>
+										<div class="card-footer d-flex justify-content-around align-items-center">
+											<h5>{{ maximoPunto.name }}</h5>
+											<h5>{{ maximoPunto.pivot.puntuacion }}</h5>
 										</div>
 									</div>
 								</div>
@@ -114,8 +112,14 @@
 							<h4>Calificacion : <span id="estrellas"></span></h4><hr>
 							<h4>Puntuacion: {{ puntuacion }}</h4><hr>
 							<h4 class="text-warning">Aumento: <b>+</b> {{ Math.floor(puntuacion/3) }}</h4><hr>
-							<router-link to="/game" class="btn btn-primary btn-block"> Volver a los ejercicios</router-link>
-							<router-link to="/home" class="btn btn-primary btn-block"> Volver al inicio</router-link>
+							<div class="input-group justify-content-center">
+								<div class="input-group-append">
+									<router-link to="/game" class="btn btn-primary btn-block"> Volver a los ejercicios</router-link>
+								</div>
+								<div class="input-group-append">
+									<router-link to="/home" class="btn btn-dark btn-block"> Volver al inicio</router-link>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -124,230 +128,222 @@
 	</div>
 </template>
 <script>
-	export default{
-		created:function() {
-			this.showUser()
-			this.maximaPuntuacion()
-			this.misPuntuaciones()
+export default{
+	created:function() {
+		this.maximaPuntuacion()
+		this.misPuntuaciones()
+	},
+	data(){
+		return{
+			loading:true,
+			maximoPunto:{},
+			misRecords:[],
+			desordenar:[],
+			palabras:['2336','2077','1985','3797','9693','3566','7852','6802','4740',' 9952','5495','5342','7735','5807','3320','9344','9657','3091','5163','2638','1085','6323','8944','9734'],
+			ids:['a','b','c','d','e','f','g','h'],
+			buscar:null,
+			puntuacion:0,
+			tiempo:100,
+			tres_segundos:null,
+			temporizador_juego:null,
+			contador:3,
+			muestrame_buscando:'',
+			bono:0,
+			interval:null,
+		}
+	},
+	methods:{
+		obtenerFecha(fecha){
+			return moment(fecha).fromNow()
 		},
-		data(){
-			return{
-				usuario:{},
-				loading:true,
-				maximoPunto:[],
-				misRecords:[],
-				desordenar:[],
-				palabras:['2336','2077','1985','3797','9693','3566','7852','6802','4740',' 9952','5495','5342','7735','5807','3320','9344','9657','3091','5163','2638','1085','6323','8944','9734'],
-				ids:['a','b','c','d','e','f','g','h'],
-				buscar:null,
-				puntuacion:0,
-				tiempo:100,
-				tres_segundos:null,
-				temporizador_juego:null,
-				contador:3,
-				muestrame_buscando:'',
-				bono:0,
-				interval:null,
+		maximaPuntuacion(){
+			axios.get("maxGame/"+6).then(res =>{
+				this.maximoPunto = res.data
+			})
+		},
+		misPuntuaciones(){
+			axios.get("/puntuacion/"+6).then(res =>{
+				this.misRecords = res.data
+				this.loading = false
+			})
+		},
+		guardarJuego(){
+			let formData = new FormData()
+			formData.append('ejercicio_id', 6)
+			formData.append('user_id', this.currentUser.id)
+			formData.append('puntuacion', this.puntuacion)
+
+			axios.post('/game',formData)
+			.then(res=>{
+				this.actualizarDatosUsuario()
+				document.getElementById("tercera-vista").style.display='none'
+				document.getElementById("cuarta-vista").style.display='block'
+			})
+		},
+		dibujarEstrellas(numero , titulo){
+			var stars = "";
+			for (var i = 0; i < 5; i++) {
+				if (i < numero) {
+					stars += "<span><i class='fas fa-star'></i></span>";
+				}else{
+					stars += "<span><i class='far fa-star'></i></span>";
+				}
+			}
+			var astro = document.getElementById("estrellas");
+			astro.innerHTML=stars;
+			astro.innerHTML+=titulo;
+		},
+		actualizarDatosUsuario(){
+			var stars = 0 
+			var minimo = 12
+			var titulo = ''
+			for(var i = 1; i <= 5; i++){
+				if (this.puntuacion >= (minimo*i)) {
+					stars = i
+					titulo = ' '+i+' / '+5
+				}else{
+					stars = i-1
+					titulo = ' '+(i-1)+' / '+5
+					break;
+				}
+			}
+			this.dibujarEstrellas(stars, titulo)
+			var point = Math.floor(this.puntuacion/3)
+			this.currentUser.puntos += point;
+			let data = new FormData();
+			data.append('puntos', this.currentUser.puntos);
+			if (this.currentUser.puntos<100) {
+				data.append('rango_id', 1);
+			}else if (this.currentUser.puntos >= 100 && this.currentUser.puntos < 300) {
+				data.append('rango_id', 2);
+			}else if (this.currentUser.puntos >= 300 && this.currentUser.puntos < 700) {
+				data.append('rango_id', 3);
+			}else if (this.currentUser.puntos >= 700&& this.currentUser.puntos < 1000) {
+				data.append('rango_id', 4);
+			}else if (this.currentUser.puntos >= 1000&& this.currentUser.puntos < 2000) {
+				data.append('rango_id', 5);
+			}else if (this.currentUser.puntos >= 2000) {
+				data.append('rango_id', 6);
+			}
+			data.append('_method','PUT');
+			var url = `/profile/${this.currentUser.id}`
+			axios.post(url, data).then(res=>{
+
+			})
+		},
+		tres_segundos_pantalla(){
+			document.getElementById("primera-vista").style.display='none'
+			document.getElementById("pantalla_3_seg").style.display='block'
+			document.getElementById("numero_3_seg").style.display='block'
+			this.tres_segundos = setInterval(this.pantalla_3_segundos,1000)
+		},
+		pantalla_3_segundos(){
+			this.contador--
+			if (this.contador <= 0) {
+				clearInterval(this.tres_segundos)
+				document.getElementById("pantalla_3_seg").style.display='none'
+				document.getElementById("numero_3_seg").style.display='none'
+				document.getElementById("segunda-vista").style.display='flex'
+				this.empezarJuego()
+				this.temporizador_juego = setInterval(this.cronometro,1000)
 			}
 		},
-		methods:{
-			obtenerFecha(fecha){
-				return moment(fecha).fromNow()
-			},
-			maximaPuntuacion(){
-				axios.get("maxGame/"+6).then(res =>{
-					this.maximoPunto = res.data
-				})
-			},
-			misPuntuaciones(){
-				axios.get("/puntuacion/"+6).then(res =>{
-					this.misRecords = res.data
-				})
-			},
-			showUser(){
-				var url ="/profile"
-				axios.get(url).then(res =>{
-					this.usuario = res.data
-					this.loading = false
-				})
-			},
-			guardarJuego(){
-				let formData = new FormData()
-				formData.append('ejercicio_id', 6)
-				formData.append('user_id', this.usuario.id)
-				formData.append('puntuacion', this.puntuacion)
-
-				axios.post('/game',formData)
-				.then(res=>{
-					this.actualizarDatosUsuario()
-					document.getElementById("tercera-vista").style.display='none'
-					document.getElementById("cuarta-vista").style.display='block'
-				})
-			},
-			dibujarEstrellas(numero , titulo){
-				var stars = "";
-				for (var i = 0; i < 5; i++) {
-					if (i < numero) {
-						stars += "<span><i class='fas fa-star'></i></span>";
-					}else{
-						stars += "<span><i class='far fa-star'></i></span>";
-					}
-				}
-				var astro = document.getElementById("estrellas");
-				astro.innerHTML=stars;
-				astro.innerHTML+=titulo;
-			},
-			actualizarDatosUsuario(){
-				var stars = 0 
-				var minimo = 12
-				var titulo = ''
-				for(var i = 1; i <= 5; i++){
-					if (this.puntuacion >= (minimo*i)) {
-						stars = i
-						titulo = ' '+i+' / '+5
-					}else{
-						stars = i-1
-						titulo = ' '+(i-1)+' / '+5
-						break;
-					}
-				}
-				this.dibujarEstrellas(stars, titulo)
-				var point = Math.floor(this.puntuacion/3)
-				this.usuario.puntos += point;
-				let data = new FormData();
-				data.append('puntos', this.usuario.puntos);
-				if (this.usuario.puntos<100) {
-					data.append('rango_id', 1);
-				}else if (this.usuario.puntos >= 100 && this.usuario.puntos < 300) {
-					data.append('rango_id', 2);
-				}else if (this.usuario.puntos >= 300 && this.usuario.puntos < 700) {
-					data.append('rango_id', 3);
-				}else if (this.usuario.puntos >= 700&& this.usuario.puntos < 1000) {
-					data.append('rango_id', 4);
-				}else if (this.usuario.puntos >= 1000&& this.usuario.puntos < 2000) {
-					data.append('rango_id', 5);
-				}else if (this.usuario.puntos >= 2000) {
-					data.append('rango_id', 6);
-				}
-				data.append('_method','PUT');
-				var url = `/profile/${this.usuario.id}`
-				axios.post(url, data).then(res=>{
-
-				})
-			},
-			tres_segundos_pantalla(){
-				document.getElementById("primera-vista").style.display='none'
-				document.getElementById("pantalla_3_seg").style.display='block'
-				document.getElementById("numero_3_seg").style.display='block'
-				this.tres_segundos = setInterval(this.pantalla_3_segundos,1000)
-			},
-			pantalla_3_segundos(){
-				this.contador--
-				if (this.contador <= 0) {
-					clearInterval(this.tres_segundos)
-					document.getElementById("pantalla_3_seg").style.display='none'
-					document.getElementById("numero_3_seg").style.display='none'
-					document.getElementById("segunda-vista").style.display='flex'
-					this.empezarJuego()
-					this.temporizador_juego = setInterval(this.cronometro,1000)
-				}
-			},
-			fin_cronometro(){
-				clearInterval(this.temporizador_juego)
-				document.getElementById("segunda-vista").style.display='none'
-				document.getElementById("tercera-vista").style.display='flex'
-			},
-			cronometro(){
-				var elem = document.getElementById("progressBar")
-				elem.style.width = this.tiempo + "%"
-				this.tiempo-=1.666667
-				if (this.tiempo > 30 && this.tiempo < 60) {
-					elem.style.background = "#6699CC"
-				}else if (this.tiempo < 30 && this.tiempo >10) {
-					elem.style.background = "#CC9933"
-				}else if (this.tiempo<10) {
-					elem.style.background = "#FF6666"
-				}
-				if(this.tiempo <= 0){
-					this.fin_cronometro()
-				}
-			},
-			empezarJuego(){
-				this.desordenar = this.palabras.sort(function(){return Math.random()-0.5})
-				this.interval = setInterval(this.ocultar_buscando,500)
-				this.buscar = Math.floor(Math.random()*7)
-				this.muestrame_buscando = this.desordenar[this.buscar]
-				for (var i = 0; i <8; i++) {
-					var dist = document.getElementById(this.ids[i])
-					dist.innerHTML = this.palabras[i]
-				}
-			},
-			ocultar_buscando(){
-				this.bono+=5
-				if (this.bono == 10) {
-					this.muestrame_buscando = "_ _ _ _"
-					clearInterval(this.interval)
-					this.bono = 0
-				}
-			},
-			error_Encontrado(encontrado){
-				encontrado.classList.add('rubberBand');
-				setTimeout(function(){
-					encontrado.classList.remove('rubberBand')
-				},1000)
-				this.puntuacion-=2
-			},
-			solucion_encontrado(encontrado){
-				encontrado.innerHTML = " "
-				encontrado.classList.add('solucion');
-				setTimeout(function(){
-					encontrado.classList.remove('solucion')
-				},1000)
-				this.puntuacion+=3
-			},
-			precionar(event){
-				var targetId = event.currentTarget.id;
-				switch (targetId) {
-					case "a":
-					var a = document.getElementById("a");
-					if(this.desordenar[this.buscar]==this.desordenar[0]){this.solucion_encontrado(a);this.empezarJuego();}else{this.error_Encontrado(a)}
-					break;
-					case "b":
-					var b = document.getElementById("b");
-					if(this.desordenar[this.buscar]==this.desordenar[1]){this.solucion_encontrado(b); this.empezarJuego();
-					}else{this.error_Encontrado(b)}
-					break;
-					case "c":
-					var c = document.getElementById("c");
-					if(this.desordenar[this.buscar]==this.desordenar[2]){this.solucion_encontrado(c); this.empezarJuego();}else{this.error_Encontrado(c)}
-					break;
-					case "d":
-					var d = document.getElementById("d");
-					if (this.desordenar[this.buscar]==this.desordenar[3]){this.solucion_encontrado(d);this.empezarJuego();}else{this.error_Encontrado(d)}
-					break;
-					case "e":
-					var e = document.getElementById("e");
-					if (this.desordenar[this.buscar]==this.desordenar[4]){this.solucion_encontrado(e); this.empezarJuego();}else{this.error_Encontrado(e)}
-					break;
-					case "f":
-					var f = document.getElementById("f");
-					if (this.desordenar[this.buscar]==this.desordenar[5]){this.solucion_encontrado(f); this.empezarJuego();}else{this.error_Encontrado(f)}
-					break;
-					case "g":
-					var g = document.getElementById("g");
-					if (this.desordenar[this.buscar]==this.desordenar[6]){this.solucion_encontrado(g); this.empezarJuego();}else{this.error_Encontrado(g)}
-					break;
-					case "h":
-					var h = document.getElementById("h");
-					if (this.desordenar[this.buscar]==this.desordenar[7]){this.solucion_encontrado(h); this.empezarJuego();}else{this.error_Encontrado(h)}
-					break;
-				}
-			},
-		},
-		beforeDestroy: function () {
+		fin_cronometro(){
 			clearInterval(this.temporizador_juego)
-		}
+			document.getElementById("segunda-vista").style.display='none'
+			document.getElementById("tercera-vista").style.display='flex'
+		},
+		cronometro(){
+			var elem = document.getElementById("progressBar")
+			elem.style.width = this.tiempo + "%"
+			this.tiempo-=1.666667
+			if (this.tiempo > 30 && this.tiempo < 60) {
+				elem.style.background = "#6699CC"
+			}else if (this.tiempo < 30 && this.tiempo >10) {
+				elem.style.background = "#CC9933"
+			}else if (this.tiempo<10) {
+				elem.style.background = "#FF6666"
+			}
+			if(this.tiempo <= 0){
+				this.fin_cronometro()
+			}
+		},
+		empezarJuego(){
+			this.desordenar = this.palabras.sort(function(){return Math.random()-0.5})
+			this.interval = setInterval(this.ocultar_buscando,500)
+			this.buscar = Math.floor(Math.random()*7)
+			this.muestrame_buscando = this.desordenar[this.buscar]
+			for (var i = 0; i <8; i++) {
+				var dist = document.getElementById(this.ids[i])
+				dist.innerHTML = this.palabras[i]
+			}
+		},
+		ocultar_buscando(){
+			this.bono+=5
+			if (this.bono == 10) {
+				this.muestrame_buscando = "_ _ _ _"
+				clearInterval(this.interval)
+				this.bono = 0
+			}
+		},
+		error_Encontrado(encontrado){
+			encontrado.classList.add('rubberBand');
+			setTimeout(function(){
+				encontrado.classList.remove('rubberBand')
+			},1000)
+			this.puntuacion-=2
+		},
+		solucion_encontrado(encontrado){
+			encontrado.innerHTML = " "
+			encontrado.classList.add('solucion');
+			setTimeout(function(){
+				encontrado.classList.remove('solucion')
+			},1000)
+			this.puntuacion+=3
+		},
+		precionar(event){
+			var targetId = event.currentTarget.id;
+			switch (targetId) {
+				case "a":
+				var a = document.getElementById("a");
+				if(this.desordenar[this.buscar]==this.desordenar[0]){this.solucion_encontrado(a);this.empezarJuego();}else{this.error_Encontrado(a)}
+				break;
+				case "b":
+				var b = document.getElementById("b");
+				if(this.desordenar[this.buscar]==this.desordenar[1]){this.solucion_encontrado(b); this.empezarJuego();
+				}else{this.error_Encontrado(b)}
+				break;
+				case "c":
+				var c = document.getElementById("c");
+				if(this.desordenar[this.buscar]==this.desordenar[2]){this.solucion_encontrado(c); this.empezarJuego();}else{this.error_Encontrado(c)}
+				break;
+				case "d":
+				var d = document.getElementById("d");
+				if (this.desordenar[this.buscar]==this.desordenar[3]){this.solucion_encontrado(d);this.empezarJuego();}else{this.error_Encontrado(d)}
+				break;
+				case "e":
+				var e = document.getElementById("e");
+				if (this.desordenar[this.buscar]==this.desordenar[4]){this.solucion_encontrado(e); this.empezarJuego();}else{this.error_Encontrado(e)}
+				break;
+				case "f":
+				var f = document.getElementById("f");
+				if (this.desordenar[this.buscar]==this.desordenar[5]){this.solucion_encontrado(f); this.empezarJuego();}else{this.error_Encontrado(f)}
+				break;
+				case "g":
+				var g = document.getElementById("g");
+				if (this.desordenar[this.buscar]==this.desordenar[6]){this.solucion_encontrado(g); this.empezarJuego();}else{this.error_Encontrado(g)}
+				break;
+				case "h":
+				var h = document.getElementById("h");
+				if (this.desordenar[this.buscar]==this.desordenar[7]){this.solucion_encontrado(h); this.empezarJuego();}else{this.error_Encontrado(h)}
+				break;
+			}
+		},
+	},
+	beforeDestroy: function () {
+		clearInterval(this.temporizador_juego)
 	}
+}
 </script>
 <style>
 #primera-vista{

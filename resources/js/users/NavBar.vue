@@ -46,12 +46,9 @@
         <router-link class="dropdown-item" to="/profile">
           Mi perfil
         </router-link>
-        <a
-        class="dropdown-item"
-        href="/logout"
-        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-        >Cerrar Sesión
-      </a>
+        <form @submit.prevent="logout">
+          <button type="submit" class="dropdown-item">Cerrar Sesión</button>
+        </form>
     </div>
   </li>
 </ul>
@@ -59,3 +56,16 @@
 </div>
 </nav>
 </template>
+
+<script>
+export default{
+  methods:{
+    logout(){
+      axios.post('/logout')
+      .then(()=>{
+        return window.location.href = "/login"
+      }) 
+    }
+  }
+}
+</script>

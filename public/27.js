@@ -1,14 +1,15 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[27],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/usuario/usuario.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/usuario/usuario.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _event_bus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../event-bus */ "./resources/js/event-bus.js");
 //
 //
 //
@@ -111,97 +112,184 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
-    this.showUser();
+    var _this = this;
+
+    this.mostrarUsuario();
+    _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('agregado', function (data) {
+      _this.usuarios.push(data);
+    });
   },
   data: function data() {
     return {
-      usuario: {},
+      name: '',
+      usuarios: [],
+      usuario: {
+        name: '',
+        password: ''
+      },
+      fillUsuario: {
+        name: '',
+        apellido_paterno: '',
+        avatar: '',
+        hash_password: ''
+      },
+      imagenMiniatura: '',
       loading: true,
-      mostrar: true
+      estado: false,
+      paginate: ['usuarios'],
+      abecedario: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-", "_", "$", "&", "#", "@"],
+      password: [],
+      random: null,
+      errors: []
     };
   },
   methods: {
-    showUser: function showUser() {
-      var _this = this;
+    addUser: function addUser() {
+      var _this2 = this;
 
-      var url = "/profile";
-      axios.get(url).then(function (res) {
-        _this.usuario = res.data;
-        _this.loading = false;
+      if (this.validarEspacios(this.usuario.name) == false || this.validarEspacios(this.password) == false) {
+        alert("los campos no pueden estar vacios");
+      } else {
+        var formData = new FormData();
+        formData.append('name', this.usuario.name);
+        formData.append('password', this.password);
+        formData.append('hash_password', this.password);
+        axios.post('/createUser', formData).then(function (response) {
+          _this2.usuario.name = "";
+          _this2.password = "";
+          _this2.errors = [];
+
+          _this2.alerta('success', 'Se a agregado correctamente');
+
+          _this2.mostrarUsuario();
+
+          $('#createdUser').modal('hide');
+        })["catch"](function (error) {
+          _this2.errors = error.response.data.errors;
+          console.log(_this2.errors);
+        });
+      }
+    },
+    createPasswordRandom: function createPasswordRandom() {
+      this.password = "";
+
+      for (var i = 1; i < 9; i++) {
+        this.random = Math.floor(Math.random() * this.abecedario.length);
+
+        if (this.abecedario[this.random] != null) {
+          this.password += this.abecedario[this.random];
+        }
+      }
+    },
+    crearUser: function crearUser() {
+      $('#createdUser').modal('show');
+    },
+    mostrarUsuario: function mostrarUsuario() {
+      var _this3 = this;
+
+      axios.get('usuario').then(function (res) {
+        _this3.usuarios = res.data;
+        _this3.loading = false;
       });
     },
-    mostrarSidebar: function mostrarSidebar() {
-      if (this.mostrar == true) {
-        document.getElementById("wrapper").classList.add("toggled");
-        this.mostrar = false;
+    obtenerImagen: function obtenerImagen(e) {
+      this.estado = true;
+      var file = e.target.files[0];
+      this.fillUsuario.avatar = file;
+      this.cargarImagen(file);
+    },
+    obtenerImagenNueva: function obtenerImagenNueva(e) {
+      this.estado = false;
+      var file = e.target.files[0];
+      this.usuario.avatar = file;
+      this.cargarImagen(file);
+    },
+    cargarImagen: function cargarImagen(file) {
+      var _this4 = this;
+
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        _this4.imagenMiniatura = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    },
+    alerta: function alerta(icono, titulo) {
+      var _this5 = this;
+
+      var Toast = this.$swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        onOpen: function onOpen(toast) {
+          toast.addEventListener('mouseenter', _this5.$swal.stopTimer);
+          toast.addEventListener('mouseleave', _this5.$swal.resumeTimer);
+        }
+      });
+      Toast.fire({
+        icon: icono,
+        title: titulo
+      });
+    },
+    validarEspacios: function validarEspacios(parametro) {
+      var patron = /^\s+$/;
+
+      if (patron.test(parametro)) {
+        return false;
       } else {
-        document.getElementById("wrapper").classList.remove('toggled');
-        this.mostrar = true;
+        return true;
       }
+    },
+    editarUsuario: function editarUsuario(usuario) {
+      this.estado = true;
+      this.fillUsuario.name = usuario.name;
+      this.fillUsuario.apellido_paterno = usuario.apellido_paterno;
+      this.fillUsuario.avatar = usuario.avatar;
+      this.fillUsuario.id = usuario.id;
+      $('#editUsuarios').modal('show');
+    },
+    updateUsuario: function updateUsuario(fillUsuario) {
+      var _this6 = this;
+
+      var data = new FormData();
+      data.append('name', this.fillUsuario.name);
+      data.append('apellido_paterno', this.fillUsuario.apellido_paterno);
+      data.append('avatar', this.usuario.avatar);
+      data.append('_method', 'PUT');
+      var url = "/usuario/".concat(fillUsuario.id);
+      axios.post(url, data).then(function (res) {
+        _this6.mostrarUsuario();
+
+        $('#editUsuarios').modal('hide');
+      });
+    }
+  },
+  computed: {
+    imagen: function imagen() {
+      this.estado = false;
+      return this.imagenMiniatura;
+    },
+    searchUser: function searchUser() {
+      var _this7 = this;
+
+      return this.usuarios.filter(function (item) {
+        return item.name.includes(_this7.name);
+      });
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&":
-/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n#sidebar-wrapper {\n\tmin-height: 100vh;\n\tmargin-left: -15rem;\n\ttransition: margin .25s ease-out;\n}\n#sidebar-wrapper .sidebar-heading {\n\tpadding: 0.875rem 1.25rem;\n\tfont-size: 1.2rem;\n}\n#sidebar-wrapper .list-group {\n\twidth: 15rem;\n}\n#page-content-wrapper {\n\tmin-width: 100vw;\n}\n#wrapper.toggled #sidebar-wrapper {\n\tmargin-left: 0;\n}\n@media (min-width: 768px) {\n#sidebar-wrapper {\n\t\tmargin-left: 0;\n}\n#page-content-wrapper {\n\t\tmin-width: 0;\n\t\twidth: 100%;\n}\n#wrapper.toggled #sidebar-wrapper {\n\t\tmargin-left: -15rem;\n}\n}\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./lecciones.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54& ***!
-  \*****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/usuario/usuario.vue?vue&type=template&id=9786295c&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/usuario/usuario.vue?vue&type=template&id=9786295c& ***!
+  \******************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -213,456 +301,485 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.loading
-        ? _c("spinner")
-        : _c("div", [
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "createdUser",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
             _c(
-              "div",
-              { staticClass: "container-fluid" },
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addUser($event)
+                  }
+                }
+              },
               [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "btn btn-dark text-uppercase",
-                    attrs: { to: "/home" }
-                  },
-                  [_vm._v("Regresar")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "btn btn-warning ocultar",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.mostrarSidebar()
+                _c("div", { staticClass: "modal-dialog" }, [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body pb-0" }, [
+                      _c("div", { staticClass: "form-group row" }, [
+                        _c(
+                          "label",
+                          { staticClass: "col-form-label col-md-2" },
+                          [_vm._v("Nombre")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-10" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.usuario.name,
+                                expression: "usuario.name"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "name",
+                              placeholder: "Nombre del usuario",
+                              required: ""
+                            },
+                            domProps: { value: _vm.usuario.name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.usuario,
+                                  "name",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.name
+                            ? _c("span", { staticClass: "text-danger" }, [
+                                _vm._v(_vm._s(_vm.errors.name[0]))
+                              ])
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group row" }, [
+                        _c(
+                          "label",
+                          { staticClass: "col-form-label col-md-2" },
+                          [_vm._v("Nombre")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.password,
+                                expression: "password"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "password",
+                              placeholder: "Contraseña del usuario",
+                              required: ""
+                            },
+                            domProps: { value: _vm.password },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.password = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "col-md-2 btn btn-primary btn-sm",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.createPasswordRandom()
+                              }
+                            }
+                          },
+                          [_vm._v("Generar")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card" },
+      [
+        _c("div", { staticClass: "card-header" }, [
+          _c("h2", { staticClass: "card-title mt-2" }, [_vm._v("Usuarios")]),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-success float-right text-white",
+              on: {
+                click: function($event) {
+                  return _vm.crearUser()
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Crear Usuario")]
+          )
+        ]),
+        _vm._v(" "),
+        _vm.loading
+          ? _c("spinner")
+          : _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.name,
+                      expression: "name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Buscar" },
+                  domProps: { value: _vm.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
+                      _vm.name = $event.target.value
                     }
-                  },
-                  [_c("i", { staticClass: "far fa-arrow-alt-circle-left" })]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex", attrs: { id: "wrapper" } }, [
-              _c("div", { attrs: { id: "sidebar-wrapper" } }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "nav flex-column nav-pills list-group",
-                    attrs: {
-                      id: "v-pills-tab",
-                      role: "tablist",
-                      "aria-orientation": "vertical"
-                    }
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link active",
-                        attrs: {
-                          id: "v-pills-home-tab",
-                          "data-toggle": "pill",
-                          href: "#v-pills-home",
-                          role: "tab",
-                          "aria-controls": "v-pills-home",
-                          "aria-selected": "true"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n\t\t\t\t\t\t¿Qué es la lectura veloz?\n\t\t\t\t\t"
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link",
-                        attrs: {
-                          id: "v-pills-profile-tab",
-                          "data-toggle": "pill",
-                          href: "#v-pills-profile",
-                          role: "tab",
-                          "aria-controls": "v-pills-profile",
-                          "aria-selected": "false"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n\t\t\t\t\t\tBeneficios de la lectura\n\t\t\t\t\t"
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link",
-                        attrs: {
-                          id: "v-pills-messages-tab",
-                          "data-toggle": "pill",
-                          href: "#v-pills-messages",
-                          role: "tab",
-                          "aria-controls": "v-pills-messages",
-                          "aria-selected": "false"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n\t\t\t\t\t\t¿Como aumentar la velocidad?\n\t\t\t\t\t"
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link",
-                        attrs: {
-                          id: "v-pills-settings-tab",
-                          "data-toggle": "pill",
-                          href: "#v-pills-settings",
-                          role: "tab",
-                          "aria-controls": "v-pills-settings",
-                          "aria-selected": "false"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n\t\t\t\t\t\tConsejos para el sistema\n\t\t\t\t\t"
-                        )
-                      ]
-                    )
-                  ]
-                )
+                  }
+                })
               ]),
               _vm._v(" "),
-              _c("div", { attrs: { id: "page-content-wrapper" } }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "tab-content",
-                    attrs: { id: "v-pills-tabContent" }
-                  },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane fade show active",
-                        attrs: {
-                          id: "v-pills-home",
-                          role: "tabpanel",
-                          "aria-labelledby": "v-pills-home-tab"
-                        }
-                      },
-                      [
-                        _c("div", { staticClass: "container" }, [
-                          _c("h3", { staticClass: "text-center" }, [
-                            _vm._v("Que es la Lectura Veloz")
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "lead text-justify" }, [
-                            _vm._v(
-                              "Es una técnica de gimnasia mental que permite comprender más rápidamente los textos y mensajes escritos, y a su vez ayuda a incrementar nuestro campo intelectual.\n\t\t\t\t\t\t\t"
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "lead text-justify" }, [
-                            _vm._v(
-                              "Las estrategias de lectura veloz no sólo permiten acelerar el trabajo de lectura, sino que a la vez facilitan el proceso de comprensión e incorporación inmediata de los conocimientos. Por lo tanto, mediante la lectura veloz podemos aprender a leer más rápido pero también comprender mejor lo que estamos leyendo.\n\t\t\t\t\t\t\t"
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "lead text-justify" }, [
-                            _vm._v(
-                              "La lectura veloz es una técnica y para alcanzar sus objetivos se requiere de mucha práctica y de un entrenamiento sistemático. Las rutinas de trabajo deben establecerse en base a los objetivos específicos de cada persona. Generalmente los objetivos suelen ser: incrementar la velocidad lectora, incrementar la capacidad de comprensión o aumentar la capacidad de concentración al leer.\t\t\n\t\t\t\t\t\t\t"
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "text-center" }, [
-                            _c("img", {
-                              attrs: {
-                                src: "imagenes/lecciones/que es.png",
-                                alt: "imagen",
-                                width: "300"
-                              }
-                            })
-                          ])
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane fade",
-                        attrs: {
-                          id: "v-pills-profile",
-                          role: "tabpanel",
-                          "aria-labelledby": "v-pills-profile-tab"
-                        }
-                      },
-                      [
-                        _c("h3", { staticClass: "text-center" }, [
-                          _vm._v("Beneficios de la Lectura")
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "lead" }, [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\tLa lectura ofrece innumerables beneficios, entre ellos:"
-                          ),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("b", [_vm._v("+")]),
-                          _vm._v(" Agudiza la astucia."),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("b", [_vm._v("+")]),
-                          _vm._v(
-                            " Estimula el intercambio de información y conocimiento."
-                          ),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("b", [_vm._v("+")]),
-                          _vm._v(
-                            " La costumbre continuada de leer, retarda la aparición de los síntomas de demencia."
-                          ),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("b", [_vm._v("+")]),
-                          _vm._v(" Estimula la percepción."),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("b", [_vm._v("+")]),
-                          _vm._v(" Estimula la concentración."),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("b", [_vm._v("+")]),
-                          _vm._v(" Estimula la empatía."),
-                          _c("br")
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "lead" }, [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\tAdemas eso no es todo... Fíjate la siguiente imagen\n\t\t\t\t\t\t"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "text-center" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "imagenes/lecciones/beneficios.png",
-                              alt: "imagen",
-                              width: "80%"
-                            }
-                          })
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane fade",
-                        attrs: {
-                          id: "v-pills-messages",
-                          role: "tabpanel",
-                          "aria-labelledby": "v-pills-messages-tab"
-                        }
-                      },
-                      [
-                        _c("h3", { staticClass: "text-center" }, [
-                          _vm._v("¿Cómo aumentar la velocidad de lectura?")
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "lead" }, [
-                          _vm._v("\n\t\t\t\t\t\t\t1. Relájate "),
-                          _c("br"),
-                          _vm._v("\n\t\t\t\t\t\t\t2. Buscar un lugar adecuado"),
-                          _c("br"),
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t3. Necesitas tener buena postura"
-                          ),
-                          _c("br"),
-                          _vm._v("\n\t\t\t\t\t\t\t4. Buena iluminación"),
-                          _c("br"),
-                          _vm._v("\n\t\t\t\t\t\t\t5. Evitar distracciones"),
-                          _c("br"),
-                          _vm._v("\n\t\t\t\t\t\t\t6. No leas en voz alta"),
-                          _c("br"),
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t7. No repitas lo antes leido"
-                          ),
-                          _c("br"),
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t8. Señala con un material para no perderte"
-                          ),
-                          _c("br"),
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t9. Trata de aumentar el campo visual"
-                          ),
-                          _c("br"),
-                          _vm._v("\n\t\t\t\t\t\t\t10. Seguir practicando"),
-                          _c("br")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "text-center" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "imagenes/lecciones/leer.png",
-                              alt: "imagen",
-                              width: "80%"
-                            }
-                          })
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane fade",
-                        attrs: {
-                          id: "v-pills-settings",
-                          role: "tabpanel",
-                          "aria-labelledby": "v-pills-settings-tab"
-                        }
-                      },
-                      [
-                        _c("h3", { staticClass: "text-center" }, [
-                          _vm._v("Consejos")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "row" }, [
-                          _c("p", { staticClass: "lead col-md-6" }, [
-                            _c("b", [_vm._v("❤")]),
-                            _c("span", { staticClass: "text-warning" }, [
-                              _vm._v(
-                                "El sistema tiene las siguientes peticiones de los examenes"
+              _vm.name == ""
+                ? _c(
+                    "div",
+                    [
+                      _c(
+                        "paginate",
+                        {
+                          attrs: {
+                            name: "usuarios",
+                            list: _vm.usuarios,
+                            per: 12
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "row" },
+                            _vm._l(_vm.paginated("usuarios"), function(
+                              usuario,
+                              index
+                            ) {
+                              return _c(
+                                "div",
+                                { key: index, staticClass: "col-6 col-md-3" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "card card-primary card-outline"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "card-body box-profile"
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "text-center" },
+                                            [
+                                              _c("img", {
+                                                staticClass:
+                                                  "profile-user-img rounded",
+                                                attrs: {
+                                                  src:
+                                                    "imagenes/usuario/" +
+                                                    usuario.avatar,
+                                                  height: "120",
+                                                  width: "100%"
+                                                }
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "h3",
+                                            {
+                                              staticClass:
+                                                "profile-username text-center"
+                                            },
+                                            [_vm._v(_vm._s(usuario.name))]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "row" },
+                                            [
+                                              _c(
+                                                "router-link",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-primary btn-block",
+                                                  attrs: {
+                                                    to: {
+                                                      name: "shoex",
+                                                      params: { id: usuario.id }
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass: "fas fa-eye"
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c("b", [_vm._v("Ver")])
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
                               )
-                            ]),
-                            _vm._v("."),
-                            _c("br"),
-                            _c("br"),
-                            _vm._v(
-                              "\n\t\t\t\t\t\t\t\t*** primer examen : Comprensión :"
-                            ),
-                            _c("b", [_vm._v("50%")]),
-                            _vm._v(" ppm : "),
-                            _c("b", [_vm._v("150")]),
-                            _c("br"),
-                            _c("br"),
-                            _vm._v(
-                              "\n\t\t\t\t\t\t\t\t*** segundo examen : Comprensión :"
-                            ),
-                            _c("b", [_vm._v("60%")]),
-                            _vm._v(" ppm : "),
-                            _c("b", [_vm._v("300")]),
-                            _c("br"),
-                            _c("br"),
-                            _vm._v(
-                              "\n\t\t\t\t\t\t\t\t*** tercer examen : Comprensión :"
-                            ),
-                            _c("b", [_vm._v("70%")]),
-                            _vm._v(" ppm : "),
-                            _c("b", [_vm._v("500")]),
-                            _c("br"),
-                            _c("br"),
-                            _vm._v(
-                              "\n\t\t\t\t\t\t\t\t*** cuarto examen : Comprensión :"
-                            ),
-                            _c("b", [_vm._v("85%")]),
-                            _vm._v(" ppm : "),
-                            _c("b", [_vm._v("700")]),
-                            _c("br"),
-                            _c("br"),
-                            _vm._v(
-                              "\n\t\t\t\t\t\t\t\t*** quinto examen : Comprensión :"
-                            ),
-                            _c("b", [_vm._v("90%")]),
-                            _vm._v(" ppm : "),
-                            _c("b", [_vm._v("1000")]),
-                            _c("br"),
-                            _c("br"),
-                            _vm._v(
-                              "\n\t\t\t\t\t\t\t\t*** sexto examen : Comprensión :"
-                            ),
-                            _c("b", [_vm._v("100%")]),
-                            _vm._v(" ppm : "),
-                            _c("b", [_vm._v("1300")]),
-                            _c("br"),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("b", [_vm._v("❤")]),
-                            _vm._v("Realiza el primer examen y gana 50 pts. "),
-                            _c("br"),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("b", [_vm._v("❤")]),
-                            _vm._v(
-                              "Si no puedes avanzar, puedes ganar puntos realizando los ejercicios. "
-                            ),
-                            _c("br"),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("b", [_vm._v("❤")]),
-                            _vm._v(
-                              "Sigue practicando y no te olvides de la diversión"
-                            ),
-                            _c("br"),
-                            _c("br")
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "text-center col-md-6" }, [
-                            _c("img", {
-                              attrs: {
-                                src: "imagenes/lecciones/fun.png",
-                                alt: "imagen",
-                                width: "80%"
-                              }
-                            })
-                          ])
-                        ])
-                      ]
+                            }),
+                            0
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("paginate-links", {
+                        attrs: {
+                          for: "usuarios",
+                          classes: {
+                            ul: "pagination",
+                            li: "page-item",
+                            a: "page-link"
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  )
+                : _c("div", [
+                    _c(
+                      "div",
+                      { staticClass: "row" },
+                      _vm._l(_vm.searchUser, function(usuario, index) {
+                        return _c(
+                          "div",
+                          { key: index, staticClass: "col-6 col-md-3" },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "card card-primary card-outline" },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "card-body box-profile" },
+                                  [
+                                    _c("div", { staticClass: "text-center" }, [
+                                      _c("img", {
+                                        staticClass: "profile-user-img rounded",
+                                        attrs: {
+                                          src:
+                                            "imagenes/usuario/" +
+                                            usuario.avatar,
+                                          height: "120",
+                                          width: "100%"
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "h3",
+                                      {
+                                        staticClass:
+                                          "profile-username text-center"
+                                      },
+                                      [_vm._v(_vm._s(usuario.name))]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "row" },
+                                      [
+                                        _c(
+                                          "router-link",
+                                          {
+                                            staticClass:
+                                              "btn btn-primary btn-block",
+                                            attrs: {
+                                              to: {
+                                                name: "shoex",
+                                                params: { id: usuario.id }
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fas fa-eye"
+                                            }),
+                                            _c("b", [_vm._v("Ver")])
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      }),
+                      0
                     )
-                  ]
-                )
-              ])
+                  ])
             ])
-          ])
-    ],
-    1
-  )
+      ],
+      1
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h4", [_vm._v("Crear")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("span", [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer pb-0" }, [
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-lg-6" }, [
+          _c("input", {
+            staticClass: "btn btn-primary pull-right",
+            attrs: { type: "submit", name: "enviar", value: "Crear Registro" }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "float-rigth btn btn-success mx-3",
+        attrs: { href: "/user-list-excel" }
+      },
+      [
+        _c("i", { staticClass: "fas fa-download" }),
+        _vm._v(" "),
+        _c("img", { attrs: { src: "imagenes/excel.png", height: "20" } })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "float-rigth btn btn-danger mx-3",
+        attrs: { href: "/user-list-pdf" }
+      },
+      [
+        _c("i", { staticClass: "fas fa-download" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-file-pdf px-2" })
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/users/lecciones/lecciones.vue":
-/*!****************************************************!*\
-  !*** ./resources/js/users/lecciones/lecciones.vue ***!
-  \****************************************************/
+/***/ "./resources/js/components/usuario/usuario.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/usuario/usuario.vue ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lecciones.vue?vue&type=template&id=17f7ae54& */ "./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54&");
-/* harmony import */ var _lecciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lecciones.vue?vue&type=script&lang=js& */ "./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lecciones.vue?vue&type=style&index=0&lang=css& */ "./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* harmony import */ var _usuario_vue_vue_type_template_id_9786295c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./usuario.vue?vue&type=template&id=9786295c& */ "./resources/js/components/usuario/usuario.vue?vue&type=template&id=9786295c&");
+/* harmony import */ var _usuario_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./usuario.vue?vue&type=script&lang=js& */ "./resources/js/components/usuario/usuario.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -670,10 +787,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _lecciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _usuario_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _usuario_vue_vue_type_template_id_9786295c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _usuario_vue_vue_type_template_id_9786295c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -683,56 +800,57 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/users/lecciones/lecciones.vue"
+component.options.__file = "resources/js/components/usuario/usuario.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************/
+/***/ "./resources/js/components/usuario/usuario.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/usuario/usuario.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./lecciones.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_usuario_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./usuario.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/usuario/usuario.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_usuario_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./lecciones.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54& ***!
-  \***********************************************************************************/
+/***/ "./resources/js/components/usuario/usuario.vue?vue&type=template&id=9786295c&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/usuario/usuario.vue?vue&type=template&id=9786295c& ***!
+  \************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./lecciones.vue?vue&type=template&id=17f7ae54& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/users/lecciones/lecciones.vue?vue&type=template&id=17f7ae54&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_usuario_vue_vue_type_template_id_9786295c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./usuario.vue?vue&type=template&id=9786295c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/usuario/usuario.vue?vue&type=template&id=9786295c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_usuario_vue_vue_type_template_id_9786295c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_lecciones_vue_vue_type_template_id_17f7ae54___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_usuario_vue_vue_type_template_id_9786295c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/event-bus.js":
+/*!***********************************!*\
+  !*** ./resources/js/event-bus.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+
+var bus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
+/* harmony default export */ __webpack_exports__["default"] = (bus);
 
 /***/ })
 

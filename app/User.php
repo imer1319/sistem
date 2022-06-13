@@ -12,53 +12,32 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Rango::class);
     }
+
     public function examenes()
     {
-       return $this->belongsToMany(Exam::class,'exam_user')
-       ->withPivot('ppm','tiempo','comprension','estado','created_at');
-   }
+        return $this->belongsToMany(Exam::class,'exam_user')->withPivot('ppm','tiempo','comprension','estado','created_at');
+    }
 
-   public function ejercicios()
-   {
-    return $this->belongsToMany(Ejercicio::class)
-    ->withPivot('puntuacion')->withTimestamps();
-}
+    public function ejercicios()
+    {
+        return $this->belongsToMany(Ejercicio::class)->withPivot('puntuacion');
+    }
 
-public function roles()
-{
-    return $this->belongsToMany(Role::class)
-    ->withTimestamps();
-}
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
     protected $fillable = [
         'name','apellido_paterno','apellido_materno','avatar','puntos','rango_id','avance_curso','ppm_inicial','comprension_inicial'
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    /**
-     * Codigo roles y usuarios
-     *
-     */
+
     public function authorizeRoles($roles)
     {
         if ($this->hasAnyRole($roles)) {
@@ -81,6 +60,7 @@ public function roles()
         }
         return false;
     }
+
     public function hasRole($role)
     {
         if ($this->roles()->where('name', $role)->first()) {

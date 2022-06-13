@@ -13,7 +13,7 @@ Vue.use(VuePaginate)
 Vue.use(VueRouter)
 Vue.mixin(auth);
 
-Vue.component('spinner', require('./components/Spinner.vue').default);
+Vue.component('spinner', require('./utils/Spiner').default);
 Vue.component('nav-bar', require('./users/NavBar.vue').default);
 
 

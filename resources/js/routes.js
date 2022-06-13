@@ -1,91 +1,46 @@
 export const routes = [
-{
-	name:'usuario',
-	path: '/usuario', 
-	component: () => import('./components/usuario/usuario.vue'),
-},
-{
-	name:'shoex',
-	path: '/usuario/:id', 
-	component: () => import('./components/usuario/showUsuario.vue'),
-},
-{
-	name:'ejercicio',
-	path: '/ejercicio', 
-	component: () => import('./components/ejercicios/ejercicio.vue'),
-},
-{
-	name:'perfil',
-	path: '/perfil', 
-	component: () => import('./components/perfil.vue'),
-},
-{
-	name:'examen',
-	path: '/examen', 
-	component: () => import('./components/examens/examenComponent.vue'),
-},
-{
-	name: 'show',
-	path: '/examen/:id',
-	component: () => import('./components/examens/showExamenComponent.vue')
-},
-{
-	name: 'rango',
-	path: '/rango',
-	component: () => import('./components/rango/rango.vue')
-},
-	// esta es la parte de los usuarios....
+	// Rutas para el user
 	{
 		name: 'home',
 		path: '/home',
-		component: () => import('./users/home')
+		component: () => import('./views/Home')
 	},
 	{
 		name: 'profile',
 		path: '/profile',
-		component: () => import('./users/user/perfil.vue')
+		component: () => import('./views/Profile')
 	},
 	{
-		name: 'exam',
-		path: '/exam',
-		component: () => import('./users/exam/exam')
-	},
-	{
-		name: 'showing',
-		path: '/exam/:id',
-		component: () => import('./users/exam/show-exam')
-	},
-	{
-		name: 'ranking',
-		path: '/ranking',
-		component: () => import('./users/ranking.vue')
-	},
-	{
-		name: 'puntuacionExamen',
-		path: '/puntuacionExamen',
-		component: () => import('./users/puntuacionExam.vue')
-	},
-	{
-		name: 'ejercicios',
-		path: '/ejercicios',
-		component: () => import('./users/ejercicios/ejercicios.vue')
+		name: 'curso',
+		path: '/curso',
+		component: () => import('./views/Curso')
 	},
 	{
 		name: 'game',
 		path: '/game',
-		component: () => import('./users/game/game.vue')
+		component: () => import('./views/Games')
+	},
+	{
+		name: 'ranking',
+		path: '/ranking',
+		component: () => import('./views/Ranking')
+	},
+	{
+		name: 'scores',
+		path: '/scores-exam',
+		component: () => import('./views/ScoresExam')
 	},
 	{
 		name: 'lecciones',
 		path: '/lecciones',
-		component: () => import('./users/lecciones/lecciones.vue')
+		component: () => import('./views/Contenido')
+	},
+	{
+		name: 'exam',
+		path: '/darExamen',
+		component: () => import('./views/DarExamen')
 	},
 	/************** RUTAS PARA EL CURSO*************/
-	{
-		name: 'curso',
-		path: '/curso',
-		component: () => import('./users/curso/curso.vue')
-	},
 	{
 		name: 'shulte-curso',
 		path: '/shulte-curso',
@@ -167,30 +122,44 @@ export const routes = [
 		path: '/iguales',
 		component: () => import('./users/game/8-campo-visual.vue')
 	},
-	/********--RUTA -- EJERCICIOS--******/
+	// Rutas admin
 	{
-		name: 'parpadeo',
-		path: '/parpadeo',
-		component: () => import('./users/ejercicios/1-parpadeo.vue')
+		name:'usuario',
+		path: '/usuario', 
+		component: () => import('./components/usuario/usuario.vue'),
 	},
 	{
-		name: 'vertical',
-		path: '/vertical',
-		component: () => import('./users/ejercicios/2-vertical.vue')
+		name:'shoex',
+		path: '/usuario/:id', 
+		component: () => import('./components/usuario/showUsuario.vue'),
 	},
 	{
-		name: 'horizontal',
-		path: '/horizontal',
-		component: () => import('./users/ejercicios/3-horizontal.vue')
+		name:'ejercicio',
+		path: '/ejercicio', 
+		component: () => import('./components/ejercicios/ejercicio.vue'),
 	},
 	{
-		name: 'aleatorio',
-		path: '/aleatorio',
-		component: () => import('./users/ejercicios/4-aleatorio.vue')
+		name:'perfil',
+		path: '/perfil', 
+		component: () => import('./components/perfil.vue'),
 	},
 	{
-		name: 'piramide',
-		path: '/piramide',
-		component: () => import('./users/ejercicios/5-piramide.vue')
+		name:'examen',
+		path: '/examen', 
+		component: () => import('./components/examens/examenComponent.vue'),
 	},
+	{
+		name: 'show',
+		path: '/examen/:id',
+		component: () => import('./components/examens/showExamenComponent.vue')
+	},
+	{
+		name: 'rango',
+		path: '/rango',
+		component: () => import('./components/rango/rango.vue')
+	},
+	{
+		path:'*',
+		component:() => import('./views/404.vue')
+	}
 	];

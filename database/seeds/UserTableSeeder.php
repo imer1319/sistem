@@ -25,6 +25,7 @@ class UserTableSeeder extends Seeder
         $user = new User();
         $user->name = 'User';
         $user->password = bcrypt('123123');
+        $user->rango_id = 1;
         $user->save();
         $user->roles()->attach($role_user);
 
@@ -40,6 +41,7 @@ class UserTableSeeder extends Seeder
             $ejercicio->name = "Ejercicio #" . $i;
             $ejercicio->save();
         }
+        
         for ($i = 1; $i < 21; $i++) {
             $user = new User();
             $user->name = 'User' . $i;
