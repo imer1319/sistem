@@ -28,7 +28,7 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         if (auth()->user()->hasRole('admin')) {
-            return 'perfil';
+            return 'dashboard';
         }else if (auth()->user()->hasRole('user')){
             return 'home';
         }

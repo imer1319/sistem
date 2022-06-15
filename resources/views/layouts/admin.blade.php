@@ -15,8 +15,9 @@
   <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/css/adminlte.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  @yield('styles')
 </head>
+
 <body class="hold-transition sidebar-mini" style="overflow-x: hidden;">
   <div class="wrapper">
     <nav class="main-header navbar navbar-expand navbar-dark" style="background-color: #25546D;">
@@ -56,7 +57,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
          <li class="nav-item">
-          <a href="{{ route('admin') }}" class="nav-link">
+          <a href="{{ route('admin.dashboard') }}" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>
               Inicio
@@ -64,19 +65,19 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('examen') }}" class="nav-link">
+          <a href="{{ route('admin.examens.index') }}" class="nav-link">
             <i class="fas fa-file-contract nav-icon"></i>
             <p>Examenes</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('rango') }}" class="nav-link">
+          <a href="{{ route('admin.rangos.index') }}" class="nav-link">
             <i class="nav-icon fas fa-trophy"></i>
             <p>Rangos</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('ejercicio') }}" class="nav-link">
+          <a href="{{ route('admin.ejercicios.index') }}" class="nav-link">
             <i class="nav-icon fas fa-gamepad"></i>
             <p>
               Ejercicios
@@ -84,7 +85,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('usuario') }}" class="nav-link">
+          <a href="{{ route('admin.usuarios.index') }}" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
             <p>
               Usuarios
@@ -105,9 +106,9 @@
   </div>
   <div class="content" id="app">
     <div class="container-fluid">
-      <div class="row">
-        <router-view></router-view>
-      </div>
+
+      @yield('content')
+      
     </div>
   </div>
 </div>

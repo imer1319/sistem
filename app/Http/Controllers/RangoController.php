@@ -23,7 +23,7 @@ class RangoController extends Controller
     {
         $validatedData = $request->validate([
             'nombre' => 'required',
-            'avatar' => 'required|mimes:jpeg,jpg,png,gif|required|max:10000',
+            'avatar' => 'required|mimes:jpeg,jpg,png,gif|max:10000',
         ]);
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');

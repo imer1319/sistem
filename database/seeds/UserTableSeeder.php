@@ -24,14 +24,14 @@ class UserTableSeeder extends Seeder
 
         $user = new User();
         $user->name = 'User';
-        $user->password = bcrypt('123123');
+        $user->password = '123123';
         $user->rango_id = 1;
         $user->save();
         $user->roles()->attach($role_user);
 
         $user = new User();
         $user->name = 'Admin';
-        $user->password = bcrypt('123123');
+        $user->password = '123123';
         $user->rango_id = 1;
         $user->save();
         $user->roles()->attach($role_admin);
@@ -45,7 +45,7 @@ class UserTableSeeder extends Seeder
         for ($i = 1; $i < 21; $i++) {
             $user = new User();
             $user->name = 'User' . $i;
-            $user->password = bcrypt('123123');
+            $user->password = '123123';
             $user->rango_id = 1;
             $user->puntos = rand(80, 400);
             $user->avance_curso = rand(3, 15);

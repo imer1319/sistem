@@ -28,8 +28,7 @@ class UsuarioController extends Controller
     public function show(Request $request, $id)
     {
         if ($request->ajax()) {
-            $usuario = User::find($id);
-            return $usuario;
+            return User::where('id',$id)->with('rango')->first();
         }
         return view('layouts.administrador');
     }

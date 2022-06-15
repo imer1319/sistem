@@ -10,29 +10,24 @@ Auth::routes(['register' => false]);
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
 Route::post('createUser', 'UsuarioController@register');
 
-// Route SPA
 
-Route::get('perfil','AdminController@index')->name('admin');
+// Rutas administracion
+Route::name('admin.')->group(function () {
+    Route::get('dashboard','Admin\DashboardController@dashboard')->name('dashboard');
+	Route::resource('examens','Admin\ExamenController')->except('destroy');
+	Route::resource('rangos','Admin\RangoController')->except('destroy','show');
+	Route::resource('ejercicios','Admin\EjercicioController')->except('destroy','show');
+	Route::resource('usuarios','Admin\UsuarioController')->except('destroy','edit');
+});
+
 Route::get('usuario/user/{id}','UsuarioController@getDataExamUser');
 Route::get('usuario/games/{id}/{ejercicio_id}','UsuarioController@getDataGameMax');
 Route::get('usuario/game/{id}/{ejercicio_id}','UsuarioController@getDataGameRecord');
-Route::get('examen','ExamController@index')->name('examen');
-Route::get('ejercicio','EjercicioController@index')->name('ejercicio');
-Route::get('rango','RangoController@index')->name('rango');
-Route::get('usuario','UsuarioController@index')->name('usuario');
 Route::get('pregunta/{id}','PreguntaController@index');
-Route::resource('examen','ExamController')->except(['index','create','edit']);
-Route::resource('rango','RangoController')->except(['index','create','edit','show','destroy']);
 Route::resource('pregunta','PreguntaController')->except(['show','edit','index']);
-Route::resource('ejercicio','EjercicioController')->except(['index','destroy']);
-Route::resource('usuario','UsuarioController')->except(['index']);
-Route::get('numero_usuarios','AdminController@count_users');
-Route::get('numero_examenes','AdminController@count_examen');
-Route::get('numero_ejercicios','AdminController@count_ejercicio');
-Route::get('mayor_velocidad','AdminController@mayor_velocidad');
-Route::get('mayor_puntuacion','AdminController@mayor_puntuacion');
 
 // ========= examen ========//
 Route::get('obtenerExamen','UserController@obtenerExamen');
@@ -61,4 +56,5 @@ Route::get('user-list-excel','ExportablesController@exportExcel');
 Route::get('user-list-pdf','ExportablesController@exportPdf');
 Route::get('todo','UsuarioController@todo');
 
-Route::get('/{any?}', 'HomeController@spa')->where('any', '.*');
+// Route SPA
+Route::get('/{any?}', 'HomeController@spa')->where('any', '.*')->name('home');
