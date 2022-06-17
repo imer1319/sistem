@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Usuario;
+namespace App\Http\Requests\Pregunta;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,8 +24,13 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2',
-            'password' => 'required|min:6',
+            'enunciado' => 'required|min:10',
+            'respuestaA' => 'required|min:10',
+            'respuestaB' => 'required|min:10',
+            'respuestaC' => 'required|min:10',
+            'respuestaD' => 'required|min:10',
+            'esCorrecto' => 'required|min:10',
+            'exam_id' => 'required|exists:App\Exam,id',
         ];
     }
 }

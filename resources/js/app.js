@@ -13,6 +13,10 @@ Vue.use(VuePaginate)
 Vue.use(VueRouter)
 Vue.mixin(auth);
 
+Vue.component('preguntas-list', require('./admin/preguntas/PreguntasList').default);
+Vue.component('preguntas-create', require('./admin/preguntas/PreguntasCreate').default);
+Vue.component('preguntas-edit', require('./admin/preguntas/PreguntasEdit').default);
+
 Vue.component('spinner', require('./utils/Spiner').default);
 Vue.component('nav-bar', require('./users/NavBar.vue').default);
 

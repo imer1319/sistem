@@ -16,7 +16,7 @@ Route::post('createUser', 'UsuarioController@register');
 
 // Rutas administracion
 Route::name('admin.')->group(function () {
-    Route::get('dashboard','Admin\DashboardController@dashboard')->name('dashboard');
+	Route::get('dashboard','Admin\DashboardController@dashboard')->name('dashboard');
 	Route::resource('examens','Admin\ExamenController')->except('destroy');
 	Route::resource('rangos','Admin\RangoController')->except('destroy','show');
 	Route::resource('ejercicios','Admin\EjercicioController')->except('destroy','show');
@@ -26,7 +26,6 @@ Route::name('admin.')->group(function () {
 Route::get('usuario/user/{id}','UsuarioController@getDataExamUser');
 Route::get('usuario/games/{id}/{ejercicio_id}','UsuarioController@getDataGameMax');
 Route::get('usuario/game/{id}/{ejercicio_id}','UsuarioController@getDataGameRecord');
-Route::get('pregunta/{id}','PreguntaController@index');
 Route::resource('pregunta','PreguntaController')->except(['show','edit','index']);
 
 // ========= examen ========//

@@ -8,6 +8,17 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $fillable = [
+        'name','apellido_paterno','apellido_materno','avatar','puntos','rango_id','avance_curso','ppm_inicial','comprension_inicial','password'
+    ];
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
     public function rango()
     {
         return $this->belongsTo(Rango::class);
@@ -27,16 +38,6 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
-    protected $fillable = [
-        'name','apellido_paterno','apellido_materno','avatar','puntos','rango_id','avance_curso','ppm_inicial','comprension_inicial'
-    ];
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 
     public function setPasswordAttribute($password)
     {

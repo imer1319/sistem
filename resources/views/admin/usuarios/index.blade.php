@@ -5,9 +5,9 @@
 	<div class="card-body">
 		<div class="d-flex justify-content-between align-items-center mb-3">
 			<h4>Usuarios</h4>
-			<a href="{{ route('admin.usuarios.create') }}" class="btn btn-success text-white">
-				<i class="fas fa-plus"></i> Crear Nuevo
-			</a>
+			<button class="btn btn-success" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus"></i>
+				Registrar nuevo
+			</button>
 		</div>
 		<div class="row">
 			@foreach($usuarios as $usuario)

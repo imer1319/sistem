@@ -21,4 +21,5 @@
 		</div>
 	</div>
 </div>
+<preguntas-list :exam_id="{{ json_encode($examen->id) }}"></preguntas-list>
 @endsection

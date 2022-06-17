@@ -20,6 +20,17 @@ class UsuarioController extends Controller
         ]);
     }
 
+    public function store(CreateRequest $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'password' => $request->password,
+            'rango_id' => 1,
+        ]);
+        $user->roles()->attach(2);
+        return redirect()->route('admin.usuarios.show', $user);
+    }
+
     public function show(User $usuario)
     {
         $usuario->load('rango','examenes');
@@ -34,8 +45,8 @@ class UsuarioController extends Controller
             $ruta = time().$file->getClientOriginalName();
             $file->move(public_path().'/imagenes/usuario',$ruta);
 
-            $file_path = public_path().'/imagenes/usuario/'.$usuario->avatar;
-            if(is_file($file_path)){
+            $file_path = public_path() . '/imagenes/usuario/' . $usuario->avatar;
+            if ($file_path != public_path() . '/imagenes/usuario/default.png') {
                 unlink($file_path);
             }
             $usuario->avatar = $ruta;
