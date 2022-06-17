@@ -22,13 +22,13 @@ class UsuarioController extends Controller
 
     public function store(CreateRequest $request)
     {
-        $user = User::create([
+        $usuario = User::create([
             'name' => $request->name,
             'password' => $request->password,
             'rango_id' => 1,
         ]);
-        $user->roles()->attach(2);
-        return redirect()->route('admin.usuarios.show', $user);
+        $usuario->roles()->attach(2);
+        return redirect()->route('admin.usuarios.show', $usuario);
     }
 
     public function show(User $usuario)

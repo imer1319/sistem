@@ -36,7 +36,7 @@ class UsuarioController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:users|max:20',
-            'password' => 'required|max:8',
+            'password' => 'required|min:8',
         ]);
         $usuario = User::create($validatedData);
         $usuario->roles()->attach(2);
